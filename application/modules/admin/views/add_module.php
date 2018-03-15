@@ -1,7 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Module</h1>
+            <h1 class="page-header">Add Module</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -66,16 +66,16 @@
 </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('select').niceSelect();
-        $(".registration_form1").validate({
-            rules: {
-                "en_module_name": "required",
-                "hi_module_name":"required"
-            },
-            submitHandler: function(form) {
-                form.submit();
-            }
-        });
+$(document).ready(function() {
+    $('select').niceSelect();
+    $(".registration_form1").validate({
+        rules: {
+            "en_module_name": "required",
+            "hi_module_name": "required"
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
     });
+});
 </script>
