@@ -576,12 +576,6 @@ class Admin extends CI_Controller
     }
 
 
-                $this->chapterList();
-            }
-        }
-        
-    }
-
     public function change_password()
     {
         $this->form_validation->set_rules('old_password', 'Old Password', 'trim|required');

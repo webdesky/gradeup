@@ -14,7 +14,6 @@
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right ">
-
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -38,7 +37,7 @@
         <!-- /.navbar-top-links -->
 
         <?php 
-            $user_role  =   $this->session->userdata('user_role'); 
+            $user_role      =   $this->session->userdata('user_role'); 
             if($user_role==4){
                 $rights     =   explode(',',trim($this->session->userdata('rights')->rights,'"'));   
                 $right0     =   str_split($rights[0]);
@@ -49,8 +48,6 @@
                 $right5     =   str_split($rights[5]);
             }
         ?>
-
-
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav sidebar-menu" id="side-menu">
@@ -111,32 +108,25 @@
                     </li>
                     <li> <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Training Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-
                             <li>
                                 <a href="<?php echo base_url('admin/training')?>">Add Training</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url('admin/trainingList')?>">Training List</a>
                             </li>
-
-                      </ul>
+                        </ul>
                     </li>
-
-                    <li> <a href="#"><i class="fa fa-hospital-o" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
-                                <a href="<?php echo base_url('admin/question')?>"><i class="fa fa-dashboard fa-fw"></i>Add Question</a>
+                                <a href="<?php echo base_url('admin/question')?>">Add Question</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url('admin/questionList')?>">Question List</a>
                             </li>
                         </ul>
-
-                        
-
                     </li>
-
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
