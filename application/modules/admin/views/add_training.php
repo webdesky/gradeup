@@ -84,24 +84,28 @@
  $(document).ready(function() {
     //$('select').niceSelect();
     $('.callbacks').multiSelect({
-        afterSelect: function(values) {
-            var url = "<?php echo base_url('admin/getChapter');?>";
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: {
-                    module_id: values
-                },
-                success: function(data) {
-                    var obj = JSON.parse(data);
-                    if (obj.length != 0) {
-                        for (var i = 0; i < obj.length; i++) {
-                            var h = obj[i].en_chapter_name;
-                            $('.callback').multiSelect('addOption', {
-                                value: obj[i].id,
-                                text: obj[i].en_chapter_name,
-                                index: 0
-                            });
+
+      afterSelect: function(values){
+
+       var url = "<?php echo base_url('admin/getChapter') ?>";
+        $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            module_id: values
+        },
+        success: function(data) {
+
+                   var obj = JSON.parse(data);
+                    //console.log(obj);
+                     if(obj.length != 0){
+                    for (var i = 0; i < obj.length; i++) {
+
+                        var h = obj[i].en_chapter_name;
+                        $('.callback').multiSelect('addOption', { value: obj[i].id, text: obj[i].en_chapter_name, index: 0 });
+                        
+
+
                         }
                     }
                 }

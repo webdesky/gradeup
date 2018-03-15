@@ -118,7 +118,23 @@
                             <li>
                                 <a href="<?php echo base_url('admin/trainingList')?>">Training List</a>
                             </li>
+
+                      </ul>
+                    </li>
+
+                    <li> <a href="#"><i class="fa fa-hospital-o" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a href="<?php echo base_url('admin/question')?>"><i class="fa fa-dashboard fa-fw"></i>Add Question</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/questionList')?>">Question List</a>
+                            </li>
                         </ul>
+
+                        
+
                     </li>
 
                 </ul>
