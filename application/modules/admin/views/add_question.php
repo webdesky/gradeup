@@ -17,7 +17,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                            <form role="form" method="post" action="<?php echo base_url('admin/question') ?>" class="registration_form1" enctype="multipart/form-data">
+                            <form role="form" method="post" action="<?php if(isset($questions)) {  echo  base_url('admin/question/'.$questions[0]->id);  }else{ echo  base_url('admin/question'); } ?>" class="registration_form1" enctype="multipart/form-data">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3 ">Module Name * </label>
@@ -25,7 +25,8 @@
                                             <select class="form-control" name="module_id" id="module_id">
                                                 <option data-display="--Select Modules--">--Select Modules--</option>
                                                 <?php foreach ($modules as $key => $value) { ?>
-                                                <option value="<?php echo $value['id']; ?>">
+                                                <option value="<?php echo $value['id']; ?>" <?php if(isset($questions) && $questions[0]->module_id==$value['id']){ ?> selected
+                                                    <?php }?>>
                                                     <?php echo ucwords($value['en_module_name']); ?>
                                                 </option>
                                                 <?php } ?>
@@ -46,19 +47,22 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Question Marks </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="question_marks" id="question_marks" placeholder="Question Marks" autocomplete="off" value="<?php echo set_value('question_marks'); ?>"> <span class="red"><?php echo form_error('question_marks'); ?></span> </div>
+                                            <input class="form-control" type="text" name="question_marks" id="question_marks" placeholder="Question Marks" autocomplete="off" value="<?php  if(isset($questions)) { echo  $questions[0]->question_marks; } ?>"> <span class="red"><?php echo form_error('question_marks'); ?></span> </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">Question Type</label>
                                         <div class="col-md-9">
-                                            <select class="form-control" name="question_type" onchange="questionChanges(this.value)">
+                                            <select class="form-control" name="question_type" id="question_type" onchange="questionChanges(this.value)">
                                                 <option data-display="--Select question_type--">--Please Select Question Type--</option>
-                                                <option value="Options">Options </option>
-                                                <option value="Fill In the Blank">Fill In the Blank</option>
+                                                <option value="Options" <?php if(isset($questions) && $questions[0]->question_type=='Options'){ ?> selected
+                                                    <?php }?> >Options </option>
+                                                <option value="Fill In the Blank" <?php if(isset($questions) && $questions[0]->question_type=='Fill In the Blank'){ ?> selected
+                                                    <?php }?>>Fill In the Blank</option>
                                                 <!-- <option value="Descriptive">Descriptive</option> -->
-                                                <option value="True False">True False</option>
+                                                <option value="True False" <?php if(isset($questions) && $questions[0]->question_type=='True False'){ ?> selected
+                                                    <?php }?>>True False</option>
                                             </select>
                                             <span class="red"><?php echo form_error('question_type'); ?></span> </div>
                                     </div>
@@ -69,6 +73,7 @@
                                             <label class="col-md-3">Question IN English * </label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="en_question" name="en_question" placeholder="English Question">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_question; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_question'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('en_question');
@@ -83,6 +88,7 @@
                                             <label class="col-md-3">Question In Hindi</label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="hi_question" name="hi_question" placeholder="Hindi Question">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_question; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_question'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('hi_question');
@@ -99,6 +105,7 @@
                                             <div class="col-md-9">
                                                 <input type="hidden" name="id">
                                                 <textarea class="form-control" rows="8" id="en_option_a" name="en_option_a" placeholder="Option A">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_option_a; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_option_a'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('en_option_a');
@@ -113,6 +120,7 @@
                                             <label class="col-md-3">Option A Hindi</label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="hi_option_a" name="hi_option_a" placeholder="Option A">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_a; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_option_a'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('hi_option_a');
@@ -128,6 +136,7 @@
                                             <div class="col-md-9">
                                                 <input type="hidden" name="id">
                                                 <textarea class="form-control" rows="8" id="en_option_b" name="en_option_b" placeholder="Option B">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_option_b; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_option_b'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('en_option_b');
@@ -142,6 +151,7 @@
                                             <label class="col-md-3">Option B Hindi</label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="hi_option_b" name="hi_option_b" placeholder="Option b">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_b; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_option_b'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('hi_option_b');
@@ -157,6 +167,7 @@
                                             <div class="col-md-9">
                                                 <input type="hidden" name="id">
                                                 <textarea class="form-control" rows="8" id="en_option_c" name="en_option_c" placeholder="Option C">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_option_c; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_option_c'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('en_option_c');
@@ -171,6 +182,7 @@
                                             <label class="col-md-3">Option C Hindi</label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="hi_option_c" name="hi_option_c" placeholder="Option C">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_c; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_option_c'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('hi_option_c');
@@ -184,11 +196,12 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Option D * </label>
                                             <div class="col-md-9">
-                                                 <textarea class="form-control" rows="8" id="en_option_d" name="en_option_d" placeholder="Option D">
-                                                    </textarea> <span class="red"><?php echo form_error('en_option_d'); ?></span>
-                                                    <script type="text/javascript">
-                                                    CKEDITOR.replace('en_option_d');
-                                                    </script>
+                                                <textarea class="form-control" rows="8" id="en_option_d" name="en_option_d" placeholder="Option D">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_option_d; } ?>
+                                                </textarea> <span class="red"><?php echo form_error('en_option_d'); ?></span>
+                                                <script type="text/javascript">
+                                                CKEDITOR.replace('en_option_d');
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
@@ -199,6 +212,7 @@
                                             <label class="col-md-3">Option D Hindi</label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="hi_option_d" name="hi_option_d" placeholder="Option D">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_d; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_option_d'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('hi_option_d');
@@ -207,14 +221,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                                 <div id="option13" style="display: none">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3">Answer * </label>
                                             <div class="col-md-9">
-                                                
                                                 <textarea class="form-control" rows="8" id="en_answer" name="en_answer" placeholder="Answer">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_answer; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_answer'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('en_answer');
@@ -229,6 +242,7 @@
                                             <label class="col-md-3">Answer In Hindi</label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="hi_answer" name="hi_answer" placeholder="ANswer">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_answer; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_answer'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('hi_answer');
@@ -242,10 +256,12 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Answer</label>
                                             <div class="col-md-9">
-                                                <select  name="en_answers" class="form-control">
+                                                <select name="en_answers" class="form-control">
                                                     <option value="" selected="">Please Correct Answer</option>
-                                                    <option value="1">True</option>
-                                                    <option value="0">False</option>
+                                                    <option value="1" <?php if(isset($questions) && $questions[0]->en_answer==1){ ?> selected
+                                                        <?php }?>>True</option>
+                                                    <option value="0" <?php if(isset($questions) && $questions[0]->en_answer==0){ ?> selected
+                                                        <?php }?>>False</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -258,6 +274,7 @@
                                             <label class="col-md-3">Explaination</label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="en_explaination" name="en_explaination" placeholder="Explaination">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_explaination; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_explaination'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('en_explaination');
@@ -272,6 +289,7 @@
                                             <label class="col-md-3">Explaination In Hindi</label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="hi_explaination" name="hi_explaination" placeholder="Explaination">
+                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_explaination; } ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_explaination'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('hi_explaination');
@@ -284,10 +302,12 @@
                                     <label class="col-md-2">Status</label>
                                     <div class="col-lg-6">
                                         <label class="radio-inline">
-                                            <input type="radio" name="status" value="1" checked>Active
+                                            <input type="radio" name="status" value="1" <?php if(isset($questions) && $questions[0]->is_active==1){ ?> checked
+                                            <?php }?>>Active
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="status" value="0">Inactive
+                                            <input type="radio" name="status" value="0" <?php if(isset($questions) && $questions[0]->is_active==0){ ?> checked
+                                            <?php }?>>Inactive
                                         </label>
                                     </div>
                                 </div>
@@ -321,6 +341,35 @@ $(document).ready(function() {
         }
     });
 
+    var question_type=$('#question_type').val();
+    questionChanges(question_type);
+    
+    var module=$('#module_id').val();
+    getChapter(module);
+    function getChapter(value){
+        var url = "<?php echo base_url('admin/getChapter') ?>";
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                module_id: value
+            },
+            success: function(data) {
+
+                var obj = JSON.parse(data);
+                $('#chapter_id').html('');
+                if (obj.length != 0) {
+                    for (var i = 0; i < obj.length; i++) {
+
+                        $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
+
+                    }
+                }
+
+
+            }
+        });
+    }
     $('#module_id').on('change', function() {
 
         var url = "<?php echo base_url('admin/getChapter') ?>";
@@ -347,12 +396,7 @@ $(document).ready(function() {
         });
     })
 });
-
-
-
-
-
-function questionChanges(val) {
+   function questionChanges(val) {
 
     if (val == 'Options') {
         $('#options').css('display', 'block');

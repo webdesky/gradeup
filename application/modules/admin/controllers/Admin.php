@@ -485,10 +485,14 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
 
-             if(!empty($id)){
-             
+                 if(!empty($id)){
+                     $where = array(
+                'id ' => $id
+                );
+             $data['questions']  =$this->model->getAllwhere('questions',$where);
              $data['modules']    = $this->model->getAll('modules');
              $data['chapters']   = $this->model->getAll('chapters');
+                 
              }else{
              $data['modules']    = $this->model->getAll('modules');
              $data['chapters']   = $this->model->getAll('chapters');
@@ -571,13 +575,7 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
 
     }
-
-
-                $this->chapterList();
-            }
-        }
-        
-    }
+      
 
     public function change_password()
     {
