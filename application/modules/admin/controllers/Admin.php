@@ -420,20 +420,24 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
              if ($this->controller->checkSession()) {
-                $fk_module_id     = $this->input->post('fk_module_id');
-                $en_chapter_name  = $this->input->post('en_chapter_name');
-                $hi_chapter_name  = $this->input->post('hi_chapter_name');
-                $is_active        = $this->input->post('status');
+                $data=$this->input->post();
+                
+                $module_id           = implode(",",$this->input->post('module_id'));
+                $chapter_id          = implode(",",$this->input->post('chapter_id'));
+                $en_training_name    = $this->input->post('en_training_name');
+                $hi_training_name    = $this->input->post('hi_training_name');
+                $is_active           = $this->input->post('status');
 
                 $data = array(
-                    'fk_module_id'           => $fk_module_id, 
-                    'en_chapter_name'        => $en_chapter_name,
-                    'hi_chapter_name'        => $hi_chapter_name,
+                    'module_id'              => $module_id, 
+                    'chapter_id'             => $chapter_id,
+                    'en_training_name'       => $en_training_name,
+                    'hi_training_name'       => $hi_training_name,
                     'is_active'              => $is_active,
                     'created_at'             => date('Y-m-d H:i:s')
                 );
 
-
+              
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -441,16 +445,34 @@ class Admin extends CI_Controller
                   
                     unset($data['created_at']);
                     
-                    $result = $this->model->updateFields('chapters', $data, $where);
+                    $result = $this->model->updateFields('training', $data, $where);
                 } else {
-                    $result = $this->model->insertData('chapters', $data);
+                    $result = $this->model->insertData('training', $data);
                 }
                 
-                $this->chapterList();
+                $this->trainingList();
              }
          }
 
     }
+
+    public function trainingList(){
+        
+        $data['body']      = 'training_list';
+        
+        $this->controller->load_view($data);
+
+    }
+
+    public function getChapter(){
+           $module_id = $this->input->post('module_id');
+           $where = array(
+            'fk_module_id ' => $module_id[0]
+            );
+            $data     = $this->model->getAllwhere('chapters', $where);
+            echo json_encode($data);
+    }
+    
     public function change_password()
     {
         $this->form_validation->set_rules('old_password', 'Old Password', 'trim|required');

@@ -560,11 +560,3 @@
 input {
     text-transform: capitalize;
   }
-.border-rights:hover {
-    box-shadow: 4px 4px 10px 4px #ccc;
-    padding: 28px 5px;
-}
-
-.border-rights {
-    padding: 28px 5px;
-}
