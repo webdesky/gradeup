@@ -35,14 +35,14 @@
                                             <td id="tr_<?php echo $i;?>">
                                                 <?php echo $i; ?> </td>
                                             <td>
-                                                <?php echo $module['en_module_name'];?> </td>
+                                                <?php echo $module->en_module_name;?> </td>
                                             <td>
-                                                <?php echo $module['hi_module_name'];?> </td>
+                                                <?php echo $module->hi_module_name;?> </td>
                                             <td>
-                                                <?php echo $module['created_at'];?> </td>
+                                                <?php echo $module->created_at;?> </td>
                                             <td>
-                                                <a href="<?php echo base_url('admin/edit_module/'.$module['id'])?>"><span class="glyphicon glyphicon-edit"></span></a> |
-                                                <a href="javascript:void(0)" onclick="delete_user('<?php echo $module['id']?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
+                                                <a href="<?php echo base_url('admin/edit_module/'.$module->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |
+                                                <a href="javascript:void(0)" onclick="delete_user('<?php echo $module->id?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
                                                </td>
                                                  </tr>
                                         <?php $i++;}}?> </tbody>

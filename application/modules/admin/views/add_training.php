@@ -13,7 +13,7 @@
                 <?php echo $info_message; ?> </div>
             <?php endif ?>
             <div class="panel panel-default">
-                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/notices_list')?>"><i class="fa fa-th-list">&nbsp;Training List</i></a> </div>
+                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/training_list')?>"><i class="fa fa-th-list">&nbsp;Training List</i></a> </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
@@ -24,7 +24,7 @@
                                             <select class="form-control callbacks" name="module_id[]" multiple='multiple'>
                                             <option data-display="--Select Modules--">--Select Modules--</option>
                                              <?php foreach ($modules as $key => $value) { ?>
-                                                  <option value="<?php echo $value['id']; ?>"><?php echo ucwords($value['en_module_name']); ?></option>
+                                                  <option value="<?php echo $value->id; ?>"><?php echo ucwords($value->en_module_name); ?></option>
                                             <?php } ?>
                                         </select> <span class="red"><?php echo form_error('fk_module_id'); ?></span> </div>
                                     </div>
@@ -45,7 +45,7 @@
                                             <input class="form-control" type="text" name="en_training_name" id="en_training_name" placeholder="Training Name" autocomplete="off" required="required" value="<?php echo set_value('en_training_name'); ?>"> <span class="red"><?php echo form_error('en_training_name'); ?></span> </div>
                                     </div>
                                 </div>
-
+                                
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">Hindi Chapter Name * </label>
@@ -88,7 +88,7 @@
         $('.callbacks').multiSelect({
             afterSelect: function(values) {
 
-                var url = 'admin/getChapter';
+                var url = "<?php echo base_url('admin/getChapter');?>";
                 $.ajax({
                     url: url,
                     type: "POST",

@@ -15,14 +15,6 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <form role="form" method="post" action="<?php echo base_url('admin/profile') ?>" class="registration_form1" class="form-horizontal" enctype="multipart/form-data">
-                                <?php //echo '<pre>'; print_r($users[0]);?>
-                                <?php if(!empty($users[0]->profile_pic)){?>
-                                <div class="col-md-6" align="center">
-                                    <div class="form-group">
-                                        <img src="<?php echo base_url('asset/uploads/').$users[0]->profile_pic ?>" style="max-width: 300px;max-height: 300px;">
-                                    </div>
-                                </div>
-                                <?php }?>
                                 <div class="form-group">
                                     <label class="col-md-2">First Name * </label>
                                     <div class="col-lg-6">
@@ -43,21 +35,7 @@
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control date" name="date_of_birth" id="date_of_birth" value="<?php echo $users[0]->date_of_birth;?>"> <span class="red"><?php echo form_error('email'); ?></span> </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-2">Blood Group: </label>
-                                    <div class="col-lg-6">
-                                        <select class="wide" name="blood_group">
-                                            <option value="">--SELECT--</option>
-                                            <option value="a+" <?php if($users[0]->blood_group=="a+"){echo 'selected';};?>>A+</option>
-                                            <option value="a-" <?php if($users[0]->blood_group=="a-"){echo 'selected';};?>>A-</option>
-                                            <option value="b+" <?php if($users[0]->blood_group=="b+"){echo 'selected';};?>>B+</option>
-                                            <option value="b-" <?php if($users[0]->blood_group=="b-"){echo 'selected';};?>>B-</option>
-                                            <option value="o+" <?php if($users[0]->blood_group=="o+"){echo 'selected';};?>>O+</option>
-                                            <option value="o-" <?php if($users[0]->blood_group=="o-"){echo 'selected';};?>>O-</option>
-                                            <option value="ab+" <?php if($users[0]->blood_group=="ab+"){echo 'selected';};?>> AB+</option>
-                                            <option value="ab-" <?php if($users[0]->blood_group=="ab-"){echo 'selected';};?>>AB-</option>
-                                        </select> <span class="red"><?php echo form_error('email'); ?></span> </div>
-                                </div>
+                                
                                 <div class="form-group">
                                     <label class="col-md-2">Gender : </label>
                                     <div class="col-lg-6">

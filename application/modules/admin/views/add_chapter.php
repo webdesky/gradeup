@@ -13,7 +13,7 @@
                 <?php echo $info_message; ?> </div>
             <?php endif ?>
             <div class="panel panel-default">
-                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/notices_list')?>"><i class="fa fa-th-list">&nbsp;Chapter List</i></a> </div>
+                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/chapterList')?>"><i class="fa fa-th-list">&nbsp;Chapter List</i></a> </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
@@ -23,7 +23,7 @@
                                     <div class="col-md-9"> <select class="wide" name="fk_module_id">
                                             <option data-display="--Select Modules--">--Select Modules--</option>
                                              <?php foreach ($modules as $key => $value) { ?>
-                                                  <option value="<?php echo $value['id']; ?>"><?php echo ucwords($value['en_module_name']); ?></option>
+                                                  <option value="<?php echo $value->id; ?>"><?php echo ucwords($value->en_module_name); ?></option>
                                             <?php } ?>
                                          </select> <span class="red"><?php echo form_error('fk_module_id'); ?></span> </div>
                                 </div>

@@ -32,15 +32,6 @@ class Admin extends CI_Controller
         }
     }
     
-    public function add_doctor()
-    {
-        if ($this->controller->checkSession()) {
-            $data['body'] = 'add_doctor';
-            $this->controller->load_view($data);
-        } else {
-            $this->index();
-        }
-    }
     
     
     public function last_executed_query()
@@ -87,7 +78,7 @@ class Admin extends CI_Controller
                 'sender_id ' => $this->session->userdata('id')
             );
             
-           /* $field_val                = 'message.*,users.first_name,users.last_name';
+            /* $field_val                = 'message.*,users.first_name,users.last_name';
             $data['messages_list']    = $this->model->GetJoinRecord('message', 'reciever_id', 'users', 'id', $field_val, $where4);
             $data['totalAppointment'] = $this->model->getcount('appointment', $where);
             $data['totalPatient']     = $this->model->getcount('users', $where1);
@@ -95,187 +86,184 @@ class Admin extends CI_Controller
             $data['appointmentList']  = $this->model->GetJoinRecord('appointment', 'doctor_id', 'users', 'id', '', $where3);*/
             $this->controller->load_view($data);
         } else {
-            $this->index(); 
+            $this->index();
         }
     }
-
-    public function setting(){
+    
+    public function setting()
+    {
         $this->form_validation->set_rules('en_site_title', 'Site Title', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['setting']= $this->model->getAll('settings');
-            $data['body'] = 'setting';
+            $data['setting'] = $this->model->getAll('settings');
+            $data['body']    = 'setting';
             $this->controller->load_view($data);
         } else {
-             if ($this->controller->checkSession()) {
+            if ($this->controller->checkSession()) {
                 
-                $en_site_title   = $this->input->post('en_site_title');
-                $hi_site_title   = $this->input->post('hi_site_title');
-                $en_meta_tags    = $this->input->post('en_meta_tags');
-                $en_copyright    = $this->input->post('en_copyright');
-                $en_contact_us   = $this->input->post('en_contact_us');
-                $hi_meta_tags    = $this->input->post('hi_meta_tags');
-                $hi_copyright    = $this->input->post('hi_copyright');
-                $hi_contact_us   = $this->input->post('hi_contact_us');
+                $en_site_title = $this->input->post('en_site_title');
+                $hi_site_title = $this->input->post('hi_site_title');
+                $en_meta_tags  = $this->input->post('en_meta_tags');
+                $en_copyright  = $this->input->post('en_copyright');
+                $en_contact_us = $this->input->post('en_contact_us');
+                $hi_meta_tags  = $this->input->post('hi_meta_tags');
+                $hi_copyright  = $this->input->post('hi_copyright');
+                $hi_contact_us = $this->input->post('hi_contact_us');
                 
                 $data = array(
-                    'en_site_title'    => $en_site_title,
-                    'en_meta_tags'     => $en_meta_tags,
-                    'en_copyright'     => $en_copyright,
-                    'en_contact_us'    => $en_contact_us,
-                    'hi_site_title'    => $hi_site_title,
-                    'hi_meta_tags'     => $hi_meta_tags,
-                    'hi_copyright'     => $hi_copyright,
-                    'hi_contact_us'    => $hi_contact_us,
-                    'created_at'       => date('Y-m-d H:i:s')
+                    'en_site_title' => $en_site_title,
+                    'en_meta_tags' => $en_meta_tags,
+                    'en_copyright' => $en_copyright,
+                    'en_contact_us' => $en_contact_us,
+                    'hi_site_title' => $hi_site_title,
+                    'hi_meta_tags' => $hi_meta_tags,
+                    'hi_copyright' => $hi_copyright,
+                    'hi_contact_us' => $hi_contact_us,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
-
-                if (isset($_FILES['favicon_icon']['name']) && !empty($_FILES['favicon_icon']['name']))
-                 {
-
+                
+                if (isset($_FILES['favicon_icon']['name']) && !empty($_FILES['favicon_icon']['name'])) {
+                    
                     if ($_FILES["favicon_icon"]["size"] > 500000) {
                         $this->session->set_flashdata('info_message', "favicon icon size too large");
                         redirect('admin/setting');
-                    }
-                    else
-                    {
-                        if (move_uploaded_file($_FILES['favicon_icon']['tmp_name'], 'asset/uploads/' . $_FILES['favicon_icon']['name']))
-                        {
+                    } else {
+                        if (move_uploaded_file($_FILES['favicon_icon']['tmp_name'], 'asset/uploads/' . $_FILES['favicon_icon']['name'])) {
                             $data['favicon'] = $_FILES['favicon_icon']['name'];
                         }
-
+                        
                     }
                 }
-
-                if (isset($_FILES['site_logo']['name']) && !empty($_FILES['site_logo']['name']))
-                 {
-
+                
+                if (isset($_FILES['site_logo']['name']) && !empty($_FILES['site_logo']['name'])) {
+                    
                     if ($_FILES["site_logo"]["size"] > 1000000) {
                         $this->session->set_flashdata('info_message', "Site Logo size too large");
                         redirect('admin/setting');
-                    }
-                    else
-                    {
-                        if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/' . $_FILES['site_logo']['name']))
-                        {
+                    } else {
+                        if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/' . $_FILES['site_logo']['name'])) {
                             $data['logo'] = $_FILES['site_logo']['name'];
                         }
-
+                        
                     }
                 }
-
                 
-                 $where  = array(
-                        'id' => $this->input->post('id')
-                    );
-                 $result = $this->model->updateFields('settings', $data, $where);
-                 //$result = $this->model->insertData('setting', $data);
+                
+                $where  = array(
+                    'id' => $this->input->post('id')
+                );
+                $result = $this->model->updateFields('settings', $data, $where);
+                //$result = $this->model->insertData('setting', $data);
                 //$this->message_list();
-                 redirect('admin/setting');
+                redirect('admin/setting');
             }
             
-
+            
         }
-       
+        
     }
-
-    public function about(){
+    
+    public function about()
+    {
         $this->form_validation->set_rules('en_about_us', 'About us', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['about']= $this->model->getAll('about_us');
-            $data['body'] = 'about_us';
+            $data['about'] = $this->model->getAll('about_us');
+            $data['body']  = 'about_us';
             $this->controller->load_view($data);
         } else {
-             if ($this->controller->checkSession()) {
-                    $en_about_us    = $this->input->post('en_about_us');
-                    $hi_about_us    = $this->input->post('hi_about_us');
-                 
-                 $data = array(
-                    'en_about_us'        => $en_about_us,
-                    'hi_about_us'        => $hi_about_us,
-
-                );
-
-                 $where  = array(
-                        'id' => $this->input->post('id')
-                    );
-                 $result = $this->model->updateFields('about_us', $data, $where);
+            if ($this->controller->checkSession()) {
+                $en_about_us = $this->input->post('en_about_us');
+                $hi_about_us = $this->input->post('hi_about_us');
                 
-                 redirect('admin/about');
-             }
+                $data = array(
+                    'en_about_us' => $en_about_us,
+                    'hi_about_us' => $hi_about_us
+                    
+                );
+                
+                $where  = array(
+                    'id' => $this->input->post('id')
+                );
+                $result = $this->model->updateFields('about_us', $data, $where);
+                
+                redirect('admin/about');
+            }
+        }
     }
-}
-    public function privacy(){
+    public function privacy()
+    {
         $this->form_validation->set_rules('en_privacy_policy', 'Privacy Policy', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['privacy']= $this->model->getAll('privacy_policy');
-            $data['body'] = 'privacy_policy';
+            $data['privacy'] = $this->model->getAll('privacy_policy');
+            $data['body']    = 'privacy_policy';
             $this->controller->load_view($data);
         } else {
-             if ($this->controller->checkSession()) {
-                    $en_privacy_policy    = $this->input->post('en_privacy_policy');
-                    $hi_privacy_policy    = $this->input->post('hi_privacy_policy');
-                 
-                 $data = array(
-                    'en_privacy_policy'        => $en_privacy_policy,
-                    'hi_privacy_policy'        => $hi_privacy_policy,
-                );
-
-                 $where  = array(
-                        'id' => $this->input->post('id')
-                    );
-                 $result = $this->model->updateFields('privacy_policy', $data, $where);
+            if ($this->controller->checkSession()) {
+                $en_privacy_policy = $this->input->post('en_privacy_policy');
+                $hi_privacy_policy = $this->input->post('hi_privacy_policy');
                 
-                 redirect('admin/privacy');
-             }
+                $data = array(
+                    'en_privacy_policy' => $en_privacy_policy,
+                    'hi_privacy_policy' => $hi_privacy_policy
+                );
+                
+                $where  = array(
+                    'id' => $this->input->post('id')
+                );
+                $result = $this->model->updateFields('privacy_policy', $data, $where);
+                
+                redirect('admin/privacy');
+            }
+        }
     }
-}
-
-    public function terms(){
+    
+    public function terms()
+    {
         $this->form_validation->set_rules('en_terms', 'Terms And Condition', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['terms']= $this->model->getAll('terms_conditions');
-            $data['body'] = 'terms_conditions';
+            $data['terms'] = $this->model->getAll('terms_conditions');
+            $data['body']  = 'terms_conditions';
             $this->controller->load_view($data);
         } else {
-             if ($this->controller->checkSession()) {
-                    $en_terms    = $this->input->post('en_terms');
-                    $hi_terms    = $this->input->post('hi_terms');
-                 
-                 $data = array(
-                    'en_terms'        => $en_terms,
-                    'hi_terms'        => $hi_terms,
-                );
-
-                 $where  = array(
-                        'id' => $this->input->post('id')
-                    );
-                 $result = $this->model->updateFields('terms_conditions', $data, $where);
+            if ($this->controller->checkSession()) {
+                $en_terms = $this->input->post('en_terms');
+                $hi_terms = $this->input->post('hi_terms');
                 
-                 redirect('admin/terms');
-             }
+                $data = array(
+                    'en_terms' => $en_terms,
+                    'hi_terms' => $hi_terms
+                );
+                
+                $where  = array(
+                    'id' => $this->input->post('id')
+                );
+                $result = $this->model->updateFields('terms_conditions', $data, $where);
+                
+                redirect('admin/terms');
+            }
+        }
     }
-}
-    public function module($id=null){
+    public function module($id = null)
+    {
         $this->form_validation->set_rules('en_module_name', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             $data['body'] = 'add_module';
             $this->controller->load_view($data);
         } else {
-             if ($this->controller->checkSession()) {
-                $en_module_name  = $this->input->post('en_module_name');
-                $hi_module_name  = $this->input->post('hi_module_name');
-                $is_active       = $this->input->post('status');
-
+            if ($this->controller->checkSession()) {
+                $en_module_name = $this->input->post('en_module_name');
+                $hi_module_name = $this->input->post('hi_module_name');
+                $is_active      = $this->input->post('status');
+                
                 $data = array(
-                    'en_module_name'        => $en_module_name,
-                    'hi_module_name'        => $hi_module_name,
-                    'is_active'             => $is_active,
-                    'created_at'       => date('Y-m-d H:i:s')
+                    'en_module_name' => $en_module_name,
+                    'hi_module_name' => $hi_module_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 if (!empty($id)) {
                     $where = array(
@@ -288,59 +276,64 @@ class Admin extends CI_Controller
                     $result = $this->model->insertData('modules', $data);
                     
                 }
-                
                 $this->moduleList();
-             }
-         }
+            }
+        }
     }
-
-    public function moduleList(){
-        $data['modules']  = $this->model->getAll('modules');
-        $data['body']      = 'modules_list';
+    
+    public function moduleList()
+    {
+        $where = array(
+            'is_active' => 1
+        );
+        $data['modules'] = $this->model->getAllwhere('modules', $where);
+        $data['body']    = 'modules_list';
         $this->controller->load_view($data);
     }
-
+    
     public function edit_module($id)
     {
-        $where             = array(
+        $where = array(
             'id ' => $id
         );
-       
+        $data['modules'] = $this->model->getAllwhere('modules', $where);
+        $data['body']    = 'edit_module';
         
-        $data['modules']     = $this->model->getAllwhere('modules', $where);
-        $data['body']      = 'edit_module';
-
         $this->controller->load_view($data);
     }
-
-    public function chapter($id=null){
-            $this->form_validation->set_rules('en_chapter_name', 'Chapter Name', 'trim|required');
+    
+    public function chapter($id = null)
+    {
+        $this->form_validation->set_rules('en_chapter_name', 'Chapter Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['modules']  = $this->model->getAll('modules');
-            $data['body'] = 'add_chapter';
+            $where = array(
+                'is_active' => 1
+            );
+            $data['modules'] = $this->model->getAllwhere('modules', $where);
+            $data['body']    = 'add_chapter';
             $this->controller->load_view($data);
         } else {
-             if ($this->controller->checkSession()) {
-                $fk_module_id     = $this->input->post('fk_module_id');
-                $en_chapter_name  = $this->input->post('en_chapter_name');
-                $hi_chapter_name  = $this->input->post('hi_chapter_name');
-                $is_active        = $this->input->post('status');
-
+            if ($this->controller->checkSession()) {
+                $fk_module_id    = $this->input->post('fk_module_id');
+                $en_chapter_name = $this->input->post('en_chapter_name');
+                $hi_chapter_name = $this->input->post('hi_chapter_name');
+                $is_active       = $this->input->post('status');
+                
                 $data = array(
-                    'fk_module_id'           => $fk_module_id, 
-                    'en_chapter_name'        => $en_chapter_name,
-                    'hi_chapter_name'        => $hi_chapter_name,
-                    'is_active'              => $is_active,
-                    'created_at'             => date('Y-m-d H:i:s')
+                    'fk_module_id' => $fk_module_id,
+                    'en_chapter_name' => $en_chapter_name,
+                    'hi_chapter_name' => $hi_chapter_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
-
-
+                
+                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
                     );
-                  
+                    
                     unset($data['created_at']);
                     
                     $result = $this->model->updateFields('chapters', $data, $where);
@@ -349,30 +342,29 @@ class Admin extends CI_Controller
                 }
                 
                 $this->chapterList();
-             }
-         }
+            }
+        }
     }
-
-    public function chapterList(){
-        $data['chapter']  = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id','chapters.id ,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name');
-
-        $data['body']      = 'chapter_list';
-        
+    
+    public function chapterList()
+    {
+        $data['chapter'] = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id', 'chapters.id ,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name');
+        $data['body'] = 'chapter_list';
         $this->controller->load_view($data);
     }
-
-    public function edit_chapter($id){
-        $where             = array(
+    
+    public function edit_chapter($id)
+    {
+        $where = array(
             'chapters.id ' => $id
         );
-       
-        $data['modules']  = $this->model->getAll('modules'); 
-        $data['chapter']  = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id','chapters.id as ids,chapters.fk_module_id,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name,modules.id',$where);
-        $data['body']      = 'edit_chapter';
-       
+        
+        $data['modules'] = $this->model->getAll('modules');
+        $data['chapter'] = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id', 'chapters.id as ids,chapters.fk_module_id,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name,modules.id', $where);
+        $data['body']    = 'edit_chapter';
         $this->controller->load_view($data);
     }
-
+    
     public function check_database($password)
     {
         $username = $this->input->post('username', TRUE);
@@ -408,71 +400,53 @@ class Admin extends CI_Controller
             return false;
         }
     }
-
-    public function training($id=null){
-
+    
+    public function training($id = null)
+    {
+        
         $this->form_validation->set_rules('en_training_name', 'Training Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['modules']  = $this->model->getAll('modules');
-            $data['chapters']  = $this->model->getAll('chapters');
-            $data['body'] = 'add_training';
+            $where = array(
+                'is_active' => 1
+            );
+            $data['modules']    = $this->model->getAllwhere('modules', $where);
+            $data['chapters']   = $this->model->getAllwhere('chapters', $where);
+            $data['body']       = 'add_training';
             $this->controller->load_view($data);
         } else {
-             if ($this->controller->checkSession()) {
-                $data=$this->input->post();
+            if ($this->controller->checkSession()) {
+                $fk_module_id    = $this->input->post('fk_module_id');
+                $en_chapter_name = $this->input->post('en_chapter_name');
+                $hi_chapter_name = $this->input->post('hi_chapter_name');
+                $is_active       = $this->input->post('status');
                 
-                $module_id           = implode(",",$this->input->post('module_id'));
-                $chapter_id          = implode(",",$this->input->post('chapter_id'));
-                $en_training_name    = $this->input->post('en_training_name');
-                $hi_training_name    = $this->input->post('hi_training_name');
-                $is_active           = $this->input->post('status');
-
                 $data = array(
-                    'module_id'              => $module_id, 
-                    'chapter_id'             => $chapter_id,
-                    'en_training_name'       => $en_training_name,
-                    'hi_training_name'       => $hi_training_name,
-                    'is_active'              => $is_active,
-                    'created_at'             => date('Y-m-d H:i:s')
+                    'fk_module_id' => $fk_module_id,
+                    'en_chapter_name' => $en_chapter_name,
+                    'hi_chapter_name' => $hi_chapter_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
-
-              
+                
+                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
                     );
-                  
+                    
                     unset($data['created_at']);
                     
-                    $result = $this->model->updateFields('training', $data, $where);
+                    $result = $this->model->updateFields('chapters', $data, $where);
                 } else {
-                    $result = $this->model->insertData('training', $data);
+                    $result = $this->model->insertData('chapters', $data);
                 }
                 
-                $this->trainingList();
-             }
-         }
-
-    }
-
-    public function trainingList(){
+                $this->chapterList();
+            }
+        }
         
-        $data['body']      = 'training_list';
-        
-        $this->controller->load_view($data);
-
     }
-
-    public function getChapter(){
-           $module_id = $this->input->post('module_id');
-           $where = array(
-            'fk_module_id ' => $module_id[0]
-            );
-            $data     = $this->model->getAllwhere('chapters', $where);
-            echo json_encode($data);
-    }
-    
     public function change_password()
     {
         $this->form_validation->set_rules('old_password', 'Old Password', 'trim|required');
@@ -522,13 +496,6 @@ class Admin extends CI_Controller
         $this->index($msg);
     }
     
-    public function get_port_data()
-    {
-        $val       = $this->input->get('val');
-        $table     = $this->input->get('table');
-        $port_data = $this->model->get_matching_record($table, $val);
-        echo json_encode($port_data);
-    }
     
     
     public function register($id = null, $user_role = null)
@@ -754,9 +721,7 @@ class Admin extends CI_Controller
     {
         $id    = $this->input->post('id');
         $table = $this->input->post('table');
-        $where = array(
-            'id' => $id
-        );
+        $where = array('id' => $id);
         $this->model->delete($table, $where);
     }
     
@@ -773,221 +738,6 @@ class Admin extends CI_Controller
         $result = $this->model->updateFields($table, $data, $where);
     }
     
-    public function schedule()
-    {
-        $data['body']   = 'add_schedule';
-        $where          = array(
-            'user_role' => 2
-        );
-        $data['doctor'] = $this->model->getAllwhere('users', $where);
-        $this->controller->load_view($data);
-    }
-    
-    public function addSchedule($id = null)
-    {
-        $data      = $this->input->post();
-        $doctor_id = $data['doctor_id'];
-        $new       = array();
-        
-        foreach ($data['schedule'] as $daykey => $day) {
-            foreach ($data['starttime'] as $timekey => $time) {
-                foreach ($data['endtime'] as $endkey => $end) {
-                    $new[$daykey]['doctor_id']  = $doctor_id;
-                    $new[$daykey]['day']        = $day;
-                    $new[$daykey]['starttime']  = $time;
-                    $new[$daykey]['endtime']    = $end;
-                    $new[$daykey]['created_at'] = date('Y-m-d H:i:s');
-                    
-                }
-            }
-        }
-        
-        if (!empty($id)) {
-            $where  = array(
-                'doctor_id' => $doctor_id
-            );
-            $delete = $this->model->delete('schedule', $where);
-            $result = $this->model->insertBatch('schedule', $new);
-            
-        } else {
-            
-            $result = $this->model->insertBatch('schedule', $new);
-        }
-        
-        $this->session->set_flashdata("info_message", "Schedule added successfully..");
-        redirect("admin/list_schedule");
-    }
-    
-    
-    public function list_schedule()
-    {
-        $data['body']         = 'list_schedule';
-        $data['scheduleList'] = $this->Common_model->getSchedule('schedule');
-        $this->controller->load_view($data);
-    }
-    
-    
-    public function edit_schedule($id)
-    {
-        $data['body']     = 'edit_schedule';
-        $where            = array(
-            'schedule.doctor_id' => $id
-        );
-        $where1           = array(
-            'user_role' => 2
-        );
-        $data['doctor']   = $this->model->getAllwhere('users', $where1);
-        $data['schedule'] = $this->model->GetJoinRecord('schedule', 'doctor_id', 'users', 'id', 'schedule.sc_id,schedule.doctor_id,schedule.day,schedule.starttime,schedule.endtime,users.first_name', $where);
-        $this->controller->load_view($data);
-    }
-    
-    public function delete_schedule()
-    {
-        $id    = $this->input->post('id');
-        $where = array(
-            'doctor_id' => $id
-        );
-        $this->model->delete('schedule', $where);
-    }
-    
-    public function Appointment()
-    {
-        $data['body'] = 'add_appointment';
-        $patient_id='2';
-        $doctor_id='3';
-        $where        = array(
-            'user_role' => 2
-        );
-        $wheres       = array(
-            'user_role' => 3
-        );
-       
-        $data['doctor']  = $this->model->getAllwhere('users', $where);
-        $data['patient'] = $this->model->getAllwhere('users', $wheres);
-
-        $this->controller->load_view($data);
-    }
-    
-    public function addAppointment($id = null)
-    {
-        
-        $this->form_validation->set_rules('patient_id', 'patient_id', 'trim|required');
-        $this->form_validation->set_rules('doctor_id', 'doctor_id', 'trim|required');
-        $this->form_validation->set_rules('appointment_date', 'appointment_date', 'trim|required');
-        $this->form_validation->set_rules('appointment_time', 'appointment_time', 'trim|required');
-        $this->form_validation->set_rules('problem', 'problem', 'trim|required');
-        
-        if (empty($id)) {
-            $this->form_validation->set_rules('patient_id', 'patient_id', 'trim|required');
-            $this->form_validation->set_rules('doctor_id', 'doctor_id', 'trim|required');
-            $this->form_validation->set_rules('appointment_date', 'appointment_date', 'trim|required');
-            $this->form_validation->set_rules('appointment_time', 'appointment_time', 'trim|required');
-            $this->form_validation->set_rules('problem', 'problem', 'trim|required');
-        }
-        
-        if ($this->form_validation->run() == false) {
-            
-            $this->session->set_flashdata('errors', validation_errors());
-            $data['body']    = 'add_appointment';
-            $where           = array(
-                'user_role' => 2
-            );
-            $wheres          = array(
-                'user_role' => 3
-            );
-            $data['doctor']  = $this->model->getAllwhere('users', $where);
-            $data['patient'] = $this->model->getAllwhere('users', $wheres);
-            $this->controller->load_view($data);
-        } else {
-            
-            if ($this->controller->checkSession()) {
-                
-                $data = $this->input->post();
-                
-                $data = array(
-                    'appointment_type'  => $data['appointment_type'],
-                    'appointment_id'    => 'AP'.mt_rand(100000, 999999),
-                    'patient_id'        => $data['patient_id'],
-                    'doctor_id'         => $data['doctor_id'],
-                    'appointment_date'  => $data['appointment_date'],
-                    'appointment_time'  => $data['appointment_time'],
-                    'problem'           => $data['problem'],
-                    'created_at'        => date('Y-m-d H:i:s')
-                );
-                
-                if (!empty($id)) {
-                    
-                    $where = array(
-                        'ap_id' => $id
-                    );
-                    unset($data['created_at']);
-                    unset($data['appointment_id']);
-                    $result = $this->model->updateFields('appointment', $data, $where);
-                } else {
-                    $result = $this->model->insertData('appointment', $data);
-                }
-                $this->session->set_flashdata("info_message", "Appointment updated Successfully..");
-                redirect("admin/appointment_list");
-            }
-        }
-    }
-    
-    
-    public function appointment_list()
-    {
-        $where                   = array(
-            'user_role' => 2
-        );
-        $data['appointmentList'] = $this->model->GetJoinRecord('appointment', 'doctor_id', 'users', 'id', 'appointment.ap_id,appointment.appointment_id,appointment.appointment_time,appointment.appointment_date,users.first_name,users.last_name,appointment.is_active,appointment.appointment_type,appointment.patient_id', $where);
-        
-        $data['body'] = 'list_appointment';
-        $this->controller->load_view($data);
-    }
-    
-    public function update_status()
-    {
-        $id = $this->input->post('id');
-        $active = $this->input->post('active');
-        $data  = array(
-            'is_active' => $active
-        );
-        $where = array(
-            'ap_id' => $id
-        );
-        $this->model->update('appointment', $data, $where);
-    }
-    
-    public function edit_appointment($id)
-    {
-        
-        $where  = array(
-            'user_role' => 2
-        );
-        $wheres = array(
-            'user_role' => 3
-        );
-        
-        $data['doctor']  = $this->model->getAllwhere('users', $where);
-        $data['patient'] = $this->model->getAllwhere('users', $wheres);
-        
-        $where1 = array(
-            'ap_id ' => $id
-        );
-        
-        $data['appointment'] = $this->model->GetJoinRecord('appointment', 'doctor_id', 'users', 'id', '', $where1);
-        $data['body']        = 'edit_appointment';
-        $this->controller->load_view($data);
-    }
-    
-    
-    public function delete_appointment()
-    {
-        $id    = $this->input->post('id');
-        $where = array(
-            'ap_id' => $id
-        );
-        $this->model->delete('appointment', $where);
-    }
     
     public function profile()
     {
@@ -1007,15 +757,14 @@ class Admin extends CI_Controller
         } else {
             if ($this->controller->checkSession()) {
                 
-                $first_name  = $this->input->post('first_name');
-                $last_name   = $this->input->post('last_name');
-                $email       = $this->input->post('email');
-                $address     = $this->input->post('address');
-                $phone_no    = $this->input->post('phone');
-                $mobile_no   = $this->input->post('mobile');
-                $dob         = $this->input->post('date_of_birth');
-                $gender      = $this->input->post('gender');
-                $blood_group = $this->input->post('blood_group');
+                $first_name = $this->input->post('first_name');
+                $last_name  = $this->input->post('last_name');
+                $email      = $this->input->post('email');
+                $address    = $this->input->post('address');
+                $phone_no   = $this->input->post('phone');
+                $mobile_no  = $this->input->post('mobile');
+                $dob        = $this->input->post('date_of_birth');
+                $gender     = $this->input->post('gender');
                 
                 $data = array(
                     'first_name' => $first_name,
@@ -1025,8 +774,7 @@ class Admin extends CI_Controller
                     'phone_no' => $phone_no,
                     'mobile' => $mobile_no,
                     'date_of_birth' => $dob,
-                    'gender' => $gender,
-                    'blood_group' => $blood_group
+                    'gender' => $gender
                 );
                 
                 
@@ -1036,16 +784,6 @@ class Admin extends CI_Controller
                         
                         $data['profile_pic'] = $_FILES['image']['name'];
                     }
-                    /*$count = count($_FILES['image']['name']);
-                    for ($i = 0; $i < $count; $i++) {
-                    if ($_FILES['image']['error'][$i] == 0) {
-                    if (move_uploaded_file($_FILES['image']['tmp_name'][$i], 'asset/uploads/' . $_FILES['image']['name'][$i])) {
-                    >>>>>>> a8efd675ac5c56fadf558494c61425a84d8344de
-                    
-                    $data['profile_pic'] = $_FILES['image']['name'][$i];
-                    }
-                    }
-                    }*/
                 }
                 
                 $result = $this->model->updateFields('users', $data, $where);
@@ -1054,144 +792,6 @@ class Admin extends CI_Controller
         }
     }
     
-    public function case_study($id = null)
-    {
-        $where  = array(
-            'user_role' => 3
-        );
-        $where1 = array(
-            'user_role' => 2
-        );
-        
-        $data['patient'] = $this->model->getAllwhere('users', $where);
-        $data['doctor']  = $this->model->getAllwhere('users', $where1);
-        $this->form_validation->set_rules('patient_id', 'Patient Name', 'trim|required');
-        $this->form_validation->set_rules('diabetic', 'Diabetic', 'trim|required');
-        $this->form_validation->set_rules('blood_pressure', 'High Blood Pressure', 'trim|required');
-        if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('errors', validation_errors());
-            $data['body'] = 'case_study';
-            if (!empty($id)) {
-                $where              = array(
-                    'id' => $id
-                );
-                $data['case_study'] = $this->model->getAllwhere('case_study', $where);
-                $data['body']       = 'edit_case_study';
-            }
-            $this->controller->load_view($data);
-        } else {
-            if ($this->controller->checkSession()) {
-                $doctor_id       = $this->input->post('doctor_id');
-                $patient_id      = $this->input->post('patient_id');
-                $diabetic        = $this->input->post('diabetic');
-                $blood_pressure  = $this->input->post('blood_pressure');
-                $allergies       = $this->input->post('allergies');
-                $problem         = $this->input->post('problem');
-                $others          = $this->input->post('others');
-                $medical_history = $this->input->post('medical_history');
-                $status          = $this->input->post('status');
-                $reference       = $this->input->post('reference');
-                
-                $data = array(
-                    'doctor_id' => $doctor_id,
-                    'patient_id' => $patient_id,
-                    'diabetic' => $diabetic,
-                    'blood_pressure' => $blood_pressure,
-                    'allergies' => $allergies,
-                    'problem' => $problem,
-                    'others' => $others,
-                    'medical_history' => $medical_history,
-                    'is_active' => $status,
-                    'reference' => $reference,
-                    'created_at' => date('Y-m-d H:i:s')
-                );
-                if (!empty($id)) {
-                    $where = array(
-                        'id' => $id
-                    );
-                    unset($data['created_at']);
-                    $result = $this->model->updateFields('case_study', $data, $where);
-                } else {
-                    $result = $this->model->insertData('case_study', $data);
-                }
-                $this->case_study_list();
-            }
-        } 
-    }
-    
-    public function case_study_list()
-    {
-        $where     = array(
-            'doctor_id' => $this->session->userdata('id')
-        );
-        $field_val = 'case_study.*,users.first_name,users.last_name';
-        
-        $data['documents_list'] = $this->model->GetJoinRecord('case_study', 'patient_id', 'users', 'id', $field_val);
-        
-        $data['body'] = 'case_study_list';
-        $this->controller->load_view($data);
-    }
-    
-    
-    public function notices($id = null)
-    {
-        $this->form_validation->set_rules('title', 'title', 'trim|required');
-        $this->form_validation->set_rules('description', 'description', 'trim|required');
-        
-        if (empty($id)) {
-            $this->form_validation->set_rules('title', 'title', 'trim|required');
-            $this->form_validation->set_rules('description', 'description', 'trim|required');
-        }
-        
-        if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('errors', validation_errors());
-            $data['body'] = 'add_notice';
-            
-            if (!empty($id)) {
-                $where           = array(
-                    'id' => $id
-                );
-                $data['notices'] = $this->model->getAllwhere('notices', $where);
-                $data['body']    = 'edit_notices';
-            }
-            
-            $this->controller->load_view($data);
-        } else {
-            if ($this->controller->checkSession()) {
-                
-                $title       = $this->input->post('title');
-                $description = $this->input->post('description');
-                $start_date  = $this->input->post('start_date');
-                $end_date    = $this->input->post('end_date');
-                
-                $data = array(
-                    'title' => $title,
-                    'description' => $description,
-                    'start_date' => date('Y-m-d', strtotime($start_date)),
-                    'end_date' => date('Y-m-d', strtotime($end_date)),
-                    'created_at' => date('Y-m-d H:i:s')
-                );
-                
-                if (!empty($id)) {
-                    $where = array(
-                        'id' => $id
-                    );
-                    unset($data['created_at']);
-                    $result = $this->model->updateFields('notices', $data, $where);
-                } else {
-                    $result = $this->model->insertData('notices', $data);
-                }
-                $this->notices_list();
-            }
-        }
-    }
-    
-    public function notices_list()
-    {
-        $data['notice_list'] = $this->model->getAll('notices');
-        $data['body']        = 'list_notice';
-        $this->controller->load_view($data);
-    }
     
     public function send_mail()
     {
@@ -1216,24 +816,24 @@ class Admin extends CI_Controller
                 $sender_id   = $this->session->userdata('id');
                 
                 $data = array(
-                    'reciever_id'   => $reciever_id,
-                    'sender_id'     => $sender_id,
-                    'subject'       => $subject,
-                    'message'       => trim($message),
-                    'is_active'     => 1,
-                    'created_at'    => date('Y-m-d H:i:s')
+                    'reciever_id' => $reciever_id,
+                    'sender_id' => $sender_id,
+                    'subject' => $subject,
+                    'message' => trim($message),
+                    'is_active' => 1,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
-
+                
                 $config_mail = Array(
-                    'protocol'  => 'smtp',
+                    'protocol' => 'smtp',
                     'smtp_host' => 'ssl://smtp.googlemail.com',
                     'smtp_port' => '465',
                     'smtp_user' => 'webdeskytechnical@gmail.com',
                     'smtp_pass' => 'webdesky@2017',
-                    'mailtype'  => 'html',
-                    'charset'   => 'iso-8859-1',
-                    'newline'   => "\r\n"
-                    );
+                    'mailtype' => 'html',
+                    'charset' => 'iso-8859-1',
+                    'newline' => "\r\n"
+                );
                 
                 $this->load->library('email', $config_mail);
                 $this->email->set_mailtype("html");
@@ -1242,11 +842,11 @@ class Admin extends CI_Controller
                 $this->email->to($reciever_id);
                 $this->email->subject($subject);
                 $this->email->message($message);
-
-                if ( ! $this->email->send()) {
+                
+                if (!$this->email->send()) {
                     show_error($this->email->print_debugger());
-                } 
-                            
+                }
+                
                 $result = $this->model->insertData('mail', $data);
                 $this->mail_list();
             }
@@ -1279,7 +879,6 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
-                
                 $reciever_id = $this->input->post('reciever_id');
                 $subject     = $this->input->post('subject');
                 $message     = $this->input->post('message');
@@ -1312,63 +911,6 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
     }
     
-    public function add_inventory($id = null)
-    {
-        $this->form_validation->set_rules('equipment_name', 'Equipment Name', 'trim|required');
-        $this->form_validation->set_rules('no_of_equipment', 'No of Equipment', 'trim|required|numeric|xss_clean');
-        
-        if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('errors', validation_errors());
-            $data['body'] = 'inventory';
-            $this->controller->load_view($data);
-        } else {
-            if ($this->controller->checkSession()) {
-                $equipment_name  = $this->input->post('equipment_name');
-                $no_of_equipment = $this->input->post('no_of_equipment');
-                $others          = $this->input->post('others');
-                $data            = array(
-                    'doctor_id' => $this->session->userdata('id'),
-                    'equipment_name' => $equipment_name,
-                    'no_of_equipment' => $no_of_equipment,
-                    'others' => $others,
-                    'is_active' => 1,
-                    'created_at' => date('Y-m-d H:i:s')
-                );
-                
-                if (!empty($id)) {
-                    $where = array(
-                        'id' => $id
-                    );
-                    unset($data['created_at']);
-                    $result = $this->model->updateFields('inventory', $data, $where);
-                } else {
-                    $result = $this->model->insertData('inventory', $data);
-                }
-                $this->inventory_list();
-            }
-        }
-    }
-    
-    public function inventory_list()
-    {
-        $field_val              = 'inventory.*,users.first_name,users.last_name';
-        $where                  = array(
-            'inventory.is_active' => 1
-        );
-        $data['inventory_list'] = $this->model->GetJoinRecord('inventory', 'doctor_id', 'users', 'id', $field_val, $where);
-        $data['body']           = 'inventory_list';
-        $this->controller->load_view($data);
-    }
-    
-    public function edit_inventory($id)
-    {
-        $where             = array(
-            'id' => $id
-        );
-        $data['inventory'] = $this->model->getAllwhere('inventory', $where);
-        $data['body']      = 'edit_inventory';
-        $this->controller->load_view($data);
-    }
     
     public function check_password()
     {
@@ -1383,110 +925,6 @@ class Admin extends CI_Controller
         } else {
             echo '1';
         }
-    }
-    
-    public function hospitals($id = null)
-    {
-        $this->form_validation->set_rules('hospital_name', 'Hospital Name', 'trim|required');
-        $this->form_validation->set_rules('registration_number', 'Registration Number', 'trim|required');
-        $this->form_validation->set_rules('owner_name', 'Owner Name', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('city', 'City', 'trim|required|xss_clean|numeric');
-        $this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('no_of_doc', 'Number of Doctor', 'trim|required|numeric');
-        $this->form_validation->set_rules('speciality', 'Speciality', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('blood_bank', 'Blood Bank', 'trim|required');
-        
-        if (!empty($id)) {
-            $where = array(
-                'id' => $id
-            );
-            
-            $data['hospitals'] = $this->model->getAllwhere('hospitals', $where);
-            
-            $where_city = array(
-                'id' => $data['hospitals'][0]->city
-            );
-            
-            $state = $this->model->getAllwhere('cities', $where_city);
-            
-            $where_state = array(
-                'id' => $state[0]->state_id
-            );
-            
-            $country = $this->model->getAllwhere('states', $where_state);
-            
-            $data['hospitals'][0]->state_id   = $state[0]->state_id;
-            $data['hospitals'][0]->state_name = $country[0]->name;
-            $data['hospitals'][0]->country    = $country[0]->country_id;
-            $data['hospitals'][0]->city_name  = $state[0]->name;
-            
-            
-        }
-        
-        $data['countries'] = $this->model->getAll('countries');
-        if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('errors', validation_errors());
-            $data['body'] = 'hospitals';
-            $this->controller->load_view($data);
-        } else {
-            
-            if ($this->controller->checkSession()) {
-                
-                $hospital_name       = $this->input->post('hospital_name');
-                $registration_number = $this->input->post('registration_number');
-                $owner_name          = $this->input->post('owner_name');
-                $city                = $this->input->post('city');
-                $address             = $this->input->post('address');
-                $staff_number        = $this->input->post('staff_number');
-                $no_of_doc           = $this->input->post('no_of_doc');
-                $speciality          = $this->input->post('speciality');
-                $no_of_ambulance     = $this->input->post('no_of_ambulance');
-                $blood_bank          = $this->input->post('blood_bank');
-                $status              = $this->input->post('status');
-                
-                if (!empty($_FILES)) {
-                    $file_name = $this->file_upload($_FILES);
-                } else {
-                    $file_name = '';
-                }
-                
-                $data = array(
-                    'hospital_name' => $hospital_name,
-                    'registration_number' => $registration_number,
-                    'owner_name' => $owner_name,
-                    'city' => $city,
-                    'address' => $address,
-                    'staff_number' => $staff_number,
-                    'no_of_doc' => $no_of_doc,
-                    'speciality' => $speciality,
-                    'no_of_ambulance' => $no_of_ambulance,
-                    'blood_bank' => $blood_bank,
-                    'is_active' => $status,
-                    'logo' => $file_name,
-                    'created_at' => date('Y-m-d H:i:s')
-                );
-                
-                
-                if (!empty($id)) {
-                    $where = array(
-                        'id' => $id
-                    );
-                    unset($data['created_at']);
-                    $result = $this->model->updateFields('hospitals', $data, $where);
-                } else {
-                    $result = $this->model->insertData('hospitals', $data);
-                }
-                $this->hospitals_list();
-            }
-        }
-        
-    }
-    
-    public function hospitals_list()
-    {
-        $data['hospitals_list'] = $this->model->getAll('hospitals');
-        $data['body']           = 'hospitals_list';
-        $this->controller->load_view($data);
     }
     
     
@@ -1520,86 +958,5 @@ class Admin extends CI_Controller
         $select = 'id, name';
         $states = $this->model->getAllwhere($table, $where, $select);
         echo json_encode($states);
-    }
-    
-    
-    public function get_schedule()
-    {
-        $doctor_id        = $this->input->post('doctor_id');
-        $appointment_time = $this->input->post('appointment_time');
-        $appointment_date = $this->input->post('appointment_date');
-        $day              = date('l', strtotime($appointment_date));
-        $where            = array(
-            'doctor_id' => $doctor_id
-        );
-        $data             = $this->model->getAllwhere('schedule', $where);
-        print_r(json_encode($data));
-        
-    }
-    
-    public function get_time()
-    {
-        $doctor_id        = $this->input->post('doctor_id');
-        $appointment_date = $this->input->post('appointment_date');
-        $day              = date('l', strtotime($appointment_date));
-        
-        $where     = array(
-            'doctor_id' => $doctor_id,
-            'appointment_date' => $appointment_date
-        );
-        $field_val = 'appointment_time';
-        $data      = $this->model->getAllwhere('appointment', $where, '', '', $field_val);
-        print_r(json_encode($data));
-    }
-    
-    public function review_list()
-    {
-        $data['review'] = $this->model->getAll('review');
-        if (!empty($data['review'])) {
-            foreach ($data['review'] as $key => $value) {
-                $doctor_id  = $value['doctor_id'];
-                $patient_id = $value['patient_id'];
-                $patient    = $this->model->self_join_records($patient_id, $doctor_id);
-
-                if (!empty($patient[0]['doctor_first_name'])) {
-                    $data['review'][$key]['doctor_first_name'] = $patient[0]['doctor_first_name'];
-                }
-                if (!empty($patient[0]['patient_first_name'])) {
-                    $data['review'][$key]['patient_first_name'] = $patient[0]['patient_first_name'];
-                }
-            }
-        }
-        $data['body'] = 'review_list';
-        $this->controller->load_view($data);
-    }
-    
-    public function view_review($id)
-    {
-        $where          = array(
-            'id ' => $id
-        );
-        $data['review'] = $this->model->getAllwhere('review', $where);
-        $doctor_id      = $data['review'][0]->doctor_id;
-        $patient_id     = $data['review'][0]->patient_id;
-        $where1         = array(
-            'id' => $doctor_id
-        );
-        $select         = 'first_name';
-        $data['doctor'] = $this->model->getAllwhere('users', $where1, $select);
-        $data['body']   = 'view_review';
-        $this->controller->load_view($data);
-    }
-    
-    public function update_review()
-    {
-        $id     = $this->input->post('id');
-        $active = $this->input->post('active');
-        $data   = array(
-            'is_active' => $active
-        );
-        $where = array(
-            'id' => $id
-        );
-        $this->model->update('review', $data, $where);
     }
 }
