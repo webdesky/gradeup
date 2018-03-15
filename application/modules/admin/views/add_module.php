@@ -13,7 +13,7 @@
                 <?php echo $info_message; ?> </div>
             <?php endif ?>
             <div class="panel panel-default">
-                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/notices_list')?>"><i class="fa fa-th-list">&nbsp;Module List</i></a> </div>
+                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/moduleList')?>"><i class="fa fa-th-list">&nbsp;Module List</i></a> </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
@@ -70,8 +70,8 @@
         $('select').niceSelect();
         $(".registration_form1").validate({
             rules: {
-                "module_name": "required",
-
+                "en_module_name": "required",
+                "hi_module_name":"required"
             },
             submitHandler: function(form) {
                 form.submit();

@@ -44,7 +44,8 @@
                                             <th>User Role</th>
                                             <?php if($user_role==1 || ($user_role==4 && $right0[1]==1 || $right0[2]==1)){?>
                                             <th>Action</th>
-                                            <?php }?> </tr>
+                                            <?php }?> 
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <?php $i=1; foreach($users as $users_list){?>
@@ -68,7 +69,8 @@
                                                 <?php if($user_role==1 || ($user_role==4 && $right0[1]==1)){?> <a href="<?php echo base_url('admin/edit_user/'.$users_list->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |
                                                 <?php }if($user_role==1 || ($user_role==4 && $right0[2]==1)){?> <a href="javascript:void(0)" onclick="delete_user('<?php echo $users_list->id?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
                                                 <?php }?> </td>
-                                            <?php }?> </tr>
+                                            <?php }?> 
+                                        </tr>
                                         <?php $i++;}?> </tbody>
                                 </table>
                             </div>

@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-primary" href="<?php echo base_url('admin/module')?>"><i class="fa fa-th-list">&nbsp;Add Chapter</i></a>
+                    <a class="btn btn-primary" href="<?php echo base_url('admin/chapter')?>"><i class="fa fa-th-list">&nbsp;Add Chapter</i></a>
                      </div>
                 <div class="panel-body">
                     <div class="row">
@@ -27,13 +27,13 @@
                                             <th>Hindi Chapter Name</th>
                                             <th>Created at</th>
                                             <th>Action</th>
-                                            
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <?php if(!empty($chapter)){ ?>
                                         <?php $i=1; foreach($chapter as $value){?>
-                                        <tr>
-                                            <td id="tr_<?php echo $i;?>">
+                                        <tr id="tr_<?php echo $i;?>">
+                                            <td>
                                                 <?php echo $i; ?> </td>
                                             <td>
                                                 <?php echo $value->en_module_name;?> </td>
@@ -47,7 +47,7 @@
                                                 <a href="<?php echo base_url('admin/edit_chapter/'.$value->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |
                                                 <a href="javascript:void(0)" onclick="delete_user('<?php echo $value->id?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
                                                </td>
-                                                 </tr>
+                                        </tr>
                                         <?php $i++;}}?> </tbody>
                                 </table>
                             </div>
