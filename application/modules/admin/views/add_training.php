@@ -87,7 +87,7 @@ $(document).ready(function() {
     $('.callbacks').multiSelect({
       afterSelect: function(values){
 
-        var url = 'admin/getChapter';
+       var url = "<?php echo base_url('admin/getChapter') ?>";
         $.ajax({
         url: url,
         type: "POST",

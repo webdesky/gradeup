@@ -458,22 +458,128 @@ class Admin extends CI_Controller
     }
 
     public function trainingList(){
-        
+        $data['training']  = $this->model->getAll('training'); 
         $data['body']      = 'training_list';
         
         $this->controller->load_view($data);
 
     }
 
+    public function edit_training($id){
+         $where             = array(
+            'id ' => $id
+        );
+        $data['modules']    = $this->model->getAll('modules');
+        $data['chapters']   = $this->model->getAll('chapters');
+        $data['training']   = $this->model->getAllwhere('training', $where);
+        $data['body']       = 'edit_training';
+
+        $this->controller->load_view($data);
+    }
+
     public function getChapter(){
+
            $module_id = $this->input->post('module_id');
            $where = array(
             'fk_module_id ' => $module_id[0]
             );
             $data     = $this->model->getAllwhere('chapters', $where);
+
             echo json_encode($data);
     }
+
+    public function question($id=null){
+        $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+
+             if(!empty($id)){
+             
+             $data['modules']    = $this->model->getAll('modules');
+             $data['chapters']   = $this->model->getAll('chapters');
+             }else{
+             $data['modules']    = $this->model->getAll('modules');
+             $data['chapters']   = $this->model->getAll('chapters');
+             }
+             $data['body']       = 'add_question';
+             $this->controller->load_view($data);
+        } else {
+             if ($this->controller->checkSession()) {
+                $module_id           = $this->input->post('module_id');
+                $chapter_id          = $this->input->post('chapter_id');
+                $question_marks      = $this->input->post('question_marks');
+                $question_type       = $this->input->post('question_type');
+                $en_question         = $this->input->post('en_question');
+                $hi_question         = $this->input->post('hi_question');
+                $en_option_a         = $this->input->post('en_option_a');
+                $en_option_b         = $this->input->post('en_option_b');
+                $en_option_c         = $this->input->post('en_option_c');
+                $en_option_d         = $this->input->post('en_option_d');
+                $hi_option_a         = $this->input->post('hi_option_a');
+                $hi_option_b         = $this->input->post('hi_option_b');
+                $hi_option_c         = $this->input->post('hi_option_c');
+                $hi_option_d         = $this->input->post('hi_option_d');
+                
+                if($question_type=='True False'){
+                    $en_answer           = $this->input->post('en_answers');
+                }else{
+                    $en_answer           = $this->input->post('en_answer');    
+                }
+                
+                $hi_answer           = $this->input->post('hi_answer');
+                $en_explaination     = $this->input->post('en_explaination');
+                $hi_explaination     = $this->input->post('hi_explaination');
+                $is_active           = $this->input->post('status');
+
+                 $data = array(
+                    'module_id'              => $module_id, 
+                    'chapter_id'             => $chapter_id,
+                    'question_marks'         => $question_marks,
+                    'question_type'          => $question_type,
+                    'en_question'            => $en_question,
+                    'hi_question'            => $hi_question,
+                    'en_option_a'            => $en_option_a,
+                    'en_option_b'            => $en_option_b,
+                    'en_option_c'            => $en_option_c,
+                    'en_option_d'            => $en_option_d,
+                    'hi_option_a'            => $hi_option_a,
+                    'hi_option_b'            => $hi_option_b,
+                    'hi_option_c'            => $hi_option_c,
+                    'hi_option_d'            => $hi_option_d,
+                    'en_answer'              => $en_answer,
+                    'hi_answer'              => $hi_answer,
+                    'en_explaination'        => $en_explaination,
+                    'hi_explaination'        => $hi_explaination,
+                    'is_active'              => $is_active,
+                    'created_at'             => date('Y-m-d H:i:s')
+                );
+
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                  
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('questions', $data, $where);
+                } else {
+                    $result = $this->model->insertData('questions', $data);
+                } 
+                 $this->questionList();
+
+             }
+         }
+       
+    }
     
+    public function questionList(){
+        $data['question']  = $this->model->getAll('questions'); 
+        $data['body']      = 'question_list';
+
+        $this->controller->load_view($data);
+
+    }
+
     public function change_password()
     {
         $this->form_validation->set_rules('old_password', 'Old Password', 'trim|required');
@@ -498,6 +604,7 @@ class Admin extends CI_Controller
             }
         }
     }
+
     public function oldpass_check($oldpass)
     {
         $user_id = $this->session->userdata('id');
@@ -510,6 +617,7 @@ class Admin extends CI_Controller
             return TRUE;
         }
     }
+
     public function logout()
     {
         $user_data = $this->session->all_userdata();
