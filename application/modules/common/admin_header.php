@@ -12,6 +12,7 @@
     <script src="<?php echo base_url('asset/js/jquery-ui.js');?>"></script>
     <script src="<?php //echo base_url('asset/dist/js/moment.min.js')?>"></script>
     <script src="<?php //echo base_url('asset/dist/js/bootstrap-datetimepicker.min.js')?>"></script>
+    <script src="<?php echo base_url('asset/dist/js/jquery.multi-select.js');?>"></script>
     <script src="<?php echo base_url('asset/dist/js/jquery.nice-select.min.js');?>"></script>
     <script src="<?php echo base_url('asset/vendor/bootstrap/js/bootstrap.min.js');?>"></script>
     <script src="<?php echo base_url('asset/js/datatable.js')?>"></script>
@@ -40,6 +41,7 @@
     <link href="<?php echo base_url('asset/vendor/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet">
     <link href="<?php echo base_url('asset/timepicker.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('asset/dataTables.min.css'); ?>" rel="stylesheet">
+     <link href="<?php echo base_url('asset/dist/css/multi-select.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('asset/dist/css/nice-select.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('asset/dist/css/sweetalert.min.css')?>" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url('asset/dist/css/rowReorder.dataTables.min.css')?>">
