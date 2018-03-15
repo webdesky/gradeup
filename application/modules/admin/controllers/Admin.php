@@ -140,9 +140,9 @@ class Admin extends CI_Controller
                     else
                     {
                         if (move_uploaded_file($_FILES['favicon_icon']['tmp_name'], 'asset/uploads/' . $_FILES['favicon_icon']['name']))
-                             {
-                                $data['favicon'] = $_FILES['favicon_icon']['name'];
-                             }
+                        {
+                            $data['favicon'] = $_FILES['favicon_icon']['name'];
+                        }
 
                     }
                 }
@@ -157,9 +157,9 @@ class Admin extends CI_Controller
                     else
                     {
                         if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/' . $_FILES['site_logo']['name']))
-                             {
-                                $data['logo'] = $_FILES['site_logo']['name'];
-                             }
+                        {
+                            $data['logo'] = $_FILES['site_logo']['name'];
+                        }
 
                     }
                 }
@@ -180,7 +180,7 @@ class Admin extends CI_Controller
     }
 
     public function about(){
-        $this->form_validation->set_rules('en_about_us', 'ABout us', 'trim|required');
+        $this->form_validation->set_rules('en_about_us', 'About us', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             $data['about']= $this->model->getAll('about_us');
@@ -296,7 +296,6 @@ class Admin extends CI_Controller
 
     public function moduleList(){
         $data['modules']  = $this->model->getAll('modules');
-
         $data['body']      = 'modules_list';
         $this->controller->load_view($data);
     }
@@ -1028,10 +1027,7 @@ class Admin extends CI_Controller
                 }
                 
                 $result = $this->model->updateFields('users', $data, $where);
-                
-                
                 redirect('/admin/profile', 'refresh');
-                
             }
         }
     }
@@ -1574,9 +1570,9 @@ class Admin extends CI_Controller
     
     public function update_review()
     {
-        $id = $this->input->post('id');
+        $id     = $this->input->post('id');
         $active = $this->input->post('active');
-        $data  = array(
+        $data   = array(
             'is_active' => $active
         );
         $where = array(
