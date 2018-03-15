@@ -1,9 +1,9 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-           
+
             <h1 class="page-header">Module List</h1>
-          
+
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -13,7 +13,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a class="btn btn-primary" href="<?php echo base_url('admin/module')?>"><i class="fa fa-th-list">&nbsp;Add Module</i></a>
-                     </div>
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
@@ -26,13 +26,13 @@
                                             <th>Hindi Module Name</th>
                                             <th>Created at</th>
                                             <th>Action</th>
-                                            
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <?php if(!empty($modules)){ ?>
                                         <?php $i=1; foreach($modules as $module){?>
-                                        <tr>
-                                            <td id="tr_<?php echo $i;?>">
+                                        <tr id="tr_<?php echo $i;?>">
+                                            <td>
                                                 <?php echo $i; ?> </td>
                                             <td>
                                                 <?php echo $module->en_module_name;?> </td>
@@ -43,9 +43,10 @@
                                             <td>
                                                 <a href="<?php echo base_url('admin/edit_module/'.$module->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |
                                                 <a href="javascript:void(0)" onclick="delete_user('<?php echo $module->id?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
-                                               </td>
-                                                 </tr>
-                                        <?php $i++;}}?> </tbody>
+                                            </td>
+                                        </tr>
+                                        <?php $i++;}}?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -91,4 +92,5 @@ function delete_user(id, tr_id) {
 
     });
 }
+
 </script>

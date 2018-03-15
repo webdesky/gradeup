@@ -33,7 +33,6 @@
                                 <div class="col-md-6">
                                     <div class="form-group"> <label class="col-md-3 ">Chapter Name * </label>
                                         <div class="col-md-9"> <select class="form-control callback" name="chapter_id[]" multiple='multiple'>
-                                        
                                          </select> <span class="red"><?php echo form_error('fk_module_id'); ?></span> </div>
                                     </div>
                                 </div>
@@ -82,47 +81,42 @@
 </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
-        //$('select').niceSelect();
-
-        $('.callbacks').multiSelect({
-            afterSelect: function(values) {
-
-                var url = "<?php echo base_url('admin/getChapter');?>";
-                $.ajax({
-                    url: url,
-                    type: "POST",
-                    data: {
-                        module_id: values
-                    },
-                    success: function(data) {
-                        var obj = JSON.parse(data);
-                        if (obj.length != 0) {
-                            for (var i = 0; i < obj.length; i++) {
-                                var h = obj[i].en_chapter_name;
-                                $('.callback').multiSelect('addOption', {
-                                    value: obj[i].id,
-                                    text: obj[i].en_chapter_name,
-                                    index: 0
-                                });
-                            }
+ $(document).ready(function() {
+    //$('select').niceSelect();
+    $('.callbacks').multiSelect({
+        afterSelect: function(values) {
+            var url = "<?php echo base_url('admin/getChapter');?>";
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                    module_id: values
+                },
+                success: function(data) {
+                    var obj = JSON.parse(data);
+                    if (obj.length != 0) {
+                        for (var i = 0; i < obj.length; i++) {
+                            var h = obj[i].en_chapter_name;
+                            $('.callback').multiSelect('addOption', {
+                                value: obj[i].id,
+                                text: obj[i].en_chapter_name,
+                                index: 0
+                            });
                         }
                     }
-                });
-                //alert("Select value: "+values);
-            },
-            afterDeselect: function(values) {
-                //alert("Deselect value: "+values);
-            }
-        });
-
-        $('.callback').multiSelect({
-            afterSelect: function(values) {
-                //alert("Select value: "+values);
-            },
-            afterDeselect: function(values) {
-                //alert("Deselect value: "+values);
-            }
-        });
+                }
+            });
+        },
+        afterDeselect: function(values) {
+        }
     });
+
+    $('.callback').multiSelect({
+        afterSelect: function(values) {
+        },
+        afterDeselect: function(values) {
+        }
+    });
+ });
+
 </script>
