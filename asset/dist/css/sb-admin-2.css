@@ -560,3 +560,6 @@
 input {
     text-transform: capitalize;
   }
+.nav>li>a {
+    font-size: 18px !important;
+}

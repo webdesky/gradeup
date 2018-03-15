@@ -66,13 +66,12 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="<?php echo base_url('admin/index')?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="<?php echo base_url('admin')?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('admin/setting')?>"><i class="fa fa-wrench fa-fw"></i> Settings</a>
+                        <a href="<?php echo base_url('admin/setting')?>"><i class="fa fa-cog"></i>  Site Settings</a>
                     </li>
-
-                    <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Pages<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-files-o" aria-hidden="true"></i> Pages<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
@@ -84,52 +83,41 @@
                             </li>
 
                             <li>
-                                <a href="<?php echo base_url('admin/terms')?>">Terms And Conditions</a>
+                                <a href="<?php echo base_url('admin/terms')?>">Terms & Conditions</a>
                             </li>
-
                         </ul>
                     </li>
-
-                    <li> <a href="#"><i class="fa fa-hospital-o" aria-hidden="true"></i> Module Master<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
-                                <a href="<?php echo base_url('admin/module')?>"><i class="fa fa-dashboard fa-fw"></i>Add Module</a>
+                                <a href="<?php echo base_url('admin/module')?>">Add Module</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url('admin/moduleList')?>">Module List</a>
                             </li>
-
                         </ul>
                     </li>
-
-                    <li> <a href="#"><i class="fa fa-hospital-o" aria-hidden="true"></i> Chapter Master<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
-                                <a href="<?php echo base_url('admin/chapter')?>"><i class="fa fa-dashboard fa-fw"></i>Add Chapter</a>
+                                <a href="<?php echo base_url('admin/chapter')?>">Add Chapter</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url('admin/chapterList')?>">Chapter List</a>
                             </li>
-
-
-
                         </ul>
                     </li>
-
-                    <li> <a href="#"><i class="fa fa-hospital-o" aria-hidden="true"></i> Training Master<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Training Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
-                                <a href="<?php echo base_url('admin/training')?>"><i class="fa fa-dashboard fa-fw"></i>Add Training</a>
+                                <a href="<?php echo base_url('admin/training')?>">Add Training</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url('admin/trainingList')?>">Training List</a>
                             </li>
-
-
-
                         </ul>
                     </li>
 
