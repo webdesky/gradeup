@@ -23,10 +23,11 @@
                         <div class="col-lg-12 col-md-12">
                             <form role="form" method="post" action="<?php echo base_url('admin/privacy') ?>" class="registration_form1" enctype="multipart/form-data">
 
-
-                                <div class="col-md-6 border-rights">
+                             <div class="col-md-6 border-shadowss">
+                                <div class="en_div">English</div>
+                                <div class="col-md-12 ">
                                     <div class="form-group">
-                                        <label class="col-md-3">English Privacy Policy* </label>
+                                        <label class="col-md-3"> Privacy Policy* </label>
                                         <div class="col-md-9">
                                             <input type="hidden" name="id" value="<?php echo $privacy[0]['id']; ?>">
                                             <textarea class="form-control" rows="8" id="en_privacy_policy" name="en_privacy_policy" placeholder="about us"><?php echo  $privacy[0]['en_privacy_policy']?>
@@ -37,9 +38,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 border-rights">
+                            </div>
+
+                             <div class="col-md-6 border-shadowss">
+                                <div class="en_div">Hindi</div>
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-3">Hindi Privacy Policy * </label>
+                                        <label class="col-md-3"> Privacy Policy * </label>
                                         <div class="col-md-9">
                                             <textarea class="form-control" rows="8" id="hi_privacy_policy" name="hi_privacy_policy" placeholder="about_us"><?php echo  $privacy[0]['hi_privacy_policy']?>
                                             </textarea> <span class="red"><?php echo form_error('hi_privacy_policy'); ?></span>
@@ -49,6 +54,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
 
                                 <div class="clearfix"></div>

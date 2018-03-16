@@ -141,7 +141,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Description</label>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" rows="8" id="description" name="description" placeholder="Exam Description"><?php if(isset($exam)){ echo $exam[0]->description; } ?>
+                                            <textarea class="form-control" rows="8" id="description" name="description" placeholder="Exam Description">
+                                                <?php if(isset($exam)){ echo $exam[0]->description; } ?>
                                             </textarea> <span class="red"><?php echo form_error('description'); ?></span>
                                             <script type="text/javascript">
                                             CKEDITOR.replace('description');
@@ -154,7 +155,7 @@
                                         <label class="col-md-3">Payment Status</label>
                                         <div class="col-lg-9">
                                             <label class="radio-inline">
-                                                <input type="radio" name="payment_status" value="paid" <?php if(isset($exam) && $exam[0]->payment_status=='paid'){ echo 'checked'; } else{  echo 'checked';}?>>Paid
+                                                <input type="radio" name="payment_status" value="paid" <?php if(isset($exam) && $exam[0]->payment_status=='paid'){ echo 'checked'; } else{ echo 'checked';}?>>Paid
                                             </label>
                                             <label class="radio-inline">
                                                 <input type="radio" name="payment_status" value="free" <?php if(isset($exam) && $exam[0]->payment_status=='free'){ echo 'checked'; } ?>>Free
@@ -194,7 +195,7 @@
                                         <label class="col-md-3">Status</label>
                                         <div class="col-lg-9">
                                             <label class="radio-inline">
-                                                <input type="radio" name="status" value="1" <?php if(isset($exam) && $exam[0]->is_active==1){ echo 'checked'; }else{ echo 'checked';  } ?>>Active
+                                                <input type="radio" name="status" value="1" <?php if(isset($exam) && $exam[0]->is_active==1){ echo 'checked'; }else{ echo 'checked'; } ?>>Active
                                             </label>
                                             <label class="radio-inline">
                                                 <input type="radio" name="status" value="0" <?php if(isset($exam) && $exam[0]->is_active==0){ echo 'checked'; } ?>>Inactive
@@ -243,13 +244,13 @@ $(document).ready(function() {
         $("#test_duration").val(shine);
     });
 
-      <?php if(isset($exam)){ ?>
-      var module_id = $('#module_id').val();
-      getChapter(module_id);
-      var question_type=$('#question_type').val();
-      getQuestion(question_type);
-      <?php }?>
-    
+    <?php if(isset($exam)){ ?>
+    var module_id = $('#module_id').val();
+    getChapter(module_id);
+    var question_type = $('#question_type').val();
+    getQuestion(question_type);
+    <?php }?>
+
     $('#module_id').on('change', function() {
 
         var url = "<?php echo base_url('admin/getChapter') ?>";
@@ -265,7 +266,7 @@ $(document).ready(function() {
                 $('#chapter_id').html('');
                 if (obj.length != 0) {
                     for (var i = 0; i < obj.length; i++) {
-                    $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
+                        $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
 
                     }
                 }
@@ -296,7 +297,7 @@ $(document).ready(function() {
                     $('.one').html('');
 
                     for (var i = 0; i < obj.length; i++) {
-                        $('#table').append('<tr class="one"><td><div class="checkbox checkbox-success"><input type="checkbox"   id="checkbox1" name="question_id[]" value=" '+ obj[i].id +' "class="styled"><label></label></div></td><td>' + obj[i].en_question + '</td></tr>');
+                        $('#table').append('<tr class="one"><td><div class="checkbox checkbox-success"><input type="checkbox"   id="checkbox1" name="question_id[]" value=" ' + obj[i].id + ' "class="styled"><label></label></div></td><td>' + obj[i].en_question + '</td></tr>');
                         $('#question').show();
                         // $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
 
@@ -312,72 +313,73 @@ $(document).ready(function() {
 });
 
 
-function getChapter(value){
+function getChapter(value) {
 
-         var url = "<?php echo base_url('admin/getChapter') ?>";
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: {
-                module_id: value
-            },
-            success: function(data) {
+    var url = "<?php echo base_url('admin/getChapter') ?>";
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            module_id: value
+        },
+        success: function(data) {
 
+            var obj = JSON.parse(data);
+            $('#chapter_id').html('');
+            if (obj.length != 0) {
+                for (var i = 0; i < obj.length; i++) {
+
+                    $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
+
+                }
+            }
+
+
+        }
+    });
+}
+
+function getQuestion(value) {
+
+    var module_id = $('#module_id').val();
+    var chapter_id = <?php if(isset($exam)){ echo $exam[0]->chapter_id; }else{ echo '0'; } ?>;
+    var question_id = <?php if(isset($exam)){ echo $exam[0]->question_id; }else{ echo '1';} ?>;
+    var url = "<?php echo base_url('admin/getQuestion') ?>";
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {
+            question_type: value,
+            module_id: module_id,
+            chapter_id: chapter_id,
+        },
+        success: function(data) {
+            console.log(data);
+            if (data != null) {
                 var obj = JSON.parse(data);
-                $('#chapter_id').html('');
-                if (obj.length != 0) {
-                    for (var i = 0; i < obj.length; i++) {
+                // $('#table').html('');
 
-                        $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
+                $('.one').html('');
 
+                for (var i = 0; i < obj.length; i++) {
+                    if (question_id == obj[i].id) {
+                        $('#table').append('<tr class="one"><td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox1" name="question_id[]" checked value=" ' + obj[i].id + ' "class="styled"><label></label></div></td><td>' + obj[i].en_question + '</td></tr>');
+                    } else {
+                        $('#table').append('<tr class="one"><td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox1" name="question_id[]" value=" ' + obj[i].id + ' "class="styled"><label></label></div></td><td>' + obj[i].en_question + '</td></tr>');
                     }
+                    $('#question').show();
+                    // $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
+
                 }
-
-
+            } else {
+                $('#question').css('display', 'none');
             }
-        });
+
+        }
+    });
+
 }
 
-function getQuestion(value){
-       
-        var module_id = $('#module_id').val();
-        var chapter_id = <?php if(isset($exam)){ echo $exam[0]->chapter_id; }else{ echo '0'; } ?>;
-        var question_id= <?php if(isset($exam)){ echo $exam[0]->question_id; }else{ echo '1';} ?>;
-        var url = "<?php echo base_url('admin/getQuestion') ?>";
-        $.ajax({
-            url: url,
-            type: "GET",
-            data: {
-                question_type: value,
-                module_id: module_id,
-                chapter_id: chapter_id,
-            },
-            success: function(data) {
-                console.log(data);
-                if (data != null) {
-                    var obj = JSON.parse(data);
-                    // $('#table').html('');
-
-                    $('.one').html('');
-
-                    for (var i = 0; i < obj.length; i++) {
-                        if(question_id==obj[i].id){
-                        $('#table').append('<tr class="one"><td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox1" name="question_id[]" checked value=" '+ obj[i].id +' "class="styled"><label></label></div></td><td>' + obj[i].en_question + '</td></tr>');
-                    }else{
-                            $('#table').append('<tr class="one"><td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox1" name="question_id[]" value=" '+ obj[i].id +' "class="styled"><label></label></div></td><td>' + obj[i].en_question + '</td></tr>');
-                    }
-                        $('#question').show();
-                        // $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
-
-                    }
-                } else {
-                    $('#question').css('display', 'none');
-                }
-
-            }
-        });
- 
-}
 function get_valid_value(id_name, value) {
     if (isNaN(value) == true) {
         $("#" + id_name).val("");
