@@ -318,7 +318,6 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('en_chapter_name', 'Chapter Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-<<<<<<< HEAD
             if(!empty($id)){
                 $where = array(
             'chapters.id ' => $id
@@ -333,9 +332,6 @@ class Admin extends CI_Controller
 
             }else{
             $where = array(
-=======
-            $where           = array(
->>>>>>> bc154b87a3308e7ec4bda99c577839f07fca4cba
                 'is_active' => 1
             );
             $data['modules'] = $this->model->getAllwhere('modules', $where);
