@@ -580,3 +580,12 @@ input {
 .border-shadowss:hover {                   
     box-shadow: 2px 7px 27px 7px #999;
 }
+.border-shadowss {
+    padding: 20px 0;
+}
+
+.registration_forms12 .form-group {
+    margin-bottom: 15px;
+    overflow: hidden;
+    clear: both;
+}

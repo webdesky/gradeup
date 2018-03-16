@@ -18,24 +18,34 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <form role="form" method="post" action="<?php if(isset($modules)){ echo base_url('admin/module/'.$modules[0]->id); }else{ echo base_url('admin/module'); }?>" class="registration_form1" enctype="multipart/form-data">
-                                <div class="col-md-6 border-rights">
-                                    <div class="form-group">
-                                        <label class="col-md-3">English* </label>
-                                        <div class="col-md-9">
-                                            <input class="form-control" type="text" name="en_module_name" id="en_module_name" placeholder="Module Name" autocomplete="off" required="required" value="<?php if(isset($modules)){ echo $modules[0]->en_module_name; } ?>"> 
-                                            <span class="red"><?php echo form_error('en_module_name'); ?></span> 
+
+                                <div class="col-md-6 border-shadowss">
+                                    <div class="en_div">English</div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-3">Module Name* </label>
+                                            <div class="col-md-9">
+                                                <input class="form-control" type="text" name="en_module_name" id="en_module_name" placeholder="Module Name in English" autocomplete="off" required="required" value="<?php if(isset($modules)){ echo $modules[0]->en_module_name; } ?>">
+                                                <span class="red"><?php echo form_error('en_module_name'); ?></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 border-rights">
-                                    <div class="form-group">
-                                        <label class="col-md-3">Hindi* </label>
-                                        <div class="col-md-9">
-                                            <input class="form-control" type="text" name="hi_module_name" id="hi_module_name" placeholder="Module Name" autocomplete="off" required="required" value="<?php if(isset($modules)){ echo $modules[0]->hi_module_name; } ?>"> 
-                                            <span class="red"><?php echo form_error('hi_module_name'); ?></span> 
+
+                                <div class="col-md-6 border-shadowss">
+                                    <div class="hi_div">Hindi</div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+
+                                            <label class="col-md-3">Module Name* </label>
+                                            <div class="col-md-9">
+                                                <input class="form-control" type="text" name="hi_module_name" id="hi_module_name" placeholder="Module Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($modules)){ echo $modules[0]->hi_module_name; } ?>">
+                                                <span class="red"><?php echo form_error('hi_module_name'); ?></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="col-md-2">Status</label>
                                     <div class="col-lg-6">
@@ -49,7 +59,7 @@
                                 </div>
                                 <div class="col-md-12" align="center">
                                     <button type="submit" value="Save" class="btn btn-success">Save</button>
-                                    <input type="reset" class="btn btn-default" value="Reset"> 
+                                    <input type="reset" class="btn btn-default" value="Reset">
                                 </div>
                             </form>
                         </div>
@@ -78,4 +88,5 @@ $(document).ready(function() {
         }
     });
 });
+
 </script>
