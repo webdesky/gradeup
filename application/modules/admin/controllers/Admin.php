@@ -141,7 +141,7 @@ class Admin extends CI_Controller
                         $this->session->set_flashdata('info_message', "Site Logo size too large");
                         redirect('admin/setting');
                     } else {
-                        if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/' . $_FILES['site_logo']['name'])) {
+                        if (move_uploaded_file($_FILES['site_logo']['tmp_name'],'asset/uploads/' . $_FILES['site_logo']['name'])) {
                             $data['logo'] = $_FILES['site_logo']['name'];
                         }
                         
@@ -180,7 +180,6 @@ class Admin extends CI_Controller
                     'en_about_us' => $en_about_us,
                     'hi_about_us' => $hi_about_us,
                     'created_at'  => date('Y-m-d H:i:s')
-                    
                 );
                 
                 $where  = array(
@@ -587,18 +586,14 @@ class Admin extends CI_Controller
                      $result = $this->model->insertData('questions', $data);
                 } 
                    $this->questionList();
-
              }
          }
-       
     }
     
     public function questionList(){
         $data['question']  = $this->model->getAll('questions'); 
         $data['body']      = 'question_list';
-
         $this->controller->load_view($data);
-
     }
 
     public function exam($id=null){
@@ -1218,5 +1213,70 @@ class Admin extends CI_Controller
         $select = 'id, name';
         $states = $this->model->getAllwhere($table, $where, $select);
         echo json_encode($states);
+    }
+
+    function post($id=NULL){
+        $this->form_validation->set_rules('en_post_title', 'Post Title', 'trim|required');
+        $this->form_validation->set_rules('en_post', 'Post', 'trim|required');
+        $this->form_validation->set_rules('hi_post_title', 'Post', 'trim|required');
+        $this->form_validation->set_rules('hi_post', 'Post', 'trim|required');
+        $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required|numeric');
+        if(!empty($id)){
+            $where = array('id'=>$id);
+            $data['post'] = $this->model->getAllwhere('post', $where);
+        }
+        $where  = array('is_active'=>1);
+        $data['modules'] = $this->model->getAllwhere('modules', $where);        
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            $data['body'] = 'post';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                $en_post_title  = $this->input->post('en_post_title');
+                $en_post        = $this->input->post('en_post');
+                $hi_post_title  = $this->input->post('hi_post_title');
+                $hi_post        = $this->input->post('hi_post');
+                $module_id      = $this->input->post('module_id');
+                $is_active      = $this->input->post('status');
+                
+                $data            = array(
+                    'en_post_title' =>  $en_post_title,
+                    'en_post'       =>  $en_post,
+                    'hi_post_title' =>  $hi_post_title,
+                    'hi_post'       =>  $hi_post,
+                    'module_id'     =>  $module_id,
+                    'added_by'      =>  $this->session->userdata('id'),
+                    'is_active'     =>  $is_active,
+                    'created_at'    =>  date('Y-m-d H:i:s')
+                );
+                
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    unset($data['created_at']);
+                    $result = $this->model->updateFields('post', $data, $where);
+                } else {
+                    $result = $this->model->insertData('post', $data);
+                }
+                $this->postList();
+            }
+        }
+
+    }
+
+    function postList(){
+        if ($this->controller->checkSession()) {
+            $where  = array('is_active'=>1);
+            $data['modules'] = $this->model->getAllwhere('modules', $where);
+            $field_val       = 'post.*,users.first_name,users.last_name';
+            $data['post']    = $this->model->GetJoinRecord('post', 'added_by', 'users', 'id',$field_val);
+            $data['body']    = 'post_list';
+            $this->controller->load_view($data);
+        }
+        else{
+            show_404();
+        }
     }
 }

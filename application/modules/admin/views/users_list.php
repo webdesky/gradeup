@@ -5,7 +5,7 @@
             <h1 class="page-header">Doctor List</h1>
             <?php }elseif($role==3){ ?>
             <h1 class="page-header">Patient List</h1>
-            <?php   }else{ ?>
+            <?php }else{ ?>
             <h1 class="page-header">Sub Admin List</h1>
             <?php } ?>
         </div>
@@ -95,7 +95,7 @@ $('#users').DataTable({
 
 function delete_user(id, tr_id) {
     swal({
-        title: "Are you sure?",
+        title:"Are you sure?",
         text: "want to delete?",
         type: "warning",
         showCancelButton: true,
