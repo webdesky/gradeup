@@ -178,7 +178,8 @@ class Admin extends CI_Controller
                 
                 $data = array(
                     'en_about_us' => $en_about_us,
-                    'hi_about_us' => $hi_about_us
+                    'hi_about_us' => $hi_about_us,
+                    'created_at'  => date('Y-m-d H:i:s')
                     
                 );
                 
@@ -206,7 +207,8 @@ class Admin extends CI_Controller
                 
                 $data = array(
                     'en_privacy_policy' => $en_privacy_policy,
-                    'hi_privacy_policy' => $hi_privacy_policy
+                    'hi_privacy_policy' => $hi_privacy_policy,
+                    'created_at'  => date('Y-m-d H:i:s')
                 );
                 
                 $where  = array(
@@ -234,7 +236,8 @@ class Admin extends CI_Controller
                 
                 $data = array(
                     'en_terms' => $en_terms,
-                    'hi_terms' => $hi_terms
+                    'hi_terms' => $hi_terms,
+                    'created_at'  => date('Y-m-d H:i:s')
                 );
                 
                 $where  = array(
@@ -291,7 +294,7 @@ class Admin extends CI_Controller
     
     public function moduleList()
     {
-        $where = array(
+        $where           = array(
             'is_active' => 1
         );
         $data['modules'] = $this->model->getAllwhere('modules', $where);
@@ -301,7 +304,7 @@ class Admin extends CI_Controller
     
     public function edit_module($id)
     {
-        $where = array(
+        $where           = array(
             'id ' => $id
         );
         $data['modules'] = $this->model->getAllwhere('modules', $where);
@@ -315,6 +318,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('en_chapter_name', 'Chapter Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
+<<<<<<< HEAD
             if(!empty($id)){
                 $where = array(
             'chapters.id ' => $id
@@ -329,6 +333,9 @@ class Admin extends CI_Controller
 
             }else{
             $where = array(
+=======
+            $where           = array(
+>>>>>>> bc154b87a3308e7ec4bda99c577839f07fca4cba
                 'is_active' => 1
             );
             $data['modules'] = $this->model->getAllwhere('modules', $where);
@@ -373,7 +380,7 @@ class Admin extends CI_Controller
     public function chapterList()
     {
         $data['chapter'] = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id', 'chapters.id ,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name');
-        $data['body'] = 'chapter_list';
+        $data['body']    = 'chapter_list';
         $this->controller->load_view($data);
     }
     
@@ -431,12 +438,12 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('en_training_name', 'Training Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $where = array(
+            $where            = array(
                 'is_active' => 1
             );
-            $data['modules']    = $this->model->getAllwhere('modules', $where);
-            $data['chapters']   = $this->model->getAllwhere('chapters', $where);
-            $data['body']       = 'add_training';
+            $data['modules']  = $this->model->getAllwhere('modules', $where);
+            $data['chapters'] = $this->model->getAllwhere('chapters', $where);
+            $data['body']     = 'add_training';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
@@ -599,7 +606,7 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
 
     }
-      
+
 
     public function change_password()
     {
@@ -877,7 +884,9 @@ class Admin extends CI_Controller
     {
         $id    = $this->input->post('id');
         $table = $this->input->post('table');
-        $where = array('id' => $id);
+        $where = array(
+            'id' => $id
+        );
         $this->model->delete($table, $where);
     }
     
@@ -973,22 +982,22 @@ class Admin extends CI_Controller
                 
                 $data = array(
                     'reciever_id' => $reciever_id,
-                    'sender_id' => $sender_id,
-                    'subject' => $subject,
-                    'message' => trim($message),
-                    'is_active' => 1,
-                    'created_at' => date('Y-m-d H:i:s')
+                    'sender_id'   => $sender_id,
+                    'subject'     => $subject,
+                    'message'     => trim($message),
+                    'is_active'   => 1,
+                    'created_at'  => date('Y-m-d H:i:s')
                 );
                 
                 $config_mail = Array(
-                    'protocol' => 'smtp',
+                    'protocol'  => 'smtp',
                     'smtp_host' => 'ssl://smtp.googlemail.com',
                     'smtp_port' => '465',
                     'smtp_user' => 'webdeskytechnical@gmail.com',
                     'smtp_pass' => 'webdesky@2017',
-                    'mailtype' => 'html',
-                    'charset' => 'iso-8859-1',
-                    'newline' => "\r\n"
+                    'mailtype'  => 'html',
+                    'charset'   => 'iso-8859-1',
+                    'newline'   => "\r\n"
                 );
                 
                 $this->load->library('email', $config_mail);
