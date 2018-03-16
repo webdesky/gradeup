@@ -17,13 +17,13 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                            <form role="form" method="post" action="<?php echo base_url('admin/chapter') ?>" class="registration_form1" enctype="multipart/form-data">
+                            <form role="form" method="post" action="<?php if(isset($chapter)){ echo base_url('admin/chapter/'.$chapter[0]->ids); }else{ echo base_url('admin/chapter'); }?>" class="registration_form1" enctype="multipart/form-data">
                                 <div class="col-md-6">
                                 <div class="form-group"> <label class="col-md-3 ">Module Name * </label>
                                     <div class="col-md-9"> <select class="wide" name="fk_module_id">
                                             <option data-display="--Select Modules--">--Select Modules--</option>
                                              <?php foreach ($modules as $key => $value) { ?>
-                                                  <option value="<?php echo $value->id; ?>"><?php echo ucwords($value->en_module_name); ?></option>
+                                                  <option value="<?php echo $value->id; ?>" <?php if(isset($chapter) && $chapter[0]->fk_module_id==$value->id) { ?> selected <?php } ?>><?php echo ucwords($value->en_module_name); ?></option>
                                             <?php } ?>
                                          </select> <span class="red"><?php echo form_error('fk_module_id'); ?></span> </div>
                                 </div>
@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3">English Chapter Name * </label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="text" name="en_chapter_name" id="en_chapter_name" placeholder="Chapter Name" autocomplete="off" required="required" value="<?php echo set_value('en_chapter_name'); ?>"> <span class="red"><?php echo form_error('en_chapter_name'); ?></span> </div>
+                                        <input class="form-control" type="text" name="en_chapter_name" id="en_chapter_name" placeholder="Chapter Name" autocomplete="off" required="required" value="<?php if(isset($chapter)){ echo $chapter[0]->en_chapter_name; } ?>"> <span class="red"><?php echo form_error('en_chapter_name'); ?></span> </div>
                                 </div>
                                 </div>
 
@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3">Hindi Chapter Name * </label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="text" name="hi_chapter_name" id="hi_chapter_name" placeholder="Chapter Name hindi" autocomplete="off" required="required" value="<?php echo set_value('hi_chapter_name'); ?>"> <span class="red"><?php echo form_error('hi_chapter_name'); ?></span> </div>
+                                        <input class="form-control" type="text" name="hi_chapter_name" id="hi_chapter_name" placeholder="Chapter Name hindi" autocomplete="off" required="required" value="<?php if(isset($chapter)){ echo $chapter[0]->hi_chapter_name; } ?>"> <span class="red"><?php echo form_error('hi_chapter_name'); ?></span> </div>
                                 </div>
                                 </div>
                                 <div class="form-group">

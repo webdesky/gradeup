@@ -254,6 +254,12 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('en_module_name', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
+            if(!empty($id)){
+                $where = array(
+              'id ' => $id
+              );
+             $data['modules'] = $this->model->getAllwhere('modules', $where);
+            }
             $data['body'] = 'add_module';
             $this->controller->load_view($data);
         } else {
@@ -268,6 +274,8 @@ class Admin extends CI_Controller
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
                 );
+
+               
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -310,10 +318,30 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('en_chapter_name', 'Chapter Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
+<<<<<<< HEAD
+            if(!empty($id)){
+                $where = array(
+            'chapters.id ' => $id
+           );
+             $where1 = array(
+                'is_active' => 1
+            );
+           $data['modules'] = $this->model->getAllwhere('modules', $where1);
+
+           $data['chapter'] = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id', 'chapters.id as ids,chapters.fk_module_id,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name,modules.id', $where);
+
+
+            }else{
+            $where = array(
+=======
             $where           = array(
+>>>>>>> bc154b87a3308e7ec4bda99c577839f07fca4cba
                 'is_active' => 1
             );
             $data['modules'] = $this->model->getAllwhere('modules', $where);
+
+
+            }
             $data['body']    = 'add_chapter';
             $this->controller->load_view($data);
         } else {
@@ -559,12 +587,12 @@ class Admin extends CI_Controller
                     );
                   
                     unset($data['created_at']);
-                    
-                    $result = $this->model->updateFields('questions', $data, $where);
+
+                     $result = $this->model->updateFields('questions', $data, $where);
                 } else {
-                    $result = $this->model->insertData('questions', $data);
+                     $result = $this->model->insertData('questions', $data);
                 } 
-                 $this->questionList();
+                   $this->questionList();
 
              }
          }

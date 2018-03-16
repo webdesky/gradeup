@@ -17,12 +17,12 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                            <form role="form" method="post" action="<?php echo base_url('admin/module') ?>" class="registration_form1" enctype="multipart/form-data">
+                            <form role="form" method="post" action="<?php if(isset($modules)){ echo base_url('admin/module/'.$modules[0]->id); }else{ echo base_url('admin/module'); }?>" class="registration_form1" enctype="multipart/form-data">
                                 <div class="col-md-6 border-rights">
                                     <div class="form-group">
                                         <label class="col-md-3">English* </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="en_module_name" id="en_module_name" placeholder="Module Name" autocomplete="off" required="required" value="<?php echo set_value('en_module_name'); ?>"> 
+                                            <input class="form-control" type="text" name="en_module_name" id="en_module_name" placeholder="Module Name" autocomplete="off" required="required" value="<?php if(isset($modules)){ echo $modules[0]->en_module_name; } ?>"> 
                                             <span class="red"><?php echo form_error('en_module_name'); ?></span> 
                                         </div>
                                     </div>
@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Hindi* </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="hi_module_name" id="hi_module_name" placeholder="Module Name" autocomplete="off" required="required" value="<?php echo set_value('hi_module_name'); ?>"> 
+                                            <input class="form-control" type="text" name="hi_module_name" id="hi_module_name" placeholder="Module Name" autocomplete="off" required="required" value="<?php if(isset($modules)){ echo $modules[0]->hi_module_name; } ?>"> 
                                             <span class="red"><?php echo form_error('hi_module_name'); ?></span> 
                                         </div>
                                     </div>
@@ -41,10 +41,10 @@
                                     <label class="col-md-2">Status</label>
                                     <div class="col-lg-6">
                                         <label class="radio-inline">
-                                            <input type="radio" name="status" value="1" checked>Active
+                                            <input type="radio" name="status" value="1" <?php if(isset($modules) && $modules[0]->is_active==1){ echo 'checked'; } ?>>Active
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="status" value="0">Inactive
+                                            <input type="radio" name="status" value="0" <?php if(isset($modules) && $modules[0]->is_active==0){ echo 'checked'; } ?>>Inactive
                                         </label>
                                     </div>
                                 </div>
