@@ -141,7 +141,7 @@
                     </li>
 
 
-                    <li> <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Exam Master<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Exam Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>

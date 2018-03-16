@@ -17,7 +17,7 @@
                 <?php echo $info_message; ?> </div>
             <?php endif ?>
             <div class="panel panel-default">
-                <div class="panel-heading"><a class="btn btn-primary" href="<?php echo base_url('admin/post_list')?>"><i class="fa fa-th-list">&nbsp;Post</i></a> </div>
+                <div class="panel-heading"><a class="btn btn-primary" href="<?php echo base_url('admin/postList')?>"><i class="fa fa-th-list">&nbsp;Post</i></a> </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
@@ -27,7 +27,7 @@
                                 <form role="form" method="post" action="<?php echo base_url('admin/post') ?>" class="registration_form1" enctype="multipart/form-data">
                             <?php }?>
 
-                            
+
                                 <div class="col-md-6 border-rights">
                                     <div class="form-group">
                                         <label class="col-md-3">Select Module * </label>

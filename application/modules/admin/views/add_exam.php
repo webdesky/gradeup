@@ -13,7 +13,7 @@
                 <?php echo $info_message; ?> </div>
             <?php endif ?>
             <div class="panel panel-default">
-                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/chapterList')?>"><i class="fa fa-th-list">&nbsp;Exam List</i></a> </div>
+                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/examList')?>"><i class="fa fa-th-list">&nbsp;Exam List</i></a> </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
@@ -141,13 +141,12 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Description</label>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" rows="8" id="description" name="description" placeholder="Exam Description">
-                                                <?php if(isset($exam)){ echo $exam[0]->description; } ?>
-                                            </textarea> <span class="red"><?php echo form_error('description'); ?></span>
-                                            <script type="text/javascript">
-                                            CKEDITOR.replace('description');
-                                            </script>
-                                        </div>
+<textarea class="form-control" rows="8" id="description" name="description" placeholder="Exam Description">
+    <?php if(isset($exam)){ echo $exam[0]->description; } ?>
+</textarea> <span class="red"><?php echo form_error('description'); ?></span>
+<script type="text/javascript">
+CKEDITOR.replace('description');
+</script>                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -343,7 +342,7 @@ function getQuestion(value) {
 
     var module_id = $('#module_id').val();
     var chapter_id = <?php if(isset($exam)){ echo $exam[0]->chapter_id; }else{ echo '0'; } ?>;
-    var question_id = <?php if(isset($exam)){ echo $exam[0]->question_id; }else{ echo '1';} ?>;
+    var question_id = "<?php if(isset($exam)){ echo $exam[0]->question_id; }else{ echo '1';} ?>";
     var url = "<?php echo base_url('admin/getQuestion') ?>";
     $.ajax({
         url: url,

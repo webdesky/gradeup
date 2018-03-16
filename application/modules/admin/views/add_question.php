@@ -69,8 +69,9 @@
                                 </div>
 
                                 <div class="col-md-6 border-shadowss">
-                                 <div class="en_div">English</div>
+                                 
                                 <div id="option11" style="display: none">
+                                    <div class="en_div">English</div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-3">Question  </label>
@@ -186,8 +187,9 @@
                                 </div>
                                </div>
                                <div class="col-md-6 border-shadowss">
-                                 <div class="en_div">Hindi</div>
+                                
                                <div id="option12" style="display: none">
+                                 <div class="en_div">Hindi</div>
                                     <div class="col-md-12 ">
                                         <div class="form-group">
                                             <label class="col-md-3">Question</label>

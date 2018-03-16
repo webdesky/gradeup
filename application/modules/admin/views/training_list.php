@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-primary" href="<?php echo base_url('admin/module')?>"><i class="fa fa-th-list">&nbsp;Add Chapter</i></a>
+                    <a class="btn btn-primary" href="<?php echo base_url('admin/training')?>"><i class="fa fa-th-list">&nbsp;Add Training</i></a>
                      </div>
                 <div class="panel-body">
                     <div class="row">
