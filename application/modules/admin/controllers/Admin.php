@@ -317,6 +317,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('en_chapter_name', 'Chapter Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
+
             if(!empty($id)){
                 $where = array(
             'chapters.id ' => $id
@@ -327,15 +328,12 @@ class Admin extends CI_Controller
            $data['modules'] = $this->model->getAllwhere('modules', $where1);
 
            $data['chapter'] = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id', 'chapters.id as ids,chapters.fk_module_id,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name,modules.id', $where);
-
-
             }else{
             $where = array(
+
                 'is_active' => 1
             );
             $data['modules'] = $this->model->getAllwhere('modules', $where);
-
-
             }
             $data['body']    = 'add_chapter';
             $this->controller->load_view($data);
@@ -598,7 +596,28 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
     }
 
+    public function exam($id=null){
+        $this->form_validation->set_rules('training_id', 'Training Name', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
 
+                 if(!empty($id)){
+                     $where = array(
+                'id ' => $id
+                );
+             $data['training']  =$this->model->getAllwhere('training',$where);
+             }else{
+             $data['training']    = $this->model->getAll('training');
+            
+             }
+             $data['body']       = 'add_exam';
+             $this->controller->load_view($data);
+        } else {
+             if ($this->controller->checkSession()) {
+             }
+         }
+
+    }
     public function change_password()
     {
         $this->form_validation->set_rules('old_password', 'Old Password', 'trim|required');
