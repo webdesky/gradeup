@@ -26,7 +26,6 @@
                                             <th>Question Marks</th>
                                             <th>Created at</th>
                                             <th>Action</th>
-
                                          </tr>
                                             
                                     </thead>
@@ -35,20 +34,24 @@
                                         <?php $i=1; foreach($question as $value){?>
                                         <tr id="tr_<?php echo $i;?>">
                                             <td>
-                                                <?php echo $i; ?> </td>
+                                                <?php echo $i; ?> 
+                                            </td>
                                             <td>
-                                                <?php echo $value['question_type'];?> </td>
+                                                <?php echo $value['question_type'];?> 
+                                            </td>
                                             <td>
-                                                <?php echo $value['question_marks'];?> </td>
-                                            
+                                                <?php echo $value['question_marks'];?> 
+                                            </td>
                                             <td>
-                                                <?php echo $value['created_at'];?> </td>
+                                                <?php echo date('Y-m-d',strtotime($value['created_at']));?> 
+                                            </td>
                                             <td>
                                                 <a href="<?php echo base_url('admin/question/'.$value['id'])?>"><span class="glyphicon glyphicon-edit"></span></a> |
                                                 <a href="javascript:void(0)" onclick="delete_user('<?php echo $value['id']?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
-                                               </td>
+                                            </td>
                                         </tr>
-                                        <?php $i++;}}?> </tbody>
+                                        <?php $i++;}}?> 
+                                </tbody>
                                 </table>
                             </div>
                         </div>

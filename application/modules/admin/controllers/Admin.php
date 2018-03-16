@@ -329,17 +329,12 @@ class Admin extends CI_Controller
            $data['modules'] = $this->model->getAllwhere('modules', $where1);
 
            $data['chapter'] = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id', 'chapters.id as ids,chapters.fk_module_id,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name,modules.id', $where);
-
-
             }else{
-           
-            $where           = array(
+            $where = array(
 
                 'is_active' => 1
             );
             $data['modules'] = $this->model->getAllwhere('modules', $where);
-
-
             }
             $data['body']    = 'add_chapter';
             $this->controller->load_view($data);

@@ -68,7 +68,7 @@
                     <li>
                         <a href="<?php echo base_url('admin/setting')?>"><i class="fa fa-cog"></i>  Site Settings</a>
                     </li>
-                    <li> <a href="#"><i class="fa fa-files-o" aria-hidden="true"></i> Pages<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Pages<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
