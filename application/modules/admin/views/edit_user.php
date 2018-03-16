@@ -11,14 +11,14 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-primary" href="<?php echo base_url('admin/users_list')?>"><i class="fa fa-th-list">&nbsp;Users List</i></a>
+                    <a class="btn btn-primary" href="<?php echo base_url('admin/userList')?>"><i class="fa fa-th-list">&nbsp;Users List</i></a>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-o12">
                             <form role="form" method="post" action="<?php echo base_url('admin/register/'.$users[0]->id) ?>" class="registration_form1" enctype="multipart/form-data">
                              
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="display: none">
                                 <div class="">
                                     <label class="col-md-3">User Role *</label>
                                     <div class="col-md-9">
@@ -37,9 +37,18 @@
                                 <div class="form-group">
                                     <label class="col-md-3">User Name *</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="text" placeholder="User Name" name="user_name" autocomplete="off" required="required" value="<?php echo $users[0]->username;?>" >
+                                        <input class="form-control" type="text" placeholder="User Name" name="user_name" autocomplete="off" required="required" value="<?php echo $users[0]->username;?>" readonly>
                                     </div>
                                     <span class="red"><?php echo form_error('user_name'); ?></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3">Email Address *</label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="email" class="form-control" placeholder="Email Address" autocomplete="off" required="required" value="<?php echo $users[0]->email; ?>" readonly>
+                                    </div>
+                                    <span class="red"><?php echo form_error('email'); ?></span>
                                 </div>
                             </div>
 
@@ -62,15 +71,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3">Email Address *</label>
-                                    <div class="col-md-9">
-                                        <input type="text" name="email" class="form-control" placeholder="Email Address" autocomplete="off" required="required" value="<?php echo $users[0]->email; ?>" readonly>
-                                    </div>
-                                    <span class="red"><?php echo form_error('email'); ?></span>
-                                </div>
-                            </div>
+                            
                                 <!-- <div class="form-group">
                                     <label>Password *</label>
                                     <input type="Password" class="form-control" id="password" name="password" placeholder="Password" required="required">

@@ -68,7 +68,7 @@
                     <li>
                         <a href="<?php echo base_url('admin/setting')?>"><i class="fa fa-cog"></i>  Site Settings</a>
                     </li>
-                    <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Pages<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Pages Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
@@ -149,6 +149,19 @@
                             </li>
                             <li>
                                 <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
+
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li> <a href="#"><i class="fa fa-user"></i> User Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a href="<?php echo base_url('admin/register')?>">Add User</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/userList')?>">User List</a>
 
                             </li>
                         </ul>
