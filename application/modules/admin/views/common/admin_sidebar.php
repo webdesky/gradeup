@@ -127,6 +127,18 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li> <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Exam Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a href="<?php echo base_url('admin/exam')?>">Add Exam</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
