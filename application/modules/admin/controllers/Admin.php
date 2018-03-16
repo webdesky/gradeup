@@ -345,11 +345,11 @@ class Admin extends CI_Controller
                 $is_active       = $this->input->post('status');
                 
                 $data = array(
-                    'fk_module_id' => $fk_module_id,
-                    'en_chapter_name' => $en_chapter_name,
-                    'hi_chapter_name' => $hi_chapter_name,
-                    'is_active' => $is_active,
-                    'created_at' => date('Y-m-d H:i:s')
+                    'fk_module_id'      => $fk_module_id,
+                    'en_chapter_name'   => $en_chapter_name,
+                    'hi_chapter_name'   => $hi_chapter_name,
+                    'is_active'         => $is_active,
+                    'created_at'        => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -597,25 +597,105 @@ class Admin extends CI_Controller
     }
 
     public function exam($id=null){
-        $this->form_validation->set_rules('training_id', 'Training Name', 'trim|required');
+        $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-
-                 if(!empty($id)){
+                if(!empty($id)){
                      $where = array(
                 'id ' => $id
                 );
-             $data['training']  =$this->model->getAllwhere('training',$where);
+             $data['exam']  =$this->model->getAllwhere('exam',$where);
+             $data['modules']  =$this->model->getAll('modules');
+             $data['chapters']    = $this->model->getAll('chapters');
+             
              }else{
-             $data['training']    = $this->model->getAll('training');
+             $data['modules']    = $this->model->getAll('modules');
+             $data['chapters']    = $this->model->getAll('chapters');
             
              }
              $data['body']       = 'add_exam';
              $this->controller->load_view($data);
         } else {
              if ($this->controller->checkSession()) {
+                
+                $module_id              = $this->input->post('module_id');
+                $chapter_id             = $this->input->post('chapter_id');
+                $exam_name              = $this->input->post('exam_name');
+                $question_type          = $this->input->post('question_type');
+                $total_question         = $this->input->post('total_question');
+                $time_per_question      = $this->input->post('time_per_question');
+                $test_duration          = $this->input->post('test_duration');
+                $passing_marks          = $this->input->post('passing_marks');
+                $positive_mark          = $this->input->post('positive_mark');
+                $negative_mark          = $this->input->post('negative_mark');
+                $no_of_ques_attempt     = $this->input->post('no_of_ques_attempt');
+                $description            = $this->input->post('description');
+                $payment_status         = $this->input->post('payment_status');
+                $question_id            = implode(",",$this->input->post('question_id'));
+                $time_per_question      = $this->input->post('time_per_question');
+                $is_active              = $this->input->post('status');
+
+
+                $data = array(
+                    'module_id'              => $module_id, 
+                    'chapter_id'             => $chapter_id,
+                    'exam_name'              => $exam_name,
+                    'question_type'          => $question_type,
+                    'total_question'         => $total_question,
+                    'time_per_question'      => $time_per_question,
+                    'test_duration'          => $test_duration,
+                    'passing_marks'          => $passing_marks,
+                    'positive_mark'          => $positive_mark,
+                    'negative_mark'          => $negative_mark,
+                    'no_of_ques_attempt'     => $no_of_ques_attempt,
+                    'description'            => $description,
+                    'payment_status'         => $payment_status,
+                    'question_id'            => $question_id,
+                    'time_per_question'      => $time_per_question,
+                    'is_active'              => $is_active,
+                    'created_at'             => date('Y-m-d H:i:s')
+                );
+
+               
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                  
+                    unset($data['created_at']);
+
+                     $result = $this->model->updateFields('exam', $data, $where);
+                } else {
+                     $result = $this->model->insertData('exam', $data);
+                } 
+                
+                 $this->examList();
              }
          }
+
+    }
+
+    public function examList(){
+
+            $data['exam']  = $this->model->getAll('exam'); 
+            $data['body']      = 'exam_list';
+
+            $this->controller->load_view($data);
+    }
+
+    public function getQuestion(){
+          $module_id = $this->input->get('module_id');
+          $chapter_id = $this->input->get('chapter_id');
+          $question_type = $this->input->get('question_type');
+           $where = array(
+            'module_id ' => $module_id,
+            'chapter_id' => $chapter_id,
+            'question_type'=>$question_type
+
+            );
+            $data     = $this->model->getAllwhere('questions', $where);
+
+            echo json_encode($data);
 
     }
     public function change_password()
