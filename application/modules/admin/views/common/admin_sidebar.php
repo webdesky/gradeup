@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            <a class="navbar-brand" href="<?php echo base_url()?>">Online Test</a>
+            <a class="navbar-brand" href="<?php echo base_url('admin/admin')?>">Online Test</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -124,6 +124,17 @@
                             </li>
                             <li>
                                 <a href="<?php echo base_url('admin/questionList')?>">Question List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li> <a href="#"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Post Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a href="<?php echo base_url('admin/post')?>">Add Post</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/postList')?>">Post List</a>
                             </li>
                         </ul>
                     </li>
