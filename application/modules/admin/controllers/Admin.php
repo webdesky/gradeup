@@ -753,7 +753,7 @@ class Admin extends CI_Controller
     
     public function register($id = null, $user_role = null)
     {
-        $role = $user_role;
+        //$role = $user_role;
         
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|alpha|min_length[2]');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|alpha|min_length[2]');
@@ -763,22 +763,16 @@ class Admin extends CI_Controller
             $this->form_validation->set_rules('user_name', 'User Name', 'trim|required|is_unique[users.username]');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
             $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|alpha_numeric');
-            
-            if ($role == 2) {
-                $this->form_validation->set_rules('category', 'category', 'trim|required');
-            }
         }
         
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['category']  = $this->model->getAll('category');
             $data['body']      = 'register';
-            $data['user_role'] = "$role";
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
                 
-                $user_role   = $this->input->post('user_role');
+                //$user_role   = $this->input->post('user_role');
                 $first_name  = $this->input->post('first_name');
                 $user_name   = $this->input->post('user_name');
                 $last_name   = $this->input->post('last_name');
@@ -791,12 +785,7 @@ class Admin extends CI_Controller
                 $gender      = $this->input->post('gender');
                 $blood_group = $this->input->post('blood_group');
                 $status      = $this->input->post('status');
-                
-                if ($user_role == 2) {
-                    $category       = $this->input->post('category');
-                    $specialization = $this->input->post('specialization');
-                }
-                
+                   
                 
                 $data = array(
                     'first_name' => $first_name,
@@ -811,7 +800,7 @@ class Admin extends CI_Controller
                     'gender' => $gender,
                     'blood_group' => $blood_group,
                     'is_active' => $status,
-                    'user_role' => $user_role,
+                    'user_role' => 3,
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
@@ -837,45 +826,26 @@ class Admin extends CI_Controller
                     $result = $this->model->updateFields('users', $data, $where);
                 } else {
                     $result = $this->model->insertData('users', $data);
-                    if ($user_role == 2) {
-                        $data = array(
-                            'doctor_id' => $result,
-                            'category' => $category,
-                            'specialization' => $specialization,
-                            'is_active' => $status,
-                            'created_at' => date('Y-m-d H:i:s')
-                        );
-                        $data = $this->model->insertData('doctor', $data);
-                    }
                 }
-                $this->users_list($user_role);
+                $this->userList();
             }
         }
     }
     
     
-    public function users_list($user_role = null)
+    public function userList($user_role = null)
     {
-        
         $where = array(
-            'user_role ' => $user_role
-        );
-        
-        $where1 = array(
-            'role_id ' => $user_role
-        );
-        
-        $data['role']      = $user_role;
-        $data['category']  = $this->model->getAll('category');
+            'user_role !=' => 1
+        );        
+        //$data['role']      = $user_role;
         $data['users']     = $this->model->getAllwhere('users', $where);
-        $data['user_role'] = $this->model->getAllwhere('user_role', $where1);
-        $data['body']      = 'users_list';
-        
+        $data['body']      = 'userList';
         $this->controller->load_view($data);
     }
     
     
-    public function subadmin_users_list($user_role)
+    public function subadmin_userList($user_role)
     {
         $where             = array(
             'user_role ' => $user_role
@@ -885,7 +855,7 @@ class Admin extends CI_Controller
         );
         $data['users']     = $this->model->getAllwhere('users', $where);
         $data['user_role'] = $this->model->getAllwhere('user_role', $where1);
-        $data['body']      = 'subadmin_users_list';
+        $data['body']      = 'subadmin_userList';
         $this->controller->load_view($data);
     }
     
@@ -951,7 +921,7 @@ class Admin extends CI_Controller
             $result = $this->model->insertData('user_rights', $data);
         }
         
-        $this->subadmin_users_list('4');
+        $this->subadmin_userList('4');
     }
     
     

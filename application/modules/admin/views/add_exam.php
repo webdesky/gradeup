@@ -13,34 +13,11 @@
                 <?php echo $info_message; ?> </div>
             <?php endif ?>
             <div class="panel panel-default">
-                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/chapterList')?>"><i class="fa fa-th-list">&nbsp;Exam List</i></a> </div>
+                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/examList')?>"><i class="fa fa-th-list">&nbsp;Exam List</i></a> </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <form role="form" method="post" action="<?php if(isset($exam)){ echo base_url('admin/exam/'.$exam[0]->id); }else{ echo base_url('admin/exam'); }?>" class="registration_form1" enctype="multipart/form-data">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3 ">Module Name * </label>
-                                        <div class="col-md-9">
-                                            <select class="form-control" name="module_id" id="module_id">
-                                                <option data-display="--Select Modules--">--Select modules--</option>
-                                                <?php foreach ($modules as $key => $value) { ?>
-                                                <option value="<?php echo $value['id']; ?>" <?php if(isset($exam) && $exam[0]->module_id==$value['id']){ echo 'selected'; } ?>>
-                                                    <?php echo ucwords($value['en_module_name']); ?>
-                                                </option>
-                                                <?php } ?>
-                                            </select> <span class="red"><?php echo form_error('module_id'); ?></span> </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3 ">Chapter Name * </label>
-                                        <div class="col-md-9">
-                                            <select class="form-control" name="chapter_id" id="chapter_id">
-                                                <option data-display="--Select Chapter--">--Select Chapter--</option>
-                                            </select> <span class="red"><?php echo form_error('chapter_id'); ?></span> </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">Exam Name * </label>
@@ -66,6 +43,30 @@
                                             <span class="red"><?php echo form_error('question_type'); ?></span> </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 ">Module Name * </label>
+                                        <div class="col-md-9">
+                                            <select class="form-control" name="module_id" id="module_id">
+                                                <option data-display="--Select Modules--">--Select modules--</option>
+                                                <?php foreach ($modules as $key => $value) { ?>
+                                                <option value="<?php echo $value['id']; ?>" <?php if(isset($exam) && $exam[0]->module_id==$value['id']){ echo 'selected'; } ?>>
+                                                    <?php echo ucwords($value['en_module_name']); ?>
+                                                </option>
+                                                <?php } ?>
+                                            </select> <span class="red"><?php echo form_error('module_id'); ?></span> </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 ">Chapter Name * </label>
+                                        <div class="col-md-9">
+                                            <select class="form-control" name="chapter_id" id="chapter_id">
+                                                <option data-display="--Select Chapter--">--Select Chapter--</option>
+                                            </select> <span class="red"><?php echo form_error('chapter_id'); ?></span> </div>
+                                    </div>
+                                </div>
+                                
                                 <!-- <div class="clearfix"></div> -->
                                 <div class="col-md-12" style="display: none;" id="question">
                                     <div class="panel panel-primary">
@@ -80,30 +81,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3">Total Question </label>
-                                        <div class="col-md-9">
-                                            <input class="form-control" type="text" name="total_question" id="total_question" placeholder="Total Question" autocomplete="off" onkeyup="get_valid_value('total_question',this.value)" required="required" value="<?php if(isset($exam)){ echo $exam[0]->total_question; } ?>"> <span class="red"><?php echo form_error('total_question'); ?></span>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">Time Per Question</label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="time_per_question" id="time_per_question" placeholder="Time Per Question" autocomplete="off" onkeyup="get_valid_value('time_per_question',this.value)" required="required" value="<?php if(isset($exam)){ echo $exam[0]->time_per_question; } ?>"> <span class="red"><?php echo form_error('time_per_question'); ?></span>
+                                            <input class="form-control" type="text" name="time_per_question" id="time_per_question" placeholder="Time Per Question in seconds" autocomplete="off" onkeyup="get_valid_value('time_per_question',this.value)" required="required" value="<?php if(isset($exam)){ echo $exam[0]->time_per_question; } ?>"> <span class="red"><?php echo form_error('time_per_question'); ?></span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3">Test Duration</label>
-                                        <div class="col-md-9">
-                                            <input class="form-control" type="text" name="test_duration" readonly id="test_duration" autocomplete="off" onkeyup="get_valid_value('time_per_question',this.value)" required="required" value="<?php if(isset($exam)){ echo $exam[0]->test_duration; } ?>"> <span class="red"><?php echo form_error('test_duration'); ?></span>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">Passing Marks </label>
@@ -114,7 +101,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-3">Positive Marks(per question) </label>
+                                        <label class="col-md-3">Marks(per question) </label>
                                         <div class="col-md-9">
                                             <input class="form-control" type="text" name="positive_mark" id="positive_mark" placeholder="Positive Marks" autocomplete="off" required="required" value="<?php if(isset($exam)){ echo $exam[0]->positive_mark; } ?>"> <span class="red"><?php echo form_error('positive_mark'); ?></span>
                                         </div>
@@ -128,14 +115,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3">Attempted Question(NO.)</label>
-                                        <div class="col-md-9">
-                                            <input class="form-control" type="text" name="no_of_ques_attempt" id="no_of_ques_attempt" placeholder="No of Question To attempted" autocomplete="off" required="required" value="<?php if(isset($exam)){ echo $exam[0]->no_of_ques_attempt; } ?>"> <span class="red"><?php echo form_error('no_of_ques_attempt'); ?></span>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="clearfix"></div>
                                 <div class="col-md-6 ">
                                     <div class="form-group">
@@ -203,6 +183,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="clearfix"></div>
+                                <br/><br/>
                                 <div class="col-md-12" align="center">
                                     <button type="submit" value="Save" class="btn btn-success">Save</button>
                                     <input type="reset" class="btn btn-default" value="Reset"> </div>
