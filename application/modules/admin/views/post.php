@@ -26,6 +26,8 @@
                             <?php }else{?>
                                 <form role="form" method="post" action="<?php echo base_url('admin/post') ?>" class="registration_form1" enctype="multipart/form-data">
                             <?php }?>
+
+                            
                                 <div class="col-md-6 border-rights">
                                     <div class="form-group">
                                         <label class="col-md-3">Select Module * </label>
@@ -90,7 +92,7 @@
                                     <label class="col-md-2">Status</label>
                                     <div class="col-lg-6">
                                         <label class="radio-inline">
-                                            <input type="radio" name="status" value="1" <?php if(!empty($post[0]) && $post[0]->is_active==1){ echo 'checked';}?>>Active
+                                            <input type="radio" name="status" value="1" <?php if(!empty($post[0]) && $post[0]->is_active==1){ echo 'checked';}else{ echo 'checked';}?>>Active
                                         </label>
                                         <label class="radio-inline">
                                             <input type="radio" name="status" value="0" <?php if(!empty($post[0]) && $post[0]->is_active==0){ echo 'checked';}?>>Inactive
