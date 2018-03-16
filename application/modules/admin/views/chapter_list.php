@@ -44,7 +44,7 @@
                                             <td>
                                                 <?php echo $value->created_at;?> </td>
                                             <td>
-                                                <a href="<?php echo base_url('admin/edit_chapter/'.$value->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |
+                                                <a href="<?php echo base_url('admin/chapter/'.$value->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |
                                                 <a href="javascript:void(0)" onclick="delete_user('<?php echo $value->id?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
                                                </td>
                                         </tr>
