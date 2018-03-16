@@ -70,7 +70,7 @@
                                 <div id="option11" style="display: none">
                                     <div class="col-md-6 border-rights">
                                         <div class="form-group">
-                                            <label class="col-md-3">Question IN English * </label>
+                                            <label class="col-md-3">Question In English * </label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="en_question" name="en_question" placeholder="English Question">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->en_question; } ?>
