@@ -47,7 +47,7 @@
     <link href="<?php echo base_url('asset/dist/css/rowReorder.dataTables.min.css')?>">
     <link href="<?php  echo base_url('asset/dist/css/responsive.dataTables.min.css')?>">
     <link href="https://fonts.googleapis.com/css?family=Bellefair" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/0.3.7/awesome-bootstrap-checkbox.css">
     <link href="<?php echo base_url('asset/dist/css/datepicker.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('asset/dist/css/dataTables.bootstrap.css');?>" rel="stylesheet"> 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css">

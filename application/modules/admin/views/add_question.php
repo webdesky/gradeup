@@ -303,7 +303,7 @@
                                     <div class="col-lg-6">
                                         <label class="radio-inline">
                                             <input type="radio" name="status" value="1" <?php if(isset($questions) && $questions[0]->is_active==1){ ?> checked
-                                            <?php }?>>Active
+                                            <?php }else{ echo 'checked'; }?>>Active
                                         </label>
                                         <label class="radio-inline">
                                             <input type="radio" name="status" value="0" <?php if(isset($questions) && $questions[0]->is_active==0){ ?> checked
