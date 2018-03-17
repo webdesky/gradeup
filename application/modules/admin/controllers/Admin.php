@@ -59,31 +59,18 @@ class Admin extends CI_Controller
     {
         if ($this->controller->checkSession()) {
             $data['body'] = 'dashboard';
-            
+                $where1 = array(
+                'user_role !=' => 1,
+                'is_active' => 1
+            );      
             $where  = array(
                 'is_active' => 1
             );
-            $where1 = array(
-                'user_role' => 3,
-                'is_active' => 1
-            );
-            $where2 = array(
-                'user_role' => 2,
-                'is_active' => 1
-            );
-            $where3 = array(
-                'user_role' => 2
-            );
-            $where4 = array(
-                'sender_id ' => $this->session->userdata('id')
-            );
+            $data['totaluser']     = $this->model->getcount('users',$where1);
+            $data['totalquestion'] = $this->model->getcount('questions',$where);
+            $data['totalpost'] = $this->model->getcount('post',$where);
+            $data['totalexam'] = $this->model->getcount('exam',$where);
             
-            /* $field_val                = 'message.*,users.first_name,users.last_name';
-            $data['messages_list']    = $this->model->GetJoinRecord('message', 'reciever_id', 'users', 'id', $field_val, $where4);
-            $data['totalAppointment'] = $this->model->getcount('appointment', $where);
-            $data['totalPatient']     = $this->model->getcount('users', $where1);
-            $data['totalDoctor']      = $this->model->getcount('users', $where2);
-            $data['appointmentList']  = $this->model->GetJoinRecord('appointment', 'doctor_id', 'users', 'id', '', $where3);*/
             $this->controller->load_view($data);
         } else {
             $this->index();
@@ -192,6 +179,7 @@ class Admin extends CI_Controller
             }
         }
     }
+
     public function privacy()
     {
         $this->form_validation->set_rules('en_privacy_policy', 'Privacy Policy in English', 'trim|required');
@@ -612,6 +600,7 @@ class Admin extends CI_Controller
                 $where            = array(
                     'id ' => $id
                 );
+
                 $data['exam']     = $this->model->getAllwhere('exam', $where);
                 $data['modules']  = $this->model->getAll('modules');
                 $data['chapters'] = $this->model->getAll('chapters');
@@ -677,6 +666,7 @@ class Admin extends CI_Controller
         }
         
     }
+
     
     public function examList()
     {
@@ -700,6 +690,7 @@ class Admin extends CI_Controller
         
         echo json_encode($data);
         
+
     }
     public function change_password()
     {
@@ -842,8 +833,10 @@ class Admin extends CI_Controller
             'user_role !=' => 1
         );
         //$data['role']      = $user_role;
+
         $data['users'] = $this->model->getAllwhere('users', $where);
         $data['body']  = 'userList';
+
         $this->controller->load_view($data);
     }
     

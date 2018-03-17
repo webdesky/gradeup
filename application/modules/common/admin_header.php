@@ -27,6 +27,9 @@
     <script src="<?php echo base_url('asset/vendor/metisMenu/metisMenu.min.js');?>"></script>
     <script src="<?php echo base_url('asset/dist/js/sb-admin-2.js');?>"></script>
     <script src="<?php echo base_url('asset/dist/js/bootstrap-datepicker.js')?>"></script>
+    <script src="<?php echo base_url('asset/js/excanvas.min.js')?>"></script>
+    <script src="<?php echo base_url('asset/js/chart.min.js')?>"></script>
+    <script src="<?php echo base_url('asset/js/base.js')?>"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
     
 
@@ -44,12 +47,14 @@
     <link href="<?php echo base_url('asset/dist/css/sweetalert.min.css')?>" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url('asset/dist/css/rowReorder.dataTables.min.css')?>">
     <link href="<?php  echo base_url('asset/dist/css/responsive.dataTables.min.css')?>">
+     
     <link href="https://fonts.googleapis.com/css?family=Bellefair" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/0.3.7/awesome-bootstrap-checkbox.css">
     <link href="<?php echo base_url('asset/dist/css/datepicker.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('asset/dist/css/dataTables.bootstrap.css');?>" rel="stylesheet"> 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css">
     <link href="<?php echo base_url('asset/dist/css/bootstrap-datetimepicker.min.css')?>">
+  
 
     
 
