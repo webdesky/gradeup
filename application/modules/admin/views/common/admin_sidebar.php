@@ -65,6 +65,30 @@
                     <li>
                         <a href="<?php echo base_url('admin')?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
+                    <li> <a href="#"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Post Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a href="<?php echo base_url('admin/post')?>">Add Post</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/postList')?>">Post List</a>
+                            </li>
+                            </ul>
+                    </li>
+
+                    <li> <a href="#"><i class="fa fa-user"></i> User Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a href="<?php echo base_url('admin/register')?>">Add User</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/userList')?>">User List</a>
+
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="<?php echo base_url('admin/setting')?>"><i class="fa fa-cog"></i>  Site Settings</a>
                     </li>
@@ -128,19 +152,6 @@
                         </ul>
                     </li>
 
-                    <li> <a href="#"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Post Master<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-
-                            <li>
-                                <a href="<?php echo base_url('admin/post')?>">Add Post</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/postList')?>">Post List</a>
-                            </li>
-                            </ul>
-                    </li>
-
-
                     <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Exam Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
@@ -154,18 +165,6 @@
                         </ul>
                     </li>
 
-                    <li> <a href="#"><i class="fa fa-user"></i> User Master<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-
-                            <li>
-                                <a href="<?php echo base_url('admin/register')?>">Add User</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/userList')?>">User List</a>
-
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

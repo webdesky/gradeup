@@ -153,6 +153,7 @@ class Admin extends CI_Controller
     public function about()
     {
         $this->form_validation->set_rules('en_about_us', 'About us', 'trim|required');
+        $this->form_validation->set_rules('hi_about_us', 'About us', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             $data['about'] = $this->model->getAll('about_us');
@@ -182,6 +183,7 @@ class Admin extends CI_Controller
     public function privacy()
     {
         $this->form_validation->set_rules('en_privacy_policy', 'Privacy Policy', 'trim|required');
+        $this->form_validation->set_rules('hi_privacy_policy', 'Privacy Policy', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             $data['privacy'] = $this->model->getAll('privacy_policy');
@@ -211,6 +213,7 @@ class Admin extends CI_Controller
     public function terms()
     {
         $this->form_validation->set_rules('en_terms', 'Terms And Condition', 'trim|required');
+        $this->form_validation->set_rules('hi_terms', 'Terms And Condition', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             $data['terms'] = $this->model->getAll('terms_conditions');
