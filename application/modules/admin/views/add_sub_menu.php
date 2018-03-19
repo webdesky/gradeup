@@ -13,7 +13,7 @@
                 <?php echo $info_message; ?> </div>
             <?php endif ?>
             <div class="panel panel-default">
-                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/chapterList')?>"><i class="fa fa-th-list">&nbsp;Menu List</i></a> </div>
+                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/submenuList')?>"><i class="fa fa-th-list">&nbsp;Menu List</i></a> </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">

@@ -132,8 +132,10 @@
                             </li>
                         </ul>
                     </li>
+
                     
                     <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
+
 
                         <ul class="nav nav-second-level">
 
@@ -190,7 +192,7 @@
                                 <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
                             </li>
                         </ul>
-                    </li> -->
+                    </li> 
 
                 </ul>
             </div>

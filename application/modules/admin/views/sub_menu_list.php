@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-primary" href="<?php echo base_url('admin/menu')?>"><i class="fa fa-th-list">&nbsp;Add Sub Menu</i></a>
+                    <a class="btn btn-primary" href="<?php echo base_url('admin/sub_menu')?>"><i class="fa fa-th-list">&nbsp;Add Sub Menu</i></a>
                 </div>
                 <div class="panel-body">
                     <div class="row">
