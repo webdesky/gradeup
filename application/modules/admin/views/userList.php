@@ -32,6 +32,7 @@
                                             <th>Email</th>
                                             <th>Mobile</th>
                                             <th>Gender</th>
+                                            <th>Status</th>
                                             <?php if($user_role==1 || ($user_role==4 && $right0[1]==1 || $right0[2]==1)){?>
                                             <th>Action</th>
                                             <?php }?> 
@@ -52,6 +53,8 @@
                                                 <?php echo $users_list->mobile;?> </td>
                                             <td>
                                                 <?php echo $users_list->gender;?> </td>
+                                            <td>
+                                                <?php if($users_list->is_active==1){ echo 'Active';}else{ echo 'Inactive';}?> </td>
                                             <?php if($user_role==1 || ($user_role==4 && $right0[1]==1 || $right0[2]==1)){?>
                                             <td>
                                                 <?php if($user_role==1 || ($user_role==4 && $right0[1]==1)){?> <a href="<?php echo base_url('admin/edit_user/'.$users_list->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |

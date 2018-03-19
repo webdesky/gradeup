@@ -284,10 +284,7 @@ class Admin extends CI_Controller
     
     public function moduleList()
     {
-        $where           = array(
-            'is_active' => 1
-        );
-        $data['modules'] = $this->model->getAllwhere('modules', $where);
+        $data['modules'] = $this->model->getAll('modules');
         $data['body']    = 'modules_list';
         $this->controller->load_view($data);
     }
@@ -387,9 +384,7 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('errors', validation_errors());
             
             if (!empty($id)) {
-                
                 $where           = array(
-                    
                     'id' => $id
                 );
                 $data['menu']    = $this->model->getAllwhere('menu', $where);
@@ -397,7 +392,6 @@ class Admin extends CI_Controller
                 
             } else {
                 $where           = array(
-                    
                     'is_active' => 1
                 );
                 $data['modules'] = $this->model->getAllwhere('modules', $where);
