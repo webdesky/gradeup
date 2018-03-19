@@ -19,14 +19,14 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/profile')?>">
+                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/profile');?>">
                         <i class="fa fa-user fa-fw"></i> Update Profile</a>
                     </li>
-                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/change_password')?>">
+                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/change_password');?>">
                         <i class="fa fa-gear fa-fw"></i> Change Password</a>
                     </li>
                     <li class="divider"></li>
-                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/logout')?>">
+                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/logout');?>">
                         <i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
@@ -74,7 +74,7 @@
                             <li>
                                 <a href="<?php echo base_url('admin/postList')?>">Post List</a>
                             </li>
-                            </ul>
+                        </ul>
                     </li>
 
                     <li> <a href="#"><i class="fa fa-user"></i> User Master<span class="fa arrow"></span></a>
@@ -108,7 +108,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
+                    <!--  <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
@@ -118,8 +118,8 @@
                                 <a href="<?php echo base_url('admin/moduleList')?>">Module List</a>
                             </li>
                         </ul>
-                    </li>
-                    <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
+                    </li> -->
+                    <!-- <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
@@ -163,7 +163,7 @@
 
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>
