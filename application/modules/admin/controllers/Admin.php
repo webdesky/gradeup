@@ -380,6 +380,151 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
     }
     
+    public function menu($id = null){
+
+            $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+
+            if(!empty($id)){
+
+                 $where = array(
+
+                'id' => $id
+               );
+                $data['menu'] = $this->model->getAllwhere('menu', $where);
+                $data['modules'] = $this->model->getAllwhere('modules');
+               
+                }else{
+            $where = array(
+
+                'is_active' => 1
+            );
+            $data['modules'] = $this->model->getAllwhere('modules', $where);
+            }
+            $data['body']    = 'add_menu';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+
+                $module_id               = $this->input->post('module_id');
+                $en_menu_name            = $this->input->post('en_menu_name');
+                $hi_menu_name            = $this->input->post('hi_menu_name');
+                $is_active               = $this->input->post('status');
+                
+                $data = array(
+                    'module_id'         => $module_id,
+                    'en_menu_name'      => $en_menu_name,
+                    'hi_menu_name'      => $hi_menu_name,
+                    'is_active'         => $is_active,
+                    'created_at'        => date('Y-m-d H:i:s')
+                );
+                
+                
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('menu', $data, $where);
+                } else {
+                    $result = $this->model->insertData('menu', $data);
+                }
+
+                $this->menuList();
+
+
+            }
+        }
+    }
+
+
+    public function menuList(){
+
+         $where           = array(
+            'menu.is_active' => 1
+        );            
+        $data['menu'] =   $this->model->GetJoinRecord('menu', 'module_id', 'modules', 'id', 'menu.en_menu_name,hi_menu_name,menu.id as id,modules.en_module_name,menu.created_at', $where);
+         
+        $data['body']    = 'menu_list';
+        $this->controller->load_view($data);
+
+    }
+
+    public function sub_menu($id = null){
+
+
+             $this->form_validation->set_rules('menu_id', 'Menu Name', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+
+            if(!empty($id)){
+
+                 $where = array(
+
+                'sub_menu.id' => $id
+               );
+                 $data['sub_menu'] = $this->model->getAllwhere('sub_menu', $where);
+                $data['menu'] = $this->model->getAllwhere('menu');
+               
+                }else{
+            $where = array(
+
+                'is_active' => 1
+            );
+            $data['menu'] = $this->model->getAllwhere('menu', $where);
+            }
+            $data['body']    = 'add_sub_menu';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+
+                $menu_id                     = $this->input->post('menu_id');
+                $en_sub_menu_name            = $this->input->post('en_sub_menu_name');
+                $hi_sub_menu_name            = $this->input->post('hi_sub_menu_name');
+                $is_active                   = $this->input->post('status');
+                
+                $data = array(
+                    'menu_id'               => $menu_id,
+                    'en_sub_menu_name'      => $en_sub_menu_name,
+                    'hi_sub_menu_name'      => $hi_sub_menu_name,
+                    'is_active'             => $is_active,
+                    'created_at'            => date('Y-m-d H:i:s')
+                );
+                
+                
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('sub_menu', $data, $where);
+                } else {
+                    $result = $this->model->insertData('sub_menu', $data);
+                }
+
+                $this->submenuList();
+
+
+            }
+        }
+    }
+
+    public function submenuList(){
+
+          $where           = array(
+            'sub_menu.is_active' => 1
+        );            
+        $data['sub_menu'] =   $this->model->GetJoinRecord('sub_menu', 'menu_id', 'menu', 'id', 'sub_menu.en_sub_menu_name,sub_menu.hi_sub_menu_name,sub_menu.id as id,menu.en_menu_name,sub_menu.created_at', $where);
+         
+        $data['body']    = 'sub_menu_list';
+        $this->controller->load_view($data);
+
+    }
     public function check_database($password)
     {
         $username = $this->input->post('username', TRUE);

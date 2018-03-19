@@ -108,7 +108,27 @@
                             </li>
                         </ul>
                     </li>
-                    <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
+
+                    <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a href="<?php echo base_url('admin/menu')?>">Add Menu</a>
+                            </li>
+
+                            <li>
+                                <a href="<?php echo base_url('admin/menuList')?>">Menu List</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/sub_menu')?>">Add Sub Menu</a>
+                            </li>
+                            
+                             <li>
+                                <a href="<?php echo base_url('admin/submenuList')?>">Sub Menu List</a>
+                            </li>
+                        </ul>
+                    </li>
+                  <!--   <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
@@ -163,7 +183,7 @@
 
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>
