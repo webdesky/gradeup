@@ -19,14 +19,14 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/profile')?>">
+                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/profile');?>">
                         <i class="fa fa-user fa-fw"></i> Update Profile</a>
                     </li>
-                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/change_password')?>">
+                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/change_password');?>">
                         <i class="fa fa-gear fa-fw"></i> Change Password</a>
                     </li>
                     <li class="divider"></li>
-                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/logout')?>">
+                    <li style="font-size: 16px"><a href="<?php echo base_url('admin/logout');?>">
                         <i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
@@ -62,9 +62,11 @@
                         </div>
                         <!-- /input-group -->
                     </li>
+                    
                     <li>
                         <a href="<?php echo base_url('admin')?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
+                    
                     <li> <a href="#"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Post Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
@@ -74,7 +76,7 @@
                             <li>
                                 <a href="<?php echo base_url('admin/postList')?>">Post List</a>
                             </li>
-                            </ul>
+                        </ul>
                     </li>
 
                     <li> <a href="#"><i class="fa fa-user"></i> User Master<span class="fa arrow"></span></a>
@@ -89,9 +91,11 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li>
                         <a href="<?php echo base_url('admin/setting')?>"><i class="fa fa-cog"></i>  Site Settings</a>
                     </li>
+                    
                     <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Pages Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
@@ -109,7 +113,7 @@
                         </ul>
                     </li>
 
-                    <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
+                    <!-- <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
@@ -122,13 +126,17 @@
                             <li>
                                 <a href="<?php echo base_url('admin/sub_menu')?>">Add Sub Menu</a>
                             </li>
-                            
-                             <li>
+
+                            <li>
                                 <a href="<?php echo base_url('admin/submenuList')?>">Sub Menu List</a>
                             </li>
                         </ul>
                     </li>
+
+                    
                     <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
+
+
                         <ul class="nav nav-second-level">
 
                             <li>
@@ -139,6 +147,7 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
@@ -150,6 +159,7 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li> <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Training Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -160,6 +170,7 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li> <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
@@ -174,13 +185,11 @@
 
                     <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Exam Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-
                             <li>
                                 <a href="<?php echo base_url('admin/exam')?>">Add Exam</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
-
                             </li>
                         </ul>
                     </li> 
