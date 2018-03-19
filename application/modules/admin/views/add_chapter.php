@@ -39,10 +39,10 @@
                                             <label class="col-md-3">Status* </label>
                                             <div class="col-md-9">
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="status" value="1" checked>Active
+                                                    <input type="radio" name="status" value="1" <?php if(isset($chapter) && $chapter[0]->is_active==1){ echo 'checked';}?>>Active
                                                 </label>
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="status" value="0">Inactive
+                                                    <input type="radio" name="status" value="0" <?php if(isset($chapter) && $chapter[0]->is_active==0){ echo 'checked';}?>>Inactive
                                                 </label>
                                                 <span class="red"><?php echo form_error('status'); ?></span>
                                             </div>

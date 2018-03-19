@@ -25,6 +25,7 @@
                                             <th>Module Name</th>
                                             <th>English Chapter Name</th>
                                             <th>Hindi Chapter Name</th>
+                                            <th>Status</th>
                                             <th>Created at</th>
                                             <th>Action</th>
                                         </tr>
@@ -41,6 +42,8 @@
                                                 <?php echo $value->en_chapter_name;?> </td>
                                             <td>
                                                 <?php echo $value->hi_chapter_name;?> </td>
+                                            <td>
+                                                <?php if($value->is_active==1){ echo 'Active';}else{echo 'Inactive';}?> </td>
                                             <td>
                                                 <?php echo date('Y-m-d',strtotime($value->created_at));?> </td>
                                             <td>

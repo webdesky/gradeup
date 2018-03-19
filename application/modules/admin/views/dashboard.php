@@ -1,135 +1,137 @@
 <div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Dashboard</h1>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="widget widget-nopad">
-            <div class="widget-header">
-                <h3><i class="fa fa-list-alt" style="font-size: 20px;"></i>   Total Stats</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-                <div class="widget big-stats-container">
-                    <div class="widget-content">
-                        <h6 class="bigstats"></h6>
-                        <div id="big_stats" class="cf">
-                            <div class="stat"> 
-                            <div class="shortcuts1">        
-                                <a href="#" class="shortcut1"><i class="fa fa-user" title="User's"></i> <span class="value"><?php echo $totaluser; ?>
-                                </span></a> 
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Dashboard</h1>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="widget widget-nopad">
+			<div class="widget-header">
+				<h3><i class="fa fa-list-alt" style="font-size: 20px;"></i> Total Stats</h3>
+			</div>
+			<!-- /widget-header -->
+			<div class="widget-content">
+				<div class="widget big-stats-container">
+					<div class="widget-content">
+						<h6 class="bigstats"></h6>
+						<div id="big_stats" class="cf">
+							<div class="stat">
+								<div class="shortcuts1">
+									<a href="#" class="shortcut1"><i class="fa fa-user" title="User's"></i> <span class="value"><?php echo $totaluser; ?>
+								</span></a>
 
-                            </div>
-                            </div>
-                            <!-- .stat -->
-                            <div class="stat"> 
-                                <div class="shortcuts1">        
-                                <a href="#" class="shortcut1">
-                                <i class="fa fa-question-circle" title="Question's"></i> <span class="value"><?php echo $totalquestion; ?></span></a> </div>
-                                </div>
-                            <!-- .stat -->
-                            <div class="stat"> 
-                                <div class="shortcuts1">        
-                                <a href="#" class="shortcut1">
-                                <i class="fa fa-file-powerpoint-o" title="Post's"></i> <span class="value"><?php echo $totalpost; ?></span>
-                                </a> </div>
-                                </div>
+								</div>
+							</div>
+							<!-- .stat -->
+							<div class="stat">
+								<div class="shortcuts1">
+									<a href="#" class="shortcut1">
+								<i class="fa fa-question-circle" title="Question's"></i> <span class="value"><?php echo $totalquestion; ?></span></a> </div>
+							</div>
+							<!-- .stat -->
+							<div class="stat">
+								<div class="shortcuts1">
+									<a href="#" class="shortcut1">
+								<i class="fa fa-file-powerpoint-o" title="Post's"></i> <span class="value"><?php echo $totalpost; ?></span>
+								</a> </div>
+							</div>
 
-                            <!-- .stat -->
-                            <div class="stat"> 
-                                <div class="shortcuts1">        
-                                <a href="#" class="shortcut1">
-                                    <i class="fa fa-book" title="Exam's"></i> <span class="value"><?php echo $totalexam; ?> 
-                            </span></a> </div> </div>
-                            <!-- .stat -->
-                        </div>
-                    </div>
-                    <!-- /widget-content -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="widget">
-            <div class="widget-header">
-                <h3><i class="fa fa-bookmark" style="font-size: 20px"></i> Important Shortcuts</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-                <div class="shortcuts">
-                    <a href="<?php echo base_url('admin/moduleList') ?>" class="shortcut">
-                    <i class="shortcut-icon  fa fa-database"></i>
-                    <span class="shortcut-label">Modules</span>
-                     </a>
-                    <a href="<?php echo base_url('admin/chapterList') ?>" class="shortcut">
-                      <i class="shortcut-icon fa fa-file-text"></i>
-                      <span class="shortcut-label">Chapters</span> 
-                     </a>
-                    <a href="<?php echo base_url('admin/trainingList') ?>" class="shortcut">
-                      <i class="shortcut-icon fa fa-graduation-cap"></i> 
-                      <span class="shortcut-label">Training</span> 
-                     </a>
-                    <a href="<?php echo base_url('admin/questionList') ?>" class="shortcut"> 
-                      <i class="shortcut-icon fa fa-question-circle"></i>
-                      <span class="shortcut-label">Questions</span> 
-                     
-                     </a><a href="<?php echo base_url('admin/postList') ?>" class="shortcut">
-                      <i class="shortcut-icon fa fa-file-powerpoint-o"></i>
-                      <span class="shortcut-label">Post</span> 
-                     </a>
-                    <a href="<?php echo base_url('admin/examList') ?>" class="shortcut">
-                      <i class="shortcut-icon fa fa-book"></i>
-                      <span class="shortcut-label">Exam</span> 
-                     </a>
-                    <a href="<?php echo base_url('admin/userList') ?>" class="shortcut">
-                      <i class="shortcut-icon fa fa-user"></i> 
-                      <span class="shortcut-label">Users</span> 
-                     </a>
-                    <a href="<?php echo base_url('admin/setting') ?>" class="shortcut"> 
-                      <i class="shortcut-icon fa fa-cog"></i>
-                      <span class="shortcut-label">Settings</span> 
-                     </a>
-                </div>
-                <!-- /shortcuts -->
-            </div>
-            <!-- /widget-content -->
-        </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="col-md-6">
-        <div class="widget">
-            <div class="widget-header"> <i class="icon-signal"></i>
-                <h3> Area Chart Example</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-                <canvas id="area-chart" class="chart-holder" height="250" width="715"> </canvas>
-                <!-- /area-chart -->
-            </div>
-            <!-- /widget-content -->
-        </div>
-   </div>
+							<!-- .stat -->
+							<div class="stat">
+								<div class="shortcuts1">
+									<a href="#" class="shortcut1">
+									<i class="fa fa-book" title="Exam's"></i> <span class="value"><?php echo $totalexam; ?> 
+							</span></a> </div>
+							</div>
+							<!-- .stat -->
+						</div>
+					</div>
+					<!-- /widget-content -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="widget">
+			<div class="widget-header">
+				<h3><i class="fa fa-bookmark" style="font-size: 20px"></i> Important Shortcuts</h3>
+			</div>
+			<!-- /widget-header -->
+			<div class="widget-content">
+				<div class="shortcuts">
+					<!-- <a href="<?php echo base_url('admin/moduleList') ?>" class="shortcut">
+					<i class="shortcut-icon  fa fa-database"></i>
+					<span class="shortcut-label">Modules</span>
+					</a> -->
+					<!-- <a href="<?php echo base_url('admin/chapterList') ?>" class="shortcut">
+					  <i class="shortcut-icon fa fa-file-text"></i>
+					  <span class="shortcut-label">Chapters</span> 
+					</a> -->
+					<!-- <a href="<?php echo base_url('admin/trainingList') ?>" class="shortcut">
+					  <i class="shortcut-icon fa fa-graduation-cap"></i> 
+					  <span class="shortcut-label">Training</span> 
+					</a> -->
+					<!-- <a href="<?php echo base_url('admin/questionList') ?>" class="shortcut"> 
+					  <i class="shortcut-icon fa fa-question-circle"></i>
+					  <span class="shortcut-label">Questions</span>  
+					</a> -->
+					<a href="<?php echo base_url('admin/postList') ?>" class="shortcut">
+					  <i class="shortcut-icon fa fa-file-powerpoint-o"></i>
+					  <span class="shortcut-label">Post</span> 
+					</a>
+					<!-- <a href="<?php echo base_url('admin/examList') ?>" class="shortcut">
+					  <i class="shortcut-icon fa fa-book"></i>
+					  <span class="shortcut-label">Exam</span> 
+					</a> -->
+					<a href="<?php echo base_url('admin/userList') ?>" class="shortcut">
+					  <i class="shortcut-icon fa fa-user"></i> 
+					  <span class="shortcut-label">Users</span> 
+					</a>
+					<a href="<?php echo base_url('admin/setting') ?>" class="shortcut"> 
+					  <i class="shortcut-icon fa fa-cog"></i>
+					  <span class="shortcut-label">Settings</span> 
+					</a>
+				</div>
+				<!-- /shortcuts -->
+			</div>
+			<!-- /widget-content -->
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="col-md-6">
+		<div class="widget">
+			<div class="widget-header"> <i class="icon-signal"></i>
+				<h3> Area Chart Example</h3>
+			</div>
+			<!-- /widget-header -->
+			<div class="widget-content">
+				<canvas id="area-chart" class="chart-holder" height="250" width="715"> </canvas>
+				<!-- /area-chart -->
+			</div>
+			<!-- /widget-content -->
+		</div>
+	</div>
 
 </div>
+
 <script>
 var lineChartData = {
-    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-    datasets: [{
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            data: [65, 59, 90, 81, 56, 55, 60, 55, 99, 50, 75, 50]
-        },
-        {
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            data: [65, 59, 90, 81, 56, 55, 60, 55, 99, 50, 75, 50]
-        }
-    ]
+	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+	datasets: [{
+			fillColor: "rgba(220,220,220,0.5)",
+			strokeColor: "rgba(220,220,220,1)",
+			pointColor: "rgba(220,220,220,1)",
+			pointStrokeColor: "#fff",
+			data: [65, 59, 90, 81, 56, 55, 60, 55, 99, 50, 75, 50]
+		},
+		{
+			fillColor: "rgba(151,187,205,0.5)",
+			strokeColor: "rgba(151,187,205,1)",
+			pointColor: "rgba(151,187,205,1)",
+			pointStrokeColor: "#fff",
+			data: [65, 59, 90, 81, 56, 55, 60, 55, 99, 50, 75, 50]
+		}
+	]
 }
 var myLine = new Chart(document.getElementById("area-chart").getContext("2d")).Line(lineChartData);
 </script>
