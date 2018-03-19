@@ -42,7 +42,7 @@
                                 <div class="en_div">Hindi</div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-3"> About us * </label>
+                                        <label class="col-md-3"> About Us * </label>
                                         <div class="col-md-9">
                                             <textarea class="form-control" rows="8" id="hi_about_us" name="hi_about_us" placeholder="about_us"><?php echo  $about[0]['hi_about_us']?>
                                         </textarea> <span class="red"><?php echo form_error('hi_about_us'); ?></span>
@@ -88,3 +88,23 @@ $(document).ready(function() {
 });
 
 </script>
+
+
+<script type="text/javascript">
+    google.load("elements", "1", {
+        packages: "transliteration"
+    });
+
+    function onLoad() {
+        var options = {
+            sourceLanguage: google.elements.transliteration.LanguageCode.ENGLISH,
+            destinationLanguage: [google.elements.transliteration.LanguageCode.HINDI],
+            shortcutKey: 'ctrl+g',
+            transliterationEnabled: true
+        };
+        var control = new google.elements.transliteration.TransliterationControl(options);
+        control.makeTransliteratable(['hi_about_us']);
+    }
+    google.setOnLoadCallback(onLoad);
+
+    </script>
