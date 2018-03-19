@@ -62,9 +62,11 @@
                         </div>
                         <!-- /input-group -->
                     </li>
+                    
                     <li>
                         <a href="<?php echo base_url('admin')?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
+                    
                     <li> <a href="#"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Post Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
@@ -89,9 +91,11 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li>
                         <a href="<?php echo base_url('admin/setting')?>"><i class="fa fa-cog"></i>  Site Settings</a>
                     </li>
+                    
                     <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Pages Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
@@ -108,7 +112,29 @@
                             </li>
                         </ul>
                     </li>
-                    <!--  <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
+
+                    <!-- <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a href="<?php echo base_url('admin/menu')?>">Add Menu</a>
+                            </li>
+
+                            <li>
+                                <a href="<?php echo base_url('admin/menuList')?>">Menu List</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/sub_menu')?>">Add Sub Menu</a>
+                            </li>
+
+                            <li>
+                                <a href="<?php echo base_url('admin/submenuList')?>">Sub Menu List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
+
                         <ul class="nav nav-second-level">
 
                             <li>
@@ -118,8 +144,9 @@
                                 <a href="<?php echo base_url('admin/moduleList')?>">Module List</a>
                             </li>
                         </ul>
-                    </li> -->
-                    <!-- <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
+                    </li>
+                    
+                    <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
@@ -130,6 +157,7 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li> <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Training Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -140,6 +168,7 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li> <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
@@ -154,13 +183,11 @@
 
                     <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Exam Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-
                             <li>
                                 <a href="<?php echo base_url('admin/exam')?>">Add Exam</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
-
                             </li>
                         </ul>
                     </li> -->

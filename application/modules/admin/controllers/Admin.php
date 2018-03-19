@@ -58,18 +58,18 @@ class Admin extends CI_Controller
     public function dashboard()
     {
         if ($this->controller->checkSession()) {
-            $data['body'] = 'dashboard';
-                $where1 = array(
+            $data['body']          = 'dashboard';
+            $where1                = array(
                 'user_role !=' => 1,
                 'is_active' => 1
-            );      
-            $where  = array(
+            );
+            $where                 = array(
                 'is_active' => 1
             );
-            $data['totaluser']     = $this->model->getcount('users',$where1);
-            $data['totalquestion'] = $this->model->getcount('questions',$where);
-            $data['totalpost'] = $this->model->getcount('post',$where);
-            $data['totalexam'] = $this->model->getcount('exam',$where);
+            $data['totaluser']     = $this->model->getcount('users', $where1);
+            $data['totalquestion'] = $this->model->getcount('questions', $where);
+            $data['totalpost']     = $this->model->getcount('post', $where);
+            $data['totalexam']     = $this->model->getcount('exam', $where);
             
             $this->controller->load_view($data);
         } else {
@@ -99,14 +99,14 @@ class Admin extends CI_Controller
                 
                 $data = array(
                     'en_site_title' => $en_site_title,
-                    'en_meta_tags'  => $en_meta_tags,
-                    'en_copyright'  => $en_copyright,
+                    'en_meta_tags' => $en_meta_tags,
+                    'en_copyright' => $en_copyright,
                     'en_contact_us' => $en_contact_us,
                     'hi_site_title' => $hi_site_title,
-                    'hi_meta_tags'  => $hi_meta_tags,
-                    'hi_copyright'  => $hi_copyright,
+                    'hi_meta_tags' => $hi_meta_tags,
+                    'hi_copyright' => $hi_copyright,
                     'hi_contact_us' => $hi_contact_us,
-                    'created_at'    => date('Y-m-d H:i:s')
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 if (isset($_FILES['favicon_icon']['name']) && !empty($_FILES['favicon_icon']['name'])) {
@@ -167,7 +167,7 @@ class Admin extends CI_Controller
                 $data = array(
                     'en_about_us' => $en_about_us,
                     'hi_about_us' => $hi_about_us,
-                    'created_at'  => date('Y-m-d H:i:s')
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 $where  = array(
@@ -179,7 +179,7 @@ class Admin extends CI_Controller
             }
         }
     }
-
+    
     public function privacy()
     {
         $this->form_validation->set_rules('en_privacy_policy', 'Privacy Policy in English', 'trim|required');
@@ -197,7 +197,7 @@ class Admin extends CI_Controller
                 $data = array(
                     'en_privacy_policy' => $en_privacy_policy,
                     'hi_privacy_policy' => $hi_privacy_policy,
-                    'created_at'        => date('Y-m-d H:i:s')
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 $where  = array(
@@ -225,8 +225,8 @@ class Admin extends CI_Controller
                 $hi_terms = $this->input->post('hi_terms');
                 
                 $data = array(
-                    'en_terms'   => $en_terms,
-                    'hi_terms'   => $hi_terms,
+                    'en_terms' => $en_terms,
+                    'hi_terms' => $hi_terms,
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
@@ -261,8 +261,8 @@ class Admin extends CI_Controller
                 $data = array(
                     'en_module_name' => $en_module_name,
                     'hi_module_name' => $hi_module_name,
-                    'is_active'      => $is_active,
-                    'created_at'     => date('Y-m-d H:i:s')
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -335,11 +335,11 @@ class Admin extends CI_Controller
                 $is_active       = $this->input->post('status');
                 
                 $data = array(
-                    'fk_module_id'      => $fk_module_id,
-                    'en_chapter_name'   => $en_chapter_name,
-                    'hi_chapter_name'   => $hi_chapter_name,
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
+                    'fk_module_id' => $fk_module_id,
+                    'en_chapter_name' => $en_chapter_name,
+                    'hi_chapter_name' => $hi_chapter_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -379,12 +379,159 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
     }
     
+    public function menu($id = null)
+    {
+        
+        $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            
+            if (!empty($id)) {
+                
+                $where           = array(
+                    
+                    'id' => $id
+                );
+                $data['menu']    = $this->model->getAllwhere('menu', $where);
+                $data['modules'] = $this->model->getAllwhere('modules');
+                
+            } else {
+                $where           = array(
+                    
+                    'is_active' => 1
+                );
+                $data['modules'] = $this->model->getAllwhere('modules', $where);
+            }
+            $data['body'] = 'add_menu';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                
+                $module_id    = $this->input->post('module_id');
+                $en_menu_name = $this->input->post('en_menu_name');
+                $hi_menu_name = $this->input->post('hi_menu_name');
+                $is_active    = $this->input->post('status');
+                
+                $data = array(
+                    'module_id' => $module_id,
+                    'en_menu_name' => $en_menu_name,
+                    'hi_menu_name' => $hi_menu_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
+                );
+                
+                
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('menu', $data, $where);
+                } else {
+                    $result = $this->model->insertData('menu', $data);
+                }
+                
+                $this->menuList();
+                
+                
+            }
+        }
+    }
+    
+    
+    public function menuList()
+    {
+        
+        $where        = array(
+            'menu.is_active' => 1
+        );
+        $data['menu'] = $this->model->GetJoinRecord('menu', 'module_id', 'modules', 'id', 'menu.en_menu_name,hi_menu_name,menu.id as id,modules.en_module_name,menu.created_at', $where);
+        
+        $data['body'] = 'menu_list';
+        $this->controller->load_view($data);
+        
+    }
+    
+    public function sub_menu($id = null)
+    {
+        $this->form_validation->set_rules('menu_id', 'Menu Name', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            
+            if (!empty($id)) {
+                
+                $where            = array(
+                    
+                    'sub_menu.id' => $id
+                );
+                $data['sub_menu'] = $this->model->getAllwhere('sub_menu', $where);
+                $data['menu']     = $this->model->getAllwhere('menu');
+                
+            } else {
+                $where        = array(
+                    
+                    'is_active' => 1
+                );
+                $data['menu'] = $this->model->getAllwhere('menu', $where);
+            }
+            $data['body'] = 'add_sub_menu';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                
+                $menu_id          = $this->input->post('menu_id');
+                $en_sub_menu_name = $this->input->post('en_sub_menu_name');
+                $hi_sub_menu_name = $this->input->post('hi_sub_menu_name');
+                $is_active        = $this->input->post('status');
+                
+                $data = array(
+                    'menu_id' => $menu_id,
+                    'en_sub_menu_name' => $en_sub_menu_name,
+                    'hi_sub_menu_name' => $hi_sub_menu_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
+                );
+                
+                
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('sub_menu', $data, $where);
+                } else {
+                    $result = $this->model->insertData('sub_menu', $data);
+                }
+                
+                $this->submenuList();
+                
+                
+            }
+        }
+    }
+    
+    public function submenuList()
+    {
+        
+        $where            = array(
+            'sub_menu.is_active' => 1
+        );
+        $data['sub_menu'] = $this->model->GetJoinRecord('sub_menu', 'menu_id', 'menu', 'id', 'sub_menu.en_sub_menu_name,sub_menu.hi_sub_menu_name,sub_menu.id as id,menu.en_menu_name,sub_menu.created_at', $where);
+        
+        $data['body'] = 'sub_menu_list';
+        $this->controller->load_view($data);
+        
+    }
     public function check_database($password)
     {
         $username = $this->input->post('username', TRUE);
         $where    = array(
-            'username'  => $username,
-            'password'  => md5($password),
+            'username' => $username,
+            'password' => md5($password),
             'is_active' => 1
         );
         $result   = $this->model->getsingle('users', $where);
@@ -392,11 +539,11 @@ class Admin extends CI_Controller
         if (!empty($result)) {
             
             $sess_array = array(
-                'id'        => $result->id,
-                'username'  => $result->username,
-                'email'     => $result->email,
+                'id' => $result->id,
+                'username' => $result->username,
+                'email' => $result->email,
                 'user_role' => $result->user_role,
-                'first_name'=> $result->first_name,
+                'first_name' => $result->first_name,
                 'last_name' => $result->last_name
             );
             
@@ -436,11 +583,11 @@ class Admin extends CI_Controller
                 $is_active       = $this->input->post('status');
                 
                 $data = array(
-                    'fk_module_id'      => $fk_module_id,
-                    'en_chapter_name'   => $en_chapter_name,
-                    'hi_chapter_name'   => $hi_chapter_name,
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
+                    'fk_module_id' => $fk_module_id,
+                    'en_chapter_name' => $en_chapter_name,
+                    'hi_chapter_name' => $hi_chapter_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -546,26 +693,26 @@ class Admin extends CI_Controller
                 $is_active       = $this->input->post('status');
                 
                 $data = array(
-                    'module_id'     => $module_id,
-                    'chapter_id'    => $chapter_id,
-                    'question_marks'=> $question_marks,
+                    'module_id' => $module_id,
+                    'chapter_id' => $chapter_id,
+                    'question_marks' => $question_marks,
                     'question_type' => $question_type,
-                    'en_question'   => $en_question,
-                    'hi_question'   => $hi_question,
-                    'en_option_a'   => $en_option_a,
-                    'en_option_b'   => $en_option_b,
-                    'en_option_c'   => $en_option_c,
-                    'en_option_d'   => $en_option_d,
-                    'hi_option_a'   => $hi_option_a,
-                    'hi_option_b'   => $hi_option_b,
-                    'hi_option_c'   => $hi_option_c,
-                    'hi_option_d'   => $hi_option_d,
-                    'en_answer'     => $en_answer,
-                    'hi_answer'     => $hi_answer,
+                    'en_question' => $en_question,
+                    'hi_question' => $hi_question,
+                    'en_option_a' => $en_option_a,
+                    'en_option_b' => $en_option_b,
+                    'en_option_c' => $en_option_c,
+                    'en_option_d' => $en_option_d,
+                    'hi_option_a' => $hi_option_a,
+                    'hi_option_b' => $hi_option_b,
+                    'hi_option_c' => $hi_option_c,
+                    'hi_option_d' => $hi_option_d,
+                    'en_answer' => $en_answer,
+                    'hi_answer' => $hi_answer,
                     'en_explaination' => $en_explaination,
                     'hi_explaination' => $hi_explaination,
-                    'is_active'     => $is_active,
-                    'created_at'    => date('Y-m-d H:i:s')
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 if (!empty($id)) {
@@ -597,10 +744,10 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             if (!empty($id)) {
-                $where            = array(
+                $where = array(
                     'id ' => $id
                 );
-
+                
                 $data['exam']     = $this->model->getAllwhere('exam', $where);
                 $data['modules']  = $this->model->getAll('modules');
                 $data['chapters'] = $this->model->getAll('chapters');
@@ -632,23 +779,23 @@ class Admin extends CI_Controller
                 
                 
                 $data = array(
-                    'module_id'     => $module_id,
-                    'chapter_id'    => $chapter_id,
-                    'exam_name'     => $exam_name,
+                    'module_id' => $module_id,
+                    'chapter_id' => $chapter_id,
+                    'exam_name' => $exam_name,
                     'question_type' => $question_type,
-                    'total_question'=> $total_question,
+                    'total_question' => $total_question,
                     'time_per_question' => $time_per_question,
                     'test_duration' => $test_duration,
                     'passing_marks' => $passing_marks,
                     'positive_mark' => $positive_mark,
                     'negative_mark' => $negative_mark,
                     'no_of_ques_attempt' => $no_of_ques_attempt,
-                    'description'   => $description,
-                    'payment_status'=> $payment_status,
-                    'question_id'   => $question_id,
+                    'description' => $description,
+                    'payment_status' => $payment_status,
+                    'question_id' => $question_id,
                     'time_per_question' => $time_per_question,
-                    'is_active'     => $is_active,
-                    'created_at'    => date('Y-m-d H:i:s')
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -666,7 +813,7 @@ class Admin extends CI_Controller
         }
         
     }
-
+    
     
     public function examList()
     {
@@ -682,15 +829,15 @@ class Admin extends CI_Controller
         $chapter_id    = $this->input->get('chapter_id');
         $question_type = $this->input->get('question_type');
         $where         = array(
-                            'module_id '    => $module_id,
-                            'chapter_id'    => $chapter_id,
-                            'question_type' => $question_type 
-                        );
+            'module_id ' => $module_id,
+            'chapter_id' => $chapter_id,
+            'question_type' => $question_type
+        );
         $data          = $this->model->getAllwhere('questions', $where);
         
         echo json_encode($data);
         
-
+        
     }
     public function change_password()
     {
@@ -782,20 +929,20 @@ class Admin extends CI_Controller
                 
                 
                 $data = array(
-                    'first_name'    => $first_name,
-                    'last_name'     => $last_name,
-                    'username'      => $user_name,
-                    'email'         => $email,
-                    'password'      => MD5($password),
-                    'address'       => $address,
-                    'phone_no'      => $phone_no,
-                    'mobile'        => $mobile_no,
+                    'first_name' => $first_name,
+                    'last_name' => $last_name,
+                    'username' => $user_name,
+                    'email' => $email,
+                    'password' => MD5($password),
+                    'address' => $address,
+                    'phone_no' => $phone_no,
+                    'mobile' => $mobile_no,
                     'date_of_birth' => $dob,
-                    'gender'        => $gender,
-                    'blood_group'   => $blood_group,
-                    'is_active'     => $status,
-                    'user_role'     => 3,
-                    'created_at'    => date('Y-m-d H:i:s')
+                    'gender' => $gender,
+                    'blood_group' => $blood_group,
+                    'is_active' => $status,
+                    'user_role' => 3,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -829,14 +976,14 @@ class Admin extends CI_Controller
     
     public function userList($user_role = null)
     {
-        $where         = array(
+        $where = array(
             'user_role !=' => 1
         );
         //$data['role']      = $user_role;
-
+        
         $data['users'] = $this->model->getAllwhere('users', $where);
         $data['body']  = 'userList';
-
+        
         $this->controller->load_view($data);
     }
     
@@ -988,14 +1135,14 @@ class Admin extends CI_Controller
                 $gender     = $this->input->post('gender');
                 
                 $data = array(
-                    'first_name'    => $first_name,
-                    'last_name'     => $last_name,
-                    'email'         => $email,
-                    'address'       => $address,
-                    'phone_no'      => $phone_no,
-                    'mobile'        => $mobile_no,
+                    'first_name' => $first_name,
+                    'last_name' => $last_name,
+                    'email' => $email,
+                    'address' => $address,
+                    'phone_no' => $phone_no,
+                    'mobile' => $mobile_no,
                     'date_of_birth' => $dob,
-                    'gender'        => $gender
+                    'gender' => $gender
                 );
                 
                 
@@ -1038,22 +1185,22 @@ class Admin extends CI_Controller
                 
                 $data = array(
                     'reciever_id' => $reciever_id,
-                    'sender_id'   => $sender_id,
-                    'subject'     => $subject,
-                    'message'     => trim($message),
-                    'is_active'   => 1,
-                    'created_at'  => date('Y-m-d H:i:s')
+                    'sender_id' => $sender_id,
+                    'subject' => $subject,
+                    'message' => trim($message),
+                    'is_active' => 1,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 $config_mail = Array(
-                    'protocol'  => 'smtp',
+                    'protocol' => 'smtp',
                     'smtp_host' => 'ssl://smtp.googlemail.com',
                     'smtp_port' => '465',
                     'smtp_user' => 'webdeskytechnical@gmail.com',
                     'smtp_pass' => 'webdesky@2017',
-                    'mailtype'  => 'html',
-                    'charset'   => 'iso-8859-1',
-                    'newline'   => "\r\n"
+                    'mailtype' => 'html',
+                    'charset' => 'iso-8859-1',
+                    'newline' => "\r\n"
                 );
                 
                 $this->load->library('email', $config_mail);
@@ -1106,12 +1253,12 @@ class Admin extends CI_Controller
                 $sender_id   = $this->session->userdata('id');
                 
                 $data = array(
-                    'reciever_id'   => $reciever_id,
-                    'sender_id'     => $sender_id,
-                    'subject'       => $subject,
-                    'message'       => trim($message),
-                    'is_active'     => 1,
-                    'created_at'    => date('Y-m-d H:i:s')
+                    'reciever_id' => $reciever_id,
+                    'sender_id' => $sender_id,
+                    'subject' => $subject,
+                    'message' => trim($message),
+                    'is_active' => 1,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 $result = $this->model->insertData('message', $data);
@@ -1137,8 +1284,8 @@ class Admin extends CI_Controller
     {
         $old_password = $this->input->post('data');
         $where        = array(
-            'id'        => $this->session->userdata('id'),
-            'password'  => md5($old_password)
+            'id' => $this->session->userdata('id'),
+            'password' => md5($old_password)
         );
         $result       = $this->model->getsingle('users', $where);
         if (!empty($result)) {
@@ -1213,13 +1360,13 @@ class Admin extends CI_Controller
                 
                 $data = array(
                     'en_post_title' => $en_post_title,
-                    'en_post'       => $en_post,
+                    'en_post' => $en_post,
                     'hi_post_title' => $hi_post_title,
-                    'hi_post'       => $hi_post,
-                    'module_id'     => $module_id,
-                    'added_by'      => $this->session->userdata('id'),
-                    'is_active'     => $is_active,
-                    'created_at'    => date('Y-m-d H:i:s')
+                    'hi_post' => $hi_post,
+                    'module_id' => $module_id,
+                    'added_by' => $this->session->userdata('id'),
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 if (!empty($id)) {

@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 border-shadowss">
+                                <div class="col-md-6 border-shadowss" style="display: none">
                                  
                                 <div id="option11" style="display: none">
                                     <div class="en_div">English</div>
@@ -186,7 +186,7 @@
                                     </div>
                                 </div>
                                </div>
-                               <div class="col-md-6 border-shadowss">
+                               <div class="col-md-6 border-shadowss" style="display: none">
                                 
                                <div id="option12" style="display: none">
                                  <div class="en_div">Hindi</div>
@@ -427,6 +427,7 @@ $(document).ready(function() {
 function questionChanges(val) {
 
     if (val == 'Options') {
+        $('.border-shadowss').css('display','block');
         $('#options').css('display', 'block');
         $('#option11').css('display', 'block');
         $('#option12').css('display', 'block');
@@ -447,6 +448,7 @@ function questionChanges(val) {
         $('#option16').css('display', 'block');
         $('#option17').css('display', 'none');
     } else if (val == 'Fill In the Blank') {
+        $('.border-shadowss').css('display','block');
         $('#options').css('display', 'block');
         $('#option11').css('display', 'block');
         $('#option12').css('display', 'block');
@@ -467,6 +469,7 @@ function questionChanges(val) {
         $('#option17').css('display', 'none');
 
     } else if (val == 'Descriptive') {
+        $('.border-shadowss').css('display','block');
         $('#options').css('display', 'none');
         $('#option1').css('display', 'none');
         $('#option2').css('display', 'none');
@@ -487,6 +490,7 @@ function questionChanges(val) {
         $('#option17').css('display', 'none');
         //$('#answers_type').css('display', 'none');
     } else if (val == 'True False') {
+        $('.border-shadowss').css('display','block');
         $('#options').css('display', 'none');
         $('#option1').css('display', 'none');
         $('#option2').css('display', 'none');
