@@ -156,7 +156,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('hi_about_us', 'About us in Hindi', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['about'] = $this->model->getAll('about_us');
+            $data['about'] = $this->model->getAll('settings');
             $data['body']  = 'about_us';
             $this->controller->load_view($data);
         } else {
@@ -173,7 +173,7 @@ class Admin extends CI_Controller
                 $where  = array(
                     'id' => $this->input->post('id')
                 );
-                $result = $this->model->updateFields('about_us', $data, $where);
+                $result = $this->model->updateFields('settings', $data, $where);
                 
                 redirect('admin/about');
             }
@@ -186,7 +186,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('hi_privacy_policy', 'Privacy Policy in Hindi', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['privacy'] = $this->model->getAll('privacy_policy');
+            $data['privacy'] = $this->model->getAll('settings');
             $data['body']    = 'privacy_policy';
             $this->controller->load_view($data);
         } else {
@@ -203,7 +203,7 @@ class Admin extends CI_Controller
                 $where  = array(
                     'id' => $this->input->post('id')
                 );
-                $result = $this->model->updateFields('privacy_policy', $data, $where);
+                $result = $this->model->updateFields('settings', $data, $where);
                 
                 redirect('admin/privacy');
             }
@@ -216,7 +216,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('hi_terms', 'Terms And Condition in Hindi', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['terms'] = $this->model->getAll('terms_conditions');
+            $data['terms'] = $this->model->getAll('settings');
             $data['body']  = 'terms_conditions';
             $this->controller->load_view($data);
         } else {
@@ -233,7 +233,7 @@ class Admin extends CI_Controller
                 $where  = array(
                     'id' => $this->input->post('id')
                 );
-                $result = $this->model->updateFields('terms_conditions', $data, $where);
+                $result = $this->model->updateFields('settings', $data, $where);
                 
                 redirect('admin/terms');
             }
@@ -460,7 +460,7 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('errors', validation_errors());
 
             if(!empty($id)){
-
+ 
                  $where = array(
 
                 'sub_menu.id' => $id

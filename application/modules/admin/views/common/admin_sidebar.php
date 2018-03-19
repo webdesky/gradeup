@@ -128,7 +128,7 @@
                             </li>
                         </ul>
                     </li>
-                  <!--   <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  Module Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
@@ -183,7 +183,7 @@
 
                             </li>
                         </ul>
-                    </li> -->
+                    </li> 
 
                 </ul>
             </div>
