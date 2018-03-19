@@ -113,7 +113,7 @@
                         </ul>
                     </li>
 
-                    <!-- <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
