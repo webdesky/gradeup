@@ -64,7 +64,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Menu Name* </label>
                                             <div class="col-md-9">
-                                                <input class="form-control" type="text" name="hi_menu_name" id="hi_menu_name" placeholder="Menu Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($menu)){ echo $menu[0]->hi_menu_name; } ?>"> <span class="red"><?php echo form_error('hi_hindi_name'); ?></span>
+                                                <input class="form-control" type="text" name="hi_menu_name" id="hi_menu_name" placeholder="Menu Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($menu)){ echo $menu[0]->hi_menu_name; } ?>"> <span class="red"><?php echo form_error('hi_menu_name'); ?></span>
                                             </div>
                                         </div>
                                     </div>

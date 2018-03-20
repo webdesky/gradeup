@@ -1390,6 +1390,7 @@ class Admin extends CI_Controller
             $data['modules'] = $this->model->getAllwhere('modules', $where);
             $field_val       = 'post.*,users.first_name,users.last_name';
             $data['post']    = $this->model->GetJoinRecord('post', 'added_by', 'users', 'id', $field_val);
+            // echo $this->db->last_query();
             $data['body']    = 'post_list';
             $this->controller->load_view($data);
         } else {

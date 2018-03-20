@@ -68,7 +68,6 @@
 <script type="text/javascript">
 $('#users').DataTable({
     responsive: true,
-
 });
 
 function delete_user(id, tr_id) {
@@ -90,7 +89,7 @@ function delete_user(id, tr_id) {
             type: "POST"
         }).done(function(data) {
             swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_' + tr_id).remove();
+            $('#tr_'+tr_id).remove();
         });
 
     });

@@ -55,7 +55,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Menu Name* </label>
                                             <div class="col-md-9">
-                                                <input class="form-control" type="text" name="en_sub_menu_name" id="en_sub_menu_name" placeholder=" Sub Menu Name in English" autocomplete="off" required="required" value="<?php if(isset($sub_menu)){ echo $sub_menu[0]->en_sub_menu_name; } ?>"> <span class="red"><?php echo form_error('en_menu_name'); ?></span>
+                                                <input class="form-control" type="text" name="en_sub_menu_name" id="en_sub_menu_name" placeholder=" Sub Menu Name in English" autocomplete="off" required="required" value="<?php if(isset($sub_menu)){ echo $sub_menu[0]->en_sub_menu_name; } ?>"> <span class="red"><?php echo form_error('en_sub_menu_name'); ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Menu Name* </label>
                                             <div class="col-md-9">
-                                                <input class="form-control" type="text" name="hi_sub_menu_name" id="hi_sub_menu_name" placeholder="Sub Menu Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($sub_menu)){ echo $sub_menu[0]->hi_sub_menu_name; } ?>"> <span class="red"><?php echo form_error('hi_hindi_name'); ?></span>
+                                                <input class="form-control" type="text" name="hi_sub_menu_name" id="hi_sub_menu_name" placeholder="Sub Menu Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($sub_menu)){ echo $sub_menu[0]->hi_sub_menu_name; } ?>"> <span class="red"><?php echo form_error('hi_sub_menu_name'); ?></span>
                                             </div>
                                         </div>
                                     </div>
