@@ -20,13 +20,6 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <!-- <select class="wide" name="module_id" id="module_id">
-                            <option data-display="-- Select Module --" value="">-- Select Module --</option>
-                            <?php foreach($modules as $module):?>
-                            <option value="<?php echo $module->id;?>"><?php echo $module->en_module_name;?></option>
-                            <?php endforeach;?>
-                        </select> -->
-
                         <table class="table table-striped table-bordered display" cellspacing="0" width="100%" id="notice">
                             <thead>
                                 <tr class="bg-primary">
@@ -40,9 +33,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $count=1; if(!empty($post)) {  foreach ($post as  $value) {
-
-                              ?>
+                                <?php $count=1; if(!empty($post)) {  foreach ($post as  $value) {?>
                                 <tr class="odd gradeX" id="tr_<?php echo $count;?>">
                                     <td>
                                         <?php echo $count; ?>
@@ -54,12 +45,11 @@
                                         <?php echo $value->en_post;  ?>
                                     </td>
                                     <td class="center">
-                                        <?php if($value->is_active==1){ echo 'Active';}else{echo 'Deactivate';}  ?>
+                                        <?php if($value->is_active==1){ echo 'Active';}else{echo 'Inactive';}  ?>
                                     </td>
                                     <td class="center">
                                         <?php echo ucfirst($value->first_name.' '.$value->last_name);  ?>
                                     </td>
-
                                     <td class="center">
                                         <?php echo date('Y-m-d',strtotime($value->created_at));  ?>
                                     </td>
@@ -107,12 +97,8 @@ function delete_message(id, tr_id) {
         });
     });
 }
-/* $('#notice').DataTable({
-     responsive: true
- });*/
 
 $(document).ready(function() {
-    //$('#module_id').niceSelect();
     $('#notice').DataTable({
         responsive: {
             details: {

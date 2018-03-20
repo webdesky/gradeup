@@ -19,19 +19,19 @@
                         <div class="col-lg-12 col-md-12">
                             <form role="form" method="post" action="<?php echo base_url('admin/module/'.$modules[0]->id) ?>" class="registration_form1" enctype="multipart/form-data">
                                 <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3">English Module Name * </label>
-                                    <div class="col-md-9">
-                                        <input class="form-control" type="text" name="en_module_name" id="en_module_name" placeholder="Module Name" autocomplete="off" required="required" value="<?php echo $modules[0]->en_module_name ?>"> <span class="red"><?php echo form_error('en_module_name'); ?></span> </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3">English Module Name * </label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" name="en_module_name" id="en_module_name" placeholder="Module Name" autocomplete="off" required="required" value="<?php echo $modules[0]->en_module_name ?>"> <span class="red"><?php echo form_error('en_module_name'); ?></span> </div>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-3">Hindi Module Name * </label>
-                                    <div class="col-md-9">
-                                        <input class="form-control" type="text" name="hi_module_name" id="hi_module_name" placeholder="Module Name" autocomplete="off" required="required" value="<?php echo $modules[0]->hi_module_name ?>" > <span class="red"><?php echo form_error('hi_module_name'); ?></span> </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3">Hindi Module Name * </label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" name="hi_module_name" id="hi_module_name" placeholder="Module Name" autocomplete="off" required="required" value="<?php echo $modules[0]->hi_module_name ?>"> <span class="red"><?php echo form_error('hi_module_name'); ?></span> </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2">Status</label>
@@ -74,4 +74,5 @@ $(document).ready(function() {
         }
     });
 });
+
 </script>

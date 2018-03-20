@@ -26,8 +26,8 @@
                                 <div class="en_div">English</div>
                                 <div class="col-md-12 ">
                                     <div class="form-group">
-                                        <label class="col-md-3"> About Us * </label>
-                                        <div class="col-md-9">
+                                        <label class="col-md-2"> About Us * </label>
+                                        <div class="col-md-10">
                                             <input type="hidden" name="id" value="<?php echo $about[0]['id']; ?>">
                                             <textarea class="form-control" rows="8" id="en_about_us" name="en_about_us" placeholder="about us"><?php echo  $about[0]['en_about_us']?>
                                             </textarea> <span class="red"><?php echo form_error('en_about_us'); ?></span>
@@ -42,8 +42,8 @@
                                 <div class="en_div">Hindi</div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-3"> About Us * </label>
-                                        <div class="col-md-9">
+                                        <label class="col-md-2"> About Us * </label>
+                                        <div class="col-md-10">
                                             <textarea class="form-control" rows="8" id="hi_about_us" name="hi_about_us" placeholder="about_us"><?php echo  $about[0]['hi_about_us']?>
                                         </textarea> <span class="red"><?php echo form_error('hi_about_us'); ?></span>
                                             <script type="text/javascript">

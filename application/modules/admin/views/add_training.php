@@ -23,13 +23,12 @@
                                         <label class="col-md-3 ">Module Name * </label>
                                         <div class="col-md-9">
                                             <select class="form-control callbacks" name="module_id[]" multiple='multiple'>
-                                                <!-- <option data-display="--Select Modules--">--Select Modules--</option> -->
                                                 <?php foreach ($modules as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>">
                                                     <?php echo ucwords($value->en_module_name); ?>
                                                 </option>
                                                 <?php } ?>
-                                            </select> <span class="red"><?php echo form_error('fk_module_id'); ?></span> </div>
+                                            </select> <span class="red"><?php echo form_error('module_id'); ?></span> </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -37,7 +36,7 @@
                                         <label class="col-md-3 ">Chapter Name * </label>
                                         <div class="col-md-9">
                                             <select class="form-control callback" name="chapter_id[]" multiple='multiple'>
-                                            </select> <span class="red"><?php echo form_error('fk_module_id'); ?></span> </div>
+                                            </select> <span class="red"><?php echo form_error('chapter_id'); ?></span> </div>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>

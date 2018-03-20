@@ -22,13 +22,12 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <form role="form" method="post" action="<?php echo base_url('admin/terms') ?>" class="registration_form1" enctype="multipart/form-data">
-
-                              <div class="col-md-6 border-shadowss">
+                            <div class="col-md-6 border-shadowss">
                                 <div class="en_div">English</div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-3"> T&C* </label>
-                                        <div class="col-md-9">
+                                        <label class="col-md-2"> T&C* </label>
+                                        <div class="col-md-10">
                                             <input type="hidden" name="id" value="<?php echo $terms[0]['id']; ?>">
                                             <textarea class="form-control" rows="8" id="en_terms" name="en_terms" placeholder="about us"><?php echo  $terms[0]['en_terms']?>
                                             </textarea> <span class="red"><?php echo form_error('en_terms'); ?></span>
@@ -39,12 +38,12 @@
                                     </div>
                                 </div>
                             </div>
-                             <div class="col-md-6 border-shadowss">
+                            <div class="col-md-6 border-shadowss">
                                 <div class="en_div">Hindi</div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-3"> T&C * </label>
-                                        <div class="col-md-9">
+                                        <label class="col-md-2"> T&C * </label>
+                                        <div class="col-md-10">
                                             <textarea class="form-control" rows="8" id="hi_terms" name="hi_terms" placeholder="about_us"><?php echo  $terms[0]['hi_terms']?>
                                             </textarea> <span class="red"><?php echo form_error('hi_terms'); ?></span>
                                             <script type="text/javascript">

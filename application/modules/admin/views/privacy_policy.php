@@ -27,8 +27,8 @@
                                 <div class="en_div">English</div>
                                 <div class="col-md-12 ">
                                     <div class="form-group">
-                                        <label class="col-md-3"> Privacy Policy* </label>
-                                        <div class="col-md-9">
+                                        <label class="col-md-2"> Privacy Policy* </label>
+                                        <div class="col-md-10">
                                             <input type="hidden" name="id" value="<?php echo $privacy[0]['id']; ?>">
                                             <textarea class="form-control" rows="8" id="en_privacy_policy" name="en_privacy_policy" placeholder="about us"><?php echo  $privacy[0]['en_privacy_policy']?>
                                             </textarea> <span class="red"><?php echo form_error('en_privacy_policy'); ?></span>
@@ -44,9 +44,9 @@
                                 <div class="en_div">Hindi</div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-3"> Privacy Policy * </label>
-                                        <div class="col-md-9">
-                                            <textarea class="form-control" rows="8" id="hi_privacy_policy" name="hi_privacy_policy" placeholder="about_us"><?php echo  $privacy[0]['hi_privacy_policy']?>
+                                        <label class="col-md-2"> Privacy Policy * </label>
+                                        <div class="col-md-10">
+                                            <textarea class="form-control" id="hi_privacy_policy" name="hi_privacy_policy" placeholder="about_us"><?php echo  $privacy[0]['hi_privacy_policy']?>
                                             </textarea> <span class="red"><?php echo form_error('hi_privacy_policy'); ?></span>
                                             <script type="text/javascript">
                                                 CKEDITOR.replace('hi_privacy_policy');

@@ -121,12 +121,13 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Description</label>
                                         <div class="col-md-9">
-<textarea class="form-control" rows="8" id="description" name="description" placeholder="Exam Description">
-    <?php if(isset($exam)){ echo $exam[0]->description; } ?>
-</textarea> <span class="red"><?php echo form_error('description'); ?></span>
-<script type="text/javascript">
-CKEDITOR.replace('description');
-</script>                                        </div>
+                                            <textarea class="form-control" rows="8" id="description" name="description" placeholder="Exam Description">
+                                                <?php if(isset($exam)){ echo $exam[0]->description; } ?>
+                                            </textarea> <span class="red"><?php echo form_error('description'); ?></span>
+                                            <script type="text/javascript">
+                                            CKEDITOR.replace('description');
+                                            </script>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

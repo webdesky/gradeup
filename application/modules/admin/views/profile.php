@@ -18,22 +18,25 @@
                                 <div class="form-group">
                                     <label class="col-md-2">First Name * </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="first_name" placeholder="Enter First Name" value="<?php echo $users[0]->first_name;?>"> <span class="red"><?php echo form_error('first_name'); ?></span> </div>
+                                        <input type="text" class="form-control" name="first_name" placeholder="Enter First Name" value="<?php echo $users[0]->first_name;?>"> <span class="red"><?php echo form_error('first_name'); ?></span></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2">Last Name * </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="last_name" placeholder="Enter Last Name" value="<?php echo $users[0]->last_name;?>"> <span class="red"><?php echo form_error('last_name'); ?></span> </div>
+                                        <input type="text" class="form-control" name="last_name" placeholder="Enter Last Name" value="<?php echo $users[0]->last_name;?>"> <span class="red"><?php echo form_error('last_name'); ?></span> 
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2">Email * </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="email" placeholder="Enter Email" value="<?php echo $users[0]->email;?>"> <span class="red"><?php echo form_error('email'); ?></span> </div>
+                                        <inp ut type="text" class="form-control" name="email" placeholder="Enter Email" value="<?php echo $users[0]->email;?>"> <span class="red"><?php echo form_error('email'); ?></span> 
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2">Date of Birth : </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control date" name="date_of_birth" id="date_of_birth" value="<?php echo $users[0]->date_of_birth;?>"> <span class="red"><?php echo form_error('email'); ?></span> </div>
+                                        <input type="text" class="form-control date" name="date_of_birth" id="date_of_birth" value="<?php echo $users[0]->date_of_birth;?>"> <span class="red"><?php echo form_error('date_of_birth'); ?></span>
+                                    </div>
                                 </div>
                                 
                                 <div class="form-group">
@@ -62,7 +65,7 @@
                                         </textarea> <span class="red"><?php echo form_error('address'); ?></span> </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2">Profile Pic: </label>
+                                    <label class="col-md-2">Profile Pic : </label>
                                     <div class="col-lg-6">
                                         <input type="file" name="image" class="form-control"> <span class="red"><?php echo form_error('address'); ?></span> </div>
                                 </div>

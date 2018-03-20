@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <?php if(!empty($post[0])){?>
-                            <form role="form" method="post" action="<?php echo base_url('admin/post/'.$post[0]->id) ?>" class="registration_form12" enctype="multipart/form-data">
+                            <form role="form" method="post" action="<?php echo base_url('admin/post/'.$post[0]->id) ?>" class="registration_form1" enctype="multipart/form-data">
                                 <?php }else{?>
                                 <form role="form" method="post" action="<?php echo base_url('admin/post') ?>" class="registration_form1" enctype="multipart/form-data">
                                     <?php }?>
@@ -58,7 +58,7 @@
                                                             <input type="radio" name="status" value="0" <?php if(!empty($post[0]) && $post[0]->is_active==0){ echo 'checked';}?>>Inactive
                                                         </label>
                                                     </div>
-                                                    <span class="red"><?php echo form_error('module_id'); ?></span>
+                                                    <span class="red"><?php echo form_error('status'); ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -70,9 +70,9 @@
                                         <div class="en_div">English</div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="col-md-3">Post Title* </label>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="en_post_title" name="en_post_title" class="form-control" value="<?php if(!empty($post[0])){ echo $post[0]->en_post_title;}else{ echo set_value('en_post_title');} ?>">
+                                                <label class="col-md-2">Post Title* </label>
+                                                <div class="col-md-10">
+                                                    <input type="text" id="en_post_title" name="en_post_title" class="form-control" value="<?php if(!empty($post[0])){ echo $post[0]->en_post_title;}else{ echo set_value('en_post_title');} ?>" placeholder="Post title in English">
                                                     <span class="red"><?php echo form_error('en_post_title'); ?></span>
                                                 </div>
                                             </div>
@@ -80,8 +80,8 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="col-md-3">Post* </label>
-                                                <div class="col-md-9">
+                                                <label class="col-md-2">Post* </label>
+                                                <div class="col-md-10">
                                                     <textarea class="form-control" rows="8" id="en_post" name="en_post" placeholder="Post"><?php if(!empty($post[0])){ echo $post[0]->en_post;}else{ echo set_value('en_post'); }?>
                                                 </textarea> <span class="red"><?php echo form_error('en_post'); ?></span>
                                                     <script type="text/javascript">
@@ -97,9 +97,9 @@
                                         <div class="en_div">Hindi</div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="col-md-3">Post Title* </label>
-                                                <div class="col-md-9">
-                                                    <input type="text" name="hi_post_title" id="hi_post_title" class="form-control" value="<?php if(!empty($post[0])){ echo $post[0]->hi_post_title;}else{ echo set_value('hi_post_title');} ?>">
+                                                <label class="col-md-2">Post Title* </label>
+                                                <div class="col-md-10">
+                                                    <input type="text" name="hi_post_title" id="hi_post_title" class="form-control" value="<?php if(!empty($post[0])){ echo $post[0]->hi_post_title;}else{ echo set_value('hi_post_title');} ?>" placeholder="Post title in Hindi">
                                                     <span class="red"><?php echo form_error('hi_post_title'); ?></span>
                                                 </div>
                                             </div>
@@ -107,8 +107,8 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="col-md-3">Post* </label>
-                                                <div class="col-md-9">
+                                                <label class="col-md-2">Post* </label>
+                                                <div class="col-md-10">
                                                     <textarea class="form-control" rows="8" id="hi_post" name="hi_post" placeholder="about_us"><?php if(!empty($post[0])){ echo $post[0]->hi_post;}else{ echo set_value('hi_post'); }?>
                                                     </textarea> <span class="red"><?php echo form_error('hi_post'); ?></span>
                                                     <script type="text/javascript">

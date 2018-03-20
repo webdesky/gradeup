@@ -6,104 +6,138 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require APPPATH . '/libraries/REST_Controller.php';
 
-class Api extends REST_Controller 
 
-{   
-      function __construct() 
-      {
-         parent::__construct();
-      }
+
+class Api extends REST_Controller
+{
+    function __construct()
+    {
+        parent::__construct();
+    }
+    /*
+    Users signup service
+    */
     
-      /*get all modules*/
-      public function get_modules_get()
-      {
-        $where        = array(
-                    'is_active' => 1
-                );
-        $data = $this->model->getAllwhere('modules',$where);
-        if(!empty($data)){
-              $resp = array('code' => 'SUCCESS', 'message' => 'SUCCESS', 'response' => array('modules' => $data));   
-        }else{
-              $resp = array('code' => 'ERROR', 'message' => 'FAILURE');
+    public function get_modules_post()
+    {
+        $data = $this->model->getAll('modules');
+        if (!empty($data)) {
+            $resp = array(
+                'code' => SUCCESS,
+                'message' => 'SUCCESS',
+                'response' => array(
+                    'modules' => $data
+                )
+            );
+        } else {
+            $resp = array(
+                'code' => ERROR,
+                'message' => 'FAILURE'
+            );
         }
-              $this->response($resp);
-      }
-     
-      /*get all chapters*/
-      public function get_chapters_get()
-      {
-        $where        = array(
-                    'is_active' => 1
-                );
-        $data = $this->model->getAllwhere('chapters',$where);
-        if(!empty($data)){
-              $resp = array('code' => 'SUCCESS', 'message' => 'SUCCESS', 'response' => array('chapters' => $data));   
-        }else{
-              $resp = array('code' => 'ERROR', 'message' => 'FAILURE');
+        $this->response($resp);
+    }
+    
+    public function get_chapters_post()
+    {
+        $data = $this->model->getAll('chapters');
+        if (!empty($data)) {
+            $resp = array(
+                'code' => SUCCESS,
+                'message' => 'SUCCESS',
+                'response' => array('chapters' => $data)
+            );
+        } else {
+            $resp = array(
+                'code' => ERROR,
+                'message' => 'FAILURE'
+            );
         }
-              $this->response($resp);
-
-      }
-  
-      /*get all questions*/
-      public function get_questions_get()
-      {
-        $where        = array(
-                    'is_active' => 1
-                );
-        $data = $this->model->getAllwhere('questions',$where);
-        if(!empty($data)){
-               $resp = array('code' => 'SUCCESS', 'message' => 'SUCCESS', 'response' => array('questions' => $data));   
-        }else{
-               $resp = array('code' => 'ERROR', 'message' => 'FAILURE');
+        $this->response($resp);
+    }
+    
+    public function get_posts_post()
+    {
+        $data = $this->model->getAll('post');
+        if (!empty($data)) {
+            $resp = array(
+                'code' => SUCCESS,
+                'message' => 'SUCCESS',
+                'response' => array(
+                    'post' => $data
+                )
+            );
+        } else {
+            $resp = array(
+                'code' => ERROR,
+                'message' => 'FAILURE'
+            );
         }
-              $this->response($resp);
-      }
-
-      /*get all exams*/
-      public function get_exams_get()
-      {
-       
-        $where        = array(
-                    'is_active' => 1
-                );
-        $data= $this->model->getAllwhere('exam',$where);
-        if(!empty($data)){
-               $resp = array('code' => 'SUCCESS', 'message' => 'SUCCESS', 'response' => array('exam' => $data));   
-        }else{
-               $resp = array('code' => 'ERROR', 'message' => 'FAILURE');
+        $this->response($resp);
+    }
+    
+    public function get_questions_post()
+    {
+        $data = $this->model->getAll('questions');
+        if (!empty($data)) {
+            $resp = array(
+                'code' => SUCCESS,
+                'message' => 'SUCCESS',
+                'response' => array(
+                    'questions' => $data
+                )
+            );
+        } else {
+            $resp = array(
+                'code' => ERROR,
+                'message' => 'FAILURE'
+            );
         }
-              $this->response($resp);
-      }
-       
-
-      /*get all settings*/
-      public function get_settings_get()
-      {
-      
+        $this->response($resp);
+    }
+    
+    
+    public function get_exams_post()
+    {
+        $data = $this->model->getAll('exam');
+        if (!empty($data)) {
+            $resp = array(
+                'code' => SUCCESS,
+                'message' => 'SUCCESS',
+                'response' => array(
+                    'exam' => $data
+                )
+            );
+        } else {
+            $resp = array(
+                'code' => ERROR,
+                'message' => 'FAILURE'
+            );
+        }
+        $this->response($resp);
+    }
+    
+    public function get_settings_post()
+    {        
         $data = $this->model->getAll('settings');
-        if(!empty($data)){
-               $resp = array('code' => 'SUCCESS', 'message' => 'SUCCESS', 'response' => array('settings' => $data));   
-          }else{
-               $resp = array('code' => 'ERROR', 'message' => 'FAILURE');
+        if (!empty($data)) {
+            $resp = array(
+                'code' => SUCCESS,
+                'message' => 'SUCCESS',
+                'response' => array(
+                    'settings' => $data
+                )
+            );
+        } else {
+            $resp = array(
+                'code' => ERROR,
+                'message' => 'FAILURE'
+            );
         }
-              $this->response($resp);
-      }
+        $this->response($resp);
+    }
+}
 
-      /*get all menu*/
-      public function get_menus_get()
-      {
-       $where        = array(
-                    'is_active' => 1
-                );
-       $data = $this->model->getAllwhere('menu',$where);
-       if(!empty($data)){
-               $resp = array('code' => 'SUCCESS', 'message' => 'SUCCESS', 'response' => array('menus' => $data));   
-        }else{
-               $resp = array('code' => 'ERROR', 'message' => 'FAILURE');
-        }
-              $this->response($resp);
-      }
 
       /*verify login*/
       public function verify_login_post()
