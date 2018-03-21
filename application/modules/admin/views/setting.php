@@ -28,7 +28,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2">Site Title * </label>
                                             <div class="col-md-10">
-                                                <input type="text" id="en_site_title" name="en_site_title" class="form-control" value="<?php echo  $setting[0]['en_site_title']?>">
+                                                <input type="text" id="en_site_title" name="en_site_title" class="form-control" value="<?php if(!empty($setting[0]['en_site_title'])){ echo  $setting[0]['en_site_title'];}?>">
                                                 <span class="red"><?php echo form_error('en_site_title'); ?></span> </div>
                                         </div>
                                     </div>
@@ -37,7 +37,7 @@
                                             <label class="col-md-2">Meta Tags * </label>
                                             <div class="col-md-10">
                                                 <input type="text" id="en_meta_tags" name="en_meta_tags" class="form-control" value="<?php echo  $setting[0]['en_meta_tags']?>">
-                                                <input type="hidden" id="id" name="id" class="form-control" value="<?php echo  $setting[0]['id']?>">
+                                                <input type="hidden" id="id" name="id" class="form-control" value="<?php if(!empty($setting[0]['id'])) { echo  $setting[0]['id'];}?>">
                                                 <span class="red"><?php echo form_error('en_meta_tags'); ?></span> </div>
                                         </div>
                                     </div>
@@ -45,7 +45,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2">CopyRight * </label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="5" id="en_copyright" name="en_copyright" placeholder="copyright"><?php echo  $setting[0]['en_copyright']?>
+                                                <textarea class="form-control" rows="5" id="en_copyright" name="en_copyright" placeholder="copyright"><?php if(!empty($setting[0]['en_copyright'])){ echo  $setting[0]['en_copyright'];}?>
                                                 </textarea> <span class="red"><?php echo form_error('en_copyright'); ?></span>
                                                 <script type="text/javascript">
                                                     CKEDITOR.replace('en_copyright');
@@ -55,13 +55,10 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-md-2">Contact Us * </label>
+                                            <label class="col-md-2">Site Phone * </label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="5" id="en_contact_us" name="en_contact_us" placeholder="contact_us"><?php echo  $setting[0]['en_contact_us']?>
-                                                </textarea> <span class="red"><?php echo form_error('en_contact_us'); ?></span>
-                                                <script type="text/javascript">
-                                                    CKEDITOR.replace('en_contact_us');
-                                                </script>
+                                                <input type="text" class="form-control" name="contact_us_phone" placeholder="987-654-321" value="<?php if(!empty($setting[0]['contact_us_phone'])){ echo  $setting[0]['contact_us_phone'];}?>">
+                                                <span class="red"><?php echo form_error('contact_us_phone'); ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -70,6 +67,34 @@
                                             <label class="col-md-2">Favicon Icon * </label>
                                             <div class="col-md-10">
                                                 <input type="file" name="favicon_icon" class="form-control">
+                                                <span class="red"><?php echo form_error('favicon_icon'); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2">Twitter Url * </label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="tw_url" class="form-control" value="<?php if(!empty($setting[0]['twitter_url'])){ echo  $setting[0]['twitter_url'];}?>">
+                                                <span class="red"><?php echo form_error('tw_url'); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2">Insta Url * </label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="insta_url" class="form-control" value="<?php if(!empty($setting[0]['insta_url'])){ echo  $setting[0]['insta_url'];}?>">
+                                                <span class="red"><?php echo form_error('insta_url'); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2">Linkedin Url * </label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="linkedin_url" class="form-control" value="<?php if(!empty($setting[0]['linkedin_url'])){ echo  $setting[0]['linkedin_url'];}?>">
+                                                <span class="red"><?php echo form_error('linkedin_url'); ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +105,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2">Site Title * </label>
                                             <div class="col-md-10">
-                                                <input type="text" id="hi_site_title" name="hi_site_title" class="form-control" value="<?php echo  $setting[0]['hi_site_title']?>">
+                                                <input type="text" id="hi_site_title" name="hi_site_title" class="form-control" value="<?php if(!empty($setting[0]['hi_site_title'])){ echo $setting[0]['hi_site_title'];}?>">
                                                 <span class="red"><?php echo form_error('hi_site_title'); ?></span> </div>
                                         </div>
                                     </div>
@@ -89,7 +114,8 @@
                                         <div class="form-group">
                                             <label class="col-md-2">Meta Tags * </label>
                                             <div class="col-md-10">
-                                                <input type="text" id="hi_meta_tags" name="hi_meta_tags" class="form-control" value="<?php echo  $setting[0]['hi_meta_tags']?>">
+                                                <input type="text" id="hi_meta_tags" name="hi_meta_tags" class="form-control" value="<?php 
+                                                if(!empty($setting[0]['hi_meta_tags'])){ echo  $setting[0]['hi_meta_tags'];}?>">
                                                 <span class="red"><?php echo form_error('hi_meta_tags'); ?></span> </div>
                                         </div>
                                     </div>
@@ -98,7 +124,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2">CopyRight * </label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="5" id="hi_copyright" name="hi_copyright" placeholder="copyright"><?php echo  $setting[0]['hi_copyright']?>
+                                                <textarea class="form-control" rows="5" id="hi_copyright" name="hi_copyright" placeholder="copyright"><?php if(!empty($setting[0]['hi_copyright'])){ echo  $setting[0]['hi_copyright'];}?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_copyright'); ?></span>
                                                 <script type="text/javascript">
                                                     CKEDITOR.replace('hi_copyright');
@@ -110,13 +136,10 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-md-2">Contact Us * </label>
+                                            <label class="col-md-2">Site Email * </label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="5" id="hi_contact_us" name="hi_contact_us" placeholder="contact_us"><?php echo  $setting[0]['hi_contact_us']?>
-                                                </textarea> <span class="red"><?php echo form_error('hi_contact_us'); ?></span>
-                                                <script type="text/javascript">
-                                                    CKEDITOR.replace('hi_contact_us');
-                                                </script>
+                                                <input type="text" class="form-control" name="contact_us_email" placeholder="contact@gmail.com" value="<?php if(!empty($setting[0]['contact_us_email'])) { echo  $setting[0]['contact_us_email'];}?>">
+                                                <span class="red"><?php echo form_error('contact_us_email'); ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -126,6 +149,24 @@
                                             <label class="col-md-2">Site Logo * </label>
                                             <div class="col-md-10">
                                                 <input type="file" name="site_logo" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2">Fb Url * </label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="fb_url" class="form-control" value="<?php if(!empty($setting[0]['fb_url'])) { echo  $setting[0]['fb_url'];}?>">
+                                                <span class="red"><?php echo form_error('fb_url'); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2">Google+ Url * </label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="gplus_url" class="form-control" value="<?php if(!empty($setting[0]['gplus_url'])){ echo  $setting[0]['gplus_url'];}?>">
+                                                <span class="red"><?php echo form_error('gplus_url'); ?></span>
                                             </div>
                                         </div>
                                     </div>

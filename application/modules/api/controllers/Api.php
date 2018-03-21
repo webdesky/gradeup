@@ -265,10 +265,11 @@ class Api extends REST_Controller
             $resp = array('code' => 'ERROR', 'message' => 'Invalid Old Password');
             $this->response($resp); 
         }
-        $data        = array(
-                    
-                    'password'  => $new_password
-                );
+
+        $data   = array(
+            'password' => $new_password
+        );
+
         $result = $this->model->updateFields('users', $data, $where);
        
         /* Response array */
@@ -388,6 +389,7 @@ class Api extends REST_Controller
             $resp = array('code' => 'SUCCESS', 'message' => 'SUCCESS', 'response' => array('Sub_Menu' => $userData));   
             $this->response($resp); 
         }
+
       }
 
       public function getquestionbychapter_get()
@@ -402,5 +404,6 @@ class Api extends REST_Controller
             
         }
       }
+
 }
 ?>

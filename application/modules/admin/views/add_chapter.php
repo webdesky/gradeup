@@ -92,7 +92,6 @@ $(document).ready(function() {
     $(".registration_form1").validate({
         rules: {
             "module_name": "required",
-
         },
         submitHandler: function(form) {
             form.submit();
