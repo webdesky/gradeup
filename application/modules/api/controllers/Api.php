@@ -252,7 +252,6 @@ class Api extends REST_Controller
             $this->response($resp);
         }
         $data   = array(
-            
             'password' => $new_password
         );
         $result = $this->model->updateFields('users', $data, $where);
@@ -417,7 +416,6 @@ class Api extends REST_Controller
             'chapter_id' => $chapter_id
         );
         $data       = $this->model->getAllwhere('exam', $where);
-        
     }
 }
 ?>

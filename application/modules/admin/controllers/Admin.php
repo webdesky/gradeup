@@ -87,25 +87,35 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
+                $en_site_title    = $this->input->post('en_site_title');
+                $hi_site_title    = $this->input->post('hi_site_title');
+                $en_meta_tags     = $this->input->post('en_meta_tags');
+                $en_copyright     = $this->input->post('en_copyright');
+                $contact_us_phone = $this->input->post('contact_us_phone');
+                $hi_meta_tags     = $this->input->post('hi_meta_tags');
+                $hi_copyright     = $this->input->post('hi_copyright');
+                $contact_us_email = $this->input->post('contact_us_email');
+                $tw_url           = $this->input->post('tw_url');
+                $insta_url        = $this->input->post('insta_url');
+                $linkedin_url     = $this->input->post('linkedin_url');
+                $fb_url           = $this->input->post('fb_url');
+                $gplus_url        = $this->input->post('gplus_url');
                 
-                $en_site_title = $this->input->post('en_site_title');
-                $hi_site_title = $this->input->post('hi_site_title');
-                $en_meta_tags  = $this->input->post('en_meta_tags');
-                $en_copyright  = $this->input->post('en_copyright');
-                $en_contact_us = $this->input->post('en_contact_us');
-                $hi_meta_tags  = $this->input->post('hi_meta_tags');
-                $hi_copyright  = $this->input->post('hi_copyright');
-                $hi_contact_us = $this->input->post('hi_contact_us');
                 
                 $data = array(
                     'en_site_title' => $en_site_title,
                     'en_meta_tags' => $en_meta_tags,
                     'en_copyright' => $en_copyright,
-                    'en_contact_us' => $en_contact_us,
+                    'contact_us_phone' => $contact_us_phone,
                     'hi_site_title' => $hi_site_title,
                     'hi_meta_tags' => $hi_meta_tags,
                     'hi_copyright' => $hi_copyright,
-                    'hi_contact_us' => $hi_contact_us,
+                    'contact_us_email' => $contact_us_email,
+                    'twitter_url' => $tw_url,
+                    'insta_url' => $insta_url,
+                    'linkedin_url' => $linkedin_url,
+                    'fb_url' => $fb_url,
+                    'gplus_url' => $gplus_url,
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
@@ -140,8 +150,6 @@ class Admin extends CI_Controller
                     'id' => $this->input->post('id')
                 );
                 $result = $this->model->updateFields('settings', $data, $where);
-                //$result = $this->model->insertData('setting', $data);
-                //$this->message_list();
                 redirect('admin/setting');
             }
             
@@ -453,9 +461,6 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('menu_id', 'Menu Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-
-
-
             if (!empty($id)) {
                 
                 $where            = array(
@@ -471,7 +476,7 @@ class Admin extends CI_Controller
                     'is_active' => 1
                 );
                 $data['menu'] = $this->model->getAllwhere('menu', $where);
-
+                
             }
             $data['body'] = 'add_sub_menu';
             $this->controller->load_view($data);
@@ -557,6 +562,99 @@ class Admin extends CI_Controller
             $this->form_validation->set_message('check_database', 'Invalid Credentials ! Please try again with valid username and password');
             return false;
         }
+    }
+    
+    public function super_sub_menu($id = null)
+    {
+        $this->form_validation->set_rules('sub_menu_id', 'Sub Menu Name', 'trim|required|numeric');
+        $this->form_validation->set_rules('en_sub_menu_name', 'Super Sub Menu Name in English', 'trim|required');
+        $this->form_validation->set_rules('hi_sub_menu_name', 'Super Sub Menu Name in Hindi', 'trim|required');
+        $this->form_validation->set_rules('status', 'Status', 'trim|required');
+        
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            if (!empty($id)) {
+                $where     = array(
+                    'super_sub_menu.id' => $id
+                );
+                $field_val = 'super_sub_menu.en_super_sub_menu,super_sub_menu.is_active,super_sub_menu.hi_super_sub_menu,super_sub_menu.id as super_sub_menu_id,sub_menu.en_sub_menu_name,sub_menu.created_at,sub_menu.menu_id,sub_menu.id as sub_menu_id';
+                
+                $data['super_sub_menu'] = $this->model->GetJoinRecord('super_sub_menu', 'sub_menu_id', 'sub_menu', 'id', $field_val, $where);
+                
+                
+                $where = array(
+                    'id' => $data['super_sub_menu'][0]->menu_id
+                );
+                
+                $select = 'en_menu_name';
+                
+                $menu_name = $this->model->getAllwhere('menu', $where, $select);
+                
+                $data['super_sub_menu'][0]->menu_name = $menu_name[0]->en_menu_name;
+                
+                $data['menu'] = $this->model->getAllwhere('menu');
+                
+            } else {
+                $where        = array(
+                    'is_active' => 1
+                );
+                $data['menu'] = $this->model->getAllwhere('menu', $where);
+                
+            }
+            $data['body'] = 'add_super_sub_menu';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                
+                $sub_menu_id      = $this->input->post('sub_menu_id');
+                $en_sub_menu_name = $this->input->post('en_sub_menu_name');
+                $hi_sub_menu_name = $this->input->post('hi_sub_menu_name');
+                $is_active        = $this->input->post('status');
+                
+                $data = array(
+                    'sub_menu_id' => $sub_menu_id,
+                    'en_super_sub_menu' => $en_sub_menu_name,
+                    'hi_super_sub_menu' => $hi_sub_menu_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
+                );
+                
+                
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('super_sub_menu', $data, $where);
+                } else {
+                    $result = $this->model->insertData('super_sub_menu', $data);
+                }
+                
+                $this->super_submenuList();   
+            }
+        }
+        
+    }
+    public function super_submenuList()
+    {
+        
+        $field_val = 'super_sub_menu.en_super_sub_menu,super_sub_menu.hi_super_sub_menu,super_sub_menu.id as super_sub_menu_id,super_sub_menu.is_active,sub_menu.en_sub_menu_name,sub_menu.created_at,sub_menu.menu_id';
+        
+        $data['super_sub_menu'] = $this->model->GetJoinRecord('super_sub_menu', 'sub_menu_id', 'sub_menu', 'id', $field_val);
+        
+        $where = array(
+            'id' => $data['super_sub_menu'][0]->menu_id
+        );
+        
+        $select = 'en_menu_name';
+        
+        $menu_name = $this->model->getAllwhere('menu', $where, $select);
+        
+        $data['super_sub_menu'][0]->menu_name = $menu_name[0]->en_menu_name;
+        
+        $data['body'] = 'super_sub_menu_list';
+        $this->controller->load_view($data);
     }
     
     public function training($id = null)
@@ -1317,10 +1415,10 @@ class Admin extends CI_Controller
         $id     = $this->input->get('id');
         $table  = $this->input->get('table');
         $field  = $this->input->get('field');
+        $select = $this->input->get('select');
         $where  = array(
             "$field" => $id
         );
-        $select = 'id, name';
         $states = $this->model->getAllwhere($table, $where, $select);
         echo json_encode($states);
     }

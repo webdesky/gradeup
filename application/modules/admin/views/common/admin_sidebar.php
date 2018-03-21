@@ -115,39 +115,45 @@
                         </ul>
                     </li>
 
-                    <!-- <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<?php //echo base_url('admin/menu')?>">Add Menu</a>
+                                <a href="<?php echo base_url('admin/menu')?>">Add Menu</a>
                             </li>
                             <li>
-                                <a href="<?php //echo base_url('admin/menuList')?>">Menu List</a>
+                                <a href="<?php echo base_url('admin/menuList')?>">Menu List</a>
                             </li>
                             <li>
-                                <a href="<?php //echo base_url('admin/sub_menu')?>">Add Sub Menu</a>
+                                <a href="<?php echo base_url('admin/sub_menu')?>">Add Sub Menu</a>
                             </li>
                             <li>
-                                <a href="<?php //echo base_url('admin/submenuList')?>">Sub Menu List</a>
+                                <a href="<?php echo base_url('admin/submenuList')?>">Sub Menu List</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/super_sub_menu')?>">Add SuperSub Menu</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/super_submenuList')?>">SuperSub Menu List</a>
                             </li>
                         </ul>
                     </li>
-                    <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
+                    <!-- <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<?php //echo base_url('admin/chapter')?>">Add Chapter</a>
+                                <a href="<?php echo base_url('admin/chapter')?>">Add Chapter</a>
                             </li>
                             <li>
-                                <a href="<?php //echo base_url('admin/chapterList')?>">Chapter List</a>
+                                <a href="<?php echo base_url('admin/chapterList')?>">Chapter List</a>
                             </li>
                         </ul>
                     </li>
                     <li> <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Training Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<?php //echo base_url('admin/training')?>">Add Training</a>
+                                <a href="<?php echo base_url('admin/training')?>">Add Training</a>
                             </li>
                             <li>
-                                <a href="<?php //echo base_url('admin/trainingList')?>">Training List</a>
+                                <a href="<?php echo base_url('admin/trainingList')?>">Training List</a>
                             </li>
                         </ul>
                     </li>
@@ -155,20 +161,20 @@
                         <ul class="nav nav-second-level">
 
                             <li>
-                                <a href="<?php //echo base_url('admin/question')?>">Add Question</a>
+                                <a href="<?php echo base_url('admin/question')?>">Add Question</a>
                             </li>
                             <li>
-                                <a href="<?php //echo base_url('admin/questionList')?>">Question List</a>
+                                <a href="<?php echo base_url('admin/questionList')?>">Question List</a>
                             </li>
                         </ul>
                     </li>
                     <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Exam Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<?php //echo base_url('admin/exam')?>">Add Exam</a>
+                                <a href="<?php echo base_url('admin/exam')?>">Add Exam</a>
                             </li>
                             <li>
-                                <a href="<?php //echo base_url('admin/examList')?>">Exam List</a>
+                                <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
                             </li>
                         </ul>
                     </li>  -->

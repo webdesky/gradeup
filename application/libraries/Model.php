@@ -114,7 +114,7 @@ class Model
         }
     }
     
-    public function getAllwhere($table, $where = '', $select = 'all',$order_fld = '', $order_type = '',  $limit = '', $offset = '')
+    public function getAllwhere($table, $where = '', $select = '',$order_fld = '', $order_type = '',  $limit = '', $offset = '')
     {
         if ($order_fld != '' && $order_type != '') {
             $this->CI->db->order_by($order_fld, $order_type);
@@ -221,7 +221,7 @@ class Model
     
     public function GetJoinRecordNew($table, $field_first, $tablejointo, $field_second, $tablejointhree, $field_third,$tablejoinfour, $field_four, $field, $value, $field_val)
     {
-        $this->db->cache_on();
+        //$this->db->cache_on();
         $this->CI->db->select("$field_val");
         $this->CI->db->from("$table");
         $this->CI->db->join("$tablejointo", "$tablejointo.$field_second = $table.$field_first");
@@ -238,7 +238,7 @@ class Model
         //$this->db->group_by("$table.$field_first");
         $this->CI->db->limit(1);
         $q = $this->CI->db->get();
-        $this->db->cache_off();
+        //$this->db->cache_off();
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $rows) {
                 $data[] = $rows;
