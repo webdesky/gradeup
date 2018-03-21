@@ -18,7 +18,6 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <form role="form" method="post" action="<?php if(isset($chapter)){ echo base_url('admin/chapter/'.$chapter[0]->ids); }else{ echo base_url('admin/chapter'); }?>" class="registration_form1" enctype="multipart/form-data">
-
                                 <div class="col-md-6">
                                     <div class="col-md-12">
                                         <div class="form-group">
