@@ -123,6 +123,28 @@ class Api extends REST_Controller
         $this->response($resp);
     }
     
+    /*Get All Menus*/
+    public function get_menus()
+    {
+      $data = $this->model->getAll('menu');
+      if (!empty($data)) 
+      {
+          $resp = array(
+                'code'      => SUCCESS,
+                'message'   => 'SUCCESS',
+                'response'  => array(
+                'menu'      => $data
+                )
+            );
+      }else{
+          $resp = array(
+                'code'      => ERROR,
+                'message'   => 'FAILURE'
+            );
+      }
+        $this->response($resp);
+    }
+
     /*Get Website Settings*/
     public function get_settings_get()
     {        
