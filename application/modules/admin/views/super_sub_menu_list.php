@@ -33,7 +33,7 @@
                                     </thead>
                                     <tbody>
                                         <?php if(!empty($super_sub_menu)){ ?>
-                                        <?php $i=1; foreach($super_sub_menu as $sub_menu){?>
+                                        <?php $i=1; foreach($super_sub_menu as $sub_menu){ ?>
                                         <tr id="tr_<?php echo $i;?>">
                                             <td>
                                                 <?php echo $i; ?> </td>

@@ -643,16 +643,20 @@ class Admin extends CI_Controller
         $field_val = 'super_sub_menu.en_super_sub_menu,super_sub_menu.hi_super_sub_menu,super_sub_menu.id as super_sub_menu_id,super_sub_menu.is_active,sub_menu.en_sub_menu_name,sub_menu.created_at,sub_menu.menu_id';
         
         $data['super_sub_menu'] = $this->model->GetJoinRecord('super_sub_menu', 'sub_menu_id', 'sub_menu', 'id', $field_val);
-        
-        $where = array(
-            'id' => $data['super_sub_menu'][0]->menu_id
-        );
-        
-        $select = 'en_menu_name';
-        
-        $menu_name = $this->model->getAllwhere('menu', $where, $select);
-        
-        $data['super_sub_menu'][0]->menu_name = $menu_name[0]->en_menu_name;
+
+
+        for ($i=0; $i <count($data['super_sub_menu']) ; $i++) { 
+            $where = array(
+                'id' => $data['super_sub_menu'][$i]->menu_id
+            );
+            
+            $select = 'en_menu_name';
+            
+            $menu_name = $this->model->getAllwhere('menu', $where, $select);
+
+            $data['super_sub_menu'][$i]->menu_name = $menu_name[0]->en_menu_name;
+
+        }
         
         $data['body'] = 'super_sub_menu_list';
         $this->controller->load_view($data);
