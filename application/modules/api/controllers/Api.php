@@ -14,129 +14,136 @@ class Api extends REST_Controller
     {
         parent::__construct();
     }
-    /*
-    Users signup service
-    */
     
-    public function get_modules_post()
+    /*Get All Modules*/
+    public function get_modules_get()
     {
-        $data = $this->model->getAll('modules');
-        if (!empty($data)) {
-            $resp = array(
-                'code' => SUCCESS,
-                'message' => 'SUCCESS',
-                'response' => array(
-                    'modules' => $data
+      $data = $this->model->getAll('modules');
+      if (!empty($data)) 
+      {
+        $resp = array(
+                'code'      => 'SUCCESS',
+                'message'   => 'SUCCESS',
+                'response'  => array(
+                'modules'   => $data
                 )
             );
-        } else {
-            $resp = array(
-                'code' => ERROR,
+      }else{
+        $resp = array(
+                'code'    => ERROR,
                 'message' => 'FAILURE'
             );
-        }
+      }
         $this->response($resp);
     }
     
-    public function get_chapters_post()
+    /*Get All Chapters*/
+    public function get_chapters_get()
     {
         $data = $this->model->getAll('chapters');
-        if (!empty($data)) {
+        if (!empty($data)) 
+        {
             $resp = array(
-                'code' => SUCCESS,
-                'message' => 'SUCCESS',
-                'response' => array('chapters' => $data)
+                'code'      => 'SUCCESS',
+                'message'   => 'SUCCESS',
+                'response'  => array('chapters' => $data)
             );
-        } else {
-            $resp = array(
-                'code' => ERROR,
-                'message' => 'FAILURE'
+        }else{
+            $resp  = array(
+                'code'      => 'ERROR',
+                'message'   => 'FAILURE'
             );
         }
-        $this->response($resp);
+          $this->response($resp);
     }
     
-    public function get_posts_post()
+    /*Get All Posts*/
+    public function get_posts_get()
     {
-        $data = $this->model->getAll('post');
-        if (!empty($data)) {
+      $data = $this->model->getAll('post');
+      if (!empty($data)) 
+      {
             $resp = array(
-                'code' => SUCCESS,
-                'message' => 'SUCCESS',
-                'response' => array(
-                    'post' => $data
+                'code'      => 'SUCCESS',
+                'message'   => 'SUCCESS',
+                'response'  => array(
+                    'post'  => $data
                 )
             );
-        } else {
+      }else{
             $resp = array(
-                'code' => ERROR,
-                'message' => 'FAILURE'
+                'code'      => 'ERROR',
+                'message'   => 'FAILURE'
             );
-        }
+      }
         $this->response($resp);
     }
     
-    public function get_questions_post()
+    /*Get All Questions*/
+    public function get_questions_get()
     {
-        $data = $this->model->getAll('questions');
-        if (!empty($data)) {
+      $data = $this->model->getAll('questions');
+      if (!empty($data)) 
+      {
             $resp = array(
-                'code' => SUCCESS,
-                'message' => 'SUCCESS',
-                'response' => array(
-                    'questions' => $data
+                'code'      => 'SUCCESS',
+                'message'   => 'SUCCESS',
+                'response'  => array(
+                'questions' => $data
                 )
             );
-        } else {
+      }else{
             $resp = array(
-                'code' => ERROR,
+                'code'    => 'ERROR',
                 'message' => 'FAILURE'
             );
-        }
+      }
         $this->response($resp);
     }
     
-    
-    public function get_exams_post()
+    /*Get All Exams*/
+    public function get_exams_get()
     {
-        $data = $this->model->getAll('exam');
-        if (!empty($data)) {
-            $resp = array(
-                'code' => SUCCESS,
-                'message' => 'SUCCESS',
-                'response' => array(
-                    'exam' => $data
+      $data = $this->model->getAll('exam');
+      if (!empty($data)) 
+      {
+          $resp = array(
+                'code'      => SUCCESS,
+                'message'   => 'SUCCESS',
+                'response'  => array(
+                'exam'      => $data
                 )
             );
-        } else {
-            $resp = array(
-                'code' => ERROR,
-                'message' => 'FAILURE'
+      }else{
+          $resp = array(
+                'code'      => ERROR,
+                'message'   => 'FAILURE'
             );
-        }
+      }
         $this->response($resp);
     }
     
-    public function get_settings_post()
+    /*Get Website Settings*/
+    public function get_settings_get()
     {        
         $data = $this->model->getAll('settings');
         if (!empty($data)) {
             $resp = array(
-                'code' => SUCCESS,
-                'message' => 'SUCCESS',
-                'response' => array(
-                    'settings' => $data
+                'code'          => 'SUCCESS',
+                'message'       => 'SUCCESS',
+                'response'      => array(
+                'settings'      => $data
                 )
             );
         } else {
             $resp = array(
-                'code' => ERROR,
+                'code'    => 'ERROR',
                 'message' => 'FAILURE'
             );
         }
         $this->response($resp);
     }
-}
+
 
 
       /*verify login*/
@@ -255,7 +262,7 @@ class Api extends REST_Controller
 
         $user_id      = $this->input->get('user_id');
        
-        $where       = array(
+        $where        = array(
                     'is_active' => 1,
                     'id'        =>  $user_id
                 );
@@ -363,14 +370,15 @@ class Api extends REST_Controller
 
       public function getquestionbychapter_get()
       {
-         $chapter_id      = $this->input->get('chapter_id');
-         $where        = array(
+        $chapter_id      = $this->input->get('chapter_id');
+        $where           = array(
                     'is_active'  => 1,
                     'chapter_id' => $chapter_id
                 );
         $data = $this->model->getAllwhere('exam',$where);
-       
-
+        foreach ($data as $key => $value) {
+            
+        }
       }
 }
 ?>
