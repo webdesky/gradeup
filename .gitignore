@@ -1,6 +1,6 @@
 !.gitignore
 /application/config/*
-application/config/database.php
+/application/config/database.php
 /application/cache/*
 /application/core/*
 /application/helpers/*
@@ -13,5 +13,6 @@ application/config/database.php
 /application/third_party/*
 /application/views/*
 /system/*
+*/config/*.php
 
 

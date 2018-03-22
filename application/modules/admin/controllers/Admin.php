@@ -594,7 +594,8 @@ class Admin extends CI_Controller
                 $data['super_sub_menu'][0]->menu_name = $menu_name[0]->en_menu_name;
                 
                 $data['menu'] = $this->model->getAllwhere('menu');
-                
+
+                    
             } else {
                 $where        = array(
                     'is_active' => 1
@@ -645,6 +646,7 @@ class Admin extends CI_Controller
         $data['super_sub_menu'] = $this->model->GetJoinRecord('super_sub_menu', 'sub_menu_id', 'sub_menu', 'id', $field_val);
 
 
+
         for ($i=0; $i <count($data['super_sub_menu']) ; $i++) { 
             $where = array(
                 'id' => $data['super_sub_menu'][$i]->menu_id
@@ -658,10 +660,134 @@ class Admin extends CI_Controller
 
         }
         
+
         $data['body'] = 'super_sub_menu_list';
         $this->controller->load_view($data);
     }
     
+
+     public function super_sub_menu_post($id = null)
+    {
+        $this->form_validation->set_rules('menu_id', ' Menu Name', 'trim|required|numeric');
+        $this->form_validation->set_rules('sub_menu_id', 'Sub Menu Name', 'trim|required|numeric');
+        $this->form_validation->set_rules('super_sub_menu_id', 'Super Sub Menu Name', 'trim|required|numeric');
+        $this->form_validation->set_rules('en_post', 'Super Sub Menu Post in English', 'trim|required');
+        $this->form_validation->set_rules('hi_post', 'Super Sub Menu Post in Hindi', 'trim|required');
+        $this->form_validation->set_rules('status', 'Status', 'trim|required');
+        
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            if (!empty($id)) {
+                $where     = array(
+                    'super_sub_menu_post.id' => $id
+                );
+                $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.en_post,menu.id as menu_id,menu.en_menu_name,super_sub_menu_post.sub_menu_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post';
+        
+               $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'menu_id', 'menu', 'id', $field_val,$where);
+                
+                
+                $where = array(
+                    'id' => $data['super_sub_menu_post'][0]->sub_menu_id
+                );
+                
+                $select = 'en_sub_menu_name';
+                
+                $sub_menu_name = $this->model->getAllwhere('sub_menu', $where, $select);
+                
+                $data['super_sub_menu_post'][0]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
+                
+                  $where1 = array(
+                    'id' => $data['super_sub_menu_post'][0]->super_sub_menu_id
+                );
+                
+                $select1 = 'en_super_sub_menu';
+                $super_sub_menu_name = $this->model->getAllwhere('super_sub_menu', $where1, $select1);
+                
+                $data['super_sub_menu_post'][0]->super_sub_menu_name = $super_sub_menu_name[0]->en_super_sub_menu;
+                $data['menu'] = $this->model->getAllwhere('menu');
+
+            } else {
+                $where        = array(
+                    'is_active' => 1
+                );
+
+                $data['menu'] = $this->model->getAllwhere('menu', $where);
+                
+            }
+            $data['body'] = 'add_super_sub_menu_post';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                $menu_id            = $this->input->post('menu_id');
+                $sub_menu_id        = $this->input->post('sub_menu_id');
+                $super_sub_menu_id  = $this->input->post('super_sub_menu_id');
+                $en_post            = $this->input->post('en_post');
+                $hi_post            = $this->input->post('hi_post');
+                $is_active          = $this->input->post('status');
+                
+                $data = array(
+                    'menu_id'           =>  $menu_id,
+                    'sub_menu_id'       => $sub_menu_id,
+                    'super_sub_menu_id' => $super_sub_menu_id,
+                    'en_post'           => $en_post,
+                    'hi_post'           => $hi_post,
+                    'is_active'         => $is_active,
+                    'created_at'        => date('Y-m-d H:i:s')
+                );
+                
+
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('super_sub_menu_post', $data, $where);
+                } else {
+                    $result = $this->model->insertData('super_sub_menu_post', $data);
+                }
+                
+                $this->super_submenupostList();   
+            }
+        }
+        
+    }
+
+    public function super_submenupostList(){
+
+         $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.en_post,menu.id as menu_id,menu.en_menu_name,super_sub_menu_post.sub_menu_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post';
+        
+        $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'menu_id', 'menu', 'id', $field_val);
+
+        // echo "<pre>";
+        // print_r($data);
+        // die;
+
+        for ($i=0; $i <count($data['super_sub_menu_post']) ; $i++) { 
+            $where = array(
+                'id' => $data['super_sub_menu_post'][$i]->sub_menu_id
+            );
+            
+            $select = 'en_sub_menu_name';
+
+           
+            $sub_menu_name  = $this->model->getAllwhere('sub_menu', $where, $select);
+            
+            $where1 = array(
+                'id' => $data['super_sub_menu_post'][$i]->super_sub_menu_id
+            );
+            
+            $select1 = 'en_super_sub_menu';
+            $super_sub_menu = $this->model->getAllwhere('super_sub_menu', $where1, $select1);
+            $data['super_sub_menu_post'][$i]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
+            $data['super_sub_menu_post'][$i]->super_sub_menu_name = $super_sub_menu[0]->en_super_sub_menu;
+        }
+        
+
+        
+        $data['body'] = 'super_sub_menu_post_list';
+        $this->controller->load_view($data);
+    }
     public function training($id = null)
     {
         
