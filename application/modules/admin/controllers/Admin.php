@@ -1293,14 +1293,14 @@ class Admin extends CI_Controller
                 );
                 
                 $config_mail = Array(
-                    'protocol' => 'smtp',
+                    'protocol'  => 'smtp',
                     'smtp_host' => 'ssl://smtp.googlemail.com',
                     'smtp_port' => '465',
                     'smtp_user' => 'webdeskytechnical@gmail.com',
                     'smtp_pass' => 'webdesky@2017',
-                    'mailtype' => 'html',
-                    'charset' => 'iso-8859-1',
-                    'newline' => "\r\n"
+                    'mailtype'  => 'html',
+                    'charset'   => 'iso-8859-1',
+                    'newline'   => "\r\n"
                 );
                 
                 $this->load->library('email', $config_mail);
@@ -1314,7 +1314,6 @@ class Admin extends CI_Controller
                 if (!$this->email->send()) {
                     show_error($this->email->print_debugger());
                 }
-                
                 $result = $this->model->insertData('mail', $data);
                 $this->mail_list();
             }
@@ -1441,7 +1440,7 @@ class Admin extends CI_Controller
             );
             $data['post'] = $this->model->getAllwhere('post', $where);
         }
-        $where           = array(
+        $where            = array(
             'is_active' => 1
         );
         $data['modules'] = $this->model->getAllwhere('modules', $where);
@@ -1493,7 +1492,6 @@ class Admin extends CI_Controller
             $data['modules'] = $this->model->getAllwhere('modules', $where);
             $field_val       = 'post.*,users.first_name,users.last_name';
             $data['post']    = $this->model->GetJoinRecord('post', 'added_by', 'users', 'id', $field_val);
-            // echo $this->db->last_query();
             $data['body']    = 'post_list';
             $this->controller->load_view($data);
         } else {
