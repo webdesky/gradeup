@@ -135,6 +135,13 @@
                             <li>
                                 <a href="<?php echo base_url('admin/super_submenuList')?>">SuperSub Menu List</a>
                             </li>
+
+                             <li>
+                                <a href="<?php echo base_url('admin/super_sub_menu_post')?>">Add SuperSub Menu Post</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/super_submenupostList')?>">SuperSub Menu Post List</a>
+                            </li>
                         </ul>
                     </li>
                     <!-- <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
