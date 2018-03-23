@@ -20,8 +20,8 @@
                         <?php //echo '<pre>'; print_r($super_sub_menu[0]);?>
                             <form role="form" method="post" action="<?php if(isset($super_sub_menu)){ echo base_url('admin/super_sub_menu/'.$super_sub_menu[0]->super_sub_menu_id); }else{ echo base_url('admin/super_sub_menu'); }?>" class="registration_form1" enctype="multipart/form-data">
 
-                                <div class="col-md-6">
-                                    <div class="col-md-12">
+                               
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3">Menu Name* </label>
                                             <div class="col-md-9">
@@ -36,7 +36,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3">SubMenu Name* </label>
                                             <div class="col-md-9">
@@ -49,7 +49,87 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    
+                               
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-3">Super Sub Menu Name* </label>
+                                            <div class="col-md-9">
+                                                <input class="form-control" type="text" name="en_sub_menu_name" id="en_sub_menu_name" placeholder="Super Sub Menu Name in English" autocomplete="off" required="required" value="<?php if(isset($super_sub_menu)){ echo $super_sub_menu[0]->en_super_sub_menu; } ?>"> <span class="red"><?php echo form_error('en_sub_menu_name'); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-3">Super Sub Menu Name* </label>
+                                            <div class="col-md-9">
+                                                <input class="form-control" type="text" name="hi_sub_menu_name" id="hi_sub_menu_name" placeholder="Super Sub Menu Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($super_sub_menu)){ echo $super_sub_menu[0]->hi_super_sub_menu; } ?>"> <span class="red"><?php echo form_error('hi_sub_menu_name'); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3">Url* </label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" name="url" id="url" placeholder="url" autocomplete="off" required="required" value="<?php if(isset($super_sub_menu)){ echo $super_sub_menu[0]->url; } ?>"> <span class="red"><?php echo form_error('url'); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3">Meta Title* </label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" name="meta_title" id="meta_title" placeholder="Meta Title" autocomplete="off" required="required" value="<?php if(isset($super_sub_menu)){ echo $super_sub_menu[0]->meta_title; } ?>"> <span class="red"><?php echo form_error('meta_title'); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="col-md-3">Meta Description</label>
+                                        <div class="col-md-9">
+                                            <textarea class="form-control" rows="8" id="meta_description" name="meta_description" placeholder="Meta Description">
+                                                <?php if(isset($super_sub_menu)){ echo $super_sub_menu[0]->meta_description; } ?>
+                                            </textarea> <span class="red"><?php echo form_error('meta_description'); ?></span>
+                                            <script type="text/javascript">
+                                            CKEDITOR.replace('meta_description');
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="col-md-3">Meta Keyword</label>
+                                        <div class="col-md-9">
+                                            <textarea class="form-control" rows="8" id="meta_keyword" name="meta_keyword" placeholder="Meta Description">
+                                                <?php if(isset($super_sub_menu)){ echo $super_sub_menu[0]->meta_keyword; } ?>
+                                            </textarea> <span class="red"><?php echo form_error('meta_keyword'); ?></span>
+                                            <script type="text/javascript">
+                                            CKEDITOR.replace('meta_keyword');
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="col-md-3">Category Image</label>
+                                        <div class="col-md-9">
+                                            <input type="file" name="category_image" id="category_image" class="form-control">
+                                            <span class="red"><?php echo form_error('category_image'); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="col-md-3">Banner Image</label>
+                                        <div class="col-md-9">
+                                            <input type="file" name="banner_image" id="banner_image" class="form-control">
+                                            <span class="red"><?php echo form_error('banner_image'); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3">Status* </label>
                                             <div class="col-md-9">
@@ -63,27 +143,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="col-md-3">Super Sub Menu Name* </label>
-                                            <div class="col-md-9">
-                                                <input class="form-control" type="text" name="en_sub_menu_name" id="en_sub_menu_name" placeholder="Super Sub Menu Name in English" autocomplete="off" required="required" value="<?php if(isset($super_sub_menu)){ echo $super_sub_menu[0]->en_super_sub_menu; } ?>"> <span class="red"><?php echo form_error('en_sub_menu_name'); ?></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="col-md-3">Super Sub Menu Name* </label>
-                                            <div class="col-md-9">
-                                                <input class="form-control" type="text" name="hi_sub_menu_name" id="hi_sub_menu_name" placeholder="Super Sub Menu Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($super_sub_menu)){ echo $super_sub_menu[0]->hi_super_sub_menu; } ?>"> <span class="red"><?php echo form_error('hi_sub_menu_name'); ?></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
                                 <div class="col-md-12" align="center">
                                     <button type="submit" value="Save" class="btn btn-success">Save</button>
