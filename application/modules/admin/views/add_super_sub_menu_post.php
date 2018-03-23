@@ -60,8 +60,8 @@
                                             <div class="col-md-9">
                                                 <select class="wide" name="super_sub_menu_id" id="super_sub_menu_id">
                                                     <?php if(isset($super_sub_menu_post) && !empty($super_sub_menu_post[0]->sub_menu_id)){?>
-                                                    <option value="<?php echo $super_sub_menu_post[0]->sub_menu_id?>">
-                                                        <?php echo $super_sub_menu_post[0]->super_sub_menu_name?>
+                                                    <option value="<?php echo $super_sub_menu_post[0]->super_sub_menu_id?>">
+                                                        <?php echo $super_sub_menu_post[0]->en_super_sub_menu?>
                                                     </option>
                                                     <?php }?>
                                                 </select>

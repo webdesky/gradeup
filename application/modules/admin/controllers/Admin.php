@@ -404,20 +404,43 @@ class Admin extends CI_Controller
         } else {
             if ($this->controller->checkSession()) {
                 
-                $module_id    = $this->input->post('module_id');
-                $en_menu_name = $this->input->post('en_menu_name');
-                $hi_menu_name = $this->input->post('hi_menu_name');
-                $is_active    = $this->input->post('status');
+                $module_id          = $this->input->post('module_id');
+                $en_menu_name       = $this->input->post('en_menu_name');
+                $hi_menu_name       = $this->input->post('hi_menu_name');
+                $url                = $this->input->post('url');
+                $meta_title         = $this->input->post('meta_title');
+                $meta_description   = $this->input->post('meta_description');
+                $meta_keyword       = $this->input->post('meta_keyword');
+                $is_active          = $this->input->post('status');
                 
                 $data = array(
-                    'module_id' => $module_id,
-                    'en_menu_name' => $en_menu_name,
-                    'hi_menu_name' => $hi_menu_name,
-                    'is_active' => $is_active,
-                    'created_at' => date('Y-m-d H:i:s')
+
+                    'module_id'         => $module_id,
+                    'en_menu_name'      => $en_menu_name,
+                    'hi_menu_name'      => $hi_menu_name,
+                    'url'               => $url,
+                    'meta_title'        => $meta_title,
+                    'meta_description'  => $meta_description,
+                    'meta_keyword'      => $meta_keyword,
+                    'is_active'         => $is_active,
+                    'created_at'        => date('Y-m-d H:i:s')
+
                 );
                 
-                
+                if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
+                    $count = count($_FILES['category_image']['name']);
+                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                                $data['category_image'] = $_FILES['category_image']['name'];
+                        }
+                }
+
+                if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
+                    $count = count($_FILES['banner_image']['name']);
+                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                                $data['banner_image'] = $_FILES['banner_image']['name'];
+                        }
+                }
+               
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -477,20 +500,43 @@ class Admin extends CI_Controller
         } else {
             if ($this->controller->checkSession()) {
                 
-                $menu_id          = $this->input->post('menu_id');
-                $en_sub_menu_name = $this->input->post('en_sub_menu_name');
-                $hi_sub_menu_name = $this->input->post('hi_sub_menu_name');
+                $menu_id            = $this->input->post('menu_id');
+                $en_sub_menu_name   = $this->input->post('en_sub_menu_name');
+                $hi_sub_menu_name   = $this->input->post('hi_sub_menu_name');
+                $url                = $this->input->post('url');
+                $meta_title         = $this->input->post('meta_title');
+                $meta_description   = $this->input->post('meta_description');
+                $meta_keyword       = $this->input->post('meta_keyword');
                 $is_active        = $this->input->post('status');
                 
                 $data = array(
-                    'menu_id' => $menu_id,
-                    'en_sub_menu_name' => $en_sub_menu_name,
-                    'hi_sub_menu_name' => $hi_sub_menu_name,
-                    'is_active' => $is_active,
-                    'created_at' => date('Y-m-d H:i:s')
+
+                    'menu_id'            => $menu_id,
+                    'en_sub_menu_name'   => $en_sub_menu_name,
+                    'hi_sub_menu_name'   => $hi_sub_menu_name,
+                    'url'                => $url,
+                    'meta_title'         => $meta_title,
+                    'meta_description'   => $meta_description,
+                    'meta_keyword'       => $meta_keyword,
+                    'is_active'          => $is_active,
+                    'created_at'         => date('Y-m-d H:i:s')
+
                 );
                 
-                
+                if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
+                    $count = count($_FILES['category_image']['name']);
+                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                                $data['category_image'] = $_FILES['category_image']['name'];
+                        }
+                }
+
+                if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
+                    $count = count($_FILES['banner_image']['name']);
+                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                                $data['banner_image'] = $_FILES['banner_image']['name'];
+                        }
+                }
+
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -564,7 +610,7 @@ class Admin extends CI_Controller
                 $where     = array(
                     'super_sub_menu.id' => $id
                 );
-                $field_val = 'super_sub_menu.en_super_sub_menu,super_sub_menu.is_active,super_sub_menu.hi_super_sub_menu,super_sub_menu.id as super_sub_menu_id,sub_menu.en_sub_menu_name,sub_menu.created_at,sub_menu.menu_id,sub_menu.id as sub_menu_id';
+                $field_val = 'super_sub_menu.en_super_sub_menu,super_sub_menu.is_active,super_sub_menu.hi_super_sub_menu,super_sub_menu.id as super_sub_menu_id,sub_menu.en_sub_menu_name,sub_menu.created_at,sub_menu.menu_id,sub_menu.id as sub_menu_id,super_sub_menu.url,super_sub_menu.meta_title,super_sub_menu.meta_description,super_sub_menu.meta_keyword';
                 
                 $data['super_sub_menu'] = $this->model->GetJoinRecord('super_sub_menu', 'sub_menu_id', 'sub_menu', 'id', $field_val, $where);
                 
@@ -597,17 +643,38 @@ class Admin extends CI_Controller
                 $sub_menu_id      = $this->input->post('sub_menu_id');
                 $en_sub_menu_name = $this->input->post('en_sub_menu_name');
                 $hi_sub_menu_name = $this->input->post('hi_sub_menu_name');
+                 $url                = $this->input->post('url');
+                $meta_title         = $this->input->post('meta_title');
+                $meta_description   = $this->input->post('meta_description');
+                $meta_keyword       = $this->input->post('meta_keyword');
                 $is_active        = $this->input->post('status');
                 
                 $data = array(
                     'sub_menu_id' => $sub_menu_id,
                     'en_super_sub_menu' => $en_sub_menu_name,
                     'hi_super_sub_menu' => $hi_sub_menu_name,
+                    'url'                => $url,
+                    'meta_title'         => $meta_title,
+                    'meta_description'   => $meta_description,
+                    'meta_keyword'       => $meta_keyword,
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
-                
+                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
+                    $count = count($_FILES['category_image']['name']);
+                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                                $data['category_image'] = $_FILES['category_image']['name'];
+                        }
+                }
+
+                if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
+                    $count = count($_FILES['banner_image']['name']);
+                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                                $data['banner_image'] = $_FILES['banner_image']['name'];
+                        }
+                }
+
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -664,31 +731,36 @@ class Admin extends CI_Controller
                 $where     = array(
                     'super_sub_menu_post.id' => $id
                 );
-                $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.en_post,menu.id as menu_id,menu.en_menu_name,super_sub_menu_post.sub_menu_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post';
-                
-                $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'menu_id', 'menu', 'id', $field_val, $where);
+
+                $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post,super_sub_menu_post.en_post,super_sub_menu.en_super_sub_menu,super_sub_menu.sub_menu_id,super_sub_menu.en_super_sub_menu';
+        
+               $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'super_sub_menu_id', 'super_sub_menu', 'id', $field_val,$where);
+
                 
                 
                 $where = array(
                     'id' => $data['super_sub_menu_post'][0]->sub_menu_id
                 );
                 
-                $select = 'en_sub_menu_name';
+                $select = 'menu_id,en_sub_menu_name';
                 
                 $sub_menu_name = $this->model->getAllwhere('sub_menu', $where, $select);
                 
                 $data['super_sub_menu_post'][0]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
                 
-                $where1 = array(
-                    'id' => $data['super_sub_menu_post'][0]->super_sub_menu_id
+
+                  $where1 = array(
+                    'id' => $sub_menu_name[0]->menu_id
                 );
                 
-                $select1             = 'en_super_sub_menu';
-                $super_sub_menu_name = $this->model->getAllwhere('super_sub_menu', $where1, $select1);
+                $select1 = 'id,en_menu_name';
+                $menu = $this->model->getAllwhere('menu', $where1, $select1);
                 
-                $data['super_sub_menu_post'][0]->super_sub_menu_name = $super_sub_menu_name[0]->en_super_sub_menu;
-                $data['menu']                                        = $this->model->getAllwhere('menu');
-                
+                $data['super_sub_menu_post'][0]->menu = $menu[0]->en_menu_name;
+                $data['super_sub_menu_post'][0]->menu_id = $menu[0]->id;
+                $data['menu'] = $this->model->getAllwhere('menu');
+
+
             } else {
                 $where = array(
                     'is_active' => 1
@@ -701,16 +773,15 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
-                $menu_id           = $this->input->post('menu_id');
-                $sub_menu_id       = $this->input->post('sub_menu_id');
-                $super_sub_menu_id = $this->input->post('super_sub_menu_id');
-                $en_post           = $this->input->post('en_post');
-                $hi_post           = $this->input->post('hi_post');
-                $is_active         = $this->input->post('status');
+
+                
+                $super_sub_menu_id  = $this->input->post('super_sub_menu_id');
+                $en_post            = $this->input->post('en_post');
+                $hi_post            = $this->input->post('hi_post');
+                $is_active          = $this->input->post('status');
                 
                 $data = array(
-                    'menu_id' => $menu_id,
-                    'sub_menu_id' => $sub_menu_id,
+
                     'super_sub_menu_id' => $super_sub_menu_id,
                     'en_post' => $en_post,
                     'hi_post' => $hi_post,
@@ -735,33 +806,41 @@ class Admin extends CI_Controller
         }
         
     }
-    
-    public function super_submenupostList()
-    {
+
+
+    public function super_submenupostList(){
+
+           $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post,super_sub_menu_post.en_post,super_sub_menu.en_super_sub_menu,super_sub_menu.sub_menu_id,super_sub_menu.en_super_sub_menu';
         
-        $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.en_post,menu.id as menu_id,menu.en_menu_name,super_sub_menu_post.sub_menu_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post';
-        
-        $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'menu_id', 'menu', 'id', $field_val);
-        
-        
-        for ($i = 0; $i < count($data['super_sub_menu_post']); $i++) {
+        $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'super_sub_menu_id', 'super_sub_menu', 'id', $field_val);
+
+        // echo "<pre>";
+        // print_r($data);
+        // die;
+
+        for ($i=0; $i <count($data['super_sub_menu_post']) ; $i++) { 
+
             $where = array(
                 'id' => $data['super_sub_menu_post'][$i]->sub_menu_id
             );
             
-            $select = 'en_sub_menu_name';
-            
-            
-            $sub_menu_name = $this->model->getAllwhere('sub_menu', $where, $select);
-            
-            $where1 = array(
-                'id' => $data['super_sub_menu_post'][$i]->super_sub_menu_id
-            );
-            
-            $select1                                              = 'en_super_sub_menu';
-            $super_sub_menu                                       = $this->model->getAllwhere('super_sub_menu', $where1, $select1);
-            $data['super_sub_menu_post'][$i]->sub_menu_name       = $sub_menu_name[0]->en_sub_menu_name;
-            $data['super_sub_menu_post'][$i]->super_sub_menu_name = $super_sub_menu[0]->en_super_sub_menu;
+
+              $select = 'menu_id,en_sub_menu_name';
+                
+              $sub_menu_name  = $this->model->getAllwhere('sub_menu', $where, $select);
+        
+              $data['super_sub_menu_post'][$i]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
+               $where1 = array(
+                    'id' => $sub_menu_name[0]->menu_id
+                );
+                
+                $select1 = 'id,en_menu_name';
+                $menu = $this->model->getAllwhere('menu', $where1, $select1);
+
+                $data['super_sub_menu_post'][$i]->menu = $menu[0]->en_menu_name;
+                $data['super_sub_menu_post'][$i]->menu_id = $menu[0]->id;
+
+
         }
         $data['body'] = 'super_sub_menu_post_list';
         $this->controller->load_view($data);

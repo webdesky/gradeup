@@ -6,6 +6,7 @@
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
+    
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -39,12 +40,15 @@
                                             <td>
                                                 <?php echo $i; ?> </td>
                                             <td>
-                                                <?php echo $sub_menu->en_menu_name;?> </td>
+                                                <?php echo $sub_menu->menu;?> </td>
                                             <td>
                                                 <?php echo $sub_menu->sub_menu_name;?> </td>
                                             <td>
-                                                <?php echo $sub_menu->super_sub_menu_name;?> </td>
+
+                                                <?php echo $sub_menu->en_super_sub_menu;?> </td>
+                                             
                                             <td>
+
                                                 <?php echo $sub_menu->en_post;?> </td>
                                             <td>
                                                 <?php echo $sub_menu->hi_post;?> </td>
