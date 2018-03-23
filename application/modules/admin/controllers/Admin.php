@@ -16,9 +16,9 @@ class Admin extends CI_Controller
             if ($log == 1 || $log == 4) {
                 redirect('admin/dashboard');
             } else if ($log == 2) {
-                redirect('doctor/dashboard');
+                //redirect('doctor/dashboard');
             } else if ($log == 3) {
-                redirect('patient/dashboard');
+                //redirect('patient/dashboard');
             } else {
                 $this->load->view('admin/login', $msg);
             }
@@ -32,8 +32,7 @@ class Admin extends CI_Controller
         }
     }
     
-    
-    
+
     public function last_executed_query()
     {
         echo $this->db->last_query();
@@ -60,8 +59,8 @@ class Admin extends CI_Controller
         if ($this->controller->checkSession()) {
             $data['body']          = 'dashboard';
             $where1                = array(
-                'user_role !='  => 1,
-                'is_active'     => 1
+                'user_role !=' => 1,
+                'is_active' => 1
             );
             $where                 = array(
                 'is_active' => 1
@@ -70,7 +69,6 @@ class Admin extends CI_Controller
             $data['totalquestion'] = $this->model->getcount('questions', $where);
             $data['totalpost']     = $this->model->getcount('post', $where);
             $data['totalexam']     = $this->model->getcount('exam', $where);
-            
             $this->controller->load_view($data);
         } else {
             $this->index();
@@ -117,7 +115,7 @@ class Admin extends CI_Controller
                     'fb_url' => $fb_url,
                     'gplus_url' => $gplus_url,
                     'created_at' => date('Y-m-d H:i:s')
-
+                    
                 );
                 
                 if (isset($_FILES['favicon_icon']['name']) && !empty($_FILES['favicon_icon']['name'])) {
@@ -142,10 +140,8 @@ class Admin extends CI_Controller
                         if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/' . $_FILES['site_logo']['name'])) {
                             $data['logo'] = $_FILES['site_logo']['name'];
                         }
-                        
                     }
                 }
-                
                 
                 $where  = array(
                     'id' => $this->input->post('id')
@@ -153,8 +149,7 @@ class Admin extends CI_Controller
                 $result = $this->model->updateFields('settings', $data, $where);
                 redirect('admin/setting');
             }
-            
-            
+ 
         }
         
     }
@@ -176,7 +171,7 @@ class Admin extends CI_Controller
                 $data = array(
                     'en_about_us' => $en_about_us,
                     'hi_about_us' => $hi_about_us,
-                    'created_at'  => date('Y-m-d H:i:s')
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 $where  = array(
@@ -206,7 +201,7 @@ class Admin extends CI_Controller
                 $data = array(
                     'en_privacy_policy' => $en_privacy_policy,
                     'hi_privacy_policy' => $hi_privacy_policy,
-                    'created_at'        => date('Y-m-d H:i:s')
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 $where  = array(
@@ -232,10 +227,9 @@ class Admin extends CI_Controller
             if ($this->controller->checkSession()) {
                 $en_terms = $this->input->post('en_terms');
                 $hi_terms = $this->input->post('hi_terms');
-                
                 $data = array(
-                    'en_terms'   => $en_terms,
-                    'hi_terms'   => $hi_terms,
+                    'en_terms' => $en_terms,
+                    'hi_terms' => $hi_terms,
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
@@ -270,8 +264,8 @@ class Admin extends CI_Controller
                 $data = array(
                     'en_module_name' => $en_module_name,
                     'hi_module_name' => $hi_module_name,
-                    'is_active'      => $is_active,
-                    'created_at'     => date('Y-m-d H:i:s')
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -320,7 +314,7 @@ class Admin extends CI_Controller
                     'chapters.id ' => $id
                 );
                 $where1          = array(
-                    'is_active'    => 1
+                    'is_active' => 1
                 );
                 $data['modules'] = $this->model->getAllwhere('modules', $where1);
                 $data['chapter'] = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id', 'chapters.id as ids,chapters.fk_module_id,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name,modules.id', $where);
@@ -341,11 +335,11 @@ class Admin extends CI_Controller
                 $is_active       = $this->input->post('status');
                 
                 $data = array(
-                    'fk_module_id'      => $fk_module_id,
-                    'en_chapter_name'   => $en_chapter_name,
-                    'hi_chapter_name'   => $hi_chapter_name,
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
+                    'fk_module_id' => $fk_module_id,
+                    'en_chapter_name' => $en_chapter_name,
+                    'hi_chapter_name' => $hi_chapter_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -416,11 +410,11 @@ class Admin extends CI_Controller
                 $is_active    = $this->input->post('status');
                 
                 $data = array(
-                    'module_id'     => $module_id,
-                    'en_menu_name'  => $en_menu_name,
-                    'hi_menu_name'  => $hi_menu_name,
-                    'is_active'     => $is_active,
-                    'created_at'    => date('Y-m-d H:i:s')
+                    'module_id' => $module_id,
+                    'en_menu_name' => $en_menu_name,
+                    'hi_menu_name' => $hi_menu_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -437,8 +431,7 @@ class Admin extends CI_Controller
                 }
                 
                 $this->menuList();
-                
-                
+            
             }
         }
     }
@@ -490,11 +483,11 @@ class Admin extends CI_Controller
                 $is_active        = $this->input->post('status');
                 
                 $data = array(
-                    'menu_id'            => $menu_id,
-                    'en_sub_menu_name'   => $en_sub_menu_name,
-                    'hi_sub_menu_name'   => $hi_sub_menu_name,
-                    'is_active'          => $is_active,
-                    'created_at'         => date('Y-m-d H:i:s')
+                    'menu_id' => $menu_id,
+                    'en_sub_menu_name' => $en_sub_menu_name,
+                    'hi_sub_menu_name' => $hi_sub_menu_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -511,8 +504,6 @@ class Admin extends CI_Controller
                 }
                 
                 $this->submenuList();
-                
-                
             }
         }
     }
@@ -533,8 +524,8 @@ class Admin extends CI_Controller
     {
         $username = $this->input->post('username', TRUE);
         $where    = array(
-            'username'  => $username,
-            'password'  => md5($password),
+            'username' => $username,
+            'password' => md5($password),
             'is_active' => 1
         );
         $result   = $this->model->getsingle('users', $where);
@@ -542,12 +533,12 @@ class Admin extends CI_Controller
         if (!empty($result)) {
             
             $sess_array = array(
-                'id'            => $result->id,
-                'username'      => $result->username,
-                'email'         => $result->email,
-                'user_role'     => $result->user_role,
-                'first_name'    => $result->first_name,
-                'last_name'     => $result->last_name
+                'id' => $result->id,
+                'username' => $result->username,
+                'email' => $result->email,
+                'user_role' => $result->user_role,
+                'first_name' => $result->first_name,
+                'last_name' => $result->last_name
             );
             
             if ($result->user_role == 4) {
@@ -594,8 +585,8 @@ class Admin extends CI_Controller
                 $data['super_sub_menu'][0]->menu_name = $menu_name[0]->en_menu_name;
                 
                 $data['menu'] = $this->model->getAllwhere('menu');
-
-                    
+                
+                
             } else {
                 $where        = array(
                     'is_active' => 1
@@ -633,7 +624,7 @@ class Admin extends CI_Controller
                     $result = $this->model->insertData('super_sub_menu', $data);
                 }
                 
-                $this->super_submenuList();   
+                $this->super_submenuList();
             }
         }
         
@@ -644,10 +635,8 @@ class Admin extends CI_Controller
         $field_val = 'super_sub_menu.en_super_sub_menu,super_sub_menu.hi_super_sub_menu,super_sub_menu.id as super_sub_menu_id,super_sub_menu.is_active,sub_menu.en_sub_menu_name,sub_menu.created_at,sub_menu.menu_id';
         
         $data['super_sub_menu'] = $this->model->GetJoinRecord('super_sub_menu', 'sub_menu_id', 'sub_menu', 'id', $field_val);
-
-
-
-        for ($i=0; $i <count($data['super_sub_menu']) ; $i++) { 
+        
+        for ($i = 0; $i < count($data['super_sub_menu']); $i++) {
             $where = array(
                 'id' => $data['super_sub_menu'][$i]->menu_id
             );
@@ -655,18 +644,17 @@ class Admin extends CI_Controller
             $select = 'en_menu_name';
             
             $menu_name = $this->model->getAllwhere('menu', $where, $select);
-
+            
             $data['super_sub_menu'][$i]->menu_name = $menu_name[0]->en_menu_name;
-
+            
         }
         
-
         $data['body'] = 'super_sub_menu_list';
         $this->controller->load_view($data);
     }
     
-
-     public function super_sub_menu_post($id = null)
+    
+    public function super_sub_menu_post($id = null)
     {
         $this->form_validation->set_rules('menu_id', ' Menu Name', 'trim|required|numeric');
         $this->form_validation->set_rules('sub_menu_id', 'Sub Menu Name', 'trim|required|numeric');
@@ -682,8 +670,8 @@ class Admin extends CI_Controller
                     'super_sub_menu_post.id' => $id
                 );
                 $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.en_post,menu.id as menu_id,menu.en_menu_name,super_sub_menu_post.sub_menu_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post';
-        
-               $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'menu_id', 'menu', 'id', $field_val,$where);
+                
+                $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'menu_id', 'menu', 'id', $field_val, $where);
                 
                 
                 $where = array(
@@ -696,21 +684,21 @@ class Admin extends CI_Controller
                 
                 $data['super_sub_menu_post'][0]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
                 
-                  $where1 = array(
+                $where1 = array(
                     'id' => $data['super_sub_menu_post'][0]->super_sub_menu_id
                 );
                 
-                $select1 = 'en_super_sub_menu';
+                $select1             = 'en_super_sub_menu';
                 $super_sub_menu_name = $this->model->getAllwhere('super_sub_menu', $where1, $select1);
                 
                 $data['super_sub_menu_post'][0]->super_sub_menu_name = $super_sub_menu_name[0]->en_super_sub_menu;
-                $data['menu'] = $this->model->getAllwhere('menu');
-
+                $data['menu']                                        = $this->model->getAllwhere('menu');
+                
             } else {
-                $where        = array(
+                $where = array(
                     'is_active' => 1
                 );
-
+                
                 $data['menu'] = $this->model->getAllwhere('menu', $where);
                 
             }
@@ -718,24 +706,24 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
-                $menu_id            = $this->input->post('menu_id');
-                $sub_menu_id        = $this->input->post('sub_menu_id');
-                $super_sub_menu_id  = $this->input->post('super_sub_menu_id');
-                $en_post            = $this->input->post('en_post');
-                $hi_post            = $this->input->post('hi_post');
-                $is_active          = $this->input->post('status');
+                $menu_id           = $this->input->post('menu_id');
+                $sub_menu_id       = $this->input->post('sub_menu_id');
+                $super_sub_menu_id = $this->input->post('super_sub_menu_id');
+                $en_post           = $this->input->post('en_post');
+                $hi_post           = $this->input->post('hi_post');
+                $is_active         = $this->input->post('status');
                 
                 $data = array(
-                    'menu_id'           =>  $menu_id,
-                    'sub_menu_id'       => $sub_menu_id,
+                    'menu_id' => $menu_id,
+                    'sub_menu_id' => $sub_menu_id,
                     'super_sub_menu_id' => $super_sub_menu_id,
-                    'en_post'           => $en_post,
-                    'hi_post'           => $hi_post,
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
+                    'en_post' => $en_post,
+                    'hi_post' => $hi_post,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
-
+                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -747,44 +735,39 @@ class Admin extends CI_Controller
                     $result = $this->model->insertData('super_sub_menu_post', $data);
                 }
                 
-                $this->super_submenupostList();   
+                $this->super_submenupostList();
             }
         }
         
     }
-
-    public function super_submenupostList(){
-
-         $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.en_post,menu.id as menu_id,menu.en_menu_name,super_sub_menu_post.sub_menu_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post';
+    
+    public function super_submenupostList()
+    {
+        
+        $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.en_post,menu.id as menu_id,menu.en_menu_name,super_sub_menu_post.sub_menu_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post';
         
         $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'menu_id', 'menu', 'id', $field_val);
-
-        // echo "<pre>";
-        // print_r($data);
-        // die;
-
-        for ($i=0; $i <count($data['super_sub_menu_post']) ; $i++) { 
+        
+        
+        for ($i = 0; $i < count($data['super_sub_menu_post']); $i++) {
             $where = array(
                 'id' => $data['super_sub_menu_post'][$i]->sub_menu_id
             );
             
             $select = 'en_sub_menu_name';
-
-           
-            $sub_menu_name  = $this->model->getAllwhere('sub_menu', $where, $select);
+            
+            
+            $sub_menu_name = $this->model->getAllwhere('sub_menu', $where, $select);
             
             $where1 = array(
                 'id' => $data['super_sub_menu_post'][$i]->super_sub_menu_id
             );
             
-            $select1 = 'en_super_sub_menu';
-            $super_sub_menu = $this->model->getAllwhere('super_sub_menu', $where1, $select1);
-            $data['super_sub_menu_post'][$i]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
+            $select1                                              = 'en_super_sub_menu';
+            $super_sub_menu                                       = $this->model->getAllwhere('super_sub_menu', $where1, $select1);
+            $data['super_sub_menu_post'][$i]->sub_menu_name       = $sub_menu_name[0]->en_sub_menu_name;
             $data['super_sub_menu_post'][$i]->super_sub_menu_name = $super_sub_menu[0]->en_super_sub_menu;
         }
-        
-
-        
         $data['body'] = 'super_sub_menu_post_list';
         $this->controller->load_view($data);
     }
@@ -809,11 +792,11 @@ class Admin extends CI_Controller
                 $is_active       = $this->input->post('status');
                 
                 $data = array(
-                    'fk_module_id'      => $fk_module_id,
-                    'en_chapter_name'   => $en_chapter_name,
-                    'hi_chapter_name'   => $hi_chapter_name,
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
+                    'fk_module_id' => $fk_module_id,
+                    'en_chapter_name' => $en_chapter_name,
+                    'hi_chapter_name' => $hi_chapter_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -828,7 +811,6 @@ class Admin extends CI_Controller
                 } else {
                     $result = $this->model->insertData('chapters', $data);
                 }
-                
                 
                 $this->trainingList();
             }
@@ -860,13 +842,11 @@ class Admin extends CI_Controller
     
     public function getChapter()
     {
-        
         $module_id = $this->input->post('module_id');
         $where     = array(
             'fk_module_id ' => $module_id[0]
         );
-        $data      = $this->model->getAllwhere('chapters', $where);
-        
+        $data      = $this->model->getAllwhere('chapters', $where);  
         echo json_encode($data);
     }
     
@@ -883,10 +863,9 @@ class Admin extends CI_Controller
                 $data['questions'] = $this->model->getAllwhere('questions', $where);
                 $data['modules']   = $this->model->getAll('modules');
                 $data['chapters']  = $this->model->getAll('chapters');
-                
             } else {
-                $data['modules']   = $this->model->getAll('modules');
-                $data['chapters']  = $this->model->getAll('chapters');
+                $data['modules']  = $this->model->getAll('modules');
+                $data['chapters'] = $this->model->getAll('chapters');
             }
             $data['body'] = 'add_question';
             $this->controller->load_view($data);
@@ -919,26 +898,26 @@ class Admin extends CI_Controller
                 $is_active       = $this->input->post('status');
                 
                 $data = array(
-                    'module_id'         => $module_id,
-                    'chapter_id'        => $chapter_id,
-                    'question_marks'    => $question_marks,
-                    'question_type'     => $question_type,
-                    'en_question'       => $en_question,
-                    'hi_question'       => $hi_question,
-                    'en_option_a'       => $en_option_a,
-                    'en_option_b'       => $en_option_b,
-                    'en_option_c'       => $en_option_c,
-                    'en_option_d'       => $en_option_d,
-                    'hi_option_a'       => $hi_option_a,
-                    'hi_option_b'       => $hi_option_b,
-                    'hi_option_c'       => $hi_option_c,
-                    'hi_option_d'       => $hi_option_d,
-                    'en_answer'         => $en_answer,
-                    'hi_answer'         => $hi_answer,
-                    'en_explaination'   => $en_explaination,
-                    'hi_explaination'   => $hi_explaination,
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
+                    'module_id' => $module_id,
+                    'chapter_id' => $chapter_id,
+                    'question_marks' => $question_marks,
+                    'question_type' => $question_type,
+                    'en_question' => $en_question,
+                    'hi_question' => $hi_question,
+                    'en_option_a' => $en_option_a,
+                    'en_option_b' => $en_option_b,
+                    'en_option_c' => $en_option_c,
+                    'en_option_d' => $en_option_d,
+                    'hi_option_a' => $hi_option_a,
+                    'hi_option_b' => $hi_option_b,
+                    'hi_option_c' => $hi_option_c,
+                    'hi_option_d' => $hi_option_d,
+                    'en_answer' => $en_answer,
+                    'hi_answer' => $hi_answer,
+                    'en_explaination' => $en_explaination,
+                    'hi_explaination' => $hi_explaination,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 if (!empty($id)) {
@@ -1005,23 +984,23 @@ class Admin extends CI_Controller
                 
                 
                 $data = array(
-                    'module_id'             => $module_id,
-                    'chapter_id'            => $chapter_id,
-                    'exam_name'             => $exam_name,
-                    'question_type'         => $question_type,
-                    'total_question'        => $total_question,
-                    'time_per_question'     => $time_per_question,
-                    'test_duration'         => $test_duration,
-                    'passing_marks'         => $passing_marks,
-                    'positive_mark'         => $positive_mark,
-                    'negative_mark'         => $negative_mark,
-                    'no_of_ques_attempt'    => $no_of_ques_attempt,
-                    'description'           => $description,
-                    'payment_status'        => $payment_status,
-                    'question_id'           => $question_id,
-                    'time_per_question'     => $time_per_question,
-                    'is_active'             => $is_active,
-                    'created_at'            => date('Y-m-d H:i:s')
+                    'module_id' => $module_id,
+                    'chapter_id' => $chapter_id,
+                    'exam_name' => $exam_name,
+                    'question_type' => $question_type,
+                    'total_question' => $total_question,
+                    'time_per_question' => $time_per_question,
+                    'test_duration' => $test_duration,
+                    'passing_marks' => $passing_marks,
+                    'positive_mark' => $positive_mark,
+                    'negative_mark' => $negative_mark,
+                    'no_of_ques_attempt' => $no_of_ques_attempt,
+                    'description' => $description,
+                    'payment_status' => $payment_status,
+                    'question_id' => $question_id,
+                    'time_per_question' => $time_per_question,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -1055,9 +1034,9 @@ class Admin extends CI_Controller
         $chapter_id    = $this->input->get('chapter_id');
         $question_type = $this->input->get('question_type');
         $where         = array(
-            'module_id '        => $module_id,
-            'chapter_id'        => $chapter_id,
-            'question_type'     => $question_type
+            'module_id ' => $module_id,
+            'chapter_id' => $chapter_id,
+            'question_type' => $question_type
         );
         $data          = $this->model->getAllwhere('questions', $where);
         
@@ -1155,20 +1134,20 @@ class Admin extends CI_Controller
                 
                 
                 $data = array(
-                    'first_name'    => $first_name,
-                    'last_name'     => $last_name,
-                    'username'      => $user_name,
-                    'email'         => $email,
-                    'password'      => MD5($password),
-                    'address'       => $address,
-                    'phone_no'      => $phone_no,
-                    'mobile'        => $mobile_no,
+                    'first_name' => $first_name,
+                    'last_name' => $last_name,
+                    'username' => $user_name,
+                    'email' => $email,
+                    'password' => MD5($password),
+                    'address' => $address,
+                    'phone_no' => $phone_no,
+                    'mobile' => $mobile_no,
                     'date_of_birth' => $dob,
-                    'gender'        => $gender,
-                    'blood_group'   => $blood_group,
-                    'is_active'     => $status,
-                    'user_role'     => 3,
-                    'created_at'    => date('Y-m-d H:i:s')
+                    'gender' => $gender,
+                    'blood_group' => $blood_group,
+                    'is_active' => $status,
+                    'user_role' => 3,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 
@@ -1419,14 +1398,14 @@ class Admin extends CI_Controller
                 );
                 
                 $config_mail = Array(
-                    'protocol'  => 'smtp',
+                    'protocol' => 'smtp',
                     'smtp_host' => 'ssl://smtp.googlemail.com',
                     'smtp_port' => '465',
                     'smtp_user' => 'webdeskytechnical@gmail.com',
                     'smtp_pass' => 'webdesky@2017',
-                    'mailtype'  => 'html',
-                    'charset'   => 'iso-8859-1',
-                    'newline'   => "\r\n"
+                    'mailtype' => 'html',
+                    'charset' => 'iso-8859-1',
+                    'newline' => "\r\n"
                 );
                 
                 $this->load->library('email', $config_mail);
@@ -1566,7 +1545,7 @@ class Admin extends CI_Controller
             );
             $data['post'] = $this->model->getAllwhere('post', $where);
         }
-        $where            = array(
+        $where           = array(
             'is_active' => 1
         );
         $data['modules'] = $this->model->getAllwhere('modules', $where);

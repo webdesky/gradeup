@@ -1,4 +1,3 @@
-!.gitignore
 /application/config/*
 /application/config/database.php
 /application/cache/*

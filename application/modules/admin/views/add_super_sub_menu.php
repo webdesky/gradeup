@@ -17,9 +17,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                        <?php //echo '<pre>'; print_r($super_sub_menu[0]);?>
                             <form role="form" method="post" action="<?php if(isset($super_sub_menu)){ echo base_url('admin/super_sub_menu/'.$super_sub_menu[0]->super_sub_menu_id); }else{ echo base_url('admin/super_sub_menu'); }?>" class="registration_form1" enctype="multipart/form-data">
-
                                 <div class="col-md-6">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -27,15 +25,15 @@
                                             <div class="col-md-9">
                                                 <select class="wide" name="menu_id" onchange="get_sub_menu(this.value)">
                                                     <option data-display="--Select Menu--">--Select Menu--</option>
-                                                     <?php foreach ($menu as $key => $value) { ?>
-                                                          <option value="<?php echo $value->id; ?>" <?php if(isset($super_sub_menu) && $super_sub_menu[0]->menu_id==$value->id) { ?> selected <?php } ?>><?php echo ucwords($value->en_menu_name); ?></option>
+                                                    <?php foreach ($menu as $key => $value) { ?>
+                                                        <option value="<?php echo $value->id; ?>" <?php if(isset($super_sub_menu) && $super_sub_menu[0]->menu_id==$value->id) { echo 'selected'; } ?>><?php echo ucwords($value->en_menu_name); ?>
+                                                        </option>
                                                     <?php } ?>
-                                                 </select>
+                                                </select>
                                                 <span class="red"><?php echo form_error('menu_id'); ?></span>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-3">SubMenu Name* </label>
