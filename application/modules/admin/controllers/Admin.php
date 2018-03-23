@@ -510,15 +510,10 @@ class Admin extends CI_Controller
     
     public function submenuList()
     {
-        
-        $where            = array(
-            'sub_menu.is_active' => 1
-        );
+        $where            = array('sub_menu.is_active' => 1);
         $data['sub_menu'] = $this->model->GetJoinRecord('sub_menu', 'menu_id', 'menu', 'id', 'sub_menu.en_sub_menu_name,sub_menu.hi_sub_menu_name,sub_menu.id as id,menu.en_menu_name,sub_menu.created_at', $where);
-        
         $data['body'] = 'sub_menu_list';
-        $this->controller->load_view($data);
-        
+        $this->controller->load_view($data); 
     }
     public function check_database($password)
     {
@@ -822,7 +817,6 @@ class Admin extends CI_Controller
     {
         $data['training'] = $this->model->getAll('training');
         $data['body']     = 'training_list';
-        
         $this->controller->load_view($data);
         
     }
@@ -836,7 +830,6 @@ class Admin extends CI_Controller
         $data['chapters'] = $this->model->getAll('chapters');
         $data['training'] = $this->model->getAllwhere('training', $where);
         $data['body']     = 'edit_training';
-        
         $this->controller->load_view($data);
     }
     
