@@ -17,7 +17,6 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                            <?php //echo '<pre>'; print_r($super_sub_menu[0]);?>
                             <form role="form" method="post" action="<?php if(isset($super_sub_menu_post)){ echo base_url('admin/super_sub_menu_post/'.$super_sub_menu_post[0]->super_sub_menu_post_id); }else{ echo base_url('admin/super_sub_menu_post'); }?>" class="registration_form1" enctype="multipart/form-data">
                                 <div class="col-md-6">
                                     <div class="col-md-12">
@@ -27,8 +26,7 @@
                                                 <select class="wide" name="menu_id" onchange="get_sub_menu(this.value)">
                                                     <option data-display="--Select Menu--">--Select Menu--</option>
                                                     <?php foreach ($menu as $key => $value) { ?>
-                                                    <option value="<?php echo $value->id; ?>" <?php if(isset($super_sub_menu_post) && $super_sub_menu_post[0]->menu_id==$value->id) { ?> selected
-                                                        <?php } ?>>
+                                                    <option value="<?php echo $value->id; ?>" <?php if(isset($super_sub_menu_post) && $super_sub_menu_post[0]->menu_id==$value->id) { echo 'selected'; } ?>>
                                                         <?php echo ucwords($value->en_menu_name); ?>
                                                     </option>
                                                     <?php } ?>
@@ -60,7 +58,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Super SubMenu Name* </label>
                                             <div class="col-md-9">
-                                                <select class="wide" name="super_sub_menu_id" id="super_sub_menu_id" >
+                                                <select class="wide" name="super_sub_menu_id" id="super_sub_menu_id">
                                                     <?php if(isset($super_sub_menu_post) && !empty($super_sub_menu_post[0]->sub_menu_id)){?>
                                                     <option value="<?php echo $super_sub_menu_post[0]->super_sub_menu_id?>">
                                                         <?php echo $super_sub_menu_post[0]->en_super_sub_menu?>
@@ -72,7 +70,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                 <div class="col-md-6">   
+                                <div class="col-md-6">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-3">Status* </label>
@@ -98,9 +96,10 @@
                                                 <textarea class="form-control" rows="8" id="en_post" name="en_post" placeholder="about us">
                                                     <?php if(isset($super_sub_menu_post) && !empty($super_sub_menu_post[0]->en_post)){ echo $super_sub_menu_post[0]->en_post; }?>
                                             </textarea> <span class="red"><?php echo form_error('en_post'); ?></span>
-                                            <script type="text/javascript">
-                                                CKEDITOR.replace('en_post');
-                                            </script>
+                                                <script type="text/javascript">
+                                                    CKEDITOR.replace('en_post');
+
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
@@ -114,29 +113,31 @@
                                                 <textarea class="form-control" rows="8" id="hi_post" name="hi_post" placeholder="about us">
                                                     <?php if(isset($super_sub_menu_post) && !empty($super_sub_menu_post[0]->hi_post)){ echo $super_sub_menu_post[0]->hi_post; }?>
                                             </textarea> <span class="red"><?php echo form_error('hi_post'); ?></span>
-                                            <script type="text/javascript">
-                                                CKEDITOR.replace('hi_post');
-                                            </script>
+                                                <script type="text/javascript">
+                                                    CKEDITOR.replace('hi_post');
+
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-                                <div class="col-md-12" align="center">
-                                    <button type="submit" value="Save" class="btn btn-success">Save</button>
-                                    <input type="reset" class="btn btn-default" value="Reset"> </div>
-                            </form>
                         </div>
+                        <br/><br/>
+                        <div class="col-md-12" align="center">
+                            <button type="submit" value="Save" class="btn btn-success">Save</button>
+                            <input type="reset" class="btn btn-default" value="Reset"> </div>
+                        </form>
                     </div>
-                    <!-- /.row (nested) -->
                 </div>
-                <!-- /.panel-body -->
+                <!-- /.row (nested) -->
             </div>
-            <!-- /.panel -->
+            <!-- /.panel-body -->
         </div>
-        <!-- /.col-lg-12 -->
+        <!-- /.panel -->
     </div>
-    <!-- row -->
+    <!-- /.col-lg-12 -->
+</div>
+<!-- row -->
 </div>
 </div>
 <script type="text/javascript">
@@ -195,4 +196,5 @@ function get_super__sub_menu(str) {
         }
     });
 }
+
 </script>

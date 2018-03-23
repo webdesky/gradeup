@@ -18,7 +18,6 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <form role="form" method="post" action="<?php if(isset($modules)){ echo base_url('admin/module/'.$modules[0]->id); }else{ echo base_url('admin/module'); }?>" class="registration_form1" enctype="multipart/form-data">
-
                                 <div class="col-md-6 border-shadowss">
                                     <div class="en_div">English</div>
                                     <div class="col-md-12">

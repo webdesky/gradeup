@@ -1,9 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-
             <h1 class="page-header">Super Sub Menu List</h1>
-
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -90,15 +88,14 @@ function delete_user(id, tr_id) {
             url: "<?php echo base_url('admin/delete')?>",
             data: {
                 id: id,
-                table: 'sub_menu'
+                table: 'super_sub_menu'
             },
             type: "POST"
         }).done(function(data) {
             swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_'+tr_id).remove();
+            $('#tr_' + tr_id).remove();
         });
 
     });
 }
-
 </script>
