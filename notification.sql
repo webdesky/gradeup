@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2018 at 02:04 PM
+-- Generation Time: Mar 24, 2018 at 06:53 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -25,14 +25,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menu`
+-- Table structure for table `notification`
 --
 
-CREATE TABLE `menu` (
+CREATE TABLE `notification` (
   `id` int(11) NOT NULL,
-  `module_id` int(11) DEFAULT NULL,
-  `en_menu_name` varchar(255) DEFAULT NULL,
-  `hi_menu_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `notification_description` longtext CHARACTER SET utf8,
+  `notification_url` varchar(255) DEFAULT NULL,
+  `notification_image` varchar(255) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
   `meta_description` longtext,
@@ -40,27 +41,27 @@ CREATE TABLE `menu` (
   `category_image` varchar(255) DEFAULT NULL,
   `banner_image` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
+  `site_url` varchar(255) DEFAULT NULL,
+  `image_folder` varchar(255) DEFAULT NULL,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `is_active` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `menu`
+-- Dumping data for table `notification`
 --
 
-INSERT INTO `menu` (`id`, `module_id`, `en_menu_name`, `hi_menu_name`, `url`, `meta_title`, `meta_description`, `meta_keyword`, `category_image`, `banner_image`, `created_at`, `updated_at`, `is_active`) VALUES
-(1, 9, 'Banking', 'बैंकिंग ', 'asass', 'aassa', '<p>asasss</p>\r\n', '<p>asaass</p>\r\n', 'download.png', 'download.png', '2018-03-19 08:14:08', '2018-03-19 12:44:08', 1),
-(6, 10, 'SSC', 'एसएससी ', NULL, NULL, NULL, NULL, NULL, NULL, '2018-03-19 12:20:43', '2018-03-19 16:50:43', 1),
-(7, 11, 'UPSC', 'यूपीएससी ', NULL, NULL, NULL, NULL, NULL, NULL, '2018-03-19 12:23:36', '2018-03-19 16:53:36', 1);
+INSERT INTO `notification` (`id`, `title`, `notification_description`, `notification_url`, `notification_image`, `url`, `meta_title`, `meta_description`, `meta_keyword`, `category_image`, `banner_image`, `created_at`, `site_url`, `image_folder`, `updated_at`, `is_active`) VALUES
+(1, 'Testing', '<p>sdsd</p>\r\n', 'assaa', 'download.png', 'dds', 'sdsd', '<p>sdsd</p>\r\n', '<p>sdsd</p>\r\n', 'download.png', 'download.png', '2018-03-24 06:45:38', 'http://localhost/gradeup/', 'asset/uploads/', '2018-03-24 11:15:38', 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `menu`
+-- Indexes for table `notification`
 --
-ALTER TABLE `menu`
+ALTER TABLE `notification`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -68,10 +69,10 @@ ALTER TABLE `menu`
 --
 
 --
--- AUTO_INCREMENT for table `menu`
+-- AUTO_INCREMENT for table `notification`
 --
-ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `notification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

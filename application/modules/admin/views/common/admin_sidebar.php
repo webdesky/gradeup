@@ -115,6 +115,39 @@
                         </ul>
                     </li>
 
+                    <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  News <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/news');?>">Add News</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/newsList');?>">News List</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>Notification <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/notification');?>">Add Notification</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/notificationList');?>"> Notification List</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li> <a href="#"><i class="fa fa-database" aria-hidden="true"></i>Event <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/event');?>">Add Event</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/eventList');?>">Event list</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
