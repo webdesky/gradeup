@@ -1980,7 +1980,7 @@ class Admin extends CI_Controller
         $where           = array(
             'testimonials.id' => $id
         );
-        $field_val       = 'testimonials.*,users.first_name,users.last_name';
+        $field_val       = 'testimonials.*,users.first_name,users.last_name,users.profile_pic';
         $data['testimonials']    = $this->model->GetJoinRecord('testimonials', 'user_id', 'users', 'id', $field_val,$where);
         $data['body']    = 'view_testimonial';
         $this->controller->load_view($data);

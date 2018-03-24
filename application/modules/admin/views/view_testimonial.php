@@ -17,9 +17,10 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
+                        <form role="form" method="post" action="" class="registration_form1" enctype="multipart/form-data">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-3">User* </label>
+                                    <label class="col-md-3">User </label>
                                     <div class="col-md-9">
                                         <?php echo strtoupper($testimonials[0]->first_name.' '.$testimonials[0]->last_name);?>
                                     </div>
@@ -28,7 +29,16 @@
                             <div class="clearfix"></div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-3">Testimonial* </label>
+                                    <label class="col-md-3">Picture </label>
+                                    <div class="col-md-9">
+                                        <img src="<?php echo base_url('asset/uploads/'.$testimonials[0]->profile_pic)?>"" height="50px" width="50px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3">Testimonial </label>
                                     <div class="col-md-9">
                                         <?php echo $testimonials[0]->testimonial;?>
                                     </div>
@@ -37,7 +47,7 @@
                             <div class="clearfix"></div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-3">Status* </label>
+                                    <label class="col-md-3">Status </label>
                                     <div class="col-md-9">
                                         <?php if($testimonials[0]->is_active==1){ echo 'Active';}else{echo 'Inactive';}?>
                                     </div>
@@ -46,13 +56,14 @@
                             <div class="clearfix"></div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-3">Created Date* </label>
+                                    <label class="col-md-3">Created Date </label>
                                     <div class="col-md-9">
                                         <?php echo date('Y-m-d',strtotime($testimonials[0]->created_at));?>
                                     </div>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
+                            </form>
                         </div>
                     </div>
                     <!-- /.row (nested) -->

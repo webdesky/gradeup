@@ -115,7 +115,7 @@
                         </ul>
                     </li>
 
-                    <li> <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i>  News <span class="fa arrow"></span></a>
+                    <!-- <li> <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i>  News <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<?php echo base_url('admin/news');?>">Add News</a>
@@ -234,7 +234,7 @@
                                 <a href="<?php echo base_url('admin/whychooseList')?>">View Content</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>
