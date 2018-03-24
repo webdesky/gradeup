@@ -843,7 +843,298 @@ class Admin extends CI_Controller
         $data['body'] = 'super_sub_menu_post_list';
         $this->controller->load_view($data);
     }
-    public function training($id = NULL)
+
+
+
+      public function news($id = null)
+    {
+        
+        $this->form_validation->set_rules('title', 'News Title', 'trim|required');
+        $this->form_validation->set_rules('status', 'Status', 'trim|required');
+       
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            
+            if (!empty($id)) {
+                $where           = array(
+                    'id' => $id
+                );
+                $data['news']    = $this->model->getAllwhere('news', $where);
+                
+                
+            } else {
+             
+            }
+            $data['body'] = 'add_news';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                
+                $title              = $this->input->post('title');
+                $news_description   = $this->input->post('news_description');
+                $news_url           = $this->input->post('news_url');
+                $url                = $this->input->post('url');
+                $meta_title         = $this->input->post('meta_title');
+                $meta_description   = $this->input->post('meta_description');
+                $meta_keyword       = $this->input->post('meta_keyword');
+                $is_active          = $this->input->post('status');
+                
+                $data = array(
+
+                    'title'             => $title,
+                    'news_description'  => $news_description,
+                    'news_url'          => $news_url,
+                    'url'               => $url,
+                    'meta_title'        => $meta_title,
+                    'meta_description'  => $meta_description,
+                    'meta_keyword'      => $meta_keyword,
+                    'site_url'          => base_url(),
+                    'image_folder'      =>'asset/uploads/',
+                    'is_active'         => $is_active,
+                    'created_at'        => date('Y-m-d H:i:s')
+
+                );
+                
+                if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
+                    $count = count($_FILES['category_image']['name']);
+                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                                $data['category_image'] = $_FILES['category_image']['name'];
+                        }
+                }
+
+                if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
+                    $count = count($_FILES['banner_image']['name']);
+                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                                $data['banner_image'] = $_FILES['banner_image']['name'];
+                        }
+                }
+               
+               if (isset($_FILES['news_image']['name']) && !empty($_FILES['news_image']['name'])) {
+                    $count = count($_FILES['news_image']['name']);
+                        if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])) {
+                                $data['news_image'] = $_FILES['news_image']['name'];
+                        }
+                }
+
+
+               
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('news', $data, $where);
+                } else {
+                    $result = $this->model->insertData('news', $data);
+                }
+                
+                $this->newsList();
+            
+            }
+        }
+    }
+
+    public function newsList(){
+        $data['news']  = $this->model->getAll('news');
+
+        $data['body'] = 'news_list';
+        $this->controller->load_view($data);
+
+
+    }
+
+    public function notification($id = null)
+    {
+        
+        $this->form_validation->set_rules('title', 'Notification Title', 'trim|required');
+        $this->form_validation->set_rules('status', 'Status', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            
+            if (!empty($id)) {
+                $where           = array(
+                    'id' => $id
+                );
+                $data['notification']    = $this->model->getAllwhere('notification', $where);
+                
+                
+            } else {
+             
+            }
+            $data['body'] = 'add_notification';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                
+                $title                      = $this->input->post('title');
+                $notification_description   = $this->input->post('notification_description');
+                $notification_url           = $this->input->post('notification_url');
+                $url                        = $this->input->post('url');
+                $meta_title                 = $this->input->post('meta_title');
+                $meta_description           = $this->input->post('meta_description');
+                $meta_keyword               = $this->input->post('meta_keyword');
+                $is_active                  = $this->input->post('status');
+                
+                $data = array(
+
+                    'title'                     => $title,
+                    'notification_description'  => $notification_description,
+                    'notification_url'          => $notification_url,
+                    'url'                       => $url,
+                    'meta_title'                => $meta_title,
+                    'meta_description'          => $meta_description,
+                    'meta_keyword'              => $meta_keyword,
+                    'site_url'                  => base_url(),
+                    'image_folder'              =>'asset/uploads/',
+                    'is_active'                 => $is_active,
+                    'created_at'                => date('Y-m-d H:i:s')
+
+                );
+                
+                if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
+                    $count = count($_FILES['category_image']['name']);
+                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                                $data['category_image'] = $_FILES['category_image']['name'];
+                        }
+                }
+
+                if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
+                    $count = count($_FILES['banner_image']['name']);
+                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                                $data['banner_image'] = $_FILES['banner_image']['name'];
+                        }
+                }
+               
+               if (isset($_FILES['notification_image']['name']) && !empty($_FILES['notification_image']['name'])) {
+                    $count = count($_FILES['notification_image']['name']);
+                        if (move_uploaded_file($_FILES['notification_image']['tmp_name'], 'asset/uploads/' . $_FILES['notification_image']['name'])) {
+                                $data['notification_image'] = $_FILES['notification_image']['name'];
+                        }
+                }
+
+
+               
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('notification', $data, $where);
+                } else {
+                    $result = $this->model->insertData('notification', $data);
+                }
+                
+                $this->notificationList();
+            
+            }
+        }
+    }
+
+
+    public function notificationList(){
+        $data['notification']  = $this->model->getAll('notification');
+
+        $data['body'] = 'notification_list';
+        $this->controller->load_view($data);
+
+
+    }
+
+    public function event($id = null)
+    {
+       
+        $this->form_validation->set_rules('title', 'Event Title', 'trim|required');
+        $this->form_validation->set_rules('status', 'Status', 'trim|required');
+        $this->form_validation->set_rules('description', 'description', 'trim|required');
+        $this->form_validation->set_rules('address', 'address', 'trim|required');
+        $this->form_validation->set_rules('event_date', 'event date', 'trim|required');
+        $this->form_validation->set_rules('start_time', 'event time', 'trim|required');
+        $this->form_validation->set_rules('end_time', 'event time', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            
+            if (!empty($id)) {
+                $where           = array(
+                    'id' => $id
+                );
+                $data['event']    = $this->model->getAllwhere('event', $where);
+                
+                
+            } else {
+             
+            }
+            $data['body'] = 'add_event';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                
+                $title              = $this->input->post('title');
+                $event_description  = $this->input->post('description');
+                $event_address      = $this->input->post('address');
+                $event_date         = $this->input->post('event_date');
+                $start_time        = $this->input->post('start_time');
+                $end_time          = $this->input->post('end_time');
+                $is_active          = $this->input->post('status');
+                
+                $data = array(
+
+                    'title'             => $title,
+                    'description'       => $event_description,
+                    'address'           => $event_address,
+                    'event_date'        => $event_date,
+                    'start_time'       => $start_time,
+                    'end_time'         => $end_time,
+                    'site_url'          => base_url(),
+                    'image_folder'      =>'asset/uploads/',
+                    'is_active'         => $is_active,
+                    'created_at'        => date('Y-m-d H:i:s')
+
+                );
+                
+                
+               
+               if (isset($_FILES['event_image']['name']) && !empty($_FILES['event_image']['name'])) {
+                    $count = count($_FILES['event_image']['name']);
+                        if (move_uploaded_file($_FILES['event_image']['tmp_name'], 'asset/uploads/' . $_FILES['event_image']['name'])) {
+                                $data['image'] = $_FILES['event_image']['name'];
+                        }
+                }
+
+
+               
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('event', $data, $where);
+                } else {
+                    $result = $this->model->insertData('event', $data);
+                }
+                
+                $this->eventList();
+            
+            }
+        }
+    }
+
+    public function eventList(){
+        $data['event']  = $this->model->getAll('event');
+
+        $data['body'] = 'event_list';
+        $this->controller->load_view($data);
+
+
+    }
+
+
+    public function training($id = null)
     {
         
         $this->form_validation->set_rules('en_training_name', 'Training Name', 'trim|required');
