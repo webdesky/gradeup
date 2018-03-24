@@ -1106,7 +1106,7 @@ class Admin extends CI_Controller
                if (isset($_FILES['event_image']['name']) && !empty($_FILES['event_image']['name'])) {
                     $count = count($_FILES['event_image']['name']);
                         if (move_uploaded_file($_FILES['event_image']['tmp_name'], 'asset/uploads/' . $_FILES['event_image']['name'])) {
-                                $data['event_image'] = $_FILES['event_image']['name'];
+                                $data['image'] = $_FILES['event_image']['name'];
                         }
                 }
 
