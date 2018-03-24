@@ -185,6 +185,23 @@
                             </li>
                         </ul>
                     </li>  -->
+                    <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Testimonials<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/testimonials')?>">View Testimonials</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Why Choose Us<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/choose')?>">Add Content</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/whychooseList')?>">View Content</a>
+                            </li>
+                        </ul>
+                    </li>
 
                 </ul>
             </div>

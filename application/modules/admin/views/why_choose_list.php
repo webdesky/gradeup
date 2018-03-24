@@ -1,9 +1,9 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-
-            <h1 class="page-header">Menu List</h1>
-
+           
+            <h1 class="page-header">Why Choose List</h1>
+          
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -12,8 +12,8 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-primary" href="<?php echo base_url('admin/menu')?>"><i class="fa fa-th-list">&nbsp;Add Menu</i></a>
-                </div>
+                    <a class="btn btn-primary" href="<?php echo base_url('admin/choose/')?>"><i class="fa fa-th-list">&nbsp;Add Content</i></a>
+                     </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
@@ -22,35 +22,36 @@
                                     <thead>
                                         <tr class="bg-primary">
                                             <th>Sr no.</th>
-                                            <th>Module Name</th>
-                                            <th>English Menu Name</th>
-                                            <th>Menu Menu Name</th>
+                                            <th>Title</th>
+                                            <th>Content</th>
+                                            <th>Image</th>
+                                            <th>Status</th>
                                             <th>Created at</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if(!empty($menu)){ ?>
-                                        <?php $i=1; foreach($menu as $menu){ 
-                                            echo '<pre>'; print_r($menu);?>
+                                        <?php if(!empty($post)){ ?>
+                                        <?php $i=1; foreach($post as $value){?>
                                         <tr id="tr_<?php echo $i;?>">
                                             <td>
                                                 <?php echo $i; ?> </td>
                                             <td>
-                                                <?php echo $menu->en_module_name;?> </td>
+                                                <?php echo $value['en_title'];?> </td>
                                             <td>
-                                                <?php echo $menu->en_menu_name;?> </td>
+                                                <?php echo $value['en_content'];?> </td>
                                             <td>
-                                                <?php echo $menu->hi_menu_name;?> </td>
+                                                <?php echo $value['image'];?> </td>
                                             <td>
-                                                <?php echo date('Y-m-d',strtotime($menu->created_at));?> </td>
+                                                <?php if($value['is_active']==1){ echo 'Active';}else{echo 'Inactive';}?> </td>
                                             <td>
-                                                <a href="<?php echo base_url('admin/menu/'.$menu->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |
-                                                <a href="javascript:void(0)" onclick="delete_user('<?php echo $menu->id?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
-                                            </td>
+                                                <?php echo date('Y-m-d',strtotime($value['created_at']));?> </td>
+                                            <td>
+                                                <a href="<?php echo base_url('admin/choose/'.$value['id'])?>"><span class="glyphicon glyphicon-edit"></span></a> |
+                                                <a href="javascript:void(0)" onclick="delete_user('<?php echo $value['id']?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
+                                               </td>
                                         </tr>
-                                        <?php $i++;}}?>
-                                    </tbody>
+                                        <?php $i++;}}?> </tbody>
                                 </table>
                             </div>
                         </div>
@@ -86,7 +87,7 @@ function delete_user(id, tr_id) {
             url: "<?php echo base_url('admin/delete')?>",
             data: {
                 id: id,
-                table: 'menu'
+                table: 'why_choose_us'
             },
             type: "POST"
         }).done(function(data) {
@@ -96,5 +97,4 @@ function delete_user(id, tr_id) {
 
     });
 }
-
 </script>

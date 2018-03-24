@@ -242,7 +242,7 @@ class Admin extends CI_Controller
             }
         }
     }
-    public function module($id = null)
+    public function module($id = NULL)
     {
         $this->form_validation->set_rules('en_module_name', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
@@ -303,7 +303,7 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
     }
     
-    public function chapter($id = null)
+    public function chapter($id = NULL)
     {
         $this->form_validation->set_rules('en_chapter_name', 'Chapter Name', 'trim|required');
         if ($this->form_validation->run() == false) {
@@ -379,7 +379,7 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
     }
     
-    public function menu($id = null)
+    public function menu($id = NULL)
     {
         
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
@@ -467,13 +467,13 @@ class Admin extends CI_Controller
             'menu.is_active' => 1
         );
         $data['menu'] = $this->model->GetJoinRecord('menu', 'module_id', 'modules', 'id', 'menu.en_menu_name,hi_menu_name,menu.id as id,modules.en_module_name,menu.created_at', $where);
-        
+
         $data['body'] = 'menu_list';
         $this->controller->load_view($data);
         
     }
     
-    public function sub_menu($id = null)
+    public function sub_menu($id = NULL)
     {
         $this->form_validation->set_rules('menu_id', 'Menu Name', 'trim|required');
         if ($this->form_validation->run() == false) {
@@ -481,7 +481,6 @@ class Admin extends CI_Controller
             if (!empty($id)) {
                 
                 $where            = array(
-                    
                     'sub_menu.id' => $id
                 );
                 $data['sub_menu'] = $this->model->getAllwhere('sub_menu', $where);
@@ -489,7 +488,6 @@ class Admin extends CI_Controller
                 
             } else {
                 $where        = array(
-                    
                     'is_active' => 1
                 );
                 $data['menu'] = $this->model->getAllwhere('menu', $where);
@@ -597,7 +595,7 @@ class Admin extends CI_Controller
         }
     }
     
-    public function super_sub_menu($id = null)
+    public function super_sub_menu($id = NULL)
     {
         $this->form_validation->set_rules('sub_menu_id', 'Sub Menu Name', 'trim|required|numeric');
         $this->form_validation->set_rules('en_sub_menu_name', 'Super Sub Menu Name in English', 'trim|required');
@@ -643,10 +641,10 @@ class Admin extends CI_Controller
                 $sub_menu_id      = $this->input->post('sub_menu_id');
                 $en_sub_menu_name = $this->input->post('en_sub_menu_name');
                 $hi_sub_menu_name = $this->input->post('hi_sub_menu_name');
-                 $url                = $this->input->post('url');
-                $meta_title         = $this->input->post('meta_title');
-                $meta_description   = $this->input->post('meta_description');
-                $meta_keyword       = $this->input->post('meta_keyword');
+                $url              = $this->input->post('url');
+                $meta_title       = $this->input->post('meta_title');
+                $meta_description = $this->input->post('meta_description');
+                $meta_keyword     = $this->input->post('meta_keyword');
                 $is_active        = $this->input->post('status');
                 
                 $data = array(
@@ -663,7 +661,7 @@ class Admin extends CI_Controller
                 
                  if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/'.$_FILES['category_image']['name'])) {
                                 $data['category_image'] = $_FILES['category_image']['name'];
                         }
                 }
@@ -671,7 +669,7 @@ class Admin extends CI_Controller
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
                         if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
-                                $data['banner_image'] = $_FILES['banner_image']['name'];
+                            $data['banner_image'] = $_FILES['banner_image']['name'];
                         }
                 }
 
@@ -716,7 +714,7 @@ class Admin extends CI_Controller
     }
     
     
-    public function super_sub_menu_post($id = null)
+    public function super_sub_menu_post($id = NULL)
     {
         $this->form_validation->set_rules('menu_id', ' Menu Name', 'trim|required|numeric');
         $this->form_validation->set_rules('sub_menu_id', 'Sub Menu Name', 'trim|required|numeric');
@@ -845,7 +843,7 @@ class Admin extends CI_Controller
         $data['body'] = 'super_sub_menu_post_list';
         $this->controller->load_view($data);
     }
-    public function training($id = null)
+    public function training($id = NULL)
     {
         
         $this->form_validation->set_rules('en_training_name', 'Training Name', 'trim|required');
@@ -922,7 +920,7 @@ class Admin extends CI_Controller
         echo json_encode($data);
     }
     
-    public function question($id = null)
+    public function question($id = NULL)
     {
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
@@ -1015,7 +1013,7 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
     }
     
-    public function exam($id = null)
+    public function exam($id = NULL)
     {
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
@@ -1169,7 +1167,7 @@ class Admin extends CI_Controller
     
     
     
-    public function register($id = null, $user_role = null)
+    public function register($id = NULL, $user_role = NULL)
     {
         //$role = $user_role;
         
@@ -1251,7 +1249,7 @@ class Admin extends CI_Controller
     }
     
     
-    public function userList($user_role = null)
+    public function userList($user_role = NULL)
     {
         $where = array(
             'user_role !=' => 1
@@ -1295,7 +1293,7 @@ class Admin extends CI_Controller
         
     }
     
-    public function addRights($id = null)
+    public function addRights($id = NULL)
     {
         $actions = array(
             'add',
@@ -1675,4 +1673,104 @@ class Admin extends CI_Controller
             show_404();
         }
     }
+
+    public function testimonials(){
+        if ($this->controller->checkSession()) {
+            $field_val       = 'testimonials.*,users.first_name,users.last_name';
+            $data['testimonials']    = $this->model->GetJoinRecord('testimonials', 'user_id', 'users', 'id', $field_val);
+            $data['body']    = 'testimonials_list';
+            $this->controller->load_view($data);
+        } else {
+            show_404();
+        }
+    }
+
+    public function view_testimonial($id=NULL){
+        $where           = array(
+            'testimonials.id' => $id
+        );
+        $field_val       = 'testimonials.*,users.first_name,users.last_name';
+        $data['testimonials']    = $this->model->GetJoinRecord('testimonials', 'user_id', 'users', 'id', $field_val,$where);
+        $data['body']    = 'view_testimonial';
+        $this->controller->load_view($data);
+    }
+
+
+    public function choose($id=NULL){
+        $this->form_validation->set_rules('en_site_title', 'Title in English', 'trim|required');
+        $this->form_validation->set_rules('en_content', 'Content in English', 'trim|required');
+        $this->form_validation->set_rules('hi_site_title', 'Title in Hindi', 'trim|required');
+        $this->form_validation->set_rules('hi_content', 'Content in Hindi', 'trim|required');
+        $this->form_validation->set_rules('status', 'Status', 'trim|required|numeric');
+        if (!empty($id)) {
+            $where        = array(
+                'id' => $id
+            );
+            $data['setting'] = $this->model->getAllwhere('why_choose_us', $where);
+        }
+        $where           = array(
+            'is_active' => 1
+        );
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            $data['body'] = 'why_choose';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                $en_site_title = $this->input->post('en_site_title');
+                $en_content    = $this->input->post('en_content');
+                $hi_site_title = $this->input->post('hi_site_title');
+                $hi_content    = $this->input->post('hi_content');
+                $is_active     = $this->input->post('status');
+                $f_newfile     = "";
+
+                if (!empty($_FILES['image']['name'])) {
+                    $f_name      = $_FILES['image']['name'];
+                    $f_tmp       = $_FILES['image']['tmp_name'];
+                    $f_size      = $_FILES['image']['size'];
+                    $f_extension = explode('.', $f_name); //To breaks the string into array
+                    $f_extension = strtolower(end($f_extension)); //end() is used to retrun a last element to the array                    
+                    if ($f_name) {
+                        $f_newfile = uniqid() . '.' . $f_extension; // It`s use to stop overriding if the image will be same then uniqid() will generate the unique name of both file.
+                        $store     = 'asset/uploads/' . $f_newfile;
+                        $image1    = move_uploaded_file($f_tmp, $store);
+                    }
+                }
+
+                
+                $data = array(
+                    'en_title' => $en_site_title,
+                    'en_content' => $en_content,
+                    'hi_title' => $hi_site_title,
+                    'hi_content' => $hi_content,
+                    'image' =>$f_newfile,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
+                );
+                
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    unset($data['created_at']);
+                    $result = $this->model->updateFields('why_choose_us', $data, $where);
+                } else {
+                    $result = $this->model->insertData('why_choose_us', $data);
+                }
+                $this->whychooseList();
+            }
+        }
+
+    }
+
+    public function whychooseList(){
+        if ($this->controller->checkSession()) {
+            $data['post']    = $this->model->getAll('why_choose_us');
+            $data['body']    = 'why_choose_list';
+            $this->controller->load_view($data);
+        } else {
+            show_404();
+        }
+    }
+
 }
