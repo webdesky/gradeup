@@ -44,10 +44,10 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-2">Status</label>
-                                    <div class="col-lg-6">
+                                    <label class="col-md-3">Status</label>
+                                    <div class="col-lg-9">
                                         <label class="radio-inline">
                                             <input type="radio" name="status" value="1" <?php if(isset($modules) && $modules[0]->is_active==1){ echo 'checked'; } ?>>Active
                                         </label>
@@ -56,6 +56,16 @@
                                         </label>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3">Image</label>
+                                    <div class="col-lg-9">
+                                        <input type="file" name="image" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
                                 <div class="col-md-12" align="center">
                                     <button type="submit" value="Save" class="btn btn-success">Save</button>
                                     <input type="reset" class="btn btn-default" value="Reset">

@@ -264,11 +264,25 @@ class Admin extends CI_Controller
                 $data = array(
                     'en_module_name' => $en_module_name,
                     'hi_module_name' => $hi_module_name,
+                      'site_url'     => base_url(),
+                    'image_folder' =>'asset/uploads/',
+
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
-                
+                if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                    
+                    if ($_FILES["image"]["size"] > 500000) {
+                        $this->session->set_flashdata('info_message', "Module icon size too large");
+                        redirect('admin/module');
+                    } else {
+                        if (move_uploaded_file($_FILES['image']['tmp_name'], 'asset/uploads/' . $_FILES['image']['name'])) {
+                            $data['image'] = $_FILES['image']['name'];
+                        }
+                        
+                    }
+                }
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
