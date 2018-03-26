@@ -32,7 +32,7 @@ class Admin extends CI_Controller
         }
     }
     
-
+    
     public function last_executed_query()
     {
         echo $this->db->last_query();
@@ -149,7 +149,7 @@ class Admin extends CI_Controller
                 $result = $this->model->updateFields('settings', $data, $where);
                 redirect('admin/setting');
             }
- 
+            
         }
         
     }
@@ -197,15 +197,15 @@ class Admin extends CI_Controller
             if ($this->controller->checkSession()) {
                 $en_privacy_policy = $this->input->post('en_privacy_policy');
                 $hi_privacy_policy = $this->input->post('hi_privacy_policy');
-                $data = array(
+                $data              = array(
                     'en_privacy_policy' => $en_privacy_policy,
                     'hi_privacy_policy' => $hi_privacy_policy,
                     'created_at' => date('Y-m-d H:i:s')
                 );
-                $where  = array(
+                $where             = array(
                     'id' => $this->input->post('id')
                 );
-                $result = $this->model->updateFields('settings', $data, $where);
+                $result            = $this->model->updateFields('settings', $data, $where);
                 redirect('admin/privacy');
             }
         }
@@ -224,7 +224,7 @@ class Admin extends CI_Controller
             if ($this->controller->checkSession()) {
                 $en_terms = $this->input->post('en_terms');
                 $hi_terms = $this->input->post('hi_terms');
-                $data = array(
+                $data     = array(
                     'en_terms' => $en_terms,
                     'hi_terms' => $hi_terms,
                     'created_at' => date('Y-m-d H:i:s')
@@ -265,7 +265,7 @@ class Admin extends CI_Controller
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
-                if(isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
                     
                     if ($_FILES["image"]["size"] > 500000) {
                         $this->session->set_flashdata('info_message', "Module icon size too large");
@@ -285,7 +285,6 @@ class Admin extends CI_Controller
                     $result = $this->model->updateFields('modules', $data, $where);
                 } else {
                     $result = $this->model->insertData('modules', $data);
-                    
                 }
                 $this->moduleList();
             }
@@ -349,14 +348,12 @@ class Admin extends CI_Controller
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
-                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
                     );
                     
                     unset($data['created_at']);
-                    
                     $result = $this->model->updateFields('chapters', $data, $where);
                 } else {
                     $result = $this->model->insertData('chapters', $data);
@@ -377,7 +374,7 @@ class Admin extends CI_Controller
     public function edit_chapter($id)
     {
         $where = array(
-            'chapters.id ' => $id
+            'chapters.id' => $id
         );
         
         $data['modules'] = $this->model->getAll('modules');
@@ -388,7 +385,6 @@ class Admin extends CI_Controller
     
     public function menu($id = NULL)
     {
-        
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
@@ -411,42 +407,41 @@ class Admin extends CI_Controller
         } else {
             if ($this->controller->checkSession()) {
                 
-                $module_id          = $this->input->post('module_id');
-                $en_menu_name       = $this->input->post('en_menu_name');
-                $hi_menu_name       = $this->input->post('hi_menu_name');
-                $url                = $this->input->post('url');
-                $meta_title         = $this->input->post('meta_title');
-                $meta_description   = $this->input->post('meta_description');
-                $meta_keyword       = $this->input->post('meta_keyword');
-                $is_active          = $this->input->post('status');
+                $module_id        = $this->input->post('module_id');
+                $en_menu_name     = $this->input->post('en_menu_name');
+                $hi_menu_name     = $this->input->post('hi_menu_name');
+                $url              = $this->input->post('url');
+                $meta_title       = $this->input->post('meta_title');
+                $meta_description = $this->input->post('meta_description');
+                $meta_keyword     = $this->input->post('meta_keyword');
+                $is_active        = $this->input->post('status');
                 
                 $data = array(
-                    'module_id'         => $module_id,
-                    'en_menu_name'      => $en_menu_name,
-                    'hi_menu_name'      => $hi_menu_name,
-                    'url'               => $url,
-                    'meta_title'        => $meta_title,
-                    'meta_description'  => $meta_description,
-                    'meta_keyword'      => $meta_keyword,
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
-
+                    'module_id' => $module_id,
+                    'en_menu_name' => $en_menu_name,
+                    'hi_menu_name' => $hi_menu_name,
+                    'url' => $url,
+                    'meta_title' => $meta_title,
+                    'meta_description' => $meta_description,
+                    'meta_keyword' => $meta_keyword,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
-                                $data['category_image'] = $_FILES['category_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                        $data['category_image'] = $_FILES['category_image']['name'];
+                    }
                 }
-
+                
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
-                                $data['banner_image'] = $_FILES['banner_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                        $data['banner_image'] = $_FILES['banner_image']['name'];
+                    }
                 }
-               
+                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -460,7 +455,7 @@ class Admin extends CI_Controller
                 }
                 
                 $this->menuList();
-            
+                
             }
         }
     }
@@ -468,12 +463,10 @@ class Admin extends CI_Controller
     
     public function menuList()
     {
-        
         $where        = array(
             'menu.is_active' => 1
         );
         $data['menu'] = $this->model->GetJoinRecord('menu', 'module_id', 'modules', 'id', 'menu.en_menu_name,hi_menu_name,menu.id as id,modules.en_module_name,menu.created_at', $where);
-
         $data['body'] = 'menu_list';
         $this->controller->load_view($data);
         
@@ -485,13 +478,11 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             if (!empty($id)) {
-                
                 $where            = array(
                     'sub_menu.id' => $id
                 );
                 $data['sub_menu'] = $this->model->getAllwhere('sub_menu', $where);
                 $data['menu']     = $this->model->getAllwhere('menu');
-                
             } else {
                 $where        = array(
                     'is_active' => 1
@@ -504,43 +495,41 @@ class Admin extends CI_Controller
         } else {
             if ($this->controller->checkSession()) {
                 
-                $menu_id            = $this->input->post('menu_id');
-                $en_sub_menu_name   = $this->input->post('en_sub_menu_name');
-                $hi_sub_menu_name   = $this->input->post('hi_sub_menu_name');
-                $url                = $this->input->post('url');
-                $meta_title         = $this->input->post('meta_title');
-                $meta_description   = $this->input->post('meta_description');
-                $meta_keyword       = $this->input->post('meta_keyword');
+                $menu_id          = $this->input->post('menu_id');
+                $en_sub_menu_name = $this->input->post('en_sub_menu_name');
+                $hi_sub_menu_name = $this->input->post('hi_sub_menu_name');
+                $url              = $this->input->post('url');
+                $meta_title       = $this->input->post('meta_title');
+                $meta_description = $this->input->post('meta_description');
+                $meta_keyword     = $this->input->post('meta_keyword');
                 $is_active        = $this->input->post('status');
                 
                 $data = array(
-
-                    'menu_id'            => $menu_id,
-                    'en_sub_menu_name'   => $en_sub_menu_name,
-                    'hi_sub_menu_name'   => $hi_sub_menu_name,
-                    'url'                => $url,
-                    'meta_title'         => $meta_title,
-                    'meta_description'   => $meta_description,
-                    'meta_keyword'       => $meta_keyword,
-                    'is_active'          => $is_active,
-                    'created_at'         => date('Y-m-d H:i:s')
-
+                    'menu_id' => $menu_id,
+                    'en_sub_menu_name' => $en_sub_menu_name,
+                    'hi_sub_menu_name' => $hi_sub_menu_name,
+                    'url' => $url,
+                    'meta_title' => $meta_title,
+                    'meta_description' => $meta_description,
+                    'meta_keyword' => $meta_keyword,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
-                                $data['category_image'] = $_FILES['category_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                        $data['category_image'] = $_FILES['category_image']['name'];
+                    }
                 }
-
+                
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
-                                $data['banner_image'] = $_FILES['banner_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                        $data['banner_image'] = $_FILES['banner_image']['name'];
+                    }
                 }
-
+                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -560,10 +549,12 @@ class Admin extends CI_Controller
     
     public function submenuList()
     {
-        $where            = array('sub_menu.is_active' => 1);
+        $where            = array(
+            'sub_menu.is_active' => 1
+        );
         $data['sub_menu'] = $this->model->GetJoinRecord('sub_menu', 'menu_id', 'menu', 'id', 'sub_menu.en_sub_menu_name,sub_menu.hi_sub_menu_name,sub_menu.id as id,menu.en_menu_name,sub_menu.created_at', $where);
-        $data['body'] = 'sub_menu_list';
-        $this->controller->load_view($data); 
+        $data['body']     = 'sub_menu_list';
+        $this->controller->load_view($data);
     }
     public function check_database($password)
     {
@@ -657,28 +648,28 @@ class Admin extends CI_Controller
                     'sub_menu_id' => $sub_menu_id,
                     'en_super_sub_menu' => $en_sub_menu_name,
                     'hi_super_sub_menu' => $hi_sub_menu_name,
-                    'url'                => $url,
-                    'meta_title'         => $meta_title,
-                    'meta_description'   => $meta_description,
-                    'meta_keyword'       => $meta_keyword,
+                    'url' => $url,
+                    'meta_title' => $meta_title,
+                    'meta_description' => $meta_description,
+                    'meta_keyword' => $meta_keyword,
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
-                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
+                if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/'.$_FILES['category_image']['name'])) {
-                                $data['category_image'] = $_FILES['category_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                        $data['category_image'] = $_FILES['category_image']['name'];
+                    }
                 }
-
+                
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
-                            $data['banner_image'] = $_FILES['banner_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                        $data['banner_image'] = $_FILES['banner_image']['name'];
+                    }
                 }
-
+                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -732,39 +723,29 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             if (!empty($id)) {
-                $where     = array(
+                $where = array(
                     'super_sub_menu_post.id' => $id
                 );
-
+                
                 $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post,super_sub_menu_post.en_post,super_sub_menu.en_super_sub_menu,super_sub_menu.sub_menu_id,super_sub_menu.en_super_sub_menu';
-        
-               $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'super_sub_menu_id', 'super_sub_menu', 'id', $field_val,$where);
-
                 
+                $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'super_sub_menu_id', 'super_sub_menu', 'id', $field_val, $where);
                 
-                $where = array(
+                $where                                         = array(
                     'id' => $data['super_sub_menu_post'][0]->sub_menu_id
                 );
-                
-                $select = 'menu_id,en_sub_menu_name';
-                
-                $sub_menu_name = $this->model->getAllwhere('sub_menu', $where, $select);
-                
+                $select                                        = 'menu_id,en_sub_menu_name';
+                $sub_menu_name                                 = $this->model->getAllwhere('sub_menu', $where, $select);
                 $data['super_sub_menu_post'][0]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
-                
-
-                  $where1 = array(
+                $where1                                        = array(
                     'id' => $sub_menu_name[0]->menu_id
                 );
                 
-                $select1 = 'id,en_menu_name';
-                $menu = $this->model->getAllwhere('menu', $where1, $select1);
-                
-                $data['super_sub_menu_post'][0]->menu = $menu[0]->en_menu_name;
+                $select1                                 = 'id,en_menu_name';
+                $menu                                    = $this->model->getAllwhere('menu', $where1, $select1);
+                $data['super_sub_menu_post'][0]->menu    = $menu[0]->en_menu_name;
                 $data['super_sub_menu_post'][0]->menu_id = $menu[0]->id;
-                $data['menu'] = $this->model->getAllwhere('menu');
-
-
+                $data['menu']                            = $this->model->getAllwhere('menu');
             } else {
                 $where = array(
                     'is_active' => 1
@@ -777,15 +758,12 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
-
-                
-                $super_sub_menu_id  = $this->input->post('super_sub_menu_id');
-                $en_post            = $this->input->post('en_post');
-                $hi_post            = $this->input->post('hi_post');
-                $is_active          = $this->input->post('status');
+                $super_sub_menu_id = $this->input->post('super_sub_menu_id');
+                $en_post           = $this->input->post('en_post');
+                $hi_post           = $this->input->post('hi_post');
+                $is_active         = $this->input->post('status');
                 
                 $data = array(
-
                     'super_sub_menu_id' => $super_sub_menu_id,
                     'en_post' => $en_post,
                     'hi_post' => $hi_post,
@@ -799,131 +777,122 @@ class Admin extends CI_Controller
                         'id' => $id
                     );
                     unset($data['created_at']);
-                    
                     $result = $this->model->updateFields('super_sub_menu_post', $data, $where);
                 } else {
                     $result = $this->model->insertData('super_sub_menu_post', $data);
                 }
-                
                 $this->super_submenupostList();
             }
         }
         
     }
-
-
-    public function super_submenupostList(){
-
-           $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post,super_sub_menu_post.en_post,super_sub_menu.en_super_sub_menu,super_sub_menu.sub_menu_id,super_sub_menu.en_super_sub_menu';
+    
+    
+    public function super_submenupostList()
+    {
+        $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post,super_sub_menu_post.en_post,super_sub_menu.en_super_sub_menu,super_sub_menu.sub_menu_id,super_sub_menu.en_super_sub_menu';
         
         $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'super_sub_menu_id', 'super_sub_menu', 'id', $field_val);
-
-        // echo "<pre>";
-        // print_r($data);
-        // die;
-
-        for ($i=0; $i <count($data['super_sub_menu_post']) ; $i++) { 
-
+        
+        for ($i = 0; $i < count($data['super_sub_menu_post']); $i++) {
+            
             $where = array(
                 'id' => $data['super_sub_menu_post'][$i]->sub_menu_id
             );
             
-
-              $select = 'menu_id,en_sub_menu_name';
-                
-              $sub_menu_name  = $this->model->getAllwhere('sub_menu', $where, $select);
-        
-              $data['super_sub_menu_post'][$i]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
-               $where1 = array(
-                    'id' => $sub_menu_name[0]->menu_id
-                );
-                
-                $select1 = 'id,en_menu_name';
-                $menu = $this->model->getAllwhere('menu', $where1, $select1);
-
-                $data['super_sub_menu_post'][$i]->menu = $menu[0]->en_menu_name;
-                $data['super_sub_menu_post'][$i]->menu_id = $menu[0]->id;
-
-
+            
+            $select = 'menu_id,en_sub_menu_name';
+            
+            $sub_menu_name = $this->model->getAllwhere('sub_menu', $where, $select);
+            
+            $data['super_sub_menu_post'][$i]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
+            $where1                                         = array(
+                'id' => $sub_menu_name[0]->menu_id
+            );
+            
+            $select1                                  = 'id,en_menu_name';
+            $menu                                     = $this->model->getAllwhere('menu', $where1, $select1);
+            $data['super_sub_menu_post'][$i]->menu    = $menu[0]->en_menu_name;
+            $data['super_sub_menu_post'][$i]->menu_id = $menu[0]->id;
         }
         $data['body'] = 'super_sub_menu_post_list';
         $this->controller->load_view($data);
     }
-
-
-
-      public function news($id = null)
+    
+    
+    
+    public function news($id = null)
     {
         
         $this->form_validation->set_rules('title', 'News Title', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
-       
+        
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             
             if (!empty($id)) {
-                $where           = array(
+                $where        = array(
                     'id' => $id
                 );
-                $data['news']    = $this->model->getAllwhere('news', $where);
+                $data['news'] = $this->model->getAllwhere('news', $where);
                 
                 
             } else {
-             
+                
             }
             $data['body'] = 'add_news';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
                 
-                $title              = $this->input->post('title');
-                $news_description   = $this->input->post('news_description');
-                $news_url           = $this->input->post('news_url');
-                $url                = $this->input->post('url');
-                $meta_title         = $this->input->post('meta_title');
-                $meta_description   = $this->input->post('meta_description');
-                $meta_keyword       = $this->input->post('meta_keyword');
-                $is_active          = $this->input->post('status');
+                $title            = $this->input->post('title');
+                $news_description = $this->input->post('news_description');
+                $news_url         = $this->input->post('news_url');
+                $url              = $this->input->post('url');
+                $meta_title       = $this->input->post('meta_title');
+                $meta_description = $this->input->post('meta_description');
+                $meta_keyword     = $this->input->post('meta_keyword');
+                $is_active        = $this->input->post('status');
                 
                 $data = array(
-
-                    'title'             => $title,
-                    'news_description'  => $news_description,
-                    'news_url'          => $news_url,
-                    'url'               => $url,
-                    'meta_title'        => $meta_title,
-                    'meta_description'  => $meta_description,
-                    'meta_keyword'      => $meta_keyword,
-                    'site_url'          => base_url(),
-                    'image_folder'      =>'asset/uploads/',
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
-
+                    
+                    'title' => $title,
+                    'news_description' => $news_description,
+                    'news_url' => $news_url,
+                    'url' => $url,
+                    'meta_title' => $meta_title,
+                    'meta_description' => $meta_description,
+                    'meta_keyword' => $meta_keyword,
+                    'site_url' => base_url(),
+                    'image_folder' => 'asset/uploads/',
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
+                    
                 );
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
-                                $data['category_image'] = $_FILES['category_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                        $data['category_image'] = $_FILES['category_image']['name'];
+                    }
                 }
-
+                
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
-                                $data['banner_image'] = $_FILES['banner_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                        $data['banner_image'] = $_FILES['banner_image']['name'];
+                    }
                 }
-               
-               if (isset($_FILES['news_image']['name']) && !empty($_FILES['news_image']['name'])) {
+                
+                if (isset($_FILES['news_image']['name']) && !empty($_FILES['news_image']['name'])) {
                     $count = count($_FILES['news_image']['name']);
-                        if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])) {
-                                $data['news_image'] = $_FILES['news_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])) {
+                        $data['news_image'] = $_FILES['news_image']['name'];
+                    }
                 }
-
-
-               
+                
+                
+                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -937,20 +906,19 @@ class Admin extends CI_Controller
                 }
                 
                 $this->newsList();
-            
+                
             }
         }
     }
-
-    public function newsList(){
-        $data['news']  = $this->model->getAll('news');
-
+    
+    public function newsList()
+    {
+        $data['news'] = $this->model->getAll('news');
         $data['body'] = 'news_list';
         $this->controller->load_view($data);
-
-
+        
     }
-
+    
     public function notification($id = null)
     {
         
@@ -960,68 +928,68 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('errors', validation_errors());
             
             if (!empty($id)) {
-                $where           = array(
+                $where                = array(
                     'id' => $id
                 );
-                $data['notification']    = $this->model->getAllwhere('notification', $where);
+                $data['notification'] = $this->model->getAllwhere('notification', $where);
                 
                 
             } else {
-             
+                
             }
             $data['body'] = 'add_notification';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
                 
-                $title                      = $this->input->post('title');
-                $notification_description   = $this->input->post('notification_description');
-                $notification_url           = $this->input->post('notification_url');
-                $url                        = $this->input->post('url');
-                $meta_title                 = $this->input->post('meta_title');
-                $meta_description           = $this->input->post('meta_description');
-                $meta_keyword               = $this->input->post('meta_keyword');
-                $is_active                  = $this->input->post('status');
+                $title                    = $this->input->post('title');
+                $notification_description = $this->input->post('notification_description');
+                $notification_url         = $this->input->post('notification_url');
+                $url                      = $this->input->post('url');
+                $meta_title               = $this->input->post('meta_title');
+                $meta_description         = $this->input->post('meta_description');
+                $meta_keyword             = $this->input->post('meta_keyword');
+                $is_active                = $this->input->post('status');
                 
                 $data = array(
-
-                    'title'                     => $title,
-                    'notification_description'  => $notification_description,
-                    'notification_url'          => $notification_url,
-                    'url'                       => $url,
-                    'meta_title'                => $meta_title,
-                    'meta_description'          => $meta_description,
-                    'meta_keyword'              => $meta_keyword,
-                    'site_url'                  => base_url(),
-                    'image_folder'              =>'asset/uploads/',
-                    'is_active'                 => $is_active,
-                    'created_at'                => date('Y-m-d H:i:s')
-
+                    
+                    'title' => $title,
+                    'notification_description' => $notification_description,
+                    'notification_url' => $notification_url,
+                    'url' => $url,
+                    'meta_title' => $meta_title,
+                    'meta_description' => $meta_description,
+                    'meta_keyword' => $meta_keyword,
+                    'site_url' => base_url(),
+                    'image_folder' => 'asset/uploads/',
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
+                    
                 );
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
-                                $data['category_image'] = $_FILES['category_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                        $data['category_image'] = $_FILES['category_image']['name'];
+                    }
                 }
-
+                
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
-                                $data['banner_image'] = $_FILES['banner_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                        $data['banner_image'] = $_FILES['banner_image']['name'];
+                    }
                 }
-               
-               if (isset($_FILES['notification_image']['name']) && !empty($_FILES['notification_image']['name'])) {
+                
+                if (isset($_FILES['notification_image']['name']) && !empty($_FILES['notification_image']['name'])) {
                     $count = count($_FILES['notification_image']['name']);
-                        if (move_uploaded_file($_FILES['notification_image']['tmp_name'], 'asset/uploads/' . $_FILES['notification_image']['name'])) {
-                                $data['notification_image'] = $_FILES['notification_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['notification_image']['tmp_name'], 'asset/uploads/' . $_FILES['notification_image']['name'])) {
+                        $data['notification_image'] = $_FILES['notification_image']['name'];
+                    }
                 }
-
-
-               
+                
+                
+                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -1035,24 +1003,25 @@ class Admin extends CI_Controller
                 }
                 
                 $this->notificationList();
-            
+                
             }
         }
     }
-
-
-    public function notificationList(){
-        $data['notification']  = $this->model->getAll('notification');
-
+    
+    
+    public function notificationList()
+    {
+        $data['notification'] = $this->model->getAll('notification');
+        
         $data['body'] = 'notification_list';
         $this->controller->load_view($data);
-
-
+        
+        
     }
-
+    
     public function event($id = null)
     {
-       
+        
         $this->form_validation->set_rules('title', 'Event Title', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
         $this->form_validation->set_rules('description', 'description', 'trim|required');
@@ -1064,54 +1033,52 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('errors', validation_errors());
             
             if (!empty($id)) {
-                $where           = array(
+                $where         = array(
                     'id' => $id
                 );
-                $data['event']    = $this->model->getAllwhere('event', $where);
+                $data['event'] = $this->model->getAllwhere('event', $where);
                 
                 
             } else {
-             
+                
             }
             $data['body'] = 'add_event';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
                 
-                $title              = $this->input->post('title');
-                $event_description  = $this->input->post('description');
-                $event_address      = $this->input->post('address');
-                $event_date         = $this->input->post('event_date');
+                $title             = $this->input->post('title');
+                $event_description = $this->input->post('description');
+                $event_address     = $this->input->post('address');
+                $event_date        = $this->input->post('event_date');
                 $start_time        = $this->input->post('start_time');
                 $end_time          = $this->input->post('end_time');
-                $is_active          = $this->input->post('status');
+                $is_active         = $this->input->post('status');
                 
                 $data = array(
-
-                    'title'             => $title,
-                    'description'       => $event_description,
-                    'address'           => $event_address,
-                    'event_date'        => $event_date,
-                    'start_time'       => $start_time,
-                    'end_time'         => $end_time,
-                    'site_url'          => base_url(),
-                    'image_folder'      =>'asset/uploads/',
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
-
+                    
+                    'title' => $title,
+                    'description' => $event_description,
+                    'address' => $event_address,
+                    'event_date' => $event_date,
+                    'start_time' => $start_time,
+                    'end_time' => $end_time,
+                    'site_url' => base_url(),
+                    'image_folder' => 'asset/uploads/',
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
+                    
                 );
                 
                 
-               
-               if (isset($_FILES['event_image']['name']) && !empty($_FILES['event_image']['name'])) {
+                
+                if (isset($_FILES['event_image']['name']) && !empty($_FILES['event_image']['name'])) {
                     $count = count($_FILES['event_image']['name']);
-                        if (move_uploaded_file($_FILES['event_image']['tmp_name'], 'asset/uploads/' . $_FILES['event_image']['name'])) {
-                                $data['image'] = $_FILES['event_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['event_image']['tmp_name'], 'asset/uploads/' . $_FILES['event_image']['name'])) {
+                        $data['image'] = $_FILES['event_image']['name'];
+                    }
                 }
-
-
-               
+                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -1125,21 +1092,19 @@ class Admin extends CI_Controller
                 }
                 
                 $this->eventList();
-            
+                
             }
         }
     }
-
-    public function eventList(){
-        $data['event']  = $this->model->getAll('event');
-
+    
+    public function eventList()
+    {
+        $data['event'] = $this->model->getAll('event');
         $data['body'] = 'event_list';
-        $this->controller->load_view($data);
-
-
+        $this->controller->load_view($data);        
     }
-
-
+    
+    
     public function training($id = null)
     {
         
@@ -1213,7 +1178,7 @@ class Admin extends CI_Controller
         $where     = array(
             'fk_module_id ' => $module_id[0]
         );
-        $data      = $this->model->getAllwhere('chapters', $where);  
+        $data      = $this->model->getAllwhere('chapters', $where);
         echo json_encode($data);
     }
     
@@ -1667,14 +1632,14 @@ class Admin extends CI_Controller
     
     public function change_status()
     {
-        $id     = $this->input->post('id');
-        $table  = $this->input->post('table');
+        $id    = $this->input->post('id');
+        $table = $this->input->post('table');
         
         $where  = array(
             'id' => $id
         );
         $data   = array(
-            'is_active' => 1-$this->input->post('status')
+            'is_active' => 1 - $this->input->post('status')
         );
         $result = $this->model->updateFields($table, $data, $where);
     }
@@ -1868,7 +1833,7 @@ class Admin extends CI_Controller
     }
     
     
-    function file_upload($file)
+    public function file_upload($file)
     {
         if (!empty($file['logo']['name'])) {
             $f_name      = $file['logo']['name'];
@@ -1887,7 +1852,7 @@ class Admin extends CI_Controller
         }
     }
     
-    function get_record()
+    public function get_record()
     {
         $id     = $this->input->get('id');
         $table  = $this->input->get('table');
@@ -1900,7 +1865,7 @@ class Admin extends CI_Controller
         echo json_encode($states);
     }
     
-    function post($id = NULL)
+    public function post($id = NULL)
     {
         $this->form_validation->set_rules('en_post_title', 'Post Title', 'trim|required');
         $this->form_validation->set_rules('en_post', 'Post', 'trim|required');
@@ -1956,7 +1921,7 @@ class Admin extends CI_Controller
         
     }
     
-    function postList()
+    public function postList()
     {
         if ($this->controller->checkSession()) {
             $where           = array(
@@ -1971,42 +1936,45 @@ class Admin extends CI_Controller
             show_404();
         }
     }
-
-    public function testimonials(){
+    
+    public function testimonials()
+    {
         if ($this->controller->checkSession()) {
-            $field_val       = 'testimonials.*,users.first_name,users.last_name';
-            $data['testimonials']    = $this->model->GetJoinRecord('testimonials', 'user_id', 'users', 'id', $field_val);
-            $data['body']    = 'testimonials_list';
+            $field_val            = 'testimonials.*,users.first_name,users.last_name';
+            $data['testimonials'] = $this->model->GetJoinRecord('testimonials', 'user_id', 'users', 'id', $field_val);
+            $data['body']         = 'testimonials_list';
             $this->controller->load_view($data);
         } else {
             show_404();
         }
     }
-
-    public function view_testimonial($id=NULL){
-        $where           = array(
+    
+    public function view_testimonial($id = NULL)
+    {
+        $where                = array(
             'testimonials.id' => $id
         );
-        $field_val       = 'testimonials.*,users.first_name,users.last_name,users.profile_pic';
-        $data['testimonials']    = $this->model->GetJoinRecord('testimonials', 'user_id', 'users', 'id', $field_val,$where);
-        $data['body']    = 'view_testimonial';
+        $field_val            = 'testimonials.*,users.first_name,users.last_name,users.profile_pic';
+        $data['testimonials'] = $this->model->GetJoinRecord('testimonials', 'user_id', 'users', 'id', $field_val, $where);
+        $data['body']         = 'view_testimonial';
         $this->controller->load_view($data);
     }
-
-
-    public function choose($id=NULL){
+    
+    
+    public function choose($id = NULL)
+    {
         $this->form_validation->set_rules('en_site_title', 'Title in English', 'trim|required');
         $this->form_validation->set_rules('en_content', 'Content in English', 'trim|required');
         $this->form_validation->set_rules('hi_site_title', 'Title in Hindi', 'trim|required');
         $this->form_validation->set_rules('hi_content', 'Content in Hindi', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required|numeric');
         if (!empty($id)) {
-            $where        = array(
+            $where           = array(
                 'id' => $id
             );
             $data['setting'] = $this->model->getAllwhere('why_choose_us', $where);
         }
-        $where           = array(
+        $where = array(
             'is_active' => 1
         );
         if ($this->form_validation->run() == false) {
@@ -2021,7 +1989,7 @@ class Admin extends CI_Controller
                 $hi_content    = $this->input->post('hi_content');
                 $is_active     = $this->input->post('status');
                 $f_newfile     = "";
-
+                
                 if (!empty($_FILES['image']['name'])) {
                     $f_name      = $_FILES['image']['name'];
                     $f_tmp       = $_FILES['image']['tmp_name'];
@@ -2034,14 +2002,14 @@ class Admin extends CI_Controller
                         $image1    = move_uploaded_file($f_tmp, $store);
                     }
                 }
-
+                
                 
                 $data = array(
                     'en_title' => $en_site_title,
                     'en_content' => $en_content,
                     'hi_title' => $hi_site_title,
                     'hi_content' => $hi_content,
-                    'image' =>$f_newfile,
+                    'image' => $f_newfile,
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
                 );
@@ -2058,17 +2026,18 @@ class Admin extends CI_Controller
                 $this->whychooseList();
             }
         }
-
+        
     }
-
-    public function whychooseList(){
+    
+    public function whychooseList()
+    {
         if ($this->controller->checkSession()) {
-            $data['post']    = $this->model->getAll('why_choose_us');
-            $data['body']    = 'why_choose_list';
+            $data['post'] = $this->model->getAll('why_choose_us');
+            $data['body'] = 'why_choose_list';
             $this->controller->load_view($data);
         } else {
             show_404();
         }
     }
-
+    
 }
