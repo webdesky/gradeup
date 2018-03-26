@@ -168,8 +168,7 @@
                             <li>
                                 <a href="<?php echo base_url('admin/super_submenuList')?>">SuperSub Menu List</a>
                             </li>
-
-                             <li>
+                            <li>
                                 <a href="<?php echo base_url('admin/super_sub_menu_post')?>">Add SuperSub Menu Post</a>
                             </li>
                             <li>

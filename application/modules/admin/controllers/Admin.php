@@ -197,18 +197,15 @@ class Admin extends CI_Controller
             if ($this->controller->checkSession()) {
                 $en_privacy_policy = $this->input->post('en_privacy_policy');
                 $hi_privacy_policy = $this->input->post('hi_privacy_policy');
-                
                 $data = array(
                     'en_privacy_policy' => $en_privacy_policy,
                     'hi_privacy_policy' => $hi_privacy_policy,
                     'created_at' => date('Y-m-d H:i:s')
                 );
-                
                 $where  = array(
                     'id' => $this->input->post('id')
                 );
                 $result = $this->model->updateFields('settings', $data, $where);
-                
                 redirect('admin/privacy');
             }
         }
@@ -264,14 +261,11 @@ class Admin extends CI_Controller
                 $data = array(
                     'en_module_name' => $en_module_name,
                     'hi_module_name' => $hi_module_name,
-                      'site_url'     => base_url(),
-                    'image_folder' =>'asset/uploads/',
-
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
-                if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                if(isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
                     
                     if ($_FILES["image"]["size"] > 500000) {
                         $this->session->set_flashdata('info_message', "Module icon size too large");
@@ -280,7 +274,6 @@ class Admin extends CI_Controller
                         if (move_uploaded_file($_FILES['image']['tmp_name'], 'asset/uploads/' . $_FILES['image']['name'])) {
                             $data['image'] = $_FILES['image']['name'];
                         }
-                        
                     }
                 }
                 if (!empty($id)) {
@@ -428,7 +421,6 @@ class Admin extends CI_Controller
                 $is_active          = $this->input->post('status');
                 
                 $data = array(
-
                     'module_id'         => $module_id,
                     'en_menu_name'      => $en_menu_name,
                     'hi_menu_name'      => $hi_menu_name,
@@ -1677,11 +1669,12 @@ class Admin extends CI_Controller
     {
         $id     = $this->input->post('id');
         $table  = $this->input->post('table');
+        
         $where  = array(
             'id' => $id
         );
         $data   = array(
-            'is_active' => 0
+            'is_active' => 1-$this->input->post('status')
         );
         $result = $this->model->updateFields($table, $data, $where);
     }

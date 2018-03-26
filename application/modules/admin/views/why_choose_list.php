@@ -41,7 +41,10 @@
                                             <td>
                                                 <?php echo $value['en_content'];?> </td>
                                             <td>
-                                                <?php echo $value['image'];?> </td>
+                                            <?php if(!empty($value['image'])){?>
+                                               <img src="<?php echo base_url('asset/uploads/'.$value['image'])?>" height='50px' width='50px'>
+                                            <?php }?> 
+                                            </td>
                                             <td>
                                                 <?php if($value['is_active']==1){ echo 'Active';}else{echo 'Inactive';}?> </td>
                                             <td>
