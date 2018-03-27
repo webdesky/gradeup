@@ -1918,7 +1918,6 @@ class Admin extends CI_Controller
                 $this->postList();
             }
         }
-        
     }
     
     public function postList()
@@ -2002,7 +2001,6 @@ class Admin extends CI_Controller
                         $image1    = move_uploaded_file($f_tmp, $store);
                     }
                 }
-                
                 
                 $data = array(
                     'en_title' => $en_site_title,

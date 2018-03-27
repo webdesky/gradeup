@@ -18,7 +18,7 @@
                         }
                     ?>
                     <a class="btn btn-primary" href="<?php echo base_url('admin/register/')?>"><i class="fa fa-th-list">&nbsp;Add User</i></a>
-                    </div>
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
@@ -35,7 +35,7 @@
                                             <th>Status</th>
                                             <?php if($user_role==1 || ($user_role==4 && $right0[1]==1 || $right0[2]==1)){?>
                                             <th>Action</th>
-                                            <?php }?> 
+                                            <?php }?>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,28 +55,27 @@
                                                 <?php echo $users_list->gender;?> </td>
                                             <td>
                                                 <?php if($users_list->is_active==1){ echo 'Active';}else{ echo 'Inactive';}?> </td>
-                                            
+
                                             <?php if($user_role==1 || ($user_role==4 && $right0[1]==1 || $right0[2]==1)){?>
                                             <td>
                                                 <?php if($users_list->is_active==1){?>
-                                                    <a href="javascript:void(0)" onclick="update_status('<?php echo $users_list->id?>','<?php echo $users_list->is_active;?>')" title="Change Status">
+                                                <a href="javascript:void(0)" onclick="update_status('<?php echo $users_list->id?>','<?php echo $users_list->is_active;?>')" title="Change Status">
                                                         <span class="glyphicon glyphicon-refresh"></span>
                                                     </a>
                                                 <?php }else{?>
-                                                    <a href="javascript:void(0)" onclick="update_status('<?php echo $users_list->id?>','<?php echo $users_list->is_active;?>')" title="Change Status">
+                                                <a href="javascript:void(0)" onclick="update_status('<?php echo $users_list->id?>','<?php echo $users_list->is_active;?>')" title="Change Status">
                                                         <span class="glyphicon glyphicon-refresh"></span>
                                                     </a>
-                                                <?php }?>
-                                                |
-                                                
-                                                <?php if($user_role==1 ||($user_role==4 && $right0[1]==1)){?> <a href="<?php echo base_url('admin/edit_user/'.$users_list->id)?>"><span class="glyphicon glyphicon-edit"></span></a>|
+                                                <?php }?> |
+
+                                                <?php if($user_role==1 ||($user_role==4 && $right0[1]==1)){?> <a href="<?php echo base_url('admin/edit_user/'.$users_list->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |
 
                                                 <?php }if($user_role==1 || ($user_role==4 && $right0[2]==1)){?> <a href="javascript:void(0)" onclick="delete_user('<?php echo $users_list->id?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
                                                 <?php }?> </td>
-                                            <?php }?> 
+                                            <?php }?>
                                         </tr>
                                         <?php $i++;}}?> </tbody>
-                                        <!-- <i class="fas fa-unlock-alt"></i> -->
+                                    <!-- <i class="fas fa-unlock-alt"></i> -->
                                 </table>
                             </div>
                         </div>
@@ -95,12 +94,11 @@
 <script type="text/javascript">
 $('#users').DataTable({
     responsive: true,
-
 });
 
 function delete_user(id, tr_id) {
     swal({
-        title:"Are you sure?",
+        title: "Are you sure?",
         text: "want to delete?",
         type: "warning",
         showCancelButton: true,
@@ -124,28 +122,18 @@ function delete_user(id, tr_id) {
 
 function update_status(user_id, status) {
     swal({
-        title:"Are you sure?",
-        text: "Want to Change Status?",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        confirmButtonText: "Yes,Change it!",
-        confirmButtonColor: "#ec6c62"
-    }, function() {
+        title: "Are you sure?", text: "Want to Change Status?", type: "warning", showCancelButton: true, closeOnConfirm: false, confirmButtonText: "Yes,Change it!", confirmButtonColor: "#ec6c62"
+    },function(){
         $.ajax({
-            url: "<?php echo base_url('admin/change_status')?>",
-            data: {
-                id: user_id,
-                table: 'users',
-                status:status
-            },
-            type: "POST"
+            url: "<?php echo base_url('admin/change_status')?>", data: {
+                id: user_id, table: 'users', status: status
+            }
+            , type: "POST"
         }).done(function(data) {
             swal("Updated!", "Record was successfully updated!", "success");
         });
-
         location.reload();
-
     });
 }
+
 </script>
