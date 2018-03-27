@@ -855,19 +855,19 @@ class Admin extends CI_Controller
                 $is_active        = $this->input->post('status');
                 
                 $data = array(
-                    
-                    'title' => $title,
-                    'news_description' => $news_description,
-                    'news_url' => $news_url,
-                    'url' => $url,
-                    'meta_title' => $meta_title,
-                    'meta_description' => $meta_description,
-                    'meta_keyword' => $meta_keyword,
-                    'site_url' => base_url(),
-                    'image_folder' => 'asset/uploads/',
-                    'is_active' => $is_active,
-                    'created_at' => date('Y-m-d H:i:s')
-                    
+
+
+                    'title'             => $title,
+                    'news_description'  => $news_description,
+                    'news_url'          => $news_url,
+                    'url'               => $url,
+                    'meta_title'        => $meta_title,
+                    'meta_description'  => $meta_description,
+                    'meta_keyword'      => $meta_keyword,
+                    'is_active'         => $is_active,
+                    'created_at'        => date('Y-m-d H:i:s')
+
+
                 );
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
@@ -952,19 +952,19 @@ class Admin extends CI_Controller
                 $is_active                = $this->input->post('status');
                 
                 $data = array(
-                    
-                    'title' => $title,
-                    'notification_description' => $notification_description,
-                    'notification_url' => $notification_url,
-                    'url' => $url,
-                    'meta_title' => $meta_title,
-                    'meta_description' => $meta_description,
-                    'meta_keyword' => $meta_keyword,
-                    'site_url' => base_url(),
-                    'image_folder' => 'asset/uploads/',
-                    'is_active' => $is_active,
-                    'created_at' => date('Y-m-d H:i:s')
-                    
+
+
+                    'title'                     => $title,
+                    'notification_description'  => $notification_description,
+                    'notification_url'          => $notification_url,
+                    'url'                       => $url,
+                    'meta_title'                => $meta_title,
+                    'meta_description'          => $meta_description,
+                    'meta_keyword'              => $meta_keyword,
+                    'is_active'                 => $is_active,
+                    'created_at'                => date('Y-m-d H:i:s')
+
+
                 );
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
@@ -1056,18 +1056,18 @@ class Admin extends CI_Controller
                 $is_active         = $this->input->post('status');
                 
                 $data = array(
-                    
-                    'title' => $title,
-                    'description' => $event_description,
-                    'address' => $event_address,
-                    'event_date' => $event_date,
-                    'start_time' => $start_time,
-                    'end_time' => $end_time,
-                    'site_url' => base_url(),
-                    'image_folder' => 'asset/uploads/',
-                    'is_active' => $is_active,
-                    'created_at' => date('Y-m-d H:i:s')
-                    
+
+
+                    'title'             => $title,
+                    'description'       => $event_description,
+                    'address'           => $event_address,
+                    'event_date'        => $event_date,
+                    'start_time'       => $start_time,
+                    'end_time'         => $end_time,
+                    'is_active'         => $is_active,
+                    'created_at'        => date('Y-m-d H:i:s')
+
+
                 );
                 
                 
@@ -1105,6 +1105,87 @@ class Admin extends CI_Controller
     }
     
     
+    public function blog($id = null)
+    {
+        
+        $this->form_validation->set_rules('en_title', 'Blog Title', 'trim|required');
+        $this->form_validation->set_rules('en_description', 'Blog description', 'trim|required');
+        $this->form_validation->set_rules('status', 'Status', 'trim|required');
+        
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            
+            if (!empty($id)) {
+                $where        = array(
+                    'id' => $id
+                );
+                $data['blog'] = $this->model->getAllwhere('blogs', $where);
+                
+                
+            } else {
+                
+            }
+            $data['body'] = 'add_blog';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                
+                $en_title            = $this->input->post('en_title');
+                $hi_title            = $this->input->post('hi_title');
+                $en_description      = $this->input->post('en_description');
+                $hi_description      = $this->input->post('hi_description');
+                $en_address          = $this->input->post('en_address');
+                $hi_address          = $this->input->post('hi_address');
+                $blog_date           = $this->input->post('blog_date');
+                $is_active           = $this->input->post('status');
+                
+                $data = array(
+
+
+                    'en_title'             => $en_title,
+                    'hi_title'             => $hi_title,
+                    'en_description'       => $en_description,
+                    'hi_description'       => $hi_description,
+                    'en_address'           => $en_address,
+                    'hi_address'           => $hi_address,
+                    'blog_date'            => $blog_date,
+                    'is_active'            => $is_active,
+                    'created_at'           => date('Y-m-d H:i:s')
+
+
+                );
+                
+                if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                    $count = count($_FILES['image']['name']);
+                    if (move_uploaded_file($_FILES['image']['tmp_name'], 'asset/uploads/' . $_FILES['image']['name'])) {
+                        $data['image'] = $_FILES['image']['name'];
+                    }
+                }
+                
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('blogs', $data, $where);
+                } else {
+                    $result = $this->model->insertData('blogs', $data);
+                }
+                
+                $this->blogList();
+                
+            }
+        }
+    }
+
+    public function blogList(){
+        $data['blogs'] = $this->model->getAll('blogs');
+        $data['body'] = 'blog_list';
+        $this->controller->load_view($data);        
+    }
+
     public function training($id = null)
     {
         
