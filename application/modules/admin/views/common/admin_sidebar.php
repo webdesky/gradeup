@@ -134,6 +134,18 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Blog <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/blog');?>">Add Blog</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/blogList');?>">Blog list</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <!-- <li> <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i>  News <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -167,7 +179,7 @@
                         </ul>
                     </li>
 
-         <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<?php echo base_url('admin/menu')?>">Add Menu</a>
