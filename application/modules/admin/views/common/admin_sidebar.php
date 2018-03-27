@@ -52,15 +52,6 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav sidebar-menu" id="side-menu">
                     <li class="sidebar-search">
-                        <!-- <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div> -->
-                        <!-- /input-group -->
                     </li>
                     <li>
                         <a href="<?php echo base_url('admin');?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
@@ -165,7 +156,7 @@
                         </ul>
                     </li>
 
-                    <li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Event <span class="fa arrow"></span></a>
+                    <!--<li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Event <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<?php echo base_url('admin/event');?>">Add Event</a>
@@ -176,7 +167,35 @@
                         </ul>
                     </li>
 
-                    
+         <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/menu')?>">Add Menu</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/menuList')?>">Menu List</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/sub_menu')?>">Add Sub Menu</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/submenuList')?>">Sub Menu List</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/super_sub_menu')?>">Add SuperSub Menu</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/super_submenuList')?>">SuperSub Menu List</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/super_sub_menu_post')?>">Add SuperSub Menu Post</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/super_submenupostList')?>">SuperSub Menu Post List</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
