@@ -264,9 +264,6 @@ class Admin extends CI_Controller
                 $data = array(
                     'en_module_name' => $en_module_name,
                     'hi_module_name' => $hi_module_name,
-                      'site_url'     => base_url(),
-                    'image_folder' =>'asset/uploads/',
-
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
                 );
@@ -902,8 +899,6 @@ class Admin extends CI_Controller
                     'meta_title'        => $meta_title,
                     'meta_description'  => $meta_description,
                     'meta_keyword'      => $meta_keyword,
-                    'site_url'          => base_url(),
-                    'image_folder'      =>'asset/uploads/',
                     'is_active'         => $is_active,
                     'created_at'        => date('Y-m-d H:i:s')
 
@@ -1000,8 +995,6 @@ class Admin extends CI_Controller
                     'meta_title'                => $meta_title,
                     'meta_description'          => $meta_description,
                     'meta_keyword'              => $meta_keyword,
-                    'site_url'                  => base_url(),
-                    'image_folder'              =>'asset/uploads/',
                     'is_active'                 => $is_active,
                     'created_at'                => date('Y-m-d H:i:s')
 
@@ -1102,8 +1095,6 @@ class Admin extends CI_Controller
                     'event_date'        => $event_date,
                     'start_time'       => $start_time,
                     'end_time'         => $end_time,
-                    'site_url'          => base_url(),
-                    'image_folder'      =>'asset/uploads/',
                     'is_active'         => $is_active,
                     'created_at'        => date('Y-m-d H:i:s')
 
