@@ -332,8 +332,7 @@
                                             <?php }else{ echo 'checked'; }?>>Active
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="status" value="0" <?php if(isset($questions) && $questions[0]->is_active==0){ ?> checked
-                                            <?php }?>>Inactive
+                                            <input type="radio" name="status" value="0" <?php if(isset($questions) && $questions[0]->is_active==0){ ?> checked <?php }?>>Inactive
                                         </label>
                                     </div>
                                 </div>
@@ -355,12 +354,11 @@
 </div>
 </div>
 <script type="text/javascript">
+
 $(document).ready(function() {
-    //$('select').niceSelect();
     $(".registration_form1").validate({
         rules: {
             "module_name": "required",
-
         },
         submitHandler: function(form) {
             form.submit();
@@ -369,9 +367,8 @@ $(document).ready(function() {
 
     var question_type = $('#question_type').val();
     questionChanges(question_type);
-
     var module = $('#module_id').val();
-    getChapter(module);
+    
 
     function getChapter(value) {
         var url = "<?php echo base_url('admin/getChapter') ?>";
@@ -382,23 +379,17 @@ $(document).ready(function() {
                 module_id: value
             },
             success: function(data) {
-
                 var obj = JSON.parse(data);
                 $('#chapter_id').html('');
                 if (obj.length != 0) {
                     for (var i = 0; i < obj.length; i++) {
-
                         $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
-
                     }
                 }
-
-
             }
         });
     }
     $('#module_id').on('change', function() {
-
         var url = "<?php echo base_url('admin/getChapter') ?>";
         $.ajax({
             url: url,
@@ -407,27 +398,21 @@ $(document).ready(function() {
                 module_id: this.value
             },
             success: function(data) {
-
                 var obj = JSON.parse(data);
                 $('#chapter_id').html('');
                 if (obj.length != 0) {
                     for (var i = 0; i < obj.length; i++) {
-
                         $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
-
                     }
                 }
-
-
             }
         });
     })
 });
 
 function questionChanges(val) {
-
     if (val == 'Options') {
-        $('.border-shadowss').css('display','block');
+        $('.border-shadowss').css('display', 'block');
         $('#options').css('display', 'block');
         $('#option11').css('display', 'block');
         $('#option12').css('display', 'block');
@@ -441,14 +426,13 @@ function questionChanges(val) {
         $('#option8').css('display', 'block');
         $('#option9').css('display', 'none');
         $('#option10').css('display', 'none');
-
         $('#option13').css('display', 'block');
         $('#option14').css('display', 'block');
         $('#option15').css('display', 'block');
         $('#option16').css('display', 'block');
         $('#option17').css('display', 'none');
     } else if (val == 'Fill In the Blank') {
-        $('.border-shadowss').css('display','block');
+        $('.border-shadowss').css('display', 'block');
         $('#options').css('display', 'block');
         $('#option11').css('display', 'block');
         $('#option12').css('display', 'block');
@@ -467,9 +451,8 @@ function questionChanges(val) {
         $('#option15').css('display', 'block');
         $('#option16').css('display', 'block');
         $('#option17').css('display', 'none');
-
     } else if (val == 'Descriptive') {
-        $('.border-shadowss').css('display','block');
+        $('.border-shadowss').css('display', 'block');
         $('#options').css('display', 'none');
         $('#option1').css('display', 'none');
         $('#option2').css('display', 'none');
@@ -488,9 +471,8 @@ function questionChanges(val) {
         $('#option15').css('display', 'block');
         $('#option16').css('display', 'block');
         $('#option17').css('display', 'none');
-        //$('#answers_type').css('display', 'none');
     } else if (val == 'True False') {
-        $('.border-shadowss').css('display','block');
+        $('.border-shadowss').css('display', 'block');
         $('#options').css('display', 'none');
         $('#option1').css('display', 'none');
         $('#option2').css('display', 'none');
@@ -509,14 +491,7 @@ function questionChanges(val) {
         $('#option15').css('display', 'block');
         $('#option16').css('display', 'block');
         $('#option17').css('display', 'block');
-
-
-        //$('#pattern_type').css('display', 'block');
-    } else {
-
-        // $('#option1div').css('display', 'none');
-
-    }
+    } else {}
 }
 
 function show_answer_option(id) {

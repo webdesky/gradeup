@@ -15,7 +15,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                            <form role="form" method="post" action="<?php echo base_url('admin/register') ?>" class="registration_form12" enctype="multipart/form-data">
+                            <form role="form" method="post" action="<?php echo base_url('admin/register')?>" class="registration_form12" enctype="multipart/form-data">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">User Name *</label>

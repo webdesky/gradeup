@@ -24,7 +24,7 @@
                             <form role="form" method="post" action="<?php if(isset($blog)){ echo base_url('admin/blog/'.$blog[0]->id); }else{ echo base_url('admin/blog'); }?>" class="registration_form1" enctype="multipart/form-data">
                                 <div class="col-md-6 border-shadowss">
                                     <div class="en_div">English</div>
-                                    <div class="col-md-12 ">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-2"> Title * </label>
                                             <div class="col-md-10">

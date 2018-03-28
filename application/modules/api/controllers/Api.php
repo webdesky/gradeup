@@ -1,11 +1,9 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 
 require APPPATH . '/libraries/REST_Controller.php';
-
 
 class Api extends REST_Controller
 {
@@ -166,8 +164,8 @@ class Api extends REST_Controller
     /*verify login*/
     public function verify_login_post()
     {
-        
         $username = $this->get('username');
+        
         $password = $this->get('password');
         
         $where = array(
@@ -296,21 +294,21 @@ class Api extends REST_Controller
             )
         );
         $this->response($resp);
-        
     }
     
     
     /*get user Profile*/
     public function getProfile_get()
     {
-        
         $user_id = $this->input->get('user_id');
         
-        $where    = array(
+        $where = array(
             'is_active' => 1,
             'id' => $user_id
         );
+        
         $userData = $this->model->getAllwhere('users', $where);
+        
         if (empty($userData)) {
             $resp = array(
                 'code' => 'ERROR',
@@ -332,13 +330,13 @@ class Api extends REST_Controller
     /*Update user Profile*/
     public function updateProfile_post()
     {
-        
         $user_id = $this->input->post('user_id');
         
-        $where    = array(
+        $where = array(
             'is_active' => 1,
             'id' => $user_id
         );
+        
         $userData = $this->model->getAllwhere('users', $where);
         
         if (empty($userData)) {
@@ -369,7 +367,6 @@ class Api extends REST_Controller
                 'blood_group' => $blood_group,
                 'is_active' => $status,
                 'user_role' => 3
-                
             );
             $result = $this->model->updateFields('users', $data, $where);
             /* Response array */
@@ -388,7 +385,6 @@ class Api extends REST_Controller
     /*Get Menu By Module ID*/
     public function getMenuByModule_get()
     {
-        
         $module_id = $this->input->post('module_id');
         $where     = array(
             'is_active' => 1,
@@ -416,7 +412,6 @@ class Api extends REST_Controller
     /*Get Sub Menu By Menu ID*/
     public function getSubMenuByMenu_get()
     {
-        
         $menu_id  = $this->input->post('menu_id');
         $where    = array(
             'is_active' => 1,
@@ -439,7 +434,6 @@ class Api extends REST_Controller
             );
             $this->response($resp);
         }
-        
     }
     
     public function getquestionbychapter_get()
@@ -454,6 +448,4 @@ class Api extends REST_Controller
             
         }
     }
-    
 }
-?>
