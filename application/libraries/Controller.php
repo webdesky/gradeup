@@ -39,6 +39,8 @@ class Controller
         }
     }
     
+    
+    
     public function checkSession()
     {
         if (!empty($this->CI->session->userdata('user_role'))) {
