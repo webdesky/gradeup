@@ -77,10 +77,7 @@ class Admin extends CI_Controller
     
     public function setting()
     {
-        $this->lang->load('en', 'english');
-        $data= $this->lang->line('news');
-        echo $data;
-        die;
+        
         $this->form_validation->set_rules('en_site_title', 'Site Title', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
