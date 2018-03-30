@@ -40,7 +40,7 @@
 							<div class="stat">
 								<div class="shortcuts1">
 									<a href="#" class="shortcut1">
-									<i class="fa fa-book" title="Exam's"></i> <span class="value"><?php //echo $totalexam; ?> 
+									<i class="fa fa-book" title="Exam's"></i> <span class="value"><?php echo $totalexam; ?> 
 							</span></a> </div>
 							</div>
 							<!-- .stat -->

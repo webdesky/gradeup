@@ -68,7 +68,7 @@ class Admin extends CI_Controller
             $data['totaluser']     = $this->model->getcount('users', $where1);
             $data['totalquestion'] = $this->model->getcount('questions', $where);
             $data['totalpost']     = $this->model->getcount('post', $where);
-            // $data['totalexam']     = $this->model->getcount('exam', $where);
+            $data['totalexam']     = $this->model->getcount('exam', $where);
             $this->controller->load_view($data);
         } else {
             $this->index();
