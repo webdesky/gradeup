@@ -219,7 +219,7 @@ class Model
         return $q->row();
     }
     
-    public function GetJoinRecordNew($table, $field_first, $tablejointo, $field_second, $tablejointhree, $field_third,$tablejoinfour, $field_four, $field, $value, $field_val)
+    public function GetJoinRecordNew($table, $field_first, $tablejointo, $field_second, $tablejointhree, $field_third,$tablejoinfour, $field_four, $field, $value, $field_val,$first_table_second_val)
     {
         //$this->db->cache_on();
         $this->CI->db->select("$field_val");
@@ -227,7 +227,7 @@ class Model
         $this->CI->db->join("$tablejointo", "$tablejointo.$field_second = $table.$field_first");
 
         if($tablejointhree && $field_third){
-            $this->CI->db->join("$tablejointhree", "$tablejointhree.$field_third = $table.$field_first");
+            $this->CI->db->join("$tablejointhree", "$tablejointhree.$field_third = $table.$first_table_second_val");
 
             if($tablejoinfour && $field_four){
                 $this->CI->db->join("$tablejoinfour", "$tablejoinfour.$field_four = $table.$field_first");    
@@ -348,6 +348,16 @@ class Model
     {
         $this->CI->db->update_batch($table, $data, $condition);
         return $this->CI->db->insert_id();
+    }
+    public function getAllwhereIN($table,$where,$select){
+        if(!empty($select)){
+            $this->CI->db->select($select);
+        }else{
+            $this->CI->db->select('*');
+        }
+        $this->CI->db->where_in('id',$where);
+        $query = $this->CI->db->get($table);
+        return $query->result_array();
     }
     
 }

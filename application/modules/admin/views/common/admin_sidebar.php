@@ -130,7 +130,6 @@
                             </li>
                         </ul>
                     </li>
-
                     <li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Blog <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -141,7 +140,6 @@
                             </li>
                         </ul>
                     </li>
-
                     <li> <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i>  News <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -152,7 +150,6 @@
                             </li>
                         </ul>
                     </li>
-
                     <li> <a href="#"><i class="fa fa-bell" aria-hidden="true"></i> Notification <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -163,7 +160,6 @@
                             </li>
                         </ul>
                     </li>
-
                     <li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Event <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -174,9 +170,7 @@
                             </li>
                         </ul>
                     </li>
-
-                
-                    <!-- <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
+                    <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<?php echo base_url('admin/chapter')?>">Add Chapter</a>
@@ -207,6 +201,16 @@
                             </li>
                         </ul>
                     </li>
+                    <li> <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Package Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/package')?>">Add Package</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/packageList')?>">Package List</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Exam Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -216,7 +220,7 @@
                                 <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
                             </li>
                         </ul>
-                    </li> 
+                    </li>
                     <li> <a href="#"><i class="fa fa-quote-left" aria-hidden="true"></i> Testimonials<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -233,7 +237,7 @@
                                 <a href="<?php echo base_url('admin/whychooseList')?>">View Content</a>
                             </li>
                         </ul>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

@@ -16,9 +16,9 @@ class Admin extends CI_Controller
             if ($log == 1 || $log == 4) {
                 redirect('admin/dashboard');
             } else if ($log == 2) {
-                //redirect('doctor/dashboard');
+                
             } else if ($log == 3) {
-                //redirect('patient/dashboard');
+                
             } else {
                 $this->load->view('admin/login', $msg);
             }
@@ -68,7 +68,7 @@ class Admin extends CI_Controller
             $data['totaluser']     = $this->model->getcount('users', $where1);
             $data['totalquestion'] = $this->model->getcount('questions', $where);
             $data['totalpost']     = $this->model->getcount('post', $where);
-            $data['totalexam']     = $this->model->getcount('exam', $where);
+           // $data['totalexam']     = $this->model->getcount('exam', $where);
             $this->controller->load_view($data);
         } else {
             $this->index();
@@ -1356,7 +1356,7 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
     }
     
-    public function exam($id = NULL)
+    public function package($id = NULL)
     {
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
@@ -1366,23 +1366,22 @@ class Admin extends CI_Controller
                     'id ' => $id
                 );
                 
-                $data['exam']     = $this->model->getAllwhere('exam', $where);
+                $data['exam']     = $this->model->getAllwhere('package', $where);
                 $data['modules']  = $this->model->getAll('modules');
                 $data['chapters'] = $this->model->getAll('chapters');
             } else {
                 $data['modules']  = $this->model->getAll('modules');
-                $data['chapters'] = $this->model->getAll('chapters');
+                //$data['chapters'] = $this->model->getAll('chapters');
             }
-            $data['body'] = 'add_exam';
+            $data['body'] = 'add_package';
             $this->controller->load_view($data);
         } else {
-            if ($this->controller->checkSession()) {
-                
+            if ($this->controller->checkSession()) {                
                 $module_id          = $this->input->post('module_id');
                 $chapter_id         = $this->input->post('chapter_id');
                 $exam_name          = $this->input->post('exam_name');
                 $question_type      = $this->input->post('question_type');
-                $total_question     = $this->input->post('total_question');
+                $total_question     = count($this->input->post('question_id'));
                 $time_per_question  = $this->input->post('time_per_question');
                 $test_duration      = $this->input->post('test_duration');
                 $passing_marks      = $this->input->post('passing_marks');
@@ -1422,22 +1421,31 @@ class Admin extends CI_Controller
                         'id' => $id
                     );
                     unset($data['created_at']);
-                    $result = $this->model->updateFields('exam', $data, $where);
+                    $result = $this->model->updateFields('package', $data, $where);
                 } else {
-                    $result = $this->model->insertData('exam', $data);
+                    $result = $this->model->insertData('package', $data);
                 }
-                $this->examList();
+                $this->packageList();
             }
         }
         
     }
     
     
-    public function examList()
+    public function packageList()
     {
-        
-        $data['exam'] = $this->model->getAll('exam');
-        $data['body'] = 'exam_list';
+        $data['exam'] = $this->model->getAll('package');
+        $data['body'] = 'package_list';
+        $this->controller->load_view($data);
+    }
+
+    public function view_package($id){
+        $where = array('id'=>$id);
+        $field_val = 'package.*,modules.id as main_module_id,modules.en_module_name,chapters.id as main_chapter_id,chapters.en_chapter_name';
+        $field = 'id';
+        $value = $id;
+        $data['package'] = $this->model->GetJoinRecordNew('package','module_id','modules','id', 'chapters', 'id','', '', $field, $value, $field_val,'chapter_id');
+        $data['body'] = 'view_package';
         $this->controller->load_view($data);
     }
     
@@ -1812,14 +1820,14 @@ class Admin extends CI_Controller
                 );
                 
                 $config_mail = Array(
-                    'protocol' => 'smtp',
+                    'protocol'  => 'smtp',
                     'smtp_host' => 'ssl://smtp.googlemail.com',
                     'smtp_port' => '465',
                     'smtp_user' => 'webdeskytechnical@gmail.com',
                     'smtp_pass' => 'webdesky@2017',
-                    'mailtype' => 'html',
-                    'charset' => 'iso-8859-1',
-                    'newline' => "\r\n"
+                    'mailtype'  => 'html',
+                    'charset'   => 'iso-8859-1',
+                    'newline'   => "\r\n"
                 );
                 
                 $this->load->library('email', $config_mail);
@@ -2117,6 +2125,53 @@ class Admin extends CI_Controller
         } else {
             show_404();
         }
+    }
+
+    public function exam()
+    {
+        if ($this->controller->checkSession()) {
+            $data['modules']  = $this->model->getAll('modules');
+            $data['body'] = 'add_exam';
+            $this->controller->load_view($data);
+        } else {
+            show_404();
+        }
+    }
+
+    public function get_exam(){
+        $module_id      = $this->input->get('module_id');
+        $chapter_id     = $this->input->get('chapter_id');
+        $question_type  = $this->input->get('question_type');
+        $payment_status = $this->input->get('payment_status');
+        $status         = $this->input->get('status');
+
+        $where = array(
+                    'module_id' => $module_id,
+                    'chapter_id' => $chapter_id,
+                    'question_type' => $question_type,
+                    'payment_status' => $payment_status,
+                    'is_active' => $status
+                );
+        $select     = 'id,exam_name';
+
+        $package    = $this->model->getAllwhere('package',$where,$select);
+
+        if($package!=''){
+            echo json_encode($package);
+        }
+
+        
+
+    }
+
+    public function get_questions(){
+        $question_id = explode(",", $this->input->get('question_id'));
+        if(!empty($question_id)){
+            $select     = 'en_question,hi_question';
+            $questions  = $this->model->getAllwhereIN('questions',$question_id,$select);
+            echo json_encode($questions);
+        }
+
     }
     
 }

@@ -2,8 +2,6 @@
 header('Access-Control-Allow-Origin: *');
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
-
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 
 require APPPATH . '/libraries/REST_Controller.php';
@@ -12,9 +10,9 @@ class Api extends REST_Controller
 {
     function __construct()
     {
-      parent::__construct();
-      // $lang=$this->input->get('lang');
-      // $this->lang->load($lang,'english');
+        parent::__construct();
+        // $lang=$this->input->get('lang');
+        // $this->lang->load($lang,'english');
     }
 
     /*Set Language */
