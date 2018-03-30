@@ -56,10 +56,7 @@
                     <li>
                         <a href="<?php echo base_url('admin');?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url('admin/setting');?>"><i class="fa fa-cog"></i> Site Settings</a>
-                    </li>
-                  <li><a href="#"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Post Master<span class="fa arrow"></span></a>
+                    <li><a href="#"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Post Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<?php echo base_url('admin/post');?>">Add Post</a>
@@ -68,7 +65,8 @@
                                 <a href="<?php echo base_url('admin/postList');?>">Post List</a>
                             </li>
                         </ul>
-                    </li> <li><a href="#"><i class="fa fa-user"></i> User Master<span class="fa arrow"></span></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-user"></i> User Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<?php echo base_url('admin/register');?>">Add User</a>
@@ -151,7 +149,7 @@
                                 <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
                             </li>
                         </ul>
-                    </li> 
+                    </li>
                     <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -180,61 +178,70 @@
                             </li>
                         </ul>
                     </li>
-                    <li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Blog <span class="fa arrow"></span></a>
+
+                    <li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Configurations <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<?php echo base_url('admin/blog');?>">Add Blog</a>
+                                <a href="<?php echo base_url('admin/setting');?>"><i class="fa fa-cog"></i> Site Settings</a>
                             </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/blogList');?>">Blog list</a>
+                            <li> <a href="#"><i class="fa fa-leanpub" aria-hidden="true"></i> Blog <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<?php echo base_url('admin/blog');?>">Add Blog</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo base_url('admin/blogList');?>">Blog list</a>
+                                    </li>
+                                </ul>
                             </li>
-                        </ul>
-                    </li>
-                    <li> <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i>  News <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<?php echo base_url('admin/news');?>">Add News</a>
+
+                            <li> <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i>  News <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<?php echo base_url('admin/news');?>">Add News</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo base_url('admin/newsList');?>">News List</a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/newsList');?>">News List</a>
+                            <li> <a href="#"><i class="fa fa-bell" aria-hidden="true"></i> Notification <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<?php echo base_url('admin/notification');?>">Add Notification</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo base_url('admin/notificationList');?>"> Notification List</a>
+                                    </li>
+                                </ul>
                             </li>
-                        </ul>
-                    </li>
-                    <li> <a href="#"><i class="fa fa-bell" aria-hidden="true"></i> Notification <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<?php echo base_url('admin/notification');?>">Add Notification</a>
+                            <li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Event <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<?php echo base_url('admin/event');?>">Add Event</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo base_url('admin/eventList');?>">Event list</a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/notificationList');?>"> Notification List</a>
+
+                            <li> <a href="#"><i class="fa fa-quote-left" aria-hidden="true"></i> Testimonials<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<?php echo base_url('admin/testimonials')?>">View Testimonials</a>
+                                    </li>
+                                </ul>
                             </li>
-                        </ul>
-                    </li>
-                    <li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Event <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<?php echo base_url('admin/event');?>">Add Event</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/eventList');?>">Event list</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li> <a href="#"><i class="fa fa-quote-left" aria-hidden="true"></i> Testimonials<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<?php echo base_url('admin/testimonials')?>">View Testimonials</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li> <a href="#"><i class="fa fa-check" aria-hidden="true"></i> Why Choose Us<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<?php echo base_url('admin/choose')?>">Add Content</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/whychooseList')?>">View Content</a>
+                            <li> <a href="#"><i class="fa fa-check" aria-hidden="true"></i> Why Choose Us<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<?php echo base_url('admin/choose')?>">Add Content</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo base_url('admin/whychooseList')?>">View Content</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
