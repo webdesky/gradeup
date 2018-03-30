@@ -59,7 +59,7 @@
                     <li>
                         <a href="<?php echo base_url('admin/setting');?>"><i class="fa fa-cog"></i> Site Settings</a>
                     </li>
-                    <li><a href="#"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Post Master<span class="fa arrow"></span></a>
+                  <li><a href="#"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Post Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<?php echo base_url('admin/post');?>">Add Post</a>
@@ -68,8 +68,7 @@
                                 <a href="<?php echo base_url('admin/postList');?>">Post List</a>
                             </li>
                         </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-user"></i> User Master<span class="fa arrow"></span></a>
+                    </li> <li><a href="#"><i class="fa fa-user"></i> User Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<?php echo base_url('admin/register');?>">Add User</a>
@@ -102,6 +101,57 @@
                             </li>
                         </ul>
                     </li>
+                    <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/chapter')?>">Add Chapter</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/chapterList')?>">Chapter List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <li> <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Training Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php //echo base_url('admin/training')?>">Add Training</a>
+                            </li>
+                            <li>
+                                <a href="<?php //echo base_url('admin/trainingList')?>">Training List</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                    <li> <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a href="<?php echo base_url('admin/question')?>">Add Question</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/questionList')?>">Question List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li> <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Package Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/package')?>">Add Package</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/packageList')?>">Package List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Exam Master<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo base_url('admin/exam')?>">Add Exam</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
+                            </li>
+                        </ul>
+                    </li> 
                     <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -170,57 +220,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Chapter Master<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<?php echo base_url('admin/chapter')?>">Add Chapter</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/chapterList')?>">Chapter List</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li> <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Training Master<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<?php echo base_url('admin/training')?>">Add Training</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/trainingList')?>">Training List</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li> <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-
-                            <li>
-                                <a href="<?php echo base_url('admin/question')?>">Add Question</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/questionList')?>">Question List</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li> <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Package Master<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<?php echo base_url('admin/package')?>">Add Package</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/packageList')?>">Package List</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li> <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Exam Master<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<?php echo base_url('admin/exam')?>">Add Exam</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
-                            </li>
-                        </ul>
-                    </li>
+                    
                     <li> <a href="#"><i class="fa fa-quote-left" aria-hidden="true"></i> Testimonials<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>

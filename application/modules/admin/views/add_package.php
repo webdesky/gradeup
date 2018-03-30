@@ -22,7 +22,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Package Name * </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="exam_name" id="exam_name" placeholder="Exam Name" autocomplete="off" required="required" value="<?php if(isset($exam)){ echo $exam[0]->exam_name; } ?>"> <span class="red"><?php echo form_error('exam_name'); ?></span>
+                                            <input class="form-control" type="text" name="exam_name" id="exam_name" placeholder="Package Name" autocomplete="off" required="required" value="<?php if(isset($exam)){ echo $exam[0]->exam_name; } ?>"> <span class="red"><?php echo form_error('exam_name'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 ">Chapter Name * </label>
                                         <div class="col-md-9">
-                                            <select class="form-control" name="chapter_id" id="chapter_id">
+                                            <select class="form-control" name="chapter_id[]" id="chapter_id" multiple="multiple">
                                                 <option data-display="--Select Chapter--">--Select Chapter--</option>
                                             </select> <span class="red"><?php echo form_error('chapter_id'); ?></span> </div>
                                     </div>
@@ -55,7 +55,7 @@
                                         <label class="col-md-3">Question Type</label>
                                         <div class="col-md-9">
                                             <select class="form-control" name="question_type" id="question_type">
-                                                <option data-display="--Select question_type--">--Please Select Question Type--</option>
+                                                <option value="">--Please Select Question Type--</option>
                                                 <option value="Options" <?php if(isset($exam) && $exam[0]->question_type=='Options'){ ?> selected
                                                     <?php }?> >Options </option>
                                                 <option value="Fill In the Blank" <?php if(isset($exam) && $exam[0]->question_type=='Fill In the Blank'){ ?> selected
@@ -85,7 +85,7 @@
                                                             <div class="panel-body">
                                                                 <table class="table table-bordered" id="table">
                                                                     <tr>
-                                                                        <th><input type="checkbox" id="checkAll"> Select all</th>
+                                                                        <th><input type="checkbox" id="checkAll"></th>
                                                                         <th>Question</th>
                                                                     </tr>
                                                                 </table>
@@ -101,42 +101,7 @@
                                         </div>
                                     </div>
                                     <!-- Question modal ends -->
-                                
                                
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3">Time Per Question</label>
-                                        <div class="col-md-9">
-                                            <input class="form-control" type="text" name="time_per_question" id="time_per_question" placeholder="Time Per Question in seconds" autocomplete="off" onkeyup="get_valid_value('time_per_question',this.value)" required="required" value="<?php if(isset($exam)){ echo $exam[0]->time_per_question; } ?>"> <span class="red"><?php echo form_error('time_per_question'); ?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                               
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3">Passing Marks </label>
-                                        <div class="col-md-9">
-                                            <input class="form-control" type="text" name="passing_marks" id="passing_marks" placeholder="Passing Marks" autocomplete="off" required="required" value="<?php if(isset($exam)){ echo $exam[0]->passing_marks; } ?>"> <span class="red"><?php echo form_error('passing_marks'); ?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3">Marks(per question) </label>
-                                        <div class="col-md-9">
-                                            <input class="form-control" type="text" name="positive_mark" id="positive_mark" placeholder="Positive Marks" autocomplete="off" required="required" value="<?php if(isset($exam)){ echo $exam[0]->positive_mark; } ?>"> <span class="red"><?php echo form_error('positive_mark'); ?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3">Negative Marks(per question) </label>
-                                        <div class="col-md-9">
-                                            <input class="form-control" type="text" name="negative_mark" id="negative_mark" placeholder="Negative Marks" autocomplete="off" required="required" value="<?php if(isset($exam)){ echo $exam[0]->negative_mark; } ?>"> <span class="red"><?php echo form_error('negative_mark'); ?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
                                 <div class="clearfix"></div>
                                 <div class="col-md-6 ">
                                     <div class="form-group">
@@ -231,7 +196,6 @@ $(document).ready(function() {
     <?php }?>
 
     $('#module_id').on('change', function() {
-
         var url = "<?php echo base_url('admin/getChapter') ?>";
         $.ajax({
             url: url,
@@ -244,24 +208,27 @@ $(document).ready(function() {
                 var obj = JSON.parse(data);
                 $('#chapter_id').html('');
                 if (obj.length != 0) {
+                    var options = '';
                     for (var i = 0; i < obj.length; i++) {
-                        $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
-
+                        options += '<option value="'+obj[i].id+'">'+obj[i].en_chapter_name+'</option>';
                     }
+
+                    $("#chapter_id").html(options);
                 }
-
-
             }
         });
     });
 
     $('#question_type').on('change', function() {
         var module_id = $('#module_id').val();
-        var chapter_id = $('#chapter_id').val();
+        var chapter_id = [];
+        $.each($("#chapter_id option:selected"), function(){            
+            chapter_id.push($(this).val());
+        });
         var url = "<?php echo base_url('admin/getQuestion') ?>";
         $.ajax({
             url: url,
-            type: "GEt",
+            type: "GET",
             data: {
                 question_type: this.value,
                 module_id: module_id,
@@ -286,9 +253,7 @@ $(document).ready(function() {
 
 });
 
-
 function getChapter(value) {
-
     var url = "<?php echo base_url('admin/getChapter') ?>";
     $.ajax({
         url: url,
@@ -302,13 +267,10 @@ function getChapter(value) {
             $('#chapter_id').html('');
             if (obj.length != 0) {
                 for (var i = 0; i < obj.length; i++) {
-
                     $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
 
                 }
             }
-
-
         }
     });
 }
@@ -361,7 +323,6 @@ function get_valid_value(id_name, value) {
 }
 
 function secondsTimeSpanToHMS(s) {
-
     var h = Math.floor(s / 3600); //Get whole hours
     s -= h * 3600;
     var m = Math.floor(s / 60); //Get remaining minutes
@@ -369,7 +330,8 @@ function secondsTimeSpanToHMS(s) {
     var ground = h + ":" + (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s); //zero padding on minutes and seconds
     return ground;
 }
-$("#checkAll").click(function(){
+$("#checkAll").click(function() {
     $('input:checkbox').not(this).prop('checked', this.checked);
 });
+
 </script>

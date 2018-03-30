@@ -22,7 +22,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Exam Name </label>
                                         <div class="col-md-9">
-                                            <?php echo strtoupper($package[0]->exam_name);?>
+                                            <?php echo strtoupper($package[0]->package_name);?>
                                         </div>
                                     </div>
                                 </div>
@@ -50,24 +50,6 @@
                                         <label class="col-md-3">Question Type </label>
                                         <div class="col-md-9">
                                             <?php echo $package[0]->question_type;?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix "></div>
-                                <div class="col-md-6 ">
-                                    <div class="form-group ">
-                                        <label class="col-md-3 ">Total Question </label>
-                                        <div class="col-md-9 ">
-                                            <?php echo $package[0]->total_question;?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix "></div>
-                                <div class="col-md-6 ">
-                                    <div class="form-group ">
-                                        <label class="col-md-3 ">Time Per Question </label>
-                                        <div class="col-md-9 ">
-                                            <?php echo $package[0]->time_per_question;?>
                                         </div>
                                     </div>
                                 </div>
