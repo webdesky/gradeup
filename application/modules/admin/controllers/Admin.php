@@ -825,39 +825,39 @@ class Admin extends CI_Controller
     {
         
         $this->form_validation->set_rules('title', 'News Title', 'trim|required');
-        $this->form_validation->set_rules('status', 'Status', 'trim|required');
-        
+        $this->form_validation->set_rules('category','Category', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             
             if (!empty($id)) {
-                $where        = array(
+                $where           = array(
                     'id' => $id
                 );
-                $data['news'] = $this->model->getAllwhere('news', $where);
+                $data['news']    = $this->model->getAllwhere('news', $where);
                 
                 
             } else {
-                
+             
             }
             $data['body'] = 'add_news';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
                 
-                $title            = $this->input->post('title');
-                $news_description = $this->input->post('news_description');
-                $news_url         = $this->input->post('news_url');
-                $url              = $this->input->post('url');
-                $meta_title       = $this->input->post('meta_title');
-                $meta_description = $this->input->post('meta_description');
-                $meta_keyword     = $this->input->post('meta_keyword');
-                $is_active        = $this->input->post('status');
+                $title              = $this->input->post('title');
+                $category           = $this->input->post('category');
+                $news_description   = $this->input->post('news_description');
+                $news_url           = $this->input->post('news_url');
+                $url                = $this->input->post('url');
+                $meta_title         = $this->input->post('meta_title');
+                $meta_description   = $this->input->post('meta_description');
+                $meta_keyword       = $this->input->post('meta_keyword');
+                $is_active          = $this->input->post('status');
                 
                 $data = array(
 
-
                     'title'             => $title,
+                    'category'          => $category,
                     'news_description'  => $news_description,
                     'news_url'          => $news_url,
                     'url'               => $url,
@@ -867,32 +867,31 @@ class Admin extends CI_Controller
                     'is_active'         => $is_active,
                     'created_at'        => date('Y-m-d H:i:s')
 
-
                 );
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
-                        $data['category_image'] = $_FILES['category_image']['name'];
-                    }
+                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                                $data['category_image'] = $_FILES['category_image']['name'];
+                        }
                 }
-                
+
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
-                        $data['banner_image'] = $_FILES['banner_image']['name'];
-                    }
+                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                                $data['banner_image'] = $_FILES['banner_image']['name'];
+                        }
                 }
-                
-                if (isset($_FILES['news_image']['name']) && !empty($_FILES['news_image']['name'])) {
+               
+               if (isset($_FILES['news_image']['name']) && !empty($_FILES['news_image']['name'])) {
                     $count = count($_FILES['news_image']['name']);
-                    if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])) {
-                        $data['news_image'] = $_FILES['news_image']['name'];
-                    }
+                        if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])) {
+                                $data['news_image'] = $_FILES['news_image']['name'];
+                        }
                 }
-                
-                
-                
+
+
+               
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -906,7 +905,7 @@ class Admin extends CI_Controller
                 }
                 
                 $this->newsList();
-                
+            
             }
         }
     }

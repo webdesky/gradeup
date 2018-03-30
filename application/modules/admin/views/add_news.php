@@ -28,6 +28,16 @@
                                     </div>
                                 </div>
                                 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3">News Category * </label>
+                                        <div class="col-md-9">
+                                             <input class="form-control" type="text" name="category" id="category" placeholder="News Category" autocomplete="off" required="required" value="<?php if(isset($news)){ echo $news[0]->category; } ?>"> <span class="red"><?php echo form_error('category'); ?></span>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+
                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">News Url* </label>
@@ -36,6 +46,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="clearfix"></div>
                               <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">News Description* </label>
