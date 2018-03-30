@@ -13,8 +13,7 @@ class Api extends REST_Controller
     function __construct()
     {
       parent::__construct();
-      // $lang=$this->input->get('lang');
-      // $this->lang->load($lang,'english');
+      
     }
 
     /*Set Language */
@@ -202,11 +201,11 @@ class Api extends REST_Controller
 
     /*Get All Posts*/
     public function get_posts_get(){
-      $fields='post.en_post,post.id,users.first_name,users.last_name,post.chapter_id,post.super_submenu_id,post.type';
+      $fields='post.en_post,post.id,users.first_name,users.last_name,post.chapter_id,post.super_submenu_id,post.type,users.id as user_id';
       $data = $this->model->GetJoinRecord('post', 'added_by', 'users', 'id', $fields);
       
       foreach ($data as $key => $value) {
-
+        
         $where = array(
                 'id' => $value->chapter_id
             );
@@ -222,6 +221,32 @@ class Api extends REST_Controller
         $select1 = 'en_super_sub_menu';
         $menu_name  = $this->model->getAllwhere('super_sub_menu', $where1, $select1);
         $value->super_sub_menu = $menu_name[0]->en_super_sub_menu;
+
+        $select2 = 'save_notes.id';
+        $where2 =  array(
+                'save_notes.user_id' => $value->user_id,
+                'save_notes.post_id' => $value->id     
+
+            );
+        $notes=$this->model->GetJoinRecord('save_notes', 'post_id', 'post', 'id', $select2,$where2);
+       
+        if(!empty($notes)){
+          $value->notes = true;
+        }else{
+           $value->notes = false;
+        }
+
+        $where3   = array(
+            'user_id'  => $value->user_id,
+            'post_id'  => $value->id
+        );
+
+        $check = $this->model->getAllwhere('post_likes', $where);
+        if(!empty($check)){
+         $value->like =  true;       
+        }else{
+          $value->like = false;      
+        }
 
       }
       //$data = $this->model->getAll('post');
@@ -716,7 +741,7 @@ class Api extends REST_Controller
       $lang =$this->input->get('lang');
       $site_url = base_url();
       if($lang ==='en' || $lang ==null || $lang ==='hi'){
-        $fields ='testimonials.testimonial,CONCAT("'.$site_url.'","asset/uploads/",users.profile_pic)AS image,users.first_name';
+        $fields ='testimonials.testimonial,CONCAT("'.$site_url.'","asset/uploads/",users.profile_pic)AS image,users.first_name,users.user_role';
       }else{
          $resp  = array(
                 'code'    => 'ERROR',
@@ -729,6 +754,15 @@ class Api extends REST_Controller
             'is_active'  => 1
       );
       $data = $this->model->GetJoinRecord('testimonials', 'user_id', 'users', 'id', $fields);
+      if(!empty($data)){
+        foreach ($data as $key => $value) {
+          $where1           = array(
+              'role_id'  => $value->user_role
+          );
+          $role_name   = $this->model->getAllwhere('user_role',$where1,'role_name');
+          $value->role = $role_name[0]->role_name;
+        }
+      }
       if (!empty($data)) 
       {
         $resp = array(
@@ -788,7 +822,7 @@ class Api extends REST_Controller
                     'users.id'         => $id
 
                 );
-      $data      = $this->model->getAllwhere('users',$where,'id,first_name,last_name,CONCAT("'.$site_url.'","asset/uploads/",profile_pic)AS image');
+      $data      = $this->model->getAllwhere('users',$where,'id,first_name,last_name,CONCAT("'.$site_url.'","asset/uploads/",profile_pic)AS image,address');
 
       $where1    = array(
 
@@ -797,29 +831,96 @@ class Api extends REST_Controller
                     'post.added_by'   => $id
 
                 );
-      $fields='post.en_post,post.id,post.chapter_id,post.super_submenu_id,post.type,post.added_by';
+      $fields='post.en_post,post.id,post.chapter_id,post.super_submenu_id,post.type,post.added_by,CONCAT("'.$site_url.'","asset/uploads/",image)AS image,post.created_at';
       $data1 = $this->model->getAllwhere('post',$where1,$fields);
+
+      $where2    =   array(
+
+                    'save_notes.is_active'  => 1,
+
+                    'save_notes.user_id'    => $id,
+  
+
+                );
+
+      $notes =  $this->model->GetJoinRecord('save_notes', 'post_id', 'post', 'id', $fields,$where2);
+
+      if(!empty($notes)){
+        foreach ($notes as $key => $value) {
+          $times = explode(",",$this->dateDiff($value->created_at,date('Y-m-d H:i:s')));
+          
+          $notes[$key]->duration=$times[0];
+
+
+          $where3   = array(
+            'user_id'  => $id,
+            'post_id'  => $value->id
+        );
+
+        $check = $this->model->getAllwhere('post_likes', $where3,'COUNT(id) AS Likes_count');
+
+          if($check[0]->Likes_count!=0){
+           $value->like =  true;
+           $value->like_count = $check[0]->Likes_count;       
+          }else{
+            $value->like = false; 
+            $value->like_count = 0;         
+          }
+        }
+      }
+       
       
       if(!empty($data1)){
       foreach ($data1 as $key => $value) {
+        $times = explode(",",$this->dateDiff($value->created_at,date('Y-m-d H:i:s')));
+        
+        $data1[$key]->duration=$times[0];
 
-        $where = array(
-                'id' => $value->chapter_id
+        $select2 = 'save_notes.id';
+        $where2 =  array(
+                'save_notes.user_id' => $id,
+                'save_notes.post_id' => $value->id     
+
             );
-            
-        $select        = 'en_chapter_name';
-        $chapter_name  = $this->model->getAllwhere('chapters', $where, $select);
-
-        $data1[$key]->chapter_name = $chapter_name[0]->en_chapter_name;
+        $note=$this->model->GetJoinRecord('save_notes', 'post_id', 'post', 'id', $select2,$where2);
        
-        $where1 = array(
-                'id' => $value->super_submenu_id
-            );
-            
-        $select1    = 'en_super_sub_menu';
-        $menu_name  = $this->model->getAllwhere('super_sub_menu', $where1, $select1);
-        $data1[$key]->super_sub_menu = $menu_name[0]->en_super_sub_menu;
-      }
+        if(!empty($note)){
+          $value->notes  = true;
+        }else{
+           $value->notes = false;
+        }
+
+        $where3   = array(
+            'user_id'  => $id,
+            'post_id'  => $value->id
+        );
+
+        $check = $this->model->getAllwhere('post_likes', $where3,'COUNT(id) AS Likes_count');
+       
+          if($check[0]->Likes_count!=0){
+           $value->like       =  true;
+           $value->like_count =  $check[0]->Likes_count;       
+          }else{
+            $value->like       = false;
+            $value->like_count = 0;          
+          }
+          /*$where       = array(
+                  'id' => $value->chapter_id
+              );
+              
+          $select        = 'en_chapter_name';
+          $chapter_name  = $this->model->getAllwhere('chapters', $where, $select);
+
+          $data1[$key]->chapter_name = $chapter_name[0]->en_chapter_name;
+         
+          $where1      = array(
+                  'id' => $value->super_submenu_id
+              );
+              
+          $select1    = 'en_super_sub_menu';
+          $menu_name  = $this->model->getAllwhere('super_sub_menu', $where1, $select1);
+          $data1[$key]->super_sub_menu = $menu_name[0]->en_super_sub_menu;*/
+        }
       }
        if (!empty($data)) 
       {
@@ -828,7 +929,8 @@ class Api extends REST_Controller
                 'message'   => 'SUCCESS',
                 'response'  => array(
                 'User'      => $data,
-                'Post'      => $data1
+                'Post'      => $data1,
+                'Notes'     => $notes,
                 )
             );
       }else{
@@ -854,9 +956,9 @@ class Api extends REST_Controller
          $resp = array(
                 'code'      => 'SUCCESS',
                 'message'   => 'SUCCESS',
-                'response'  => array(
+                'response'  =>  array(
                 'menu'      => $menu,
-                'chapter'   =>$chapter
+                'chapter'   => $chapter
                 )
             );
       }else{
@@ -877,7 +979,7 @@ class Api extends REST_Controller
         if($data['type']=='QUERY' || $data['type'] == 'SHARED'){
        
         $required_parameter = array('user_id','chapter_id','menu_id','post');
-        $chk_error = $this->controller->check_required_value($required_parameter, $data);
+        $chk_error          = $this->controller->check_required_value($required_parameter, $data);
         if ($chk_error) 
         {
              $resp = array('code' => MISSING_PARAM, 'message' => 'Missing ' . strtoupper($chk_error['param']));
@@ -902,7 +1004,7 @@ class Api extends REST_Controller
       }else if($data['type'] == 'MCQ'){
 
         $required_parameter = array('user_id','chapter_id','menu_id','question','option_a','option_b','option_c','option_d','answer');
-        $chk_error = $this->controller->check_required_value($required_parameter, $data);
+        $chk_error          = $this->controller->check_required_value($required_parameter, $data);
         if ($chk_error) 
         {
              $resp = array('code' => MISSING_PARAM, 'message' => 'Missing ' . strtoupper($chk_error['param']));
@@ -962,7 +1064,7 @@ class Api extends REST_Controller
          $this->response($resp);
          return false;
       }  
-       $where           = array(
+        $where           = array(
             'is_active'  => 1
       );
       $data = $this->model->getAllwhere('blogs',$where,$fields);
@@ -992,7 +1094,6 @@ class Api extends REST_Controller
     /*Get Website Settings*/
     public function get_settings_get(){      
       $lang =$this->input->get('lang');
-        
       if($lang==null){
         $fields='en_site_title as site_title,CONCAT(site_url,'.', image_folder,'.',logo)AS logo,CONCAT(site_url, '.', image_folder,'.',favicon)AS favicon,en_meta_tags as meta_tags,en_copyright as copyright,contact_us_phone,contact_us_email,twitter_url,insta_url,linkedin_url,fb_url,gplus_url';
       }else if($lang === 'hi' || $lang==='en'){
@@ -1029,7 +1130,7 @@ class Api extends REST_Controller
       $lang = $this->input->get('lang');
       if($lang=='en' || $lang=='hi'){
         $this->lang->load($lang, 'english');
-        $data         = array(
+        $data[0]         = array(
                     'news'                    => $this->lang->line('news'),
                     'profile'                 => $this->lang->line('profile'),
                     'notification'            => $this->lang->line('notification'),
@@ -1051,7 +1152,31 @@ class Api extends REST_Controller
                     'my_exam'                 => $this->lang->line('my_exam'),
                     'help_feedback'           => $this->lang->line('help_feedback'),
                     'logout'                  => $this->lang->line('logout'),
-                    'home'                    => $this->lang->line('home')
+                    'home'                    => $this->lang->line('home'),
+                    'create_post'             => $this->lang->line('create_post'),
+                    'ask_a_query'             => $this->lang->line('ask_a_query'),
+                    'post_a_mcq'              => $this->lang->line('post_a_mcq'),
+                    'share_info'              => $this->lang->line('share_info'),
+                    'add_image'               => $this->lang->line('add_image'),
+                    'next'                    => $this->lang->line('next'),
+                    'login'                   => $this->lang->line('login'),
+                    'register'                => $this->lang->line('register'),
+                    'lang'                    => $this->lang->line('lang'),
+                    'select_your_exam_below'  => $this->lang->line('select_your_exam_below'),
+                    'why_choose_us'           => $this->lang->line('why_choose_us'),
+                    'get_event'               => $this->lang->line('get_event'),
+                    'our_student_says'        => $this->lang->line('our_student_says'),
+                    'latest_blog'             => $this->lang->line('latest_blog'),
+                    'our_success'             => $this->lang->line('our_success'),
+                    'about_us'                => $this->lang->line('about_us'),
+                    'privacy_policy'          => $this->lang->line('privacy_policy'),
+                    'terms_condition'         => $this->lang->line('terms_condition'),
+                    'faqs'                    => $this->lang->line('faqs'),
+                    'search'                  => $this->lang->line('search'),
+                    'courses'                 => $this->lang->line('courses'),
+                    'students'                => $this->lang->line('students'),
+                    'graduate_students'       => $this->lang->line('graduate_students'),
+                    'awards'                  => $this->lang->line('awards')
         );
       }else{
           $resp = array(
@@ -1078,5 +1203,195 @@ class Api extends REST_Controller
       }
           $this->response($resp);
     }
+
+    function dateDiff($time1, $time2, $precision = 6) {
+    // If not numeric then convert texts to unix timestamps
+      if (!is_int($time1)) {
+        $time1 = strtotime($time1);
+      }
+      if (!is_int($time2)) {
+        $time2 = strtotime($time2);
+      }
+
+      // If time1 is bigger than time2
+      // Then swap time1 and time2
+      if ($time1 > $time2) {
+        $ttime = $time1;
+        $time1 = $time2;
+        $time2 = $ttime;
+      }
+
+      // Set up intervals and diffs arrays
+      $intervals = array('year','month','day','hour','minute','second');
+      $diffs = array();
+
+      // Loop thru all intervals
+      foreach ($intervals as $interval) {
+        // Create temp time from time1 and interval
+        $ttime = strtotime('+1 ' . $interval, $time1);
+        // Set initial values
+        $add = 1;
+        $looped = 0;
+        // Loop until temp time is smaller than time2
+        while ($time2 >= $ttime) {
+          // Create new temp time from time1 and interval
+          $add++;
+          $ttime = strtotime("+" . $add . " " . $interval, $time1);
+          $looped++;
+        }
+   
+        $time1 = strtotime("+" . $looped . " " . $interval, $time1);
+        $diffs[$interval] = $looped;
+        }
+        
+        $count = 0;
+        $times = array();
+        // Loop thru all diffs
+        foreach ($diffs as $interval => $value) {
+          // Break if we have needed precission
+          if ($count >= $precision) {
+            break;
+          }
+          // Add value and interval 
+          // if value is bigger than 0
+          if ($value > 0) {
+            // Add s if value is not 1
+            if ($value != 1) {
+              $interval .= "s";
+            }
+            // Add value and interval to times array
+            $times[] = $value . " " . $interval;
+            $count++;
+          }
+        }
+
+        // Return string with times
+        return implode(", ", $times);
+      }
+
+
+      /*register User*/
+      public function save_notes_post(){
+        $pdata = file_get_contents("php://input");
+        $data  = json_decode($pdata,true);
+         
+        $required_parameter = array('user_id','post_id');
+        $chk_error = $this->controller->check_required_value($required_parameter, $data);
+        if ($chk_error) 
+        {
+             $resp = array('code' => MISSING_PARAM, 'message' => 'Missing ' . strtoupper($chk_error['param']));
+             @$this->response($resp);
+        }
+
+        $user_id     = $data['user_id'];
+        $post_id     = $data['post_id'];
+      
+        $data = array(
+            'user_id'        => $user_id,
+            'post_id'        => $post_id,
+            'is_active'      => 1,
+            'created_at'     => date('Y-m-d H:i:s')
+                );
+
+        $data = $this->model->insertData('save_notes', $data);
+       
+        if(!empty($data)){
+            $resp = array('code' => 'SUCCESS', 'message' => 'Post Added To Notes');   
+        }else{
+            $resp = array('code' => 'ERROR', 'message' => 'FAILURE','response' => array('message' => 'Post Not Added '));
+        }
+            $this->response($resp);
+      } 
+
+
+      public function delete_notes_post(){
+        $pdata = file_get_contents("php://input");
+        $data  = json_decode($pdata,true);
+         
+        $required_parameter = array('user_id','post_id');
+        $chk_error = $this->controller->check_required_value($required_parameter, $data);
+        if ($chk_error) 
+        {
+             $resp = array('code' => MISSING_PARAM, 'message' => 'Missing ' . strtoupper($chk_error['param']));
+             @$this->response($resp);
+        }
+
+        $user_id     = $data['user_id'];
+        $post_id     = $data['post_id'];
+        $where2 =  array(
+                'user_id' => $user_id,
+                'post_id' => $post_id    
+
+            );
+        $data = $this->model->delete('save_notes', $data);
+        
+        if($data){
+            $resp = array('code' => 'SUCCESS', 'message' => 'Post Deleted from Notes');   
+        }else{
+            $resp = array('code' => 'ERROR', 'message' => 'FAILURE','response' => array('message' => 'Post Not Deleted '));
+        }
+            $this->response($resp);
+      }
+
+      public function post_likes_post(){
+        $pdata = file_get_contents("php://input");
+        $data  = json_decode($pdata,true);
+         
+        $required_parameter = array('user_id','post_id');
+        $chk_error = $this->controller->check_required_value($required_parameter, $data);
+        if ($chk_error) 
+        {
+             $resp = array('code' => MISSING_PARAM, 'message' => 'Missing ' . strtoupper($chk_error['param']));
+             @$this->response($resp);
+        }
+
+        $user_id     = $data['user_id'];
+        $post_id     = $data['post_id'];
+      
+        $data = array(
+            'user_id'        => $user_id,
+            'post_id'        => $post_id,
+            'is_active'      => 1,
+            'created_at'     => date('Y-m-d H:i:s')
+                );
+
+        $data = $this->model->insertData('post_likes', $data);
+       
+        if(!empty($data)){
+            $resp = array('code' => 'SUCCESS', 'message' => 'Like Added To Post');   
+        }else{
+            $resp = array('code' => 'ERROR', 'message' => 'FAILURE','response' => array('message' => 'like Not Added '));
+        }
+            $this->response($resp);
+      } 
+
+      public function delete_like_post(){
+        $pdata = file_get_contents("php://input");
+        $data  = json_decode($pdata,true);
+         
+        $required_parameter = array('user_id','post_id');
+        $chk_error = $this->controller->check_required_value($required_parameter, $data);
+        if ($chk_error) 
+        {
+             $resp = array('code' => MISSING_PARAM, 'message' => 'Missing ' . strtoupper($chk_error['param']));
+             @$this->response($resp);
+        }
+
+        $user_id     = $data['user_id'];
+        $post_id     = $data['post_id'];
+        $where2 =  array(
+                'user_id' => $user_id,
+                'post_id' => $post_id    
+
+            );
+        $data = $this->model->delete('post_likes', $data);
+        
+        if($data){
+            $resp = array('code' => 'SUCCESS', 'message' => 'like Removed from Post');   
+        }else{
+            $resp = array('code' => 'ERROR', 'message' => 'FAILURE','response' => array('message' => 'Like Not Deleted '));
+        }
+            $this->response($resp);
+      }
 }
 ?>
