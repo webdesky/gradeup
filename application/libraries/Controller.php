@@ -71,4 +71,15 @@ class Controller
     {
         $this->CI->load->view('common/templates/default', $page_data);
     }
+    public function check_required_value($chk_params, $converted_array) {
+        foreach ($chk_params as $param) { 
+            if (array_key_exists($param, $converted_array) && ($converted_array[$param] != '')) { 
+                $check_error = 0; 
+            } else { 
+                $check_error = array('check_error' => 1, 'param' => $param); 
+                break; 
+            } 
+        } 
+        return $check_error; 
+    }
 }

@@ -16,9 +16,9 @@ class Admin extends CI_Controller
             if ($log == 1 || $log == 4) {
                 redirect('admin/dashboard');
             } else if ($log == 2) {
-                //redirect('doctor/dashboard');
+                
             } else if ($log == 3) {
-                //redirect('patient/dashboard');
+                
             } else {
                 $this->load->view('admin/login', $msg);
             }
@@ -856,6 +856,7 @@ class Admin extends CI_Controller
                 
                 $data = array(
 
+
                     'title'             => $title,
                     'category'          => $category,
                     'news_description'  => $news_description,
@@ -866,6 +867,7 @@ class Admin extends CI_Controller
                     'meta_keyword'      => $meta_keyword,
                     'is_active'         => $is_active,
                     'created_at'        => date('Y-m-d H:i:s')
+
 
                 );
                 
@@ -951,19 +953,19 @@ class Admin extends CI_Controller
                 $is_active                = $this->input->post('status');
                 
                 $data = array(
-
-
-                    'title'                     => $title,
-                    'notification_description'  => $notification_description,
-                    'notification_url'          => $notification_url,
-                    'url'                       => $url,
-                    'meta_title'                => $meta_title,
-                    'meta_description'          => $meta_description,
-                    'meta_keyword'              => $meta_keyword,
-                    'is_active'                 => $is_active,
-                    'created_at'                => date('Y-m-d H:i:s')
-
-
+                    
+                    
+                    'title' => $title,
+                    'notification_description' => $notification_description,
+                    'notification_url' => $notification_url,
+                    'url' => $url,
+                    'meta_title' => $meta_title,
+                    'meta_description' => $meta_description,
+                    'meta_keyword' => $meta_keyword,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
+                    
+                    
                 );
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
@@ -1055,18 +1057,18 @@ class Admin extends CI_Controller
                 $is_active         = $this->input->post('status');
                 
                 $data = array(
-
-
-                    'title'             => $title,
-                    'description'       => $event_description,
-                    'address'           => $event_address,
-                    'event_date'        => $event_date,
-                    'start_time'       => $start_time,
-                    'end_time'         => $end_time,
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
-
-
+                    
+                    
+                    'title' => $title,
+                    'description' => $event_description,
+                    'address' => $event_address,
+                    'event_date' => $event_date,
+                    'start_time' => $start_time,
+                    'end_time' => $end_time,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
+                    
+                    
                 );
                 
                 
@@ -1099,8 +1101,8 @@ class Admin extends CI_Controller
     public function eventList()
     {
         $data['event'] = $this->model->getAll('event');
-        $data['body'] = 'event_list';
-        $this->controller->load_view($data);        
+        $data['body']  = 'event_list';
+        $this->controller->load_view($data);
     }
     
     
@@ -1129,29 +1131,29 @@ class Admin extends CI_Controller
         } else {
             if ($this->controller->checkSession()) {
                 
-                $en_title            = $this->input->post('en_title');
-                $hi_title            = $this->input->post('hi_title');
-                $en_description      = $this->input->post('en_description');
-                $hi_description      = $this->input->post('hi_description');
-                $en_address          = $this->input->post('en_address');
-                $hi_address          = $this->input->post('hi_address');
-                $blog_date           = $this->input->post('blog_date');
-                $is_active           = $this->input->post('status');
+                $en_title       = $this->input->post('en_title');
+                $hi_title       = $this->input->post('hi_title');
+                $en_description = $this->input->post('en_description');
+                $hi_description = $this->input->post('hi_description');
+                $en_address     = $this->input->post('en_address');
+                $hi_address     = $this->input->post('hi_address');
+                $blog_date      = $this->input->post('blog_date');
+                $is_active      = $this->input->post('status');
                 
                 $data = array(
-
-
-                    'en_title'             => $en_title,
-                    'hi_title'             => $hi_title,
-                    'en_description'       => $en_description,
-                    'hi_description'       => $hi_description,
-                    'en_address'           => $en_address,
-                    'hi_address'           => $hi_address,
-                    'blog_date'            => $blog_date,
-                    'is_active'            => $is_active,
-                    'created_at'           => date('Y-m-d H:i:s')
-
-
+                    
+                    
+                    'en_title' => $en_title,
+                    'hi_title' => $hi_title,
+                    'en_description' => $en_description,
+                    'hi_description' => $hi_description,
+                    'en_address' => $en_address,
+                    'hi_address' => $hi_address,
+                    'blog_date' => $blog_date,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
+                    
+                    
                 );
                 
                 if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
@@ -1178,13 +1180,14 @@ class Admin extends CI_Controller
             }
         }
     }
-
-    public function blogList(){
+    
+    public function blogList()
+    {
         $data['blogs'] = $this->model->getAll('blogs');
-        $data['body'] = 'blog_list';
-        $this->controller->load_view($data);        
+        $data['body']  = 'blog_list';
+        $this->controller->load_view($data);
     }
-
+    
     public function training($id = null)
     {
         
@@ -1258,7 +1261,8 @@ class Admin extends CI_Controller
         $where     = array(
             'fk_module_id ' => $module_id[0]
         );
-        $data      = $this->model->getAllwhere('chapters', $where);
+        $select    = 'id,en_chapter_name';
+        $data      = $this->model->getAllwhere('chapters', $where, $select);
         echo json_encode($data);
     }
     
@@ -1331,7 +1335,6 @@ class Admin extends CI_Controller
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
                 );
-                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -1339,10 +1342,12 @@ class Admin extends CI_Controller
                     
                     unset($data['created_at']);
                     
+                    
                     $result = $this->model->updateFields('questions', $data, $where);
                 } else {
                     $result = $this->model->insertData('questions', $data);
                 }
+                
                 $this->questionList();
             }
         }
@@ -1355,7 +1360,7 @@ class Admin extends CI_Controller
         $this->controller->load_view($data);
     }
     
-    public function exam($id = NULL)
+    public function package($id = NULL)
     {
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
@@ -1365,52 +1370,44 @@ class Admin extends CI_Controller
                     'id ' => $id
                 );
                 
-                $data['exam']     = $this->model->getAllwhere('exam', $where);
+                $data['exam']     = $this->model->getAllwhere('package', $where);
                 $data['modules']  = $this->model->getAll('modules');
                 $data['chapters'] = $this->model->getAll('chapters');
             } else {
-                $data['modules']  = $this->model->getAll('modules');
-                $data['chapters'] = $this->model->getAll('chapters');
+                $data['modules'] = $this->model->getAll('modules');
+                //$data['chapters'] = $this->model->getAll('chapters');
             }
-            $data['body'] = 'add_exam';
+            $data['body'] = 'add_package';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
+                $module_id      = $this->input->post('module_id');
+                $chapter_id     = implode(",", $this->input->post('chapter_id'));
+                $exam_name      = $this->input->post('exam_name');
+                $question_type  = $this->input->post('question_type');
+                $description    = $this->input->post('description');
+                $payment_status = $this->input->post('payment_status');
+                $question_id    = implode(",", $this->input->post('question_id'));
+                $is_active      = $this->input->post('status');
+                // $time_per_question  = $this->input->post('time_per_question');
+                //$total_question     = count($this->input->post('question_id'));
+                //$time_per_question  = $this->input->post('time_per_question');
+                //$test_duration      = $this->input->post('test_duration');
+                //$passing_marks      = $this->input->post('passing_marks');
+                //$positive_mark      = $this->input->post('positive_mark');
+                //$negative_mark      = $this->input->post('negative_mark');
+                //$no_of_ques_attempt = $this->input->post('no_of_ques_attempt');
                 
-                $module_id          = $this->input->post('module_id');
-                $chapter_id         = $this->input->post('chapter_id');
-                $exam_name          = $this->input->post('exam_name');
-                $question_type      = $this->input->post('question_type');
-                $total_question     = $this->input->post('total_question');
-                $time_per_question  = $this->input->post('time_per_question');
-                $test_duration      = $this->input->post('test_duration');
-                $passing_marks      = $this->input->post('passing_marks');
-                $positive_mark      = $this->input->post('positive_mark');
-                $negative_mark      = $this->input->post('negative_mark');
-                $no_of_ques_attempt = $this->input->post('no_of_ques_attempt');
-                $description        = $this->input->post('description');
-                $payment_status     = $this->input->post('payment_status');
-                $question_id        = implode(",", $this->input->post('question_id'));
-                $time_per_question  = $this->input->post('time_per_question');
-                $is_active          = $this->input->post('status');
                 
                 
                 $data = array(
                     'module_id' => $module_id,
                     'chapter_id' => $chapter_id,
-                    'exam_name' => $exam_name,
+                    'package_name' => $exam_name,
                     'question_type' => $question_type,
-                    'total_question' => $total_question,
-                    'time_per_question' => $time_per_question,
-                    'test_duration' => $test_duration,
-                    'passing_marks' => $passing_marks,
-                    'positive_mark' => $positive_mark,
-                    'negative_mark' => $negative_mark,
-                    'no_of_ques_attempt' => $no_of_ques_attempt,
                     'description' => $description,
                     'payment_status' => $payment_status,
                     'question_id' => $question_id,
-                    'time_per_question' => $time_per_question,
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
                 );
@@ -1421,22 +1418,34 @@ class Admin extends CI_Controller
                         'id' => $id
                     );
                     unset($data['created_at']);
-                    $result = $this->model->updateFields('exam', $data, $where);
+                    $result = $this->model->updateFields('package', $data, $where);
                 } else {
-                    $result = $this->model->insertData('exam', $data);
+                    $result = $this->model->insertData('package', $data);
                 }
-                $this->examList();
+                $this->packageList();
             }
         }
         
     }
     
     
-    public function examList()
+    public function packageList()
     {
-        
-        $data['exam'] = $this->model->getAll('exam');
-        $data['body'] = 'exam_list';
+        $data['exam'] = $this->model->getAll('package');
+        $data['body'] = 'package_list';
+        $this->controller->load_view($data);
+    }
+    
+    public function view_package($id)
+    {
+        $where           = array(
+            'id' => $id
+        );
+        $field_val       = 'package.*,modules.id as main_module_id,modules.en_module_name,chapters.id as main_chapter_id,chapters.en_chapter_name';
+        $field           = 'id';
+        $value           = $id;
+        $data['package'] = $this->model->GetJoinRecordNew('package', 'module_id', 'modules', 'id', 'chapters', 'id', '', '', $field, $value, $field_val, 'chapter_id');
+        $data['body']    = 'view_package';
         $this->controller->load_view($data);
     }
     
@@ -1447,14 +1456,10 @@ class Admin extends CI_Controller
         $question_type = $this->input->get('question_type');
         $where         = array(
             'module_id ' => $module_id,
-            'chapter_id' => $chapter_id,
             'question_type' => $question_type
         );
-        $data          = $this->model->getAllwhere('questions', $where);
-        
+        $data          = $this->Common_model->getAllquestion('questions', $where, $chapter_id);
         echo json_encode($data);
-        
-        
     }
     public function change_password()
     {
@@ -2116,6 +2121,99 @@ class Admin extends CI_Controller
         } else {
             show_404();
         }
+    }
+    
+    public function exam()
+    {
+        if ($this->controller->checkSession()) {
+            $data['modules'] = $this->model->getAll('modules');
+            $data['body']    = 'add_exam';
+            $this->controller->load_view($data);
+        } else {
+            show_404();
+        }
+    }
+    
+    public function get_exam()
+    {
+        $module_id     = $this->input->get('module_id');
+        $question_type = $this->input->get('question_type');
+        
+        $where  = array(
+            'module_id' => $module_id,
+            'question_type' => $question_type
+        );
+        $select = 'id,exam_name';
+        
+        $package = $this->model->getAllwhere('package', $where, $select);
+        
+        if ($package != '') {
+            echo json_encode($package);
+        }
+    }
+    
+    public function get_questions()
+    {
+        $question_id = explode(",", $this->input->get('question_id'));
+        if (!empty($question_id)) {
+            $select    = 'en_question,hi_question';
+            $questions = $this->model->getAllwhereIN('questions', $question_id, $select);
+            echo json_encode($questions);
+        }
+    }
+    
+    public function add_exam()
+    {
+        $this->form_validation->set_rules('exam_name', 'Exam Name', 'trim|required');
+        $this->form_validation->set_rules('time_per_question', 'Time per Question', 'trim|required|numeric');
+        $this->form_validation->set_rules('passing_marks', 'Passing Marks', 'trim|required|numeric');
+        $this->form_validation->set_rules('positive_mark', 'Positive Marks', 'trim|required|numeric');
+        $this->form_validation->set_rules('package_id', 'Package', 'trim|required|numeric');
+        $this->form_validation->set_rules('status', 'Status', 'trim|required|numeric');
+        
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            $data['body'] = 'add_exam';
+            $this->controller->load_view($data);
+        } else {
+            $exam_name         = $this->input->post('exam_name');
+            $time_per_question = $this->input->post('time_per_question');
+            $passing_marks     = $this->input->post('passing_marks');
+            $positive_mark     = $this->input->post('positive_mark');
+            $negative_mark     = $this->input->post('negative_mark');
+            $package_id        = $this->input->post('package_id');
+            $status            = $this->input->post('status');
+
+            $data = array(
+                    'exam_name'     => $exam_name,
+                    'time_per_question' => $time_per_question,
+                    'passing_marks' => $passing_marks,
+                    'positive_mark' => $positive_mark,
+                    'negative_mark' => $negative_mark,
+                    'package_id'    =>  $package_id,
+                    'is_active'     => $status,
+                    'created_at'    => date('Y-m-d H:i:s')
+                );
+                
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    unset($data['created_at']);
+                    $result = $this->model->updateFields('exam', $data, $where);
+                } else {
+                    $result = $this->model->insertData('exam', $data);
+                }
+                $this->examList();
+        }
+        
+    }
+
+    public function examList(){
+        $field_val    = 'exam.*,package.package_name';
+        $data['exam'] = $this->model->GetJoinRecord('exam', 'package_id', 'package', 'id', $field_val);
+        $data['body'] = 'exam_list';
+        $this->controller->load_view($data);
     }
     
 }
