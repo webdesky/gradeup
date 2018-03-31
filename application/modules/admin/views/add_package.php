@@ -1,7 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Add Package</h1>
+            <h1 class="page-header"><?php if(isset($exam) && !empty($exam)){ echo 'Edit Package';}else{ echo 'Add Package';}?></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -22,7 +22,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Package Name * </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="exam_name" id="exam_name" placeholder="Package Name" autocomplete="off" required="required" value="<?php if(isset($exam)){ echo $exam[0]->exam_name; } ?>"> <span class="red"><?php echo form_error('exam_name'); ?></span>
+                                            <input class="form-control" type="text" name="exam_name" id="exam_name" placeholder="Package Name" autocomplete="off" required="required" value="<?php if(isset($exam)){ echo $exam[0]->package_name; } ?>"> <span class="red"><?php echo form_error('exam_name'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -47,6 +47,10 @@
                                         <div class="col-md-9">
                                             <select class="form-control" name="chapter_id[]" id="chapter_id" multiple="multiple">
                                                 <option data-display="--Select Chapter--">--Select Chapter--</option>
+                                                <?php if(!empty($chapters[0])){ foreach($chapters as $values){?>
+                                                <option value="<?php echo $values->id?>" <?php if(!empty($exam[0]->chapter_id)){ 
+                                                $chapter_array = explode(',', $exam[0]->chapter_id); if(in_array($values->id, $chapter_array)){ echo 'selected';}}?>><?php echo $values->en_chapter_name;?></option>
+                                                <?php }}?>
                                             </select> <span class="red"><?php echo form_error('chapter_id'); ?></span> </div>
                                     </div>
                                 </div>
@@ -189,35 +193,13 @@ $(document).ready(function() {
     });
 
     <?php if(isset($exam)){ ?>
-    var module_id = $('#module_id').val();
-    getChapter(module_id);
-    var question_type = $('#question_type').val();
-    getQuestion(question_type);
+    // var module_id = $('#module_id').val();
+    // getChapter(module_id);
+    // var question_type = $('#question_type').val();
+    // getQuestion(question_type);
     <?php }?>
 
-    $('#module_id').on('change', function() {
-        var url = "<?php echo base_url('admin/getChapter') ?>";
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: {
-                module_id: this.value
-            },
-            success: function(data) {
-                console.log(data);
-                var obj = JSON.parse(data);
-                $('#chapter_id').html('');
-                if (obj.length != 0) {
-                    var options = '';
-                    for (var i = 0; i < obj.length; i++) {
-                        options += '<option value="'+obj[i].id+'">'+obj[i].en_chapter_name+'</option>';
-                    }
 
-                    $("#chapter_id").html(options);
-                }
-            }
-        });
-    });
 
     $('#question_type').on('change', function() {
         var module_id = $('#module_id').val();
@@ -278,9 +260,9 @@ function getChapter(value) {
 function getQuestion(value) {
 
     var module_id = $('#module_id').val();
-    var chapter_id = <?php if(isset($exam)){ echo $exam[0]->chapter_id; }else{ echo '0'; } ?>;
-    var question_id = "<?php if(isset($exam)){ echo $exam[0]->question_id; }else{ echo '1';} ?>";
-    var url = "<?php echo base_url('admin/getQuestion') ?>";
+    var chapter_id = '<?php if(isset($exam)){ echo $exam[0]->chapter_id; }else{ echo '0'; } ?>';
+    var question_id = '<?php if(isset($exam)){ echo $exam[0]->question_id; }else{ echo '1';} ?>';
+    var url = '<?php echo base_url('admin/getQuestion') ?>';
     $.ajax({
         url: url,
         type: "GET",
@@ -293,8 +275,6 @@ function getQuestion(value) {
             console.log(data);
             if (data != null) {
                 var obj = JSON.parse(data);
-                // $('#table').html('');
-
                 $('.one').html('');
 
                 for (var i = 0; i < obj.length; i++) {
@@ -333,5 +313,26 @@ function secondsTimeSpanToHMS(s) {
 $("#checkAll").click(function() {
     $('input:checkbox').not(this).prop('checked', this.checked);
 });
+    $('#module_id').on('change', function() {
+        var url = "<?php echo base_url('admin/getChapter') ?>";
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: {
+                module_id: this.value
+            },
+            success: function(data) {
+                var obj = JSON.parse(data);
+                $('#chapter_id').html('');
+                if (obj.length != 0) {
+                    var options = '';
+                    for (var i = 0; i < obj.length; i++) {
+                        options += '<option value="'+obj[i].id+'">'+obj[i].en_chapter_name+'</option>';
+                    }
 
+                    $("#chapter_id").html(options);
+                }
+            }
+        });
+    });
 </script>

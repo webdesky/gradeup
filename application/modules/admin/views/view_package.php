@@ -96,16 +96,45 @@ function get_questions(id) {
         success: function(data) {
             var obj = JSON.parse(data);
             if (obj.length != 0) {
-                var option = '<table class="table table-bordered" id="table"><tr><th>Sr. No.</th><th>Question in English</th><th>Question in Hindi</th></tr>';
+                var option = '<table class="table table-bordered" id="table"><tr><th>Sr. No.</th><th>Question in English</th><th>Question in Hindi</th><th>Remove</th></tr>';
                 for (var i = 0; i < obj.length; i++) {
-                    option += '<tr><td>' + (i + 1) + '</td><td>' + obj[i].en_question + '</td><td>' + obj[i].hi_question + '</td></tr>';
+                    option += '<tr><td>' + (i + 1) + '</td><td>' + obj[i].en_question + '</td><td>' + obj[i].hi_question + '</td><td><input type="checkbox" name="question_id[]" value="' + obj[i].id + '"/></td></tr>';
                 }
-                option += '</table>';
+                option += '<tr><td><input class="btn btn-primary" type="button" id="update_question" onclick="update_question()" value="Update"></td></tr></table>';
                 $('#questions_list').toggle().html(option);
             }
 
         }
     })
+}
+
+function update_question() {
+    var myArray = [];
+    $(":checkbox:checked").each(function() {
+        myArray.push(this.value);
+    });
+    swal({
+        title: "Are you sure?",
+        text: "Want to Remove?",
+        type: "warning",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        confirmButtonText: "Yes, Remove it!",
+        confirmButtonColor: "#ec6c62"
+    }, function() {
+        $.ajax({
+            url: "<?php echo base_url('admin/update')?>",
+            data: {
+                'question_id': myArray,
+                'table': 'package',
+                'id': '<?php echo $this->uri->segment(3)?>'
+            },
+            type: "POST"
+        }).done(function(data) {
+            swal("Deleted!", "Record was successfully removed!", "success");
+        });
+
+    });
 }
 
 </script>
