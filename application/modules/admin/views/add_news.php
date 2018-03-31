@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">News Category * </label>
                                         <div class="col-md-9">
-                                             <input class="form-control" type="text" name="category" id="category" placeholder="News Category" autocomplete="off" required="required" value="<?php if(isset($news)){ echo $news[0]->category; } ?>"> <span class="red"><?php echo form_error('category'); ?></span>
+                                             <input class="form-control" type="text" name="category" id="category" placeholder="News Category Ex. Sports,Politics" autocomplete="off" required="required" value="<?php if(isset($news)){ echo $news[0]->category; } ?>"> <span class="red"><?php echo form_error('category'); ?></span>
                                            
                                         </div>
                                     </div>
