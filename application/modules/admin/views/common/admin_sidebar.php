@@ -36,8 +36,7 @@
         <!-- /.navbar-top-links -->
 
         <?php 
-            $user_role      =   $this->session->userdata('user_role'); 
-            
+            $user_role      =   $this->session->userdata('user_role');
             if($user_role==4){
                 $rights     =   explode(',',trim($this->session->userdata('rights')->rights,'"'));   
                 $right0     =   str_split($rights[0]);
@@ -119,9 +118,8 @@
                             </li>
                         </ul>
                     </li> -->
-                    <li> <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
+                    <li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-
                             <li>
                                 <a href="<?php echo base_url('admin/question')?>">Add Question</a>
                             </li>
@@ -180,12 +178,12 @@
                     </li>
 
                     <li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Configurations <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
+                        <ul class="nav nav-third-level">
                             <li>
                                 <a href="<?php echo base_url('admin/setting');?>"><i class="fa fa-cog"></i> Site Settings</a>
                             </li>
-                            <li> <a href="#"><i class="fa fa-leanpub" aria-hidden="true"></i> Blog <span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                            <li><a href="#"><i class="fa fa-leanpub" aria-hidden="true"></i> Blog <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level third_level">
                                     <li>
                                         <a href="<?php echo base_url('admin/blog');?>">Add Blog</a>
                                     </li>
@@ -194,9 +192,8 @@
                                     </li>
                                 </ul>
                             </li>
-
-                            <li> <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i>  News <span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                            <li><a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i>  News <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level third_level">
                                     <li>
                                         <a href="<?php echo base_url('admin/news');?>">Add News</a>
                                     </li>
@@ -205,8 +202,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li> <a href="#"><i class="fa fa-bell" aria-hidden="true"></i> Notification <span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                            <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i> Notification <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level third_level">
                                     <li>
                                         <a href="<?php echo base_url('admin/notification');?>">Add Notification</a>
                                     </li>
@@ -215,8 +212,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li> <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Event <span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                            <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Event <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level third_level">
                                     <li>
                                         <a href="<?php echo base_url('admin/event');?>">Add Event</a>
                                     </li>
@@ -225,16 +222,15 @@
                                     </li>
                                 </ul>
                             </li>
-
-                            <li> <a href="#"><i class="fa fa-quote-left" aria-hidden="true"></i> Testimonials<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                            <li><a href="#"><i class="fa fa-quote-left" aria-hidden="true"></i> Testimonials<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level third_level">
                                     <li>
                                         <a href="<?php echo base_url('admin/testimonials')?>">View Testimonials</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li> <a href="#"><i class="fa fa-check" aria-hidden="true"></i> Why Choose Us<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                            <li><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Why Choose Us<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level third_level">
                                     <li>
                                         <a href="<?php echo base_url('admin/choose')?>">Add Content</a>
                                     </li>
@@ -245,9 +241,16 @@
                             </li>
                         </ul>
                     </li>
+
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
         </div>
         <!-- /.navbar-static-side -->
     </nav>
+
+<style type="text/css">
+    .third_level{
+        margin-left: 27px;
+    }
+</style>

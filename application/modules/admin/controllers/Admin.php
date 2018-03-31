@@ -137,21 +137,18 @@ class Admin extends CI_Controller
                         $this->session->set_flashdata('info_message', "Site Logo size too large");
                         redirect('admin/setting');
                     } else {
-                        if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/' . $_FILES['site_logo']['name'])) {
+                        if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/'.$_FILES['site_logo']['name'])) {
                             $data['logo'] = $_FILES['site_logo']['name'];
                         }
                     }
                 }
-                
                 $where  = array(
                     'id' => $this->input->post('id')
                 );
                 $result = $this->model->updateFields('settings', $data, $where);
                 redirect('admin/setting');
-            }
-            
+            }  
         }
-        
     }
     
     public function about()
@@ -1257,7 +1254,7 @@ class Admin extends CI_Controller
     
     public function getChapter()
     {
-        $module_id = $this->input->post('module_id');
+        $module_id = $this->input->get('module_id');
         $where     = array(
             'fk_module_id ' => $module_id[0]
         );
@@ -1368,14 +1365,16 @@ class Admin extends CI_Controller
             if (!empty($id)) {
                 $where = array(
                     'id ' => $id
-                );
-                
+                );                
                 $data['exam']     = $this->model->getAllwhere('package', $where);
                 $data['modules']  = $this->model->getAll('modules');
-                $data['chapters'] = $this->model->getAll('chapters');
+
+                $where1 = array(
+                    'fk_module_id ' => $data['exam'][0]->module_id
+                );
+                $data['chapters'] = $this->model->getAllwhere('chapters',$where1);
             } else {
                 $data['modules'] = $this->model->getAll('modules');
-                //$data['chapters'] = $this->model->getAll('chapters');
             }
             $data['body'] = 'add_package';
             $this->controller->load_view($data);
@@ -1388,16 +1387,7 @@ class Admin extends CI_Controller
                 $description    = $this->input->post('description');
                 $payment_status = $this->input->post('payment_status');
                 $question_id    = implode(",", $this->input->post('question_id'));
-                $is_active      = $this->input->post('status');
-                // $time_per_question  = $this->input->post('time_per_question');
-                //$total_question     = count($this->input->post('question_id'));
-                //$time_per_question  = $this->input->post('time_per_question');
-                //$test_duration      = $this->input->post('test_duration');
-                //$passing_marks      = $this->input->post('passing_marks');
-                //$positive_mark      = $this->input->post('positive_mark');
-                //$negative_mark      = $this->input->post('negative_mark');
-                //$no_of_ques_attempt = $this->input->post('no_of_ques_attempt');
-                
+                $is_active      = $this->input->post('status');              
                 
                 
                 $data = array(
@@ -2156,7 +2146,7 @@ class Admin extends CI_Controller
     {
         $question_id = explode(",", $this->input->get('question_id'));
         if (!empty($question_id)) {
-            $select    = 'en_question,hi_question';
+            $select    = 'id,en_question,hi_question';
             $questions = $this->model->getAllwhereIN('questions', $question_id, $select);
             echo json_encode($questions);
         }
@@ -2214,6 +2204,19 @@ class Admin extends CI_Controller
         $data['exam'] = $this->model->GetJoinRecord('exam', 'package_id', 'package', 'id', $field_val);
         $data['body'] = 'exam_list';
         $this->controller->load_view($data);
+    }
+
+    public function update(){
+        $id          = $this->input->post('id');
+        $table       = $this->input->post('table');
+        $question_id = implode(',',$this->input->post('question_id'));
+        $data        = array('question_id'=>$question_id);
+        $where       = array('id'=>$id);
+        if($this->model->updateFields($table, $data, $where)){
+            echo 'success';
+        }else{
+            echo 'error';
+        }
     }
     
 }
