@@ -44,7 +44,7 @@
                                                 <?php echo $users_list->gender;?> </td>
                                             <td>
                                                 <?php if($users_list->user_role==2){ echo 'Doctor';}elseif($users_list->user_role==3){ echo 'Patient';}else{echo 'Admin';}?> </td>
-                                            <td><a href="<?php echo base_url('doctor/edit_user/'.$users_list->id)?>"><span class="glyphicon glyphicon-edit"></span></a> | <a href="javascript:void(0)" onclick="delete_user('<?php echo $users_list->id?>','<?php echo $i?>')"><span class="glyphicon glyphicon-trash"></span></a></td>
+                                            <td><a href="<?php echo base_url('doctor/edit_user/'.$users_list->id)?>"><span class="glyphicon glyphicon-edit"></span></a> | <a href="javascript:void(0)" onclick="delete_record('<?php echo $users_list->id?>','<?php echo $i?>','user')"><span class="glyphicon glyphicon-trash"></span></a></td>
                                         </tr>
                                         <?php $i++;}}?> </tbody>
                                 </table>
@@ -62,32 +62,3 @@
     <!-- row -->
 </div>
 </div>
-<script type="text/javascript">
-$('#users').DataTable({
-    responsive: true
-});
-
-function delete_user(id, tr_id) {
-    swal({
-        title: "Are you sure?",
-        text: "Are you sure that you want to delete?",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        confirmButtonText: "Yes, Delete it!",
-        confirmButtonColor: "#ec6c62"
-    }, function() {
-        $.ajax({
-            url: "<?php echo base_url('doctor/delete')?>",
-            data: {
-                id: id,
-                table: 'user'
-            },
-            type: "POST"
-        }).done(function(data) {
-            swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_' + tr_id).remove();
-        });
-    });
-}
-</script>

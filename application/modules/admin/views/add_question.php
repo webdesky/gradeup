@@ -39,6 +39,9 @@
                                         <div class="col-md-9">
                                             <select class="form-control" name="chapter_id" id="chapter_id">
                                                 <option data-display="--Select Chapter--">--Select Chapter--</option>
+                                                <?php if(!empty($chapters)){ foreach($chapters as $val){?>
+                                                <option value="<?php echo $val->id;?>" <?php if(isset($questions) && $questions[0]->chapter_id==$val->id){ echo 'selected';}?>><?php echo $val->en_chapter_name;?></option>
+                                                <?php }}?>
                                             </select> <span class="red"><?php echo form_error('chapter_id'); ?></span> </div>
                                     </div>
                                 </div>
@@ -374,7 +377,7 @@ $(document).ready(function() {
         var url = "<?php echo base_url('admin/getChapter') ?>";
         $.ajax({
             url: url,
-            type: "POST",
+            type: "GET",
             data: {
                 module_id: value
             },
@@ -393,11 +396,12 @@ $(document).ready(function() {
         var url = "<?php echo base_url('admin/getChapter') ?>";
         $.ajax({
             url: url,
-            type: "POST",
+            type: "GET",
             data: {
                 module_id: this.value
             },
             success: function(data) {
+                if(data.length!=''){
                 var obj = JSON.parse(data);
                 $('#chapter_id').html('');
                 if (obj.length != 0) {
@@ -405,7 +409,8 @@ $(document).ready(function() {
                         $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
                     }
                 }
-            }
+            }}
+
         });
     })
 });

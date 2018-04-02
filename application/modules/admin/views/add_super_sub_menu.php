@@ -18,11 +18,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <form role="form" method="post" action="<?php if(isset($super_sub_menu)){ echo base_url('admin/super_sub_menu/'.$super_sub_menu[0]->super_sub_menu_id); }else{ echo base_url('admin/super_sub_menu'); }?>" class="registration_form1" enctype="multipart/form-data">
-
-
-                               
                                     <div class="col-md-6">
-
                                         <div class="form-group">
                                             <label class="col-md-3">Menu Name* </label>
                                             <div class="col-md-9">
@@ -37,10 +33,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div class="col-md-6">
-
                                         <div class="form-group">
                                             <label class="col-md-3">SubMenu Name* </label>
                                             <div class="col-md-9">
@@ -53,8 +46,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                               
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3">Super Sub Menu Name* </label>
@@ -63,7 +54,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3">Super Sub Menu Name* </label>
@@ -72,7 +62,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">Url* </label>
@@ -147,8 +136,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                
-
                                 <div class="col-md-12" align="center">
                                     <button type="submit" value="Save" class="btn btn-success">Save</button>
                                     <input type="reset" class="btn btn-default" value="Reset"> </div>

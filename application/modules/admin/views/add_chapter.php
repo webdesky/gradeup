@@ -26,9 +26,9 @@
                                                 <select class="wide" name="fk_module_id">
                                                     <option data-display="--Select Modules--">--Select Modules--</option>
                                                      <?php foreach ($modules as $key => $value) { ?>
-                                                          <option value="<?php echo $value->id; ?>" <?php if(isset($chapter) && $chapter[0]->fk_module_id==$value->id) { ?> selected <?php } ?>><?php echo ucwords($value->en_module_name); ?></option>
+                                                        <option value="<?php echo $value->id; ?>" <?php if(isset($chapter) && $chapter[0]->fk_module_id==$value->id) { ?> selected <?php } ?>><?php echo ucwords($value->en_module_name); ?></option>
                                                     <?php } ?>
-                                                 </select>
+                                                </select>
                                                 <span class="red"><?php echo form_error('fk_module_id'); ?></span>
                                             </div>
                                         </div>

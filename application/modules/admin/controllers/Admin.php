@@ -1301,7 +1301,14 @@ class Admin extends CI_Controller
                 );
                 $data['questions'] = $this->model->getAllwhere('questions', $where);
                 $data['modules']   = $this->model->getAll('modules');
-                $data['chapters']  = $this->model->getAll('chapters');
+                
+
+                $field_val = 'id,en_chapter_name';
+
+                $where1 = array('fk_module_id'=>$data['questions'][0]->module_id);
+
+                $data['chapters']  = $this->model->getAllwhere('chapters', $where1, $field_val);
+
             } else {
                 $data['modules']  = $this->model->getAll('modules');
                 $data['chapters'] = $this->model->getAll('chapters');
@@ -1686,6 +1693,8 @@ class Admin extends CI_Controller
             'id' => $id
         );
         $this->model->delete($table, $where);
+        // echo $this->db->last_query(); 
+        // die;
     }
     public function change_status()
     {

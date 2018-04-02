@@ -197,8 +197,7 @@ function get_results(str) {
     var module_id = $('#module_id').val();
     var question_type = str;
     $.ajax({
-        url: '<?php echo base_url('
-        admin / get_exam ')?>',
+        url: '<?php echo base_url('admin/get_exam')?>',
         type: "GET",
         data: {
             module_id: module_id,

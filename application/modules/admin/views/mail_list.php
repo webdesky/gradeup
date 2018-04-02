@@ -32,7 +32,7 @@
                                 $count=1;
                                 if($mail_list){
                                 foreach ($mail_list as  $message) { ?>
-                                <tr class="odd gradeX">
+                                <tr class="odd gradeX" id="tr_<?php echo $count;?>">
                                     <td>
                                         <?php echo $count; ?> </td>
                                     <td>
@@ -41,7 +41,7 @@
                                         <?php echo $message->subject; ?> </td>
                                     <td class="center">
                                         <?php echo $message->message; ?> </td>
-                                    <td class="center"><a href="javascript:void(0)" onclick="delete_mail('<?php echo $message->id?>')"><i class="fa fa-trash-o" aria-hidden="true"></i></a> </td>
+                                    <td class="center"><a href="javascript:void(0)" onclick="delete_record('<?php echo $message->id?>','<?php echo $count; ?>','mail')"><i class="fa fa-trash-o" aria-hidden="true"></i></a> </td>
                                 </tr>
                                 <?php $count++; } }?> </tbody>
                         </table>
@@ -56,35 +56,3 @@
     </div>
     <!-- /.row -->
 </div>
-<script type="text/javascript">
-$('#dataTables').DataTable({
-    responsive: true
-});
-
-
-function delete_mail(id, tr_id) {
-    swal({
-        title: "Are you sure?",
-        text: "want to delete?",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        confirmButtonText: "Yes, Delete it!",
-        confirmButtonColor: "#ec6c62"
-    }, function() {
-        $.ajax({
-            url: "<?php echo base_url('admin/delete')?>",
-            data: {
-                id: id,
-                table: 'mail'
-            },
-            type: "POST"
-        }).done(function(data) {
-            swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_' + tr_id).remove();
-        }).error(function(data) {
-            swal("Oops", "We couldn't connect to the server!", "error");
-        });
-    });
-}
-</script>

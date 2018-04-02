@@ -43,7 +43,7 @@
                                                 <?php echo date('Y-m-d',strtotime($blogs['blog_date']));?> </td>
                                             <td>
                                                 <a href="<?php echo base_url('admin/blog/'.$blogs['id'])?>"><span class="glyphicon glyphicon-edit"></span></a> |
-                                                <a href="javascript:void(0)" onclick="delete_user('<?php echo $blogs['id']?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
+                                                <a href="javascript:void(0)" onclick="delete_record('<?php echo $blogs['id']?>','<?php echo $i;?>','blogs')"><span class="glyphicon glyphicon-trash"></span></a>
                                             </td>
                                         </tr>
                                         <?php $i++;}}?>
@@ -63,35 +63,3 @@
     <!-- row -->
 </div>
 </div>
-<script type="text/javascript">
-$('#users').DataTable({
-    responsive: true,
-
-});
-
-function delete_user(id, tr_id) {
-    swal({
-        title: "Are you sure?",
-        text: "want to delete?",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        confirmButtonText: "Yes, Delete it!",
-        confirmButtonColor: "#ec6c62"
-    }, function() {
-        $.ajax({
-            url: "<?php echo base_url('admin/delete')?>",
-            data: {
-                id: id,
-                table: 'blogs'
-            },
-            type: "POST"
-        }).done(function(data) {
-            swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_' + tr_id).remove();
-        });
-
-    });
-}
-
-</script>

@@ -31,6 +31,7 @@
     <script src="<?php echo base_url('asset/js/chart.min.js')?>"></script>
     <script src="<?php echo base_url('asset/js/base.js')?>"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
+    <script src="<?php echo base_url('asset/js/custom.js')?>"></script>
     
 
 

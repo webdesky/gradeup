@@ -70,7 +70,7 @@
 
                                                 <?php if($user_role==1 ||($user_role==4 && $right0[1]==1)){?> <a href="<?php echo base_url('admin/edit_user/'.$users_list->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |
 
-                                                <?php }if($user_role==1 || ($user_role==4 && $right0[2]==1)){?> <a href="javascript:void(0)" onclick="delete_user('<?php echo $users_list->id?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
+                                                <?php }if($user_role==1 || ($user_role==4 && $right0[2]==1)){?> <a href="javascript:void(0)" onclick="delete_record('<?php echo $users_list->id?>','<?php echo $i;?>','users')"><span class="glyphicon glyphicon-trash"></span></a>
                                                 <?php }?> </td>
                                             <?php }?>
                                         </tr>
@@ -92,34 +92,6 @@
 </div>
 </div>
 <script type="text/javascript">
-$('#users').DataTable({
-    responsive: true,
-});
-
-function delete_user(id, tr_id) {
-    swal({
-        title: "Are you sure?",
-        text: "want to delete?",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        confirmButtonText: "Yes, Delete it!",
-        confirmButtonColor: "#ec6c62"
-    }, function() {
-        $.ajax({
-            url: "<?php echo base_url('admin/delete')?>",
-            data: {
-                id: id,
-                table: 'users'
-            },
-            type: "POST"
-        }).done(function(data) {
-            swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_' + tr_id).remove();
-        });
-    });
-}
-
 function update_status(user_id, status) {
     swal({
         title: "Are you sure?", text: "Want to Change Status?", type: "warning", showCancelButton: true, closeOnConfirm: false, confirmButtonText: "Yes,Change it!", confirmButtonColor: "#ec6c62"

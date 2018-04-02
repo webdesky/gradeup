@@ -56,7 +56,6 @@ function check_password(data) {
             } else {
                 $('#old').text('');
             }
-            //  window.location.reload();
         }
     });
 }
@@ -73,5 +72,4 @@ function password(confirm_password) {
 
     }
 }
-
 </script>
