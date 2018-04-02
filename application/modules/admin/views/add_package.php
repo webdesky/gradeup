@@ -259,13 +259,10 @@
 
     function getQuestion(value) {
 
-        var module_id = $('#module_id').val();
-        var chapter_id = '<?php if(isset($exam)){ echo $exam[0]->chapter_id; }else{ echo '
-        0 '; } ?>';
-        var question_id = '<?php if(isset($exam)){ echo $exam[0]->question_id; }else{ echo '
-        1 ';} ?>';
-        var url = '<?php echo base_url('
-        admin / getQuestion ') ?>';
+        var module_id   = $('#module_id').val();
+        var chapter_id  = '<?php if(isset($exam)){ echo $exam[0]->chapter_id; }else{ echo '0'; } ?>';
+        var question_id = '<?php if(isset($exam)){ echo $exam[0]->question_id; }else{ echo '1';} ?>';
+        var url         = "<?php echo base_url('admin/getQuestion') ?>";
         $.ajax({
             url: url,
             type: "GET",
