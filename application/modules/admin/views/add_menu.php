@@ -41,7 +41,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Menu Name* </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="en_menu_name" id="en_menu_name" placeholder="Menu Name in English" autocomplete="off" required="required" value="<?php if(isset($menu)){ echo $menu[0]->en_menu_name; } ?>"> <span class="red"><?php echo form_error('en_menu_name'); ?></span>
+                                            <input class="form-control" type="text" name="en_menu_name" id="en_menu_name" placeholder="Menu Name in English" autocomplete="off" required="required" value="<?php if(isset($menu)){ echo $menu[0]->en_menu_name; }else{echo set_value('en_menu_name');} ?>"> <span class="red"><?php echo form_error('en_menu_name'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Menu Name* </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="hi_menu_name" id="hi_menu_name" placeholder="Menu Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($menu)){ echo $menu[0]->hi_menu_name; } ?>"> <span class="red"><?php echo form_error('hi_menu_name'); ?></span>
+                                            <input class="form-control" type="text" name="hi_menu_name" id="hi_menu_name" placeholder="Menu Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($menu)){ echo $menu[0]->hi_menu_name; }else{echo set_value('hi_menu_name');} ?>"> <span class="red"><?php echo form_error('hi_menu_name'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Url* </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="url" id="url" placeholder="url" autocomplete="off" required="required" value="<?php if(isset($menu)){ echo $menu[0]->url; } ?>"> <span class="red"><?php echo form_error('url'); ?></span>
+                                            <input class="form-control" type="text" name="url" id="url" placeholder="url" autocomplete="off" required="required" value="<?php if(isset($menu)){ echo $menu[0]->url; }else{echo set_value('url');} ?>"> <span class="red"><?php echo form_error('url'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Meta Title* </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="meta_title" id="meta_title" placeholder="Meta Title" autocomplete="off" required="required" value="<?php if(isset($menu)){ echo $menu[0]->meta_title; } ?>"> <span class="red"><?php echo form_error('meta_title'); ?></span>
+                                            <input class="form-control" type="text" name="meta_title" id="meta_title" placeholder="Meta Title" autocomplete="off" required="required" value="<?php if(isset($menu)){ echo $menu[0]->meta_title; }else{echo set_value('meta_title');} ?>"> <span class="red"><?php echo form_error('meta_title'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                         <label class="col-md-3">Meta Description</label>
                                         <div class="col-md-9">
                                             <textarea class="form-control" rows="8" id="meta_description" name="meta_description" placeholder="Meta Description">
-                                                <?php if(isset($menu)){ echo $menu[0]->meta_description; } ?>
+                                                <?php if(isset($menu)){ echo $menu[0]->meta_description; }else{echo set_value('meta_description');} ?>
                                             </textarea> <span class="red"><?php echo form_error('meta_description'); ?></span>
                                             <script type="text/javascript">
                                             CKEDITOR.replace('meta_description');
@@ -90,8 +90,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Meta Keyword</label>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" rows="8" id="meta_keyword" name="meta_keyword" placeholder="Meta Description">
-                                               <?php if(isset($menu)){ echo $menu[0]->meta_keyword; } ?>
+                                            <textarea class="form-control" rows="8" id="meta_keyword" name="meta_keyword" placeholder="Meta Keyword">
+                                               <?php if(isset($menu)){ echo $menu[0]->meta_keyword; }else{echo set_value('meta_keyword');} ?>
                                             </textarea> <span class="red"><?php echo form_error('meta_keyword'); ?></span>
                                             <script type="text/javascript">
                                             CKEDITOR.replace('meta_keyword');

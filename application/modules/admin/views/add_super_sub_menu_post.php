@@ -94,7 +94,7 @@
                                             <label class="col-md-3">Super Sub Menu Post* </label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="en_post" name="en_post" placeholder="about us">
-                                                    <?php if(isset($super_sub_menu_post) && !empty($super_sub_menu_post[0]->en_post)){ echo $super_sub_menu_post[0]->en_post; }?>
+                                                    <?php if(isset($super_sub_menu_post) && !empty($super_sub_menu_post[0]->en_post)){ echo $super_sub_menu_post[0]->en_post; }else{echo set_value('en_post');}?>
                                             </textarea> <span class="red"><?php echo form_error('en_post'); ?></span>
                                                 <script type="text/javascript">
                                                     CKEDITOR.replace('en_post');
@@ -111,7 +111,7 @@
                                             <label class="col-md-3">Super Sub Menu post* </label>
                                             <div class="col-md-9">
                                                 <textarea class="form-control" rows="8" id="hi_post" name="hi_post" placeholder="about us">
-                                                    <?php if(isset($super_sub_menu_post) && !empty($super_sub_menu_post[0]->hi_post)){ echo $super_sub_menu_post[0]->hi_post; }?>
+                                                    <?php if(isset($super_sub_menu_post) && !empty($super_sub_menu_post[0]->hi_post)){ echo $super_sub_menu_post[0]->hi_post; }else{echo set_value('hi_post');}?>
                                             </textarea> <span class="red"><?php echo form_error('hi_post'); ?></span>
                                                 <script type="text/javascript">
                                                     CKEDITOR.replace('hi_post');

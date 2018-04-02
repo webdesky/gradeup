@@ -13,9 +13,7 @@ class Model
         $this->CI->load->helper('url');
         $this->CI->config->item('base_url');
         $this->CI->load->library('session', 'form_validation');
-        $this->CI->load->database();
-        
-        
+        $this->CI->load->database();  
     }
     public function insertData($table, $dataInsert)
     {
@@ -143,13 +141,6 @@ class Model
         }
     }
 
-   public function self_join_records($patient_id,$doctor_id){
-        $this->CI->db->select('T1.first_name as doctor_first_name,T2.first_name as patient_first_name');
-        $this->CI->db->from('users T1,users T2');
-        $this->CI->db->where('T1.id = '.$doctor_id.' and T2.id = '.$patient_id);
-        $q = $this->CI->db->get();
-        return $q->result_array();
-    }
     
     public function getAll($table, $select = '',$order_fld = '', $order_type = '',  $limit = '', $offset = '')
     {
@@ -221,11 +212,9 @@ class Model
     
     public function GetJoinRecordNew($table, $field_first, $tablejointo, $field_second, $tablejointhree, $field_third,$tablejoinfour, $field_four, $field, $value, $field_val,$first_table_second_val)
     {
-        //$this->db->cache_on();
         $this->CI->db->select("$field_val");
         $this->CI->db->from("$table");
         $this->CI->db->join("$tablejointo", "$tablejointo.$field_second = $table.$field_first");
-
         if($tablejointhree && $field_third){
             $this->CI->db->join("$tablejointhree", "$tablejointhree.$field_third = $table.$first_table_second_val");
 
@@ -233,12 +222,9 @@ class Model
                 $this->CI->db->join("$tablejoinfour", "$tablejoinfour.$field_four = $table.$field_first");    
             }
         }
-
         $this->CI->db->where("$table.$field", "$value");
-        //$this->db->group_by("$table.$field_first");
         $this->CI->db->limit(1);
         $q = $this->CI->db->get();
-        //$this->db->cache_off();
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $rows) {
                 $data[] = $rows;
