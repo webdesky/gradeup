@@ -22,6 +22,7 @@
                                     <thead>
                                         <tr class="bg-primary">
                                             <th>Sr no.</th>
+                                            <th>Question</th>
                                             <th>Question Type</th>
                                             <th>Question Marks</th>
                                             <th>Created at</th>
@@ -31,11 +32,13 @@
                                     </thead>
                                     <tbody>
                                         <?php if(!empty($question)){ ?>
-                                        <?php $i=1; foreach($question as $value){?>
+                                        <?php $i=1; foreach($question as $value){
+                                           //echo '<pre>'; print_r($value);die;?>
                                         <tr id="tr_<?php echo $i;?>">
                                             <td>
                                                 <?php echo $i; ?> 
                                             </td>
+                                            <td><?php echo $value['en_question'];?></td>
                                             <td>
                                                 <?php echo $value['question_type'];?> 
                                             </td>
@@ -47,7 +50,7 @@
                                             </td>
                                             <td>
                                                 <a href="<?php echo base_url('admin/question/'.$value['id'])?>"><span class="glyphicon glyphicon-edit"></span></a> |
-                                                <a href="javascript:void(0)" onclick="delete_user('<?php echo $value['id']?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
+                                                <a href="javascript:void(0)" onclick="delete_record('<?php echo $value['id']?>','<?php echo $i;?>','questions')"><span class="glyphicon glyphicon-trash"></span></a>
                                             </td>
                                         </tr>
                                         <?php $i++;}}?> 
@@ -67,34 +70,3 @@
     <!-- row -->
 </div>
 </div>
-<script type="text/javascript">
-$('#users').DataTable({
-    responsive: true,
-
-});
-
-function delete_user(id, tr_id) {
-    swal({
-        title: "Are you sure?",
-        text: "want to delete?",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        confirmButtonText: "Yes, Delete it!",
-        confirmButtonColor: "#ec6c62"
-    }, function() {
-        $.ajax({
-            url: "<?php echo base_url('admin/delete')?>",
-            data: {
-                id: id,
-                table: 'training'
-            },
-            type: "POST"
-        }).done(function(data) {
-            swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_' + tr_id).remove();
-        });
-
-    });
-}
-</script>

@@ -45,7 +45,7 @@
                                                 <?php echo date('Y-m-d',strtotime($module['created_at']));?> </td>
                                             <td>
                                                 <a href="<?php echo base_url('admin/module/'.$module['id'])?>"><span class="glyphicon glyphicon-edit"></span></a> |
-                                                <a href="javascript:void(0)" onclick="delete_user('<?php echo $module['id']?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
+                                                <a href="javascript:void(0)" onclick="delete_record('<?php echo $module['id']?>','<?php echo $i;?>','modules')"><span class="glyphicon glyphicon-trash"></span></a>
                                             </td>
                                         </tr>
                                         <?php $i++;}}?>
@@ -66,12 +66,8 @@
 </div>
 </div>
 <script type="text/javascript">
-$('#users').DataTable({
-    responsive: true,
 
-});
-
-function delete_user(id, tr_id) {
+function delete_record(id, tr_id) {
     swal({
         title: "Are you sure?",
         text: "want to delete?",

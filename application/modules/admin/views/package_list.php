@@ -44,7 +44,7 @@
                                             <td>
                                                 <a href="<?php echo base_url('admin/view_package/'.$value['id'])?>"><span class="glyphicon glyphicon-eye-open"></span></a> |
                                                 <a href="<?php echo base_url('admin/package/'.$value['id'])?>"><span class="glyphicon glyphicon-edit"></span></a> |
-                                                <a href="javascript:void(0)" onclick="delete_user('<?php echo $value['id']?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
+                                                <a href="javascript:void(0)" onclick="delete_record('<?php echo $value['id']?>','<?php echo $i;?>','package')"><span class="glyphicon glyphicon-trash"></span></a>
                                                </td>
                                         </tr>
                                         <?php $i++;}}?> </tbody>
@@ -63,34 +63,3 @@
     <!-- row -->
 </div>
 </div>
-<script type="text/javascript">
-$('#users').DataTable({
-    responsive: true,
-
-});
-
-function delete_user(id, tr_id) {
-    swal({
-        title: "Are you sure?",
-        text: "want to delete?",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        confirmButtonText: "Yes, Delete it!",
-        confirmButtonColor: "#ec6c62"
-    }, function() {
-        $.ajax({
-            url: "<?php echo base_url('admin/delete')?>",
-            data: {
-                id: id,
-                table: 'package'
-            },
-            type: "POST"
-        }).done(function(data) {
-            swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_' + tr_id).remove();
-        });
-
-    });
-}
-</script>

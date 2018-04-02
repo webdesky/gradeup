@@ -31,8 +31,7 @@
                                     </thead>
                                     <tbody>
                                         <?php if(!empty($menu)){ ?>
-                                        <?php $i=1; foreach($menu as $menu){ 
-                                            echo '<pre>'; print_r($menu);?>
+                                        <?php $i=1; foreach($menu as $menu){ ?>
                                         <tr id="tr_<?php echo $i;?>">
                                             <td>
                                                 <?php echo $i; ?> </td>
@@ -46,7 +45,7 @@
                                                 <?php echo date('Y-m-d',strtotime($menu->created_at));?> </td>
                                             <td>
                                                 <a href="<?php echo base_url('admin/menu/'.$menu->id)?>"><span class="glyphicon glyphicon-edit"></span></a> |
-                                                <a href="javascript:void(0)" onclick="delete_user('<?php echo $menu->id?>','<?php echo $i;?>')"><span class="glyphicon glyphicon-trash"></span></a>
+                                                <a href="javascript:void(0)" onclick="delete_record('<?php echo $menu->id?>','<?php echo $i;?>','menu')"><span class="glyphicon glyphicon-trash"></span></a>
                                             </td>
                                         </tr>
                                         <?php $i++;}}?>
@@ -66,35 +65,4 @@
     <!-- row -->
 </div>
 </div>
-<script type="text/javascript">
-$('#users').DataTable({
-    responsive: true,
 
-});
-
-function delete_user(id, tr_id) {
-    swal({
-        title: "Are you sure?",
-        text: "want to delete?",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        confirmButtonText: "Yes, Delete it!",
-        confirmButtonColor: "#ec6c62"
-    }, function() {
-        $.ajax({
-            url: "<?php echo base_url('admin/delete')?>",
-            data: {
-                id: id,
-                table: 'menu'
-            },
-            type: "POST"
-        }).done(function(data) {
-            swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_' + tr_id).remove();
-        });
-
-    });
-}
-
-</script>

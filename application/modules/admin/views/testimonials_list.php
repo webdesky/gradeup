@@ -49,7 +49,7 @@
                                     <td class="center">
                                         <?php echo date('Y-m-d',strtotime($value->created_at));  ?>
                                     </td>
-                                    <td class="center"><a href="<?php echo base_url('admin/view_testimonial/'.$value->id)?>" title="View"><span class="glyphicon glyphicon-eye-open"></span></a> | <a href="javascript:void(0)" onclick="delete_message('<?php echo $value->id?>','<?php echo $count;?>')" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    <td class="center"><a href="<?php echo base_url('admin/view_testimonial/'.$value->id)?>" title="View"><span class="glyphicon glyphicon-eye-open"></span></a> | <a href="javascript:void(0)" onclick="delete_record('<?php echo $value->id?>','<?php echo $count;?>','testimonials')" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 <?php $count++; }}?>
@@ -68,32 +68,6 @@
 </div>
 
 <script type="text/javascript">
-function delete_message(id, tr_id) {
-    swal({
-        title: "Are you sure?",
-        text: "want to delete?",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        confirmButtonText: "Yes, Delete it!",
-        confirmButtonColor: "#ec6c62"
-    }, function() {
-        $.ajax({
-            url: "<?php echo base_url('admin/delete')?>",
-            data: {
-                id: id,
-                table: 'testimonials'
-            },
-            type: "POST"
-        }).done(function(data) {
-            swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_' + tr_id).remove();
-        }).error(function(data) {
-            swal("Oops", "We couldn't connect to the server!", "error");
-        });
-    });
-}
-
 $(document).ready(function() {
     $('#notice').DataTable({
         responsive: {
