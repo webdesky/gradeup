@@ -111,6 +111,22 @@
                                 </li>
                             </ul>
                         </li>
+                        <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Featured Links<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo base_url('admin/category')?>">Add Category</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('admin/categoryList')?>">Category List</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('admin/link')?>">Add Links</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('admin/linkList')?>">Link List</a>
+                                </li>
+                            </ul>
+                        </li>
                         <!-- <li> <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Training Master<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>

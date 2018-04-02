@@ -287,6 +287,111 @@ class Admin extends CI_Controller
         $data['body']    = 'modules_list';
         $this->controller->load_view($data);
     }
+
+    public function category($id = NULL)
+    {
+        $this->form_validation->set_rules('category_name', 'Category Name', 'trim|required');
+        $this->form_validation->set_rules('status', 'Status ', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            if (!empty($id)) {
+                $where           = array(
+                    'id ' => $id
+                );
+                $data['category'] = $this->model->getAllwhere('category', $where);
+            }
+            $data['body'] = 'add_category';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                $category_name  = $this->input->post('category_name');
+                $is_active      = $this->input->post('status');
+                
+                $data = array(
+                    'category_name'  => $category_name,
+                    'is_active'      => $is_active,
+                    'created_at'     => date('Y-m-d H:i:s')
+                );
+                
+               
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('category', $data, $where);
+                } else {
+                    $result = $this->model->insertData('category', $data);
+                }
+                $this->categoryList();
+            }
+        }
+    }
+
+    public function categoryList(){
+        $data['category'] = $this->model->getAll('category');
+        $data['body']    = 'category_list';
+        $this->controller->load_view($data);
+    }
+
+    public function link($id = NULL)
+    {
+        $this->form_validation->set_rules('category_id', 'Category Name', 'trim|required');
+        $this->form_validation->set_rules('title', 'title Name', 'trim|required');
+        $this->form_validation->set_rules('url', 'url Name', 'trim|required');
+        $this->form_validation->set_rules('status', 'Status ', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            if (!empty($id)) {
+                $where           = array(
+                    'featured_links.id ' => $id
+                );
+                $data['link'] = $this->model->GetJoinRecord('featured_links', 'category_id', 'category', 'id', 'featured_links.id,featured_links.title,featured_links.url,featured_links.created_at,featured_links.is_active,category.category_name,category.id as category_id',$where);
+                
+              
+
+            }
+
+            $data['category'] = $this->model->getAll('category');
+            $data['body'] = 'add_link';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                $category_id  = $this->input->post('category_id');
+                $is_active      = $this->input->post('status');
+                $title          = $this->input->post('title');
+                $url          = $this->input->post('url');
+                $data = array(
+                    'category_id'    => $category_id,
+                    'title'          => $title,
+                    'url'            => $url,
+                    'is_active'      => $is_active,
+                    'created_at'     => date('Y-m-d H:i:s')
+                );
+                
+               
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    unset($data['created_at']);
+                    
+                    $result = $this->model->updateFields('featured_links', $data, $where);
+                } else {
+                    $result = $this->model->insertData('featured_links', $data);
+                }
+                $this->linkList();
+            }
+        }
+    }
+
+    public function linkList(){
+        $data['link'] = $this->model->GetJoinRecord('featured_links', 'category_id', 'category', 'id', 'featured_links.id,featured_links.title,featured_links.url,featured_links.created_at,featured_links.is_active,category.category_name');
+
+        $data['body']    = 'link_list';
+        $this->controller->load_view($data);
+    }
     public function edit_module($id)
     {
         $where           = array(
