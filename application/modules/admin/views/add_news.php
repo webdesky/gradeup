@@ -22,7 +22,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">News Title * </label>
                                         <div class="col-md-9">
-                                             <input class="form-control" type="text" name="title" id="title" placeholder="News Title" autocomplete="off" required="required" value="<?php if(isset($news)){ echo $news[0]->title; } ?>"> <span class="red"><?php echo form_error('title'); ?></span>
+                                             <input class="form-control" type="text" name="title" id="title" placeholder="News Title" autocomplete="off" required="required" value="<?php if(isset($news)){ echo $news[0]->title; }else{echo set_value('title');} ?>"> <span class="red"><?php echo form_error('title'); ?></span>
                                            
                                         </div>
                                     </div>
@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">News Category * </label>
                                         <div class="col-md-9">
-                                             <input class="form-control" type="text" name="category" id="category" placeholder="News Category Ex. Sports,Politics" autocomplete="off" required="required" value="<?php if(isset($news)){ echo $news[0]->category; } ?>"> <span class="red"><?php echo form_error('category'); ?></span>
+                                             <input class="form-control" type="text" name="category" id="category" placeholder="News Category Ex. Sports,Politics" autocomplete="off" required="required" value="<?php if(isset($news)){ echo $news[0]->category; }else{echo set_value('category');} ?>"> <span class="red"><?php echo form_error('category'); ?></span>
                                            
                                         </div>
                                     </div>
@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">News Url* </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="news_url" id="news_url" placeholder="News Url" autocomplete="off"  value="<?php if(isset($news)){ echo $news[0]->news_url; } ?>"> <span class="red"><?php echo form_error('news_url'); ?></span>
+                                            <input class="form-control" type="text" name="news_url" id="news_url" placeholder="News Url" autocomplete="off"  value="<?php if(isset($news)){ echo $news[0]->news_url; }else{echo set_value('news_url');} ?>"> <span class="red"><?php echo form_error('news_url'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                         <label class="col-md-3">News Description* </label>
                                         <div class="col-md-9">
                                             <textarea class="form-control" rows="8" id="news_description" name="news_description" placeholder="Meta Description">
-                                                <?php if(isset($news)){ echo $news[0]->news_description; } ?>
+                                                <?php if(isset($news)){ echo $news[0]->news_description; }else{echo set_value('news_description');} ?>
                                             </textarea> <span class="red"><?php echo form_error('news_description'); ?></span>
                                             <script type="text/javascript">
                                             CKEDITOR.replace('news_description');
@@ -66,7 +66,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Url* </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="url" id="url" placeholder="url" autocomplete="off"  value="<?php if(isset($news)){ echo $news[0]->url; } ?>"> <span class="red"><?php echo form_error('url'); ?></span>
+                                            <input class="form-control" type="text" name="url" id="url" placeholder="url" autocomplete="off"  value="<?php if(isset($news)){ echo $news[0]->url; }else{echo set_value('url');} ?>"> <span class="red"><?php echo form_error('url'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Meta Title* </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="meta_title" id="meta_title" placeholder="Meta Title" autocomplete="off"  value="<?php if(isset($news)){ echo $news[0]->meta_title; } ?>"> <span class="red"><?php echo form_error('meta_title'); ?></span>
+                                            <input class="form-control" type="text" name="meta_title" id="meta_title" placeholder="Meta Title" autocomplete="off"  value="<?php if(isset($news)){ echo $news[0]->meta_title; }else{echo set_value('meta_title');} ?>"> <span class="red"><?php echo form_error('meta_title'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                         <label class="col-md-3">Meta Description</label>
                                         <div class="col-md-9">
                                             <textarea class="form-control" rows="8" id="meta_description" name="meta_description" placeholder="Meta Description">
-                                                <?php if(isset($news)){ echo $news[0]->meta_description; } ?>
+                                                <?php if(isset($news)){ echo $news[0]->meta_description; }else{echo set_value('meta_description');} ?>
                                             </textarea> <span class="red"><?php echo form_error('meta_description'); ?></span>
                                             <script type="text/javascript">
                                             CKEDITOR.replace('meta_description');
@@ -99,7 +99,7 @@
                                         <label class="col-md-3">Meta Keyword</label>
                                         <div class="col-md-9">
                                             <textarea class="form-control" rows="8" id="meta_keyword" name="meta_keyword" placeholder="Meta Description">
-                                               <?php if(isset($news)){ echo $news[0]->meta_keyword; } ?>
+                                               <?php if(isset($news)){ echo $news[0]->meta_keyword; }else{echo set_value('meta_keyword');} ?>
                                             </textarea> <span class="red"><?php echo form_error('meta_keyword'); ?></span>
                                             <script type="text/javascript">
                                             CKEDITOR.replace('meta_keyword');

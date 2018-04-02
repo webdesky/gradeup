@@ -28,7 +28,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2">Title * </label>
                                             <div class="col-md-10">
-                                                <input type="text" id="en_site_title" name="en_site_title" class="form-control" value="<?php if(!empty($setting[0]->en_title)){ echo  $setting[0]->en_title;}?>">
+                                                <input type="text" id="en_site_title" name="en_site_title" class="form-control" value="<?php if(!empty($setting[0]->en_title)){ echo  $setting[0]->en_title;}else{echo set_value('en_site_title');}?>">
                                                 <span class="red"><?php echo form_error('en_site_title'); ?></span> </div>
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2">Content * </label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="5" id="en_content" name="en_content" placeholder="copyright"><?php if(!empty($setting[0]->en_content)){ echo  $setting[0]->en_content;}?>
+                                                <textarea class="form-control" rows="5" id="en_content" name="en_content" placeholder="copyright"><?php if(!empty($setting[0]->en_content)){ echo $setting[0]->en_content;}else{echo set_value('en_content');}?>
                                                 </textarea> <span class="red"><?php echo form_error('en_content'); ?></span>
                                                 <script type="text/javascript">
                                                     CKEDITOR.replace('en_content');
@@ -61,7 +61,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2">Title * </label>
                                             <div class="col-md-10">
-                                                <input type="text" id="hi_site_title" name="hi_site_title" class="form-control" value="<?php if(!empty($setting[0]->hi_title)){ echo  $setting[0]->hi_title;}?>">
+                                                <input type="text" id="hi_site_title" name="hi_site_title" class="form-control" value="<?php if(!empty($setting[0]->hi_title)){ echo  $setting[0]->hi_title;}else{echo set_value('hi_site_title');}?>">
                                                 <span class="red"><?php echo form_error('hi_site_title'); ?></span> </div>
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2">Content * </label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="5" id="hi_content" name="hi_content" placeholder="copyright"><?php if(!empty($setting[0]->hi_content)){ echo  $setting[0]->hi_content;}?>
+                                                <textarea class="form-control" rows="5" id="hi_content" name="hi_content" placeholder="copyright"><?php if(!empty($setting[0]->hi_content)){ echo  $setting[0]->hi_content;}else{echo set_value('hi_content');}?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_content'); ?></span>
                                                 <script type="text/javascript">
                                                     CKEDITOR.replace('hi_content');

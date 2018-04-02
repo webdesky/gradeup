@@ -24,7 +24,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Module Name* </label>
                                             <div class="col-md-9">
-                                                <input class="form-control" type="text" name="en_module_name" id="en_module_name" placeholder="Module Name in English" autocomplete="off" required="required" value="<?php if(isset($modules)){ echo $modules[0]->en_module_name; } ?>">
+                                                <input class="form-control" type="text" name="en_module_name" id="en_module_name" placeholder="Module Name in English" autocomplete="off" required="required" value="<?php if(isset($modules)){ echo $modules[0]->en_module_name; }else{echo set_value('en_module_name');} ?>">
                                                 <span class="red"><?php echo form_error('en_module_name'); ?></span>
                                             </div>
                                         </div>
@@ -38,7 +38,7 @@
 
                                             <label class="col-md-3">Module Name* </label>
                                             <div class="col-md-9">
-                                                <input class="form-control" type="text" name="hi_module_name" id="hi_module_name" placeholder="Module Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($modules)){ echo $modules[0]->hi_module_name; } ?>">
+                                                <input class="form-control" type="text" name="hi_module_name" id="hi_module_name" placeholder="Module Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($modules)){ echo $modules[0]->hi_module_name; }else{echo set_value('hi_module_name');} ?>">
                                                 <span class="red"><?php echo form_error('hi_module_name'); ?></span>
                                             </div>
                                         </div>

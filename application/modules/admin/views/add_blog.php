@@ -28,7 +28,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2"> Title * </label>
                                             <div class="col-md-10">
-                                                <input type="text" name="en_title" id="en_title" class="form-control" value="<?php if(isset($blog)){ echo $blog[0]->en_title; } ?>">
+                                                <input type="text" name="en_title" id="en_title" class="form-control" value="<?php if(isset($blog)){ echo $blog[0]->en_title; }else{echo set_value('en_title');} ?>">
                                                  <span class="red"><?php echo form_error('en_title'); ?></span>
                                             </div>
                                         </div>
@@ -37,7 +37,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2"> Description * </label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="8" id="en_description" name="en_description" placeholder="about us"><?php if(isset($blog)){ echo $blog[0]->en_description; } ?>
+                                                <textarea class="form-control" rows="8" id="en_description" name="en_description" placeholder="about us"><?php if(isset($blog)){ echo $blog[0]->en_description; }else{echo set_value('en_description');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_description'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('en_description');
@@ -49,7 +49,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2"> Address * </label>
                                             <div class="col-md-10">
-                                                <input type="text" name="en_address" class="form-control" value="<?php if(isset($blog)){ echo $blog[0]->en_address; } ?>">
+                                                <input type="text" name="en_address" class="form-control" value="<?php if(isset($blog)){ echo $blog[0]->en_address; }else{echo set_value('en_address');} ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -60,7 +60,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2"> Title * </label>
                                             <div class="col-md-10">
-                                                <input type="text" name="hi_title" id="hi_title" class="form-control" value="<?php if(isset($blog)){ echo $blog[0]->hi_title; } ?>">
+                                                <input type="text" name="hi_title" id="hi_title" class="form-control" value="<?php if(isset($blog)){ echo $blog[0]->hi_title; }else{echo set_value('hi_title');} ?>">
                                                   <span class="red"><?php echo form_error('hi_title'); ?></span>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2"> Description * </label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="8" id="hi_description" name="hi_description" placeholder="about_us"><?php if(isset($blog)){ echo $blog[0]->hi_description; } ?>
+                                                <textarea class="form-control" rows="8" id="hi_description" name="hi_description" placeholder="about_us"><?php if(isset($blog)){ echo $blog[0]->hi_description; }else{echo set_value('hi_description');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_description'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('hi_description');
@@ -81,7 +81,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2"> Address * </label>
                                             <div class="col-md-10">
-                                                <input type="text" name="hi_address" class="form-control" value="<?php if(isset($blog)){ echo $blog[0]->hi_address; } ?>">
+                                                <input type="text" name="hi_address" class="form-control" value="<?php if(isset($blog)){ echo $blog[0]->hi_address; }else{echo set_value('hi_address');} ?>">
                                             </div>
                                         </div>
                                     </div>

@@ -54,7 +54,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Chapter Name* </label>
                                             <div class="col-md-9">
-                                                <input class="form-control" type="text" name="en_chapter_name" id="en_chapter_name" placeholder="Chapter Name in English" autocomplete="off" required="required" value="<?php if(isset($chapter)){ echo $chapter[0]->en_chapter_name; } ?>"> <span class="red"><?php echo form_error('en_chapter_name'); ?></span>
+                                                <input class="form-control" type="text" name="en_chapter_name" id="en_chapter_name" placeholder="Chapter Name in English" autocomplete="off" required="required" value="<?php if(isset($chapter)){ echo $chapter[0]->en_chapter_name; }else{echo set_value('en_chapter_name');} ?>"> <span class="red"><?php echo form_error('en_chapter_name'); ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Chapter Name* </label>
                                             <div class="col-md-9">
-                                                <input class="form-control" type="text" name="hi_chapter_name" id="hi_chapter_name" placeholder="Chapter Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($chapter)){ echo $chapter[0]->hi_chapter_name; } ?>"> <span class="red"><?php echo form_error('hi_chapter_name'); ?></span>
+                                                <input class="form-control" type="text" name="hi_chapter_name" id="hi_chapter_name" placeholder="Chapter Name in Hindi" autocomplete="off" required="required" value="<?php if(isset($chapter)){ echo $chapter[0]->hi_chapter_name; }else{echo set_value('hi_chapter_name');} ?>"> <span class="red"><?php echo form_error('hi_chapter_name'); ?></span>
                                             </div>
                                         </div>
                                     </div>

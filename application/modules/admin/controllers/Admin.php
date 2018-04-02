@@ -6,19 +6,14 @@ class Admin extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        
     }
     
     public function index($msg = NULL)
     {
         if (!empty($this->session->userdata['user_role'])) {
             $log = $this->session->userdata['user_role'];
-            if ($log == 1 || $log == 4) {
+            if ($log == 1) {
                 redirect('admin/dashboard');
-            } else if ($log == 2) {
-                
-            } else if ($log == 3) {
-                
             } else {
                 $this->load->view('admin/login', $msg);
             }
@@ -31,29 +26,34 @@ class Admin extends CI_Controller
             $this->load->view('admin/login', $data);
         }
     }
-    
-    
     public function last_executed_query()
     {
         echo $this->db->last_query();
         die;
     }
-    
+    public function logout()
+    {
+        $user_data = $this->session->all_userdata();
+        foreach ($user_data as $key => $value) {
+            if ($key != 'session_id' && $key != 'ip_address' && $key != 'user_agent' && $key != 'last_activity') {
+                $this->session->unset_userdata($key);
+            }
+        }
+        $this->session->sess_destroy();
+        $msg = "You have been logged out Successfully...";
+        $this->index($msg);
+    }
     public function print_array($data = NULL)
     {
         echo '<pre>';
         print_r($data);
         echo '</pre>';
     }
-    
-    
     public function verifylogin()
     {
         $data = $this->input->post();
         $this->controller->verifylogin($data);
     }
-    
-    
     public function dashboard()
     {
         if ($this->controller->checkSession()) {
@@ -74,7 +74,6 @@ class Admin extends CI_Controller
             $this->index();
         }
     }
-    
     public function setting()
     {
         $this->form_validation->set_rules('en_site_title', 'Site Title', 'trim|required');
@@ -115,7 +114,6 @@ class Admin extends CI_Controller
                     'fb_url' => $fb_url,
                     'gplus_url' => $gplus_url,
                     'created_at' => date('Y-m-d H:i:s')
-                    
                 );
                 
                 if (isset($_FILES['favicon_icon']['name']) && !empty($_FILES['favicon_icon']['name'])) {
@@ -127,7 +125,6 @@ class Admin extends CI_Controller
                         if (move_uploaded_file($_FILES['favicon_icon']['tmp_name'], 'asset/uploads/' . $_FILES['favicon_icon']['name'])) {
                             $data['favicon'] = $_FILES['favicon_icon']['name'];
                         }
-                        
                     }
                 }
                 
@@ -137,7 +134,7 @@ class Admin extends CI_Controller
                         $this->session->set_flashdata('info_message', "Site Logo size too large");
                         redirect('admin/setting');
                     } else {
-                        if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/'.$_FILES['site_logo']['name'])) {
+                        if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/' . $_FILES['site_logo']['name'])) {
                             $data['logo'] = $_FILES['site_logo']['name'];
                         }
                     }
@@ -147,10 +144,9 @@ class Admin extends CI_Controller
                 );
                 $result = $this->model->updateFields('settings', $data, $where);
                 redirect('admin/setting');
-            }  
+            }
         }
     }
-    
     public function about()
     {
         $this->form_validation->set_rules('en_about_us', 'About us in English', 'trim|required');
@@ -180,7 +176,6 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function privacy()
     {
         $this->form_validation->set_rules('en_privacy_policy', 'Privacy Policy in English', 'trim|required');
@@ -207,7 +202,6 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function terms()
     {
         $this->form_validation->set_rules('en_terms', 'Terms And Condition in English', 'trim|required');
@@ -287,14 +281,12 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function moduleList()
     {
         $data['modules'] = $this->model->getAll('modules');
         $data['body']    = 'modules_list';
         $this->controller->load_view($data);
     }
-    
     public function edit_module($id)
     {
         $where           = array(
@@ -305,7 +297,6 @@ class Admin extends CI_Controller
         
         $this->controller->load_view($data);
     }
-    
     public function chapter($id = NULL)
     {
         $this->form_validation->set_rules('en_chapter_name', 'Chapter Name', 'trim|required');
@@ -323,7 +314,6 @@ class Admin extends CI_Controller
                 $data['chapter'] = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id', 'chapters.id as ids,chapters.fk_module_id,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name,modules.id', $where);
             } else {
                 $where           = array(
-                    
                     'is_active' => 1
                 );
                 $data['modules'] = $this->model->getAllwhere('modules', $where);
@@ -349,7 +339,6 @@ class Admin extends CI_Controller
                     $where = array(
                         'id' => $id
                     );
-                    
                     unset($data['created_at']);
                     $result = $this->model->updateFields('chapters', $data, $where);
                 } else {
@@ -360,14 +349,12 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function chapterList()
     {
         $data['chapter'] = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id', 'chapters.id ,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name');
         $data['body']    = 'chapter_list';
         $this->controller->load_view($data);
     }
-    
     public function edit_chapter($id)
     {
         $where = array(
@@ -379,7 +366,6 @@ class Admin extends CI_Controller
         $data['body']    = 'edit_chapter';
         $this->controller->load_view($data);
     }
-    
     public function menu($id = NULL)
     {
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
@@ -392,7 +378,6 @@ class Admin extends CI_Controller
                 );
                 $data['menu']    = $this->model->getAllwhere('menu', $where);
                 $data['modules'] = $this->model->getAllwhere('modules');
-                
             } else {
                 $where           = array(
                     'is_active' => 1
@@ -456,8 +441,6 @@ class Admin extends CI_Controller
             }
         }
     }
-    
-    
     public function menuList()
     {
         $where        = array(
@@ -466,9 +449,7 @@ class Admin extends CI_Controller
         $data['menu'] = $this->model->GetJoinRecord('menu', 'module_id', 'modules', 'id', 'menu.en_menu_name,hi_menu_name,menu.id as id,modules.en_module_name,menu.created_at', $where);
         $data['body'] = 'menu_list';
         $this->controller->load_view($data);
-        
     }
-    
     public function sub_menu($id = NULL)
     {
         $this->form_validation->set_rules('menu_id', 'Menu Name', 'trim|required');
@@ -543,7 +524,6 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function submenuList()
     {
         $where            = array(
@@ -588,7 +568,6 @@ class Admin extends CI_Controller
             return false;
         }
     }
-    
     public function super_sub_menu($id = NULL)
     {
         $this->form_validation->set_rules('sub_menu_id', 'Sub Menu Name', 'trim|required|numeric');
@@ -602,10 +581,20 @@ class Admin extends CI_Controller
                 $where     = array(
                     'super_sub_menu.id' => $id
                 );
-                $field_val = 'super_sub_menu.en_super_sub_menu,super_sub_menu.is_active,super_sub_menu.hi_super_sub_menu,super_sub_menu.id as super_sub_menu_id,sub_menu.en_sub_menu_name,sub_menu.created_at,sub_menu.menu_id,sub_menu.id as sub_menu_id,super_sub_menu.url,super_sub_menu.meta_title,super_sub_menu.meta_description,super_sub_menu.meta_keyword';
+                $field_val = 'super_sub_menu.en_super_sub_menu,
+                            super_sub_menu.is_active,
+                            super_sub_menu.hi_super_sub_menu,
+                            super_sub_menu.id as super_sub_menu_id,
+                            sub_menu.en_sub_menu_name,
+                            sub_menu.created_at,
+                            sub_menu.menu_id,
+                            sub_menu.id as sub_menu_id,
+                            super_sub_menu.url,
+                            super_sub_menu.meta_title,
+                            super_sub_menu.meta_description,
+                            super_sub_menu.meta_keyword';
                 
                 $data['super_sub_menu'] = $this->model->GetJoinRecord('super_sub_menu', 'sub_menu_id', 'sub_menu', 'id', $field_val, $where);
-                
                 
                 $where = array(
                     'id' => $data['super_sub_menu'][0]->menu_id
@@ -681,33 +670,31 @@ class Admin extends CI_Controller
                 $this->super_submenuList();
             }
         }
-        
     }
     public function super_submenuList()
     {
         
-        $field_val = 'super_sub_menu.en_super_sub_menu,super_sub_menu.hi_super_sub_menu,super_sub_menu.id as super_sub_menu_id,super_sub_menu.is_active,sub_menu.en_sub_menu_name,sub_menu.created_at,sub_menu.menu_id';
+        $field_val = 'super_sub_menu.en_super_sub_menu,
+                    super_sub_menu.hi_super_sub_menu,
+                    super_sub_menu.id as super_sub_menu_id,
+                    super_sub_menu.is_active,
+                    sub_menu.en_sub_menu_name,
+                    sub_menu.created_at,
+                    sub_menu.menu_id';
         
         $data['super_sub_menu'] = $this->model->GetJoinRecord('super_sub_menu', 'sub_menu_id', 'sub_menu', 'id', $field_val);
-        
         for ($i = 0; $i < count($data['super_sub_menu']); $i++) {
-            $where = array(
+            $where                                 = array(
                 'id' => $data['super_sub_menu'][$i]->menu_id
             );
-            
-            $select = 'en_menu_name';
-            
-            $menu_name = $this->model->getAllwhere('menu', $where, $select);
-            
+            $select                                = 'en_menu_name';
+            $menu_name                             = $this->model->getAllwhere('menu', $where, $select);
             $data['super_sub_menu'][$i]->menu_name = $menu_name[0]->en_menu_name;
-            
         }
         
         $data['body'] = 'super_sub_menu_list';
         $this->controller->load_view($data);
     }
-    
-    
     public function super_sub_menu_post($id = NULL)
     {
         $this->form_validation->set_rules('menu_id', ' Menu Name', 'trim|required|numeric');
@@ -724,7 +711,15 @@ class Admin extends CI_Controller
                     'super_sub_menu_post.id' => $id
                 );
                 
-                $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post,super_sub_menu_post.en_post,super_sub_menu.en_super_sub_menu,super_sub_menu.sub_menu_id,super_sub_menu.en_super_sub_menu';
+                $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,
+                            super_sub_menu_post.super_sub_menu_id,
+                            super_sub_menu_post.created_at,
+                            super_sub_menu_post.is_active,
+                            super_sub_menu_post.hi_post,
+                            super_sub_menu_post.en_post,
+                            super_sub_menu.en_super_sub_menu,
+                            super_sub_menu.sub_menu_id,
+                            super_sub_menu.en_super_sub_menu';
                 
                 $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'super_sub_menu_id', 'super_sub_menu', 'id', $field_val, $where);
                 
@@ -744,12 +739,10 @@ class Admin extends CI_Controller
                 $data['super_sub_menu_post'][0]->menu_id = $menu[0]->id;
                 $data['menu']                            = $this->model->getAllwhere('menu');
             } else {
-                $where = array(
+                $where        = array(
                     'is_active' => 1
                 );
-                
                 $data['menu'] = $this->model->getAllwhere('menu', $where);
-                
             }
             $data['body'] = 'add_super_sub_menu_post';
             $this->controller->load_view($data);
@@ -768,7 +761,6 @@ class Admin extends CI_Controller
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
-                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -781,23 +773,26 @@ class Admin extends CI_Controller
                 $this->super_submenupostList();
             }
         }
-        
     }
-    
-    
     public function super_submenupostList()
     {
-        $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,super_sub_menu_post.super_sub_menu_id,super_sub_menu_post.created_at,super_sub_menu_post.is_active,super_sub_menu_post.hi_post,super_sub_menu_post.en_post,super_sub_menu.en_super_sub_menu,super_sub_menu.sub_menu_id,super_sub_menu.en_super_sub_menu';
+        $field_val = 'super_sub_menu_post.id as super_sub_menu_post_id,
+                    super_sub_menu_post.super_sub_menu_id,
+                    super_sub_menu_post.created_at,
+                    super_sub_menu_post.is_active,
+                    super_sub_menu_post.hi_post,
+                    super_sub_menu_post.en_post,
+                    super_sub_menu.en_super_sub_menu,
+                    super_sub_menu.sub_menu_id,
+                    super_sub_menu.en_super_sub_menu';
         
         $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'super_sub_menu_id', 'super_sub_menu', 'id', $field_val);
         
         for ($i = 0; $i < count($data['super_sub_menu_post']); $i++) {
             
-            $where = array(
+            $where  = array(
                 'id' => $data['super_sub_menu_post'][$i]->sub_menu_id
             );
-            
-            
             $select = 'menu_id,en_sub_menu_name';
             
             $sub_menu_name = $this->model->getAllwhere('sub_menu', $where, $select);
@@ -815,123 +810,97 @@ class Admin extends CI_Controller
         $data['body'] = 'super_sub_menu_post_list';
         $this->controller->load_view($data);
     }
-    
-    
-    
     public function news($id = null)
     {
-        
         $this->form_validation->set_rules('title', 'News Title', 'trim|required');
-        $this->form_validation->set_rules('category','Category', 'trim|required');
+        $this->form_validation->set_rules('category', 'Category', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            
             if (!empty($id)) {
-                $where           = array(
+                $where        = array(
                     'id' => $id
                 );
-                $data['news']    = $this->model->getAllwhere('news', $where);
-                
-                
+                $data['news'] = $this->model->getAllwhere('news', $where);
             } else {
-             
+                
             }
             $data['body'] = 'add_news';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
                 
-                $title              = $this->input->post('title');
-                $category           = $this->input->post('category');
-                $news_description   = $this->input->post('news_description');
-                $news_url           = $this->input->post('news_url');
-                $url                = $this->input->post('url');
-                $meta_title         = $this->input->post('meta_title');
-                $meta_description   = $this->input->post('meta_description');
-                $meta_keyword       = $this->input->post('meta_keyword');
-                $is_active          = $this->input->post('status');
+                $title            = $this->input->post('title');
+                $category         = $this->input->post('category');
+                $news_description = $this->input->post('news_description');
+                $news_url         = $this->input->post('news_url');
+                $url              = $this->input->post('url');
+                $meta_title       = $this->input->post('meta_title');
+                $meta_description = $this->input->post('meta_description');
+                $meta_keyword     = $this->input->post('meta_keyword');
+                $is_active        = $this->input->post('status');
                 
                 $data = array(
-
-
-                    'title'             => $title,
-                    'category'          => $category,
-                    'news_description'  => $news_description,
-                    'news_url'          => $news_url,
-                    'url'               => $url,
-                    'meta_title'        => $meta_title,
-                    'meta_description'  => $meta_description,
-                    'meta_keyword'      => $meta_keyword,
-                    'is_active'         => $is_active,
-                    'created_at'        => date('Y-m-d H:i:s')
-
-
+                    'title' => $title,
+                    'category' => $category,
+                    'news_description' => $news_description,
+                    'news_url' => $news_url,
+                    'url' => $url,
+                    'meta_title' => $meta_title,
+                    'meta_description' => $meta_description,
+                    'meta_keyword' => $meta_keyword,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
-                
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                        if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
-                                $data['category_image'] = $_FILES['category_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                        $data['category_image'] = $_FILES['category_image']['name'];
+                    }
                 }
-
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                        if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
-                                $data['banner_image'] = $_FILES['banner_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                        $data['banner_image'] = $_FILES['banner_image']['name'];
+                    }
                 }
-               
-               if (isset($_FILES['news_image']['name']) && !empty($_FILES['news_image']['name'])) {
+                if (isset($_FILES['news_image']['name']) && !empty($_FILES['news_image']['name'])) {
                     $count = count($_FILES['news_image']['name']);
-                        if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])) {
-                                $data['news_image'] = $_FILES['news_image']['name'];
-                        }
+                    if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])) {
+                        $data['news_image'] = $_FILES['news_image']['name'];
+                    }
                 }
-
-
-               
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
                     );
-                    
                     unset($data['created_at']);
-                    
                     $result = $this->model->updateFields('news', $data, $where);
                 } else {
                     $result = $this->model->insertData('news', $data);
                 }
                 
                 $this->newsList();
-            
+                
             }
         }
     }
-    
     public function newsList()
     {
         $data['news'] = $this->model->getAll('news');
         $data['body'] = 'news_list';
         $this->controller->load_view($data);
-        
     }
-    
     public function notification($id = null)
     {
-        
         $this->form_validation->set_rules('title', 'Notification Title', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            
             if (!empty($id)) {
                 $where                = array(
                     'id' => $id
                 );
                 $data['notification'] = $this->model->getAllwhere('notification', $where);
-                
-                
             } else {
                 
             }
@@ -950,8 +919,6 @@ class Admin extends CI_Controller
                 $is_active                = $this->input->post('status');
                 
                 $data = array(
-                    
-                    
                     'title' => $title,
                     'notification_description' => $notification_description,
                     'notification_url' => $notification_url,
@@ -961,8 +928,6 @@ class Admin extends CI_Controller
                     'meta_keyword' => $meta_keyword,
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
-                    
-                    
                 );
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
@@ -986,8 +951,6 @@ class Admin extends CI_Controller
                     }
                 }
                 
-                
-                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -1001,25 +964,17 @@ class Admin extends CI_Controller
                 }
                 
                 $this->notificationList();
-                
             }
         }
     }
-    
-    
     public function notificationList()
     {
         $data['notification'] = $this->model->getAll('notification');
-        
-        $data['body'] = 'notification_list';
+        $data['body']         = 'notification_list';
         $this->controller->load_view($data);
-        
-        
     }
-    
     public function event($id = null)
     {
-        
         $this->form_validation->set_rules('title', 'Event Title', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
         $this->form_validation->set_rules('description', 'description', 'trim|required');
@@ -1029,14 +984,11 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('end_time', 'event time', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            
             if (!empty($id)) {
                 $where         = array(
                     'id' => $id
                 );
                 $data['event'] = $this->model->getAllwhere('event', $where);
-                
-                
             } else {
                 
             }
@@ -1054,8 +1006,6 @@ class Admin extends CI_Controller
                 $is_active         = $this->input->post('status');
                 
                 $data = array(
-                    
-                    
                     'title' => $title,
                     'description' => $event_description,
                     'address' => $event_address,
@@ -1064,11 +1014,7 @@ class Admin extends CI_Controller
                     'end_time' => $end_time,
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
-                    
-                    
                 );
-                
-                
                 
                 if (isset($_FILES['event_image']['name']) && !empty($_FILES['event_image']['name'])) {
                     $count = count($_FILES['event_image']['name']);
@@ -1090,22 +1036,17 @@ class Admin extends CI_Controller
                 }
                 
                 $this->eventList();
-                
             }
         }
     }
-    
     public function eventList()
     {
         $data['event'] = $this->model->getAll('event');
         $data['body']  = 'event_list';
         $this->controller->load_view($data);
     }
-    
-    
     public function blog($id = null)
     {
-        
         $this->form_validation->set_rules('en_title', 'Blog Title', 'trim|required');
         $this->form_validation->set_rules('en_description', 'Blog description', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
@@ -1118,8 +1059,6 @@ class Admin extends CI_Controller
                     'id' => $id
                 );
                 $data['blog'] = $this->model->getAllwhere('blogs', $where);
-                
-                
             } else {
                 
             }
@@ -1138,8 +1077,6 @@ class Admin extends CI_Controller
                 $is_active      = $this->input->post('status');
                 
                 $data = array(
-                    
-                    
                     'en_title' => $en_title,
                     'hi_title' => $hi_title,
                     'en_description' => $en_description,
@@ -1149,8 +1086,6 @@ class Admin extends CI_Controller
                     'blog_date' => $blog_date,
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
-                    
-                    
                 );
                 
                 if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
@@ -1159,7 +1094,6 @@ class Admin extends CI_Controller
                         $data['image'] = $_FILES['image']['name'];
                     }
                 }
-                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -1173,21 +1107,17 @@ class Admin extends CI_Controller
                 }
                 
                 $this->blogList();
-                
             }
         }
     }
-    
     public function blogList()
     {
         $data['blogs'] = $this->model->getAll('blogs');
         $data['body']  = 'blog_list';
         $this->controller->load_view($data);
     }
-    
     public function training($id = null)
     {
-        
         $this->form_validation->set_rules('en_training_name', 'Training Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
@@ -1212,8 +1142,6 @@ class Admin extends CI_Controller
                     'is_active' => $is_active,
                     'created_at' => date('Y-m-d H:i:s')
                 );
-                
-                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -1225,21 +1153,16 @@ class Admin extends CI_Controller
                 } else {
                     $result = $this->model->insertData('chapters', $data);
                 }
-                
                 $this->trainingList();
             }
         }
-        
     }
-    
     public function trainingList()
     {
         $data['training'] = $this->model->getAll('training');
         $data['body']     = 'training_list';
         $this->controller->load_view($data);
-        
     }
-    
     public function edit_training($id)
     {
         $where            = array(
@@ -1251,7 +1174,6 @@ class Admin extends CI_Controller
         $data['body']     = 'edit_training';
         $this->controller->load_view($data);
     }
-    
     public function getChapter()
     {
         $module_id = $this->input->get('module_id');
@@ -1262,7 +1184,6 @@ class Admin extends CI_Controller
         $data      = $this->model->getAllwhere('chapters', $where, $select);
         echo json_encode($data);
     }
-    
     public function question($id = NULL)
     {
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
@@ -1336,10 +1257,7 @@ class Admin extends CI_Controller
                     $where = array(
                         'id' => $id
                     );
-                    
                     unset($data['created_at']);
-                    
-                    
                     $result = $this->model->updateFields('questions', $data, $where);
                 } else {
                     $result = $this->model->insertData('questions', $data);
@@ -1349,30 +1267,28 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function questionList()
     {
         $data['question'] = $this->model->getAll('questions');
         $data['body']     = 'question_list';
         $this->controller->load_view($data);
     }
-    
     public function package($id = NULL)
     {
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             if (!empty($id)) {
-                $where = array(
+                $where           = array(
                     'id ' => $id
-                );                
-                $data['exam']     = $this->model->getAllwhere('package', $where);
-                $data['modules']  = $this->model->getAll('modules');
-
-                $where1 = array(
+                );
+                $data['exam']    = $this->model->getAllwhere('package', $where);
+                $data['modules'] = $this->model->getAll('modules');
+                
+                $where1           = array(
                     'fk_module_id ' => $data['exam'][0]->module_id
                 );
-                $data['chapters'] = $this->model->getAllwhere('chapters',$where1);
+                $data['chapters'] = $this->model->getAllwhere('chapters', $where1);
             } else {
                 $data['modules'] = $this->model->getAll('modules');
             }
@@ -1387,8 +1303,7 @@ class Admin extends CI_Controller
                 $description    = $this->input->post('description');
                 $payment_status = $this->input->post('payment_status');
                 $question_id    = implode(",", $this->input->post('question_id'));
-                $is_active      = $this->input->post('status');              
-                
+                $is_active      = $this->input->post('status');
                 
                 $data = array(
                     'module_id' => $module_id,
@@ -1402,7 +1317,6 @@ class Admin extends CI_Controller
                     'created_at' => date('Y-m-d H:i:s')
                 );
                 
-                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -1415,30 +1329,28 @@ class Admin extends CI_Controller
                 $this->packageList();
             }
         }
-        
     }
-    
-    
     public function packageList()
     {
         $data['exam'] = $this->model->getAll('package');
         $data['body'] = 'package_list';
         $this->controller->load_view($data);
     }
-    
     public function view_package($id)
     {
         $where           = array(
             'id' => $id
         );
-        $field_val       = 'package.*,modules.id as main_module_id,modules.en_module_name,chapters.id as main_chapter_id,chapters.en_chapter_name';
+        $field_val       = 'package.*,modules.id as main_module_id,
+                            modules.en_module_name,
+                            chapters.id as main_chapter_id,
+                            chapters.en_chapter_name';
         $field           = 'id';
         $value           = $id;
         $data['package'] = $this->model->GetJoinRecordNew('package', 'module_id', 'modules', 'id', 'chapters', 'id', '', '', $field, $value, $field_val, 'chapter_id');
         $data['body']    = 'view_package';
         $this->controller->load_view($data);
     }
-    
     public function getQuestion()
     {
         $module_id     = $this->input->get('module_id');
@@ -1475,7 +1387,6 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function oldpass_check($oldpass)
     {
         $user_id = $this->session->userdata('id');
@@ -1489,29 +1400,11 @@ class Admin extends CI_Controller
         }
     }
     
-    public function logout()
-    {
-        $user_data = $this->session->all_userdata();
-        foreach ($user_data as $key => $value) {
-            if ($key != 'session_id' && $key != 'ip_address' && $key != 'user_agent' && $key != 'last_activity') {
-                $this->session->unset_userdata($key);
-            }
-        }
-        $this->session->sess_destroy();
-        $msg = "You have been logged out Successfully...";
-        $this->index($msg);
-    }
-    
-    
-    
     public function register($id = NULL, $user_role = NULL)
     {
-        //$role = $user_role;
-        
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|alpha|min_length[2]');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|alpha|min_length[2]');
         $this->form_validation->set_rules('dob', 'Date Of Birth', 'trim|required');
-        // $this->form_validation->set_rules('category', 'category', 'trim|required');
         if (empty($id)) {
             $this->form_validation->set_rules('user_name', 'User Name', 'trim|required|is_unique[users.username]');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
@@ -1524,8 +1417,6 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
-                
-                //$user_role   = $this->input->post('user_role');
                 $first_name  = $this->input->post('first_name');
                 $user_name   = $this->input->post('user_name');
                 $last_name   = $this->input->post('last_name');
@@ -1584,22 +1475,16 @@ class Admin extends CI_Controller
             }
         }
     }
-    
-    
     public function userList($user_role = NULL)
     {
-        $where = array(
+        $where         = array(
             'user_role !=' => 1
         );
-        //$data['role']      = $user_role;
-        
         $data['users'] = $this->model->getAllwhere('users', $where);
         $data['body']  = 'userList';
         
         $this->controller->load_view($data);
     }
-    
-    
     public function subadmin_userList($user_role)
     {
         $where             = array(
@@ -1613,7 +1498,6 @@ class Admin extends CI_Controller
         $data['body']      = 'subadmin_userList';
         $this->controller->load_view($data);
     }
-    
     public function assign_rights($id)
     {
         $data['user_id']     = $id;
@@ -1627,9 +1511,7 @@ class Admin extends CI_Controller
         $data['user_rights'] = $this->model->getsingle('user_rights', $where1);
         $data['body']        = 'assign_rights';
         $this->controller->load_view($data);
-        
     }
-    
     public function addRights($id = NULL)
     {
         $actions = array(
@@ -1678,8 +1560,6 @@ class Admin extends CI_Controller
         
         $this->subadmin_userList('4');
     }
-    
-    
     public function edit_user($id)
     {
         $where             = array(
@@ -1693,8 +1573,6 @@ class Admin extends CI_Controller
         $data['body']      = 'edit_user';
         $this->controller->load_view($data);
     }
-    
-    
     public function delete()
     {
         $id    = $this->input->post('id');
@@ -1704,7 +1582,6 @@ class Admin extends CI_Controller
         );
         $this->model->delete($table, $where);
     }
-    
     public function change_status()
     {
         $id    = $this->input->post('id');
@@ -1718,8 +1595,6 @@ class Admin extends CI_Controller
         );
         $result = $this->model->updateFields($table, $data, $where);
     }
-    
-    
     public function profile()
     {
         $where         = array(
@@ -1760,9 +1635,7 @@ class Admin extends CI_Controller
                 
                 
                 if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
-                    
                     if (move_uploaded_file($_FILES['image']['tmp_name'], 'asset/uploads/' . $_FILES['image']['name'])) {
-                        
                         $data['profile_pic'] = $_FILES['image']['name'];
                     }
                 }
@@ -1772,8 +1645,6 @@ class Admin extends CI_Controller
             }
         }
     }
-    
-    
     public function send_mail()
     {
         $where         = array(
@@ -1832,7 +1703,6 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function mail_list()
     {
         $where             = array(
@@ -1843,7 +1713,6 @@ class Admin extends CI_Controller
         $data['body']      = 'mail_list';
         $this->controller->load_view($data);
     }
-    
     public function send_message()
     {
         $where         = array(
@@ -1878,7 +1747,6 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function message_list()
     {
         $where = array(
@@ -1890,8 +1758,6 @@ class Admin extends CI_Controller
         $data['body']          = 'message_list';
         $this->controller->load_view($data);
     }
-    
-    
     public function check_password()
     {
         $old_password = $this->input->post('data');
@@ -1906,8 +1772,6 @@ class Admin extends CI_Controller
             echo '1';
         }
     }
-    
-    
     public function file_upload($file)
     {
         if (!empty($file['logo']['name'])) {
@@ -1926,7 +1790,6 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function get_record()
     {
         $id     = $this->input->get('id');
@@ -1939,7 +1802,6 @@ class Admin extends CI_Controller
         $states = $this->model->getAllwhere($table, $where, $select);
         echo json_encode($states);
     }
-    
     public function post($id = NULL)
     {
         $this->form_validation->set_rules('en_post_title', 'Post Title', 'trim|required');
@@ -1994,7 +1856,6 @@ class Admin extends CI_Controller
             }
         }
     }
-    
     public function postList()
     {
         if ($this->controller->checkSession()) {
@@ -2010,7 +1871,6 @@ class Admin extends CI_Controller
             show_404();
         }
     }
-    
     public function testimonials()
     {
         if ($this->controller->checkSession()) {
@@ -2022,7 +1882,6 @@ class Admin extends CI_Controller
             show_404();
         }
     }
-    
     public function view_testimonial($id = NULL)
     {
         $where                = array(
@@ -2033,8 +1892,6 @@ class Admin extends CI_Controller
         $data['body']         = 'view_testimonial';
         $this->controller->load_view($data);
     }
-    
-    
     public function choose($id = NULL)
     {
         $this->form_validation->set_rules('en_site_title', 'Title in English', 'trim|required');
@@ -2099,9 +1956,7 @@ class Admin extends CI_Controller
                 $this->whychooseList();
             }
         }
-        
     }
-    
     public function whychooseList()
     {
         if ($this->controller->checkSession()) {
@@ -2112,7 +1967,6 @@ class Admin extends CI_Controller
             show_404();
         }
     }
-    
     public function exam()
     {
         if ($this->controller->checkSession()) {
@@ -2123,25 +1977,20 @@ class Admin extends CI_Controller
             show_404();
         }
     }
-    
     public function get_exam()
     {
         $module_id     = $this->input->get('module_id');
         $question_type = $this->input->get('question_type');
-        
-        $where  = array(
+        $where         = array(
             'module_id' => $module_id,
             'question_type' => $question_type
         );
-        $select = 'id,exam_name';
-        
-        $package = $this->model->getAllwhere('package', $where, $select);
-        
+        $select        = 'id,package_name';
+        $package       = $this->model->getAllwhere('package', $where, $select);
         if ($package != '') {
             echo json_encode($package);
         }
     }
-    
     public function get_questions()
     {
         $question_id = explode(",", $this->input->get('question_id'));
@@ -2151,7 +2000,6 @@ class Admin extends CI_Controller
             echo json_encode($questions);
         }
     }
-    
     public function add_exam()
     {
         $this->form_validation->set_rules('exam_name', 'Exam Name', 'trim|required');
@@ -2160,6 +2008,11 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('positive_mark', 'Positive Marks', 'trim|required|numeric');
         $this->form_validation->set_rules('package_id', 'Package', 'trim|required|numeric');
         $this->form_validation->set_rules('status', 'Status', 'trim|required|numeric');
+        $payment_status    = $this->input->post('payment_status');
+
+        if($payment_status==='paid'){
+            $this->form_validation->set_rules('exam_price', 'Exam Price', 'trim|required|numeric');
+        }
         
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
@@ -2174,49 +2027,52 @@ class Admin extends CI_Controller
             $package_id        = $this->input->post('package_id');
             $status            = $this->input->post('status');
 
+            
             $data = array(
-                    'exam_name'     => $exam_name,
-                    'time_per_question' => $time_per_question,
-                    'passing_marks' => $passing_marks,
-                    'positive_mark' => $positive_mark,
-                    'negative_mark' => $negative_mark,
-                    'package_id'    =>  $package_id,
-                    'is_active'     => $status,
-                    'created_at'    => date('Y-m-d H:i:s')
+                'exam_name' => $exam_name,
+                'time_per_question' => $time_per_question,
+                'passing_marks' => $passing_marks,
+                'positive_mark' => $positive_mark,
+                'negative_mark' => $negative_mark,
+                'package_id' => $package_id,
+                'is_active' => $status,
+                'created_at' => date('Y-m-d H:i:s')
+            );
+            
+            if (!empty($id)) {
+                $where = array(
+                    'id' => $id
                 );
-                
-                if (!empty($id)) {
-                    $where = array(
-                        'id' => $id
-                    );
-                    unset($data['created_at']);
-                    $result = $this->model->updateFields('exam', $data, $where);
-                } else {
-                    $result = $this->model->insertData('exam', $data);
-                }
-                $this->examList();
+                unset($data['created_at']);
+                $result = $this->model->updateFields('exam', $data, $where);
+            } else {
+                $result = $this->model->insertData('exam', $data);
+            }
+            $this->examList();
         }
-        
     }
-
-    public function examList(){
+    public function examList()
+    {
         $field_val    = 'exam.*,package.package_name';
         $data['exam'] = $this->model->GetJoinRecord('exam', 'package_id', 'package', 'id', $field_val);
         $data['body'] = 'exam_list';
         $this->controller->load_view($data);
     }
-
-    public function update(){
+    public function update()
+    {
         $id          = $this->input->post('id');
         $table       = $this->input->post('table');
-        $question_id = implode(',',$this->input->post('question_id'));
-        $data        = array('question_id'=>$question_id);
-        $where       = array('id'=>$id);
-        if($this->model->updateFields($table, $data, $where)){
+        $question_id = implode(',', $this->input->post('question_id'));
+        $data        = array(
+            'question_id' => $question_id
+        );
+        $where       = array(
+            'id' => $id
+        );
+        if ($this->model->updateFields($table, $data, $where)) {
             echo 'success';
-        }else{
+        } else {
             echo 'error';
         }
     }
-    
 }

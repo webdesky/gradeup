@@ -22,7 +22,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Event Title * </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="title" id="title" placeholder="Event Title" autocomplete="off" required="required" value="<?php if(isset($event)){ echo $event[0]->title; } ?>"> <span class="red"><?php echo form_error('title'); ?></span>
+                                            <input class="form-control" type="text" name="title" id="title" placeholder="Event Title" autocomplete="off" required="required" value="<?php if(isset($event)){ echo $event[0]->title; }else{echo set_value('title');} ?>"> <span class="red"><?php echo form_error('title'); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -30,7 +30,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Event Date* </label>
                                         <div class="col-md-9">
-                                            <input type="text" name="event_date" id="event_date" class="form-control date" autocomplete="off" readonly="readonly" placeholder="Event Date" value="<?php if(isset($event)){ echo $event[0]->event_date; } ?>" style="width: 50%;float: left;">
+                                            <input type="text" name="event_date" id="event_date" class="form-control date" autocomplete="off" readonly="readonly" placeholder="Event Date" value="<?php if(isset($event)){ echo $event[0]->event_date; }else{echo set_value('event_date');} ?>" style="width: 50%;float: left;">
                                             <span><?php echo form_error('event_date'); ?></span>
                                         </div>
                                     </div>
@@ -39,7 +39,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Event Start* </label>
                                         <div class="col-md-9">
-                                            <input type="text" id="start_time" name="start_time" class="form-control" autocomplete="off" readonly="readonly" placeholder="Start Time" style="width: 50%;" value="<?php if(isset($event)){ echo $event[0]->start_time; } ?>" >
+                                            <input type="text" id="start_time" name="start_time" class="form-control" autocomplete="off" readonly="readonly" placeholder="Start Time" style="width: 50%;" value="<?php if(isset($event)){ echo $event[0]->start_time; }else{echo set_value('start_time');} ?>" >
                                             <span><?php echo form_error('start_time'); ?></span>
                                         </div>
                                     </div>
@@ -48,7 +48,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Event End* </label>
                                         <div class="col-md-9">
-                                            <input type="text" id="end_time" name="end_time" class="form-control" autocomplete="off" readonly="readonly" placeholder="End Time" style="width: 50%;"  value="<?php if(isset($event)){ echo $event[0]->end_time; } ?>" >
+                                            <input type="text" id="end_time" name="end_time" class="form-control" autocomplete="off" readonly="readonly" placeholder="End Time" style="width: 50%;"  value="<?php if(isset($event)){ echo $event[0]->end_time; }else{echo set_value('end_time');} ?>" >
                                             <span><?php echo form_error('end_time'); ?></span>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                         <label class="col-md-3">Event Description</label>
                                         <div class="col-md-9">
                                             <textarea class="form-control" rows="8" id="description" name="description" placeholder="Event Description">
-                                                <?php if(isset($event)){ echo $event[0]->description; } ?>
+                                                <?php if(isset($event)){ echo $event[0]->description; }else{echo set_value('description');} ?>
                                             </textarea> <span class="red"><?php echo form_error('description'); ?></span>
                                             <script type="text/javascript">
                                             CKEDITOR.replace('description');
@@ -71,7 +71,7 @@
                                         <label class="col-md-3">Event Address</label>
                                         <div class="col-md-9">
                                             <textarea class="form-control" rows="8" id="address" name="address" placeholder="Event Address">
-                                                <?php if(isset($event)){ echo $event[0]->address; } ?>
+                                                <?php if(isset($event)){ echo $event[0]->address; }else{echo set_value('address');} ?>
                                             </textarea> <span class="red"><?php echo form_error('address'); ?></span>
                                             <script type="text/javascript">
                                             CKEDITOR.replace('address');
