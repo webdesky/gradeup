@@ -172,11 +172,9 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        //$('select').niceSelect();
         $(".registration_form1").validate({
             rules: {
                 "module_name": "required",
-
             },
             submitHandler: function(form) {
                 form.submit();

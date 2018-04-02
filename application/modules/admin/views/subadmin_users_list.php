@@ -71,33 +71,3 @@
     <!-- row -->
 </div>
 </div>
-<script type="text/javascript">
-$('#users').DataTable({
-    responsive: true
-});
-
-function delete_user(id) {
-    swal({
-        title: "Are you sure?",
-        text: "want to delete?",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        confirmButtonText: "Yes, Delete it!",
-        confirmButtonColor: "#ec6c62"
-    }, function() {
-        $.ajax({
-            url: "<?php echo base_url('admin/delete')?>",
-            data: {
-                id: id,
-                table: 'user'
-            },
-            type: "POST"
-        }).done(function(data) {
-            swal("Deleted!", "Record was successfully deleted!", "success");
-            $('#tr_' + tr_id).remove();
-        });
-    });
-
-}
-</script>

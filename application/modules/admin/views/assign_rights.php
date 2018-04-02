@@ -77,15 +77,11 @@
 </div>
 <style type="text/css">
 .glyphicon {
-    top: 4px;
-    left: 12px;
+     top: 4px;
+     left: 12px;
 }
-
-.checkbox input[type=checkbox],
-.checkbox-inline input[type=checkbox],
-.radio input[type=radio],
-.radio-inline input[type=radio] {
-    height: 21px;
-    margin-top: 2px;
+ .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+     height: 21px;
+     margin-top: 2px;
 }
 </style>
