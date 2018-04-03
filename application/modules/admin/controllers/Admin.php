@@ -98,7 +98,6 @@ class Admin extends CI_Controller
                 $fb_url           = $this->input->post('fb_url');
                 $gplus_url        = $this->input->post('gplus_url');
                 
-                
                 $data = array(
                     'en_site_title' => $en_site_title,
                     'en_meta_tags' => $en_meta_tags,
@@ -287,7 +286,6 @@ class Admin extends CI_Controller
         $data['body']    = 'modules_list';
         $this->controller->load_view($data);
     }
-
     public function category($id = NULL)
     {
         $this->form_validation->set_rules('category_name', 'Category Name', 'trim|required');
@@ -328,13 +326,12 @@ class Admin extends CI_Controller
             }
         }
     }
-
-    public function categoryList(){
+    public function categoryList()
+    {
         $data['category'] = $this->model->getAll('category');
         $data['body']    = 'category_list';
         $this->controller->load_view($data);
     }
-
     public function link($id = NULL)
     {
         $this->form_validation->set_rules('category_id', 'Category Name', 'trim|required');
@@ -385,8 +382,8 @@ class Admin extends CI_Controller
             }
         }
     }
-
-    public function linkList(){
+    public function linkList()
+    {
         $data['link'] = $this->model->GetJoinRecord('featured_links', 'category_id', 'category', 'id', 'featured_links.id,featured_links.title,featured_links.url,featured_links.created_at,featured_links.is_active,category.category_name');
 
         $data['body']    = 'link_list';
@@ -1511,7 +1508,6 @@ class Admin extends CI_Controller
             return TRUE;
         }
     }
-    
     public function register($id = NULL, $user_role = NULL)
     {
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|alpha|min_length[2]');
@@ -2141,7 +2137,6 @@ class Admin extends CI_Controller
             $package_id        = $this->input->post('package_id');
             $status            = $this->input->post('status');
 
-            
             $data = array(
                 'exam_name' => $exam_name,
                 'time_per_question' => $time_per_question,

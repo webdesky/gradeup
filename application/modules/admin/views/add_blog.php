@@ -40,7 +40,7 @@
                                                 <textarea class="form-control" rows="8" id="en_description" name="en_description" placeholder="about us"><?php if(isset($blog)){ echo $blog[0]->en_description; }else{echo set_value('en_description');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_description'); ?></span>
                                                 <script type="text/javascript">
-                                                CKEDITOR.replace('en_description');
+                                                    CKEDITOR.replace('en_description');
                                                 </script>
                                             </div>
                                         </div>
@@ -72,7 +72,7 @@
                                                 <textarea class="form-control" rows="8" id="hi_description" name="hi_description" placeholder="about_us"><?php if(isset($blog)){ echo $blog[0]->hi_description; }else{echo set_value('hi_description');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_description'); ?></span>
                                                 <script type="text/javascript">
-                                                CKEDITOR.replace('hi_description');
+                                                    CKEDITOR.replace('hi_description');
                                                 </script>
                                             </div>
                                         </div>
@@ -156,21 +156,4 @@ $(document).ready(function() {
         }
     });
 });
-</script>
-<script type="text/javascript">
-google.load("elements", "1", {
-    packages: "transliteration"
-});
-
-function onLoad() {
-    var options = {
-        sourceLanguage: google.elements.transliteration.LanguageCode.ENGLISH,
-        destinationLanguage: [google.elements.transliteration.LanguageCode.HINDI],
-        shortcutKey: 'ctrl+g',
-        transliterationEnabled: true
-    };
-    var control = new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(['hi_about_us']);
-}
-google.setOnLoadCallback(onLoad);
 </script>

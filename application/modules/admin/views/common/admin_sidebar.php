@@ -138,22 +138,6 @@
                             </li>
                         </ul>
                     </li> -->
-
-
-                        <!-- 
-                        <li> <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Training Master<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<?php //echo base_url('admin/training')?>">Add Training</a>
-                                </li>
-                                <li>
-                                    <a href="<?php //echo base_url('admin/trainingList')?>">Training List</a>
-                                </li>
-                            </ul>
-                        </li> 
-                        -->
-                        
->>>>>>> b6411e8394527383509af7165e04e28da11d8a0f
                         <li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
