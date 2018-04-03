@@ -9,7 +9,7 @@ function delete_record(id, tr_id,table_name) {
         confirmButtonColor: "#ec6c62"
     }, function() {
         $.ajax({
-            url: "<?php echo base_url('admin/delete')?>",
+            url: base_url+'admin/delete',
             data: {
                 id: id,
                 table: table_name
