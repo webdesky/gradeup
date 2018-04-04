@@ -24,7 +24,7 @@
                                             <label class="col-md-3">Category Name* </label>
                                             <div class="col-md-9">
                                                 <select class="wide" name="category_id">
-                                                    <option data-display="--Select Modules--">--Select Category--</option>
+                                                    <option data-display="--Select Category--">--Select Category--</option>
                                                      <?php foreach ($category as $key => $value) { ?>
                                                           <option value="<?php echo $value['id']; ?>" <?php if(isset($link) && $link[0]->category_id==$value['id']) { ?> selected <?php } ?>><?php echo ucwords($value['category_name']); ?></option>
                                                     <?php } ?>
