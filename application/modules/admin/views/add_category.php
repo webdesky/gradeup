@@ -23,8 +23,8 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Category Name* </label>
                                             <div class="col-md-9">
-                                                <input class="form-control" type="text" name="category_name" id="category_name" placeholder="Categroy Name " autocomplete="off" required="required" value="<?php if(isset($category)){ echo $category[0]->category_name; }else{echo set_value('category_name');} ?>">
-                                                <span class="red"><?php echo form_error('category_name'); ?></span>
+                                                <input class="form-control" type="text" name="category_name" id="category_name" placeholder="Categroy Name" autocomplete="off" required="required" value="<?php if(isset($category)){ echo $category[0]->category_name; }else{ echo set_value('category_name');} ?>">
+                                                <span class="red"><?php echo form_error('category_name');?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -42,7 +42,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-12" align="center">
                                     <button type="submit" value="Save" class="btn btn-success">Save</button>
                                     <input type="reset" class="btn btn-default" value="Reset">
@@ -74,5 +73,4 @@ $(document).ready(function() {
         }
     });
 });
-
 </script>
