@@ -104,6 +104,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="clearfix"></div>
+                                <br/>
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label class="col-md-3">Category Image</label>

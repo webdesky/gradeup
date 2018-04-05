@@ -44,6 +44,9 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="clearfix"></div>
+                                <br/>
                                 <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="col-md-3">Status</label>
@@ -57,6 +60,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="col-md-3">Image</label>

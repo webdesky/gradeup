@@ -33,7 +33,7 @@
                                                 <label class="col-md-3 ">Package Name * </label>
                                                 <div class="col-md-9">
                                                     <select class="form-control" name="package_id[]" id="package_id" multiple="multiple">
-                                                        <option data-display="--Select Package--">--Select Chapter--</option>
+                                                        <option data-display="--Select Package--">--Select Package--</option>
                                                         <?php foreach($package as $values){?>
                                                             <option value="<?php echo $values['id']?>"  <?php if(!empty($super_package[0]->package_id)){ $chapter_array = explode(',', $super_package[0]->package_id); if(in_array($values['id'], $chapter_array)){ echo 'selected';}}?>>
 

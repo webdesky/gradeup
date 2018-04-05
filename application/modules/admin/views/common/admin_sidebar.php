@@ -111,23 +111,6 @@
                                 </li>
                             </ul>
                         </li>
-
-                        <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Featured Links<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<?php echo base_url('admin/category')?>">Add Category</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('admin/categoryList')?>">Category List</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('admin/link')?>">Add Links</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('admin/linkList')?>">Link List</a>
-                                </li>
-                            </ul>
-                        </li>
                         <li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Question Master<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -159,9 +142,9 @@
                                 <li>
                                     <a href="<?php echo base_url('admin/super_package')?>">Add Super Sub Package</a>
                                 </li>
-                                <li>
-                                   <!--  <a href="<?php echo base_url('admin/examList')?>">Exam List</a> -->
-                                </li>
+                                <!--<li>
+                                     <a href="<?php //echo base_url('admin/examList')?>">Exam List</a> 
+                                </li>-->
                             </ul>
                         </li>
                         <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
@@ -189,6 +172,22 @@
                                 </li>
                                 <li>
                                     <a href="<?php echo base_url('admin/super_submenupostList')?>">SuperSub Menu Post List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li> <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>  Featured Links<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo base_url('admin/category')?>">Add Category</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('admin/categoryList')?>">Category List</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('admin/link')?>">Add Links</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('admin/linkList')?>">Link List</a>
                                 </li>
                             </ul>
                         </li>

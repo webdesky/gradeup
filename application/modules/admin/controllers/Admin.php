@@ -345,9 +345,6 @@ class Admin extends CI_Controller
                     'featured_links.id ' => $id
                 );
                 $data['link'] = $this->model->GetJoinRecord('featured_links', 'category_id', 'category', 'id', 'featured_links.id,featured_links.title,featured_links.url,featured_links.created_at,featured_links.is_active,category.category_name,category.id as category_id',$where);
-                
-              
-
             }
 
             $data['category'] = $this->model->getAll('category');
@@ -366,8 +363,6 @@ class Admin extends CI_Controller
                     'is_active'      => $is_active,
                     'created_at'     => date('Y-m-d H:i:s')
                 );
-                
-               
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -462,7 +457,6 @@ class Admin extends CI_Controller
         $where = array(
             'chapters.id' => $id
         );
-        
         $data['modules'] = $this->model->getAll('modules');
         $data['chapter'] = $this->model->GetJoinRecord('chapters', 'fk_module_id', 'modules', 'id', 'chapters.id as ids,chapters.fk_module_id,chapters.en_chapter_name,chapters.hi_chapter_name,chapters.created_at,chapters.is_active,modules.en_module_name,modules.id', $where);
         $data['body']    = 'edit_chapter';
@@ -473,7 +467,6 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            
             if (!empty($id)) {
                 $where           = array(
                     'id' => $id
@@ -537,9 +530,7 @@ class Admin extends CI_Controller
                 } else {
                     $result = $this->model->insertData('menu', $data);
                 }
-                
-                $this->menuList();
-                
+                $this->menuList();   
             }
         }
     }
@@ -568,7 +559,6 @@ class Admin extends CI_Controller
                     'is_active' => 1
                 );
                 $data['menu'] = $this->model->getAllwhere('menu', $where);
-                
             }
             $data['body'] = 'add_sub_menu';
             $this->controller->load_view($data);
@@ -605,7 +595,7 @@ class Admin extends CI_Controller
                 
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])){
                         $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
@@ -701,16 +691,10 @@ class Admin extends CI_Controller
                 $where = array(
                     'id' => $data['super_sub_menu'][0]->menu_id
                 );
-                
                 $select = 'en_menu_name';
-                
                 $menu_name = $this->model->getAllwhere('menu', $where, $select);
-                
                 $data['super_sub_menu'][0]->menu_name = $menu_name[0]->en_menu_name;
-                
-                $data['menu'] = $this->model->getAllwhere('menu');
-                
-                
+                $data['menu'] = $this->model->getAllwhere('menu');                
             } else {
                 $where        = array(
                     'is_active' => 1
@@ -891,19 +875,15 @@ class Admin extends CI_Controller
         $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'super_sub_menu_id', 'super_sub_menu', 'id', $field_val);
         
         for ($i = 0; $i < count($data['super_sub_menu_post']); $i++) {
-            
             $where  = array(
                 'id' => $data['super_sub_menu_post'][$i]->sub_menu_id
             );
             $select = 'menu_id,en_sub_menu_name';
-            
             $sub_menu_name = $this->model->getAllwhere('sub_menu', $where, $select);
-            
             $data['super_sub_menu_post'][$i]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
             $where1                                         = array(
                 'id' => $sub_menu_name[0]->menu_id
             );
-            
             $select1                                  = 'id,en_menu_name';
             $menu                                     = $this->model->getAllwhere('menu', $where1, $select1);
             $data['super_sub_menu_post'][$i]->menu    = $menu[0]->en_menu_name;
@@ -923,14 +903,11 @@ class Admin extends CI_Controller
                     'id' => $id
                 );
                 $data['news'] = $this->model->getAllwhere('news', $where);
-            } else {
-                
-            }
+            } else {}
             $data['body'] = 'add_news';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
-                
                 $title            = $this->input->post('title');
                 $category         = $this->input->post('category');
                 $news_description = $this->input->post('news_description');
@@ -955,19 +932,19 @@ class Admin extends CI_Controller
                 );
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])){
                         $data['category_image'] = $_FILES['category_image']['name'];
                     }
                 }
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])){
                         $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
                 if (isset($_FILES['news_image']['name']) && !empty($_FILES['news_image']['name'])) {
                     $count = count($_FILES['news_image']['name']);
-                    if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])) {
+                    if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])){
                         $data['news_image'] = $_FILES['news_image']['name'];
                     }
                 }
@@ -982,7 +959,6 @@ class Admin extends CI_Controller
                 }
                 
                 $this->newsList();
-                
             }
         }
     }

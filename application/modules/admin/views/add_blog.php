@@ -45,6 +45,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="clearfix"></div>
+                                    <br/>
                                     <div class="col-md-12 ">
                                         <div class="form-group">
                                             <label class="col-md-2"> Address * </label>
@@ -77,6 +79,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="clearfix"></div>
+                                    <br/>
                                     <div class="col-md-12 ">
                                         <div class="form-group">
                                             <label class="col-md-2"> Address * </label>
@@ -87,6 +91,7 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
+                                <br/>
                                 <div class="col-md-6">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -113,11 +118,12 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
+                                <br/>
                                 <div class="col-md-6">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-md-3">Image </label>
-                                            <div class="col-md-9">
+                                            <label class="col-md-2">Image </label>
+                                            <div class="col-md-10">
                                                 <input type="file" name="image" class="form-control">
                                             </div>
                                         </div>

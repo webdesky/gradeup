@@ -108,6 +108,8 @@
                                     </div>
                                 </div>
 
+                                <br/>
+
                                  <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label class="col-md-3">News Image</label>

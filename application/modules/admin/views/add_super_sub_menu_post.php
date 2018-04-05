@@ -115,13 +115,13 @@
                                             </textarea> <span class="red"><?php echo form_error('hi_post'); ?></span>
                                                 <script type="text/javascript">
                                                     CKEDITOR.replace('hi_post');
-
                                                 </script>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         </div>
+                        <div class="clearfix"></div>
                         <br/><br/>
                         <div class="col-md-12" align="center">
                             <button type="submit" value="Save" class="btn btn-success">Save</button>

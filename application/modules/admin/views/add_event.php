@@ -39,7 +39,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Event Start* </label>
                                         <div class="col-md-9">
-                                            <input type="text" id="start_time" name="start_time" class="form-control" autocomplete="off" readonly="readonly" placeholder="Start Time" style="width: 50%;" value="<?php if(isset($event)){ echo $event[0]->start_time; }else{echo set_value('start_time');} ?>" >
+                                            <input type="text" id="start_time" name="start_time" class="form-control" autocomplete="off" readonly="readonly" placeholder="Start Time" style="width: 50%;" value="<?php if(isset($event)){ echo $event[0]->start_time; }else{echo set_value('start_time');} ?>">
                                             <span><?php echo form_error('start_time'); ?></span>
                                         </div>
                                     </div>
@@ -48,7 +48,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Event End* </label>
                                         <div class="col-md-9">
-                                            <input type="text" id="end_time" name="end_time" class="form-control" autocomplete="off" readonly="readonly" placeholder="End Time" style="width: 50%;"  value="<?php if(isset($event)){ echo $event[0]->end_time; }else{echo set_value('end_time');} ?>" >
+                                            <input type="text" id="end_time" name="end_time" class="form-control" autocomplete="off" readonly="readonly" placeholder="End Time" style="width: 50%;" value="<?php if(isset($event)){ echo $event[0]->end_time; }else{echo set_value('end_time');} ?>">
                                             <span><?php echo form_error('end_time'); ?></span>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                                                 <?php if(isset($event)){ echo $event[0]->description; }else{echo set_value('description');} ?>
                                             </textarea> <span class="red"><?php echo form_error('description'); ?></span>
                                             <script type="text/javascript">
-                                            CKEDITOR.replace('description');
+                                                CKEDITOR.replace('description');
                                             </script>
                                         </div>
                                     </div>
@@ -74,17 +74,18 @@
                                                 <?php if(isset($event)){ echo $event[0]->address; }else{echo set_value('address');} ?>
                                             </textarea> <span class="red"><?php echo form_error('address'); ?></span>
                                             <script type="text/javascript">
-                                            CKEDITOR.replace('address');
+                                                CKEDITOR.replace('address');
                                             </script>
                                         </div>
                                     </div>
                                 </div>
-
-                                 <div class="col-md-6 ">
+                                <div class="clearfix"></div>
+                                <br/>
+                                <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label class="col-md-3">Event Image</label>
                                         <div class="col-md-9">
-                                            
+
                                             <input type="file" name="event_image" id="event_image" class="form-control">
                                             <span class="red"><?php echo form_error('event_image'); ?></span>
                                         </div>
@@ -138,6 +139,6 @@ $(document).ready(function() {
     $('#start_time').timepicker();
     $('#end_time').timepicker();
 
-
 });
+
 </script>
