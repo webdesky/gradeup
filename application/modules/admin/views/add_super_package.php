@@ -38,7 +38,7 @@
                                                             <option value="<?php echo $values['id']?>"  <?php if(!empty($super_package[0]->package_id)){ $chapter_array = explode(',', $super_package[0]->package_id); if(in_array($values['id'], $chapter_array)){ echo 'selected';}}?>>
 
 
-                                                           <?php echo $values['exam_name']; ?> 
+                                                           <?php echo $values['package_name']; ?> 
                                                             </option>
                                                             <?php }?>
                                                     </select> <span class="red"><?php echo form_error('package_id'); ?></span> </div>
