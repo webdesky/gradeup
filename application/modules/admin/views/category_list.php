@@ -1,9 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-           
             <h1 class="page-header">Chapter List</h1>
-          
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -36,17 +34,17 @@
                                                 <?php echo $i; ?> </td>
                                             <td>
                                                 <?php echo $value['category_name'];?> </td>
-                                            
                                             <td>
-                                                <?php if($value['is_active']==1){ echo 'Active';}else{echo 'Inactive';}?> </td>
+                                                <?php if($value['is_active']==1){ echo 'Active';}else{ echo 'Inactive';}?> </td>
                                             <td>
                                                 <?php echo date('Y-m-d',strtotime($value['created_at']));?> </td>
                                             <td>
                                                 <a href="<?php echo base_url('admin/category/'.$value['id'])?>"><span class="glyphicon glyphicon-edit"></span></a> |
                                                 <a href="javascript:void(0)" onclick="delete_record('<?php echo $value['id']?>','<?php echo $i;?>','category')"><span class="glyphicon glyphicon-trash"></span></a>
-                                               </td>
+                                            </td>
                                         </tr>
-                                        <?php $i++;}}?> </tbody>
+                                        <?php $i++;}}?> 
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

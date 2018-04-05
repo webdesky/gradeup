@@ -16,7 +16,7 @@ function delete_record(id, tr_id,table_name) {
             },
             type: "POST"
         }).done(function(data) {
-            swal("Deleted!", "Record was successfully deleted!", "success");
+            swal("Deleted!", "Record successfully deleted!", "success");
             $('#tr_' + tr_id).remove();
         });
 
