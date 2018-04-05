@@ -219,12 +219,10 @@ class Admin extends CI_Controller
                     'hi_terms' => $hi_terms,
                     'created_at' => date('Y-m-d H:i:s')
                 );
-                
                 $where  = array(
                     'id' => $this->input->post('id')
                 );
                 $result = $this->model->updateFields('settings', $data, $where);
-                
                 redirect('admin/terms');
             }
         }
@@ -293,7 +291,7 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             if (!empty($id)) {
-                $where           = array(
+                $where            = array(
                     'id ' => $id
                 );
                 $data['category'] = $this->model->getAllwhere('category', $where);
@@ -302,16 +300,14 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
-                $category_name  = $this->input->post('category_name');
-                $is_active      = $this->input->post('status');
+                $category_name = $this->input->post('category_name');
+                $is_active     = $this->input->post('status');
                 
                 $data = array(
-                    'category_name'  => $category_name,
-                    'is_active'      => $is_active,
-                    'created_at'     => date('Y-m-d H:i:s')
+                    'category_name' => $category_name,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
-                
-               
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -329,7 +325,7 @@ class Admin extends CI_Controller
     public function categoryList()
     {
         $data['category'] = $this->model->getAll('category');
-        $data['body']    = 'category_list';
+        $data['body']     = 'category_list';
         $this->controller->load_view($data);
     }
     public function link($id = NULL)
@@ -341,27 +337,27 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             if (!empty($id)) {
-                $where           = array(
+                $where        = array(
                     'featured_links.id ' => $id
                 );
-                $data['link'] = $this->model->GetJoinRecord('featured_links', 'category_id', 'category', 'id', 'featured_links.id,featured_links.title,featured_links.url,featured_links.created_at,featured_links.is_active,category.category_name,category.id as category_id',$where);
+                $data['link'] = $this->model->GetJoinRecord('featured_links', 'category_id', 'category', 'id', 'featured_links.id,featured_links.title,featured_links.url,featured_links.created_at,featured_links.is_active,category.category_name,category.id as category_id', $where);
             }
-
+            
             $data['category'] = $this->model->getAll('category');
-            $data['body'] = 'add_link';
+            $data['body']     = 'add_link';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
-                $category_id  = $this->input->post('category_id');
-                $is_active      = $this->input->post('status');
-                $title          = $this->input->post('title');
-                $url          = $this->input->post('url');
-                $data = array(
-                    'category_id'    => $category_id,
-                    'title'          => $title,
-                    'url'            => $url,
-                    'is_active'      => $is_active,
-                    'created_at'     => date('Y-m-d H:i:s')
+                $category_id = $this->input->post('category_id');
+                $is_active   = $this->input->post('status');
+                $title       = $this->input->post('title');
+                $url         = $this->input->post('url');
+                $data        = array(
+                    'category_id' => $category_id,
+                    'title' => $title,
+                    'url' => $url,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 if (!empty($id)) {
                     $where = array(
@@ -380,8 +376,7 @@ class Admin extends CI_Controller
     public function linkList()
     {
         $data['link'] = $this->model->GetJoinRecord('featured_links', 'category_id', 'category', 'id', 'featured_links.id,featured_links.title,featured_links.url,featured_links.created_at,featured_links.is_active,category.category_name');
-
-        $data['body']    = 'link_list';
+        $data['body'] = 'link_list';
         $this->controller->load_view($data);
     }
     public function edit_module($id)
@@ -454,7 +449,7 @@ class Admin extends CI_Controller
     }
     public function edit_chapter($id)
     {
-        $where = array(
+        $where           = array(
             'chapters.id' => $id
         );
         $data['modules'] = $this->model->getAll('modules');
@@ -530,7 +525,7 @@ class Admin extends CI_Controller
                 } else {
                     $result = $this->model->insertData('menu', $data);
                 }
-                $this->menuList();   
+                $this->menuList();
             }
         }
     }
@@ -595,7 +590,7 @@ class Admin extends CI_Controller
                 
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])){
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
                         $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
@@ -688,13 +683,13 @@ class Admin extends CI_Controller
                 
                 $data['super_sub_menu'] = $this->model->GetJoinRecord('super_sub_menu', 'sub_menu_id', 'sub_menu', 'id', $field_val, $where);
                 
-                $where = array(
+                $where                                = array(
                     'id' => $data['super_sub_menu'][0]->menu_id
                 );
-                $select = 'en_menu_name';
-                $menu_name = $this->model->getAllwhere('menu', $where, $select);
+                $select                               = 'en_menu_name';
+                $menu_name                            = $this->model->getAllwhere('menu', $where, $select);
                 $data['super_sub_menu'][0]->menu_name = $menu_name[0]->en_menu_name;
-                $data['menu'] = $this->model->getAllwhere('menu');                
+                $data['menu']                         = $this->model->getAllwhere('menu');
             } else {
                 $where        = array(
                     'is_active' => 1
@@ -875,19 +870,19 @@ class Admin extends CI_Controller
         $data['super_sub_menu_post'] = $this->model->GetJoinRecord('super_sub_menu_post', 'super_sub_menu_id', 'super_sub_menu', 'id', $field_val);
         
         for ($i = 0; $i < count($data['super_sub_menu_post']); $i++) {
-            $where  = array(
+            $where                                          = array(
                 'id' => $data['super_sub_menu_post'][$i]->sub_menu_id
             );
-            $select = 'menu_id,en_sub_menu_name';
-            $sub_menu_name = $this->model->getAllwhere('sub_menu', $where, $select);
+            $select                                         = 'menu_id,en_sub_menu_name';
+            $sub_menu_name                                  = $this->model->getAllwhere('sub_menu', $where, $select);
             $data['super_sub_menu_post'][$i]->sub_menu_name = $sub_menu_name[0]->en_sub_menu_name;
             $where1                                         = array(
                 'id' => $sub_menu_name[0]->menu_id
             );
-            $select1                                  = 'id,en_menu_name';
-            $menu                                     = $this->model->getAllwhere('menu', $where1, $select1);
-            $data['super_sub_menu_post'][$i]->menu    = $menu[0]->en_menu_name;
-            $data['super_sub_menu_post'][$i]->menu_id = $menu[0]->id;
+            $select1                                        = 'id,en_menu_name';
+            $menu                                           = $this->model->getAllwhere('menu', $where1, $select1);
+            $data['super_sub_menu_post'][$i]->menu          = $menu[0]->en_menu_name;
+            $data['super_sub_menu_post'][$i]->menu_id       = $menu[0]->id;
         }
         $data['body'] = 'super_sub_menu_post_list';
         $this->controller->load_view($data);
@@ -903,7 +898,8 @@ class Admin extends CI_Controller
                     'id' => $id
                 );
                 $data['news'] = $this->model->getAllwhere('news', $where);
-            } else {}
+            } else {
+            }
             $data['body'] = 'add_news';
             $this->controller->load_view($data);
         } else {
@@ -932,19 +928,19 @@ class Admin extends CI_Controller
                 );
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])){
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
                         $data['category_image'] = $_FILES['category_image']['name'];
                     }
                 }
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])){
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
                         $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
                 if (isset($_FILES['news_image']['name']) && !empty($_FILES['news_image']['name'])) {
                     $count = count($_FILES['news_image']['name']);
-                    if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])){
+                    if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])) {
                         $data['news_image'] = $_FILES['news_image']['name'];
                     }
                 }
@@ -1275,13 +1271,15 @@ class Admin extends CI_Controller
                 $data['questions'] = $this->model->getAllwhere('questions', $where);
                 $data['modules']   = $this->model->getAll('modules');
                 
-
+                
                 $field_val = 'id,en_chapter_name';
-
-                $where1 = array('fk_module_id'=>$data['questions'][0]->module_id);
-
-                $data['chapters']  = $this->model->getAllwhere('chapters', $where1, $field_val);
-
+                
+                $where1 = array(
+                    'fk_module_id' => $data['questions'][0]->module_id
+                );
+                
+                $data['chapters'] = $this->model->getAllwhere('chapters', $where1, $field_val);
+                
             } else {
                 $data['modules']  = $this->model->getAll('modules');
                 $data['chapters'] = $this->model->getAll('chapters');
@@ -1381,22 +1379,22 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
-              
+                
                 $module_id      = $this->input->post('module_id');
                 $chapter_id     = implode(",", $this->input->post('chapter_id'));
                 $exam_name      = $this->input->post('exam_name');
                 $question_type  = $this->input->post('question_type');
                 $description    = $this->input->post('description');
                 $payment_status = $this->input->post('payment_status');
-               
-                $question_id    =  implode(",", $this->input->post('question_id'));
                 
-                $is_active      = $this->input->post('status');
+                $question_id = implode(",", $this->input->post('question_id'));
+                
+                $is_active = $this->input->post('status');
                 
                 $data = array(
                     'module_id' => $module_id,
                     'chapter_id' => $chapter_id,
-                    'exam_name'     => $exam_name,
+                    'exam_name' => $exam_name,
                     'question_type' => $question_type,
                     'description' => $description,
                     'payment_status' => $payment_status,
@@ -2097,9 +2095,9 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('positive_mark', 'Positive Marks', 'trim|required|numeric');
         //$this->form_validation->set_rules('package_id', 'Package', 'trim|required|numeric');
         $this->form_validation->set_rules('status', 'Status', 'trim|required|numeric');
-        $payment_status    = $this->input->post('payment_status');
-
-        if($payment_status==='paid'){
+        $payment_status = $this->input->post('payment_status');
+        
+        if ($payment_status === 'paid') {
             $this->form_validation->set_rules('exam_price', 'Exam Price', 'trim|required|numeric');
         }
         
@@ -2114,16 +2112,16 @@ class Admin extends CI_Controller
             $passing_marks     = $this->input->post('passing_marks');
             $positive_mark     = $this->input->post('positive_mark');
             $negative_mark     = $this->input->post('negative_mark');
-            $exam_id        = implode(",", $this->input->post('exam_id'));
+            $exam_id           = implode(",", $this->input->post('exam_id'));
             $status            = $this->input->post('status');
-
+            
             $data = array(
                 'package_name' => $package_name,
                 'time_per_question' => $time_per_question,
                 'passing_marks' => $passing_marks,
                 'positive_mark' => $positive_mark,
                 'negative_mark' => $negative_mark,
-                'exam_id'        => $exam_id,
+                'exam_id' => $exam_id,
                 'is_active' => $status,
                 'created_at' => date('Y-m-d H:i:s')
             );
@@ -2145,50 +2143,46 @@ class Admin extends CI_Controller
         $field_val    = 'package.*,exam.exam_name';
         $data['exam'] = $this->model->GetJoinRecord('package', 'exam_id', 'exam', 'id', $field_val);
         $data['body'] = 'package_list';
-
+        
         $this->controller->load_view($data);
     }
-
-    public function super_package($id = NULL){
+    
+    public function super_package($id = NULL)
+    {
         $this->form_validation->set_rules('super_package_name', 'Package ', 'trim|required');
-        //$this->form_validation->set_rules('package_id', 'Package', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required|numeric');
         if (!empty($id)) {
-            $where           = array(
+            $where                 = array(
                 'id' => $id
             );
-            $data['package']= $this->model->getAll('package');
+            $data['package']       = $this->model->getAll('package');
             $data['super_package'] = $this->model->getAllwhere('super_package', $where);
-
+            
         }
         $where = array(
             'is_active' => 1
         );
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['package']= $this->model->getAll('package');
-            $data['body'] = 'add_super_package';
-
+            $data['package'] = $this->model->getAll('package');
+            $data['body']    = 'add_super_package';
+            
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
                 
                 $super_package_name = $this->input->post('super_package_name');
-                $package_id    = implode(",",$this->input->post('package_id'));
-                $valid_till    = $this->input->post('valid_till');
-                $is_active     = $this->input->post('status');
-              
-                
-               
-                
+                $package_id         = implode(",", $this->input->post('package_id'));
+                $valid_till         = $this->input->post('valid_till');
+                $is_active          = $this->input->post('status');                
                 $data = array(
                     'super_package_name' => $super_package_name,
-                    'package_id'         => $package_id,
-                    'valid_till'         => $valid_till,
-                    'is_active'          => $is_active,
-                    'created_at'         => date('Y-m-d H:i:s')
+                    'package_id' => $package_id,
+                    'valid_till' => $valid_till,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
-               
+                
                 if (!empty($id)) {
                     $where = array(
                         'id' => $id
@@ -2202,10 +2196,10 @@ class Admin extends CI_Controller
             }
         }
     }
-    public function super_packageList(){
+    public function super_packageList()
+    {
         $data['super_package'] = $this->model->getAll('super_package');
         $data['body']          = 'super_package_list';
-
         $this->controller->load_view($data);
     }
     public function update()

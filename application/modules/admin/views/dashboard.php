@@ -59,30 +59,28 @@
 			<!-- /widget-header -->
 			<div class="widget-content">
 				<div class="shortcuts">
-					<!-- <a href="<?php echo base_url('admin/moduleList') ?>" class="shortcut">
+					 <a href="<?php echo base_url('admin/moduleList') ?>" class="shortcut">
 					<i class="shortcut-icon  fa fa-database"></i>
 					<span class="shortcut-label">Modules</span>
-					</a> -->
-					<!-- <a href="<?php echo base_url('admin/chapterList') ?>" class="shortcut">
+					</a> 
+					 <a href="<?php echo base_url('admin/chapterList') ?>" class="shortcut">
 					  <i class="shortcut-icon fa fa-file-text"></i>
 					  <span class="shortcut-label">Chapters</span> 
-					</a> -->
-					<!-- <a href="<?php echo base_url('admin/trainingList') ?>" class="shortcut">
+					</a> <a href="<?php echo base_url('admin/trainingList') ?>" class="shortcut">
 					  <i class="shortcut-icon fa fa-graduation-cap"></i> 
 					  <span class="shortcut-label">Training</span> 
-					</a> -->
-					<!-- <a href="<?php echo base_url('admin/questionList') ?>" class="shortcut"> 
+					</a><a href="<?php echo base_url('admin/questionList') ?>" class="shortcut"> 
 					  <i class="shortcut-icon fa fa-question-circle"></i>
 					  <span class="shortcut-label">Questions</span>  
-					</a> -->
+					</a>
 					<a href="<?php echo base_url('admin/postList') ?>" class="shortcut">
 					  <i class="shortcut-icon fa fa-file-powerpoint-o"></i>
 					  <span class="shortcut-label">Post</span> 
 					</a>
-					<!-- <a href="<?php echo base_url('admin/examList') ?>" class="shortcut">
+					 <a href="<?php echo base_url('admin/examList') ?>" class="shortcut">
 					  <i class="shortcut-icon fa fa-book"></i>
 					  <span class="shortcut-label">Exam</span> 
-					</a> -->
+					</a> 
 					<a href="<?php echo base_url('admin/userList') ?>" class="shortcut">
 					  <i class="shortcut-icon fa fa-user"></i> 
 					  <span class="shortcut-label">Users</span> 
