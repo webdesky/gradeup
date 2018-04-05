@@ -26,7 +26,8 @@
                                                 <select class="wide" name="category_id">
                                                     <option data-display="--Select Category--">--Select Category--</option>
                                                      <?php foreach ($category as $key => $value) { ?>
-                                                          <option value="<?php echo $value['id']; ?>" <?php if(isset($link) && $link[0]->category_id==$value['id']) { ?> selected <?php } ?>><?php echo ucwords($value['category_name']); ?></option>
+                                                    <option value="<?php echo $value['id']; ?>" <?php if(isset($link) && $link[0]->category_id==$value['id']) { ?> selected <?php } ?>><?php echo ucwords($value['category_name']); ?>
+                                                    </option>
                                                     <?php } ?>
                                                  </select>
                                                 <span class="red"><?php echo form_error('category_id'); ?></span>
@@ -48,7 +49,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -58,7 +58,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-3">Link URL* </label>
@@ -68,7 +67,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-12" align="center">
                                     <button type="submit" value="Save" class="btn btn-success">Save</button>
                                     <input type="reset" class="btn btn-default" value="Reset"> </div>
