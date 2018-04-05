@@ -23,7 +23,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3">Exam Name </label>
                                                 <div class="col-md-9">
-                                                    <?php echo strtoupper($package[0]->package_name);?>
+                                                    <?php echo strtoupper($package[0]->exam_name);?>
                                                 </div>
                                             </div>
                                         </div>

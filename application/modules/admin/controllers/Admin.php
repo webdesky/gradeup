@@ -1382,7 +1382,7 @@ class Admin extends CI_Controller
         $data['body']     = 'question_list';
         $this->controller->load_view($data);
     }
-    public function package($id = NULL)
+    public function exam($id = NULL)
     {
         $this->form_validation->set_rules('module_id', 'Module Name', 'trim|required');
         if ($this->form_validation->run() == false) {
@@ -1391,7 +1391,7 @@ class Admin extends CI_Controller
                 $where           = array(
                     'id ' => $id
                 );
-                $data['exam']    = $this->model->getAllwhere('package', $where);
+                $data['exam']    = $this->model->getAllwhere('exam', $where);
                 $data['modules'] = $this->model->getAll('modules');
                 
                 $where1           = array(
@@ -1401,23 +1401,26 @@ class Admin extends CI_Controller
             } else {
                 $data['modules'] = $this->model->getAll('modules');
             }
-            $data['body'] = 'add_package';
+            $data['body'] = 'add_exam';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
+              
                 $module_id      = $this->input->post('module_id');
                 $chapter_id     = implode(",", $this->input->post('chapter_id'));
                 $exam_name      = $this->input->post('exam_name');
                 $question_type  = $this->input->post('question_type');
                 $description    = $this->input->post('description');
                 $payment_status = $this->input->post('payment_status');
-                $question_id    = implode(",", $this->input->post('question_id'));
+               
+                $question_id    =  implode(",", $this->input->post('question_id'));
+                
                 $is_active      = $this->input->post('status');
                 
                 $data = array(
                     'module_id' => $module_id,
                     'chapter_id' => $chapter_id,
-                    'package_name' => $exam_name,
+                    'exam_name'     => $exam_name,
                     'question_type' => $question_type,
                     'description' => $description,
                     'payment_status' => $payment_status,
@@ -1431,33 +1434,33 @@ class Admin extends CI_Controller
                         'id' => $id
                     );
                     unset($data['created_at']);
-                    $result = $this->model->updateFields('package', $data, $where);
+                    $result = $this->model->updateFields('exam', $data, $where);
                 } else {
-                    $result = $this->model->insertData('package', $data);
+                    $result = $this->model->insertData('exam', $data);
                 }
-                $this->packageList();
+                $this->examList();
             }
         }
     }
-    public function packageList()
+    public function examList()
     {
-        $data['exam'] = $this->model->getAll('package');
-        $data['body'] = 'package_list';
+        $data['exam'] = $this->model->getAll('exam');
+        $data['body'] = 'exam_list';
         $this->controller->load_view($data);
     }
-    public function view_package($id)
+    public function view_exam($id)
     {
         $where           = array(
             'id' => $id
         );
-        $field_val       = 'package.*,modules.id as main_module_id,
+        $field_val       = 'exam.*,modules.id as main_module_id,
                             modules.en_module_name,
                             chapters.id as main_chapter_id,
                             chapters.en_chapter_name';
         $field           = 'id';
         $value           = $id;
-        $data['package'] = $this->model->GetJoinRecordNew('package', 'module_id', 'modules', 'id', 'chapters', 'id', '', '', $field, $value, $field_val, 'chapter_id');
-        $data['body']    = 'view_package';
+        $data['package'] = $this->model->GetJoinRecordNew('exam', 'module_id', 'modules', 'id', 'chapters', 'id', '', '', $field, $value, $field_val, 'chapter_id');
+        $data['body']    = 'view_exam';
         $this->controller->load_view($data);
     }
     public function getQuestion()
@@ -2077,11 +2080,11 @@ class Admin extends CI_Controller
             show_404();
         }
     }
-    public function exam()
+    public function package()
     {
         if ($this->controller->checkSession()) {
             $data['modules'] = $this->model->getAll('modules');
-            $data['body']    = 'add_exam';
+            $data['body']    = 'add_package';
             $this->controller->load_view($data);
         } else {
             show_404();
@@ -2095,8 +2098,8 @@ class Admin extends CI_Controller
             'module_id' => $module_id,
             'question_type' => $question_type
         );
-        $select        = 'id,package_name';
-        $package       = $this->model->getAllwhere('package', $where, $select);
+        $select        = 'id,exam_name';
+        $package       = $this->model->getAllwhere('exam', $where, $select);
         if ($package != '') {
             echo json_encode($package);
         }
@@ -2110,9 +2113,9 @@ class Admin extends CI_Controller
             echo json_encode($questions);
         }
     }
-    public function add_exam()
+    public function add_package()
     {
-        $this->form_validation->set_rules('exam_name', 'Exam Name', 'trim|required');
+        $this->form_validation->set_rules('package_name', 'Exam Name', 'trim|required');
         $this->form_validation->set_rules('time_per_question', 'Time per Question', 'trim|required|numeric');
         $this->form_validation->set_rules('passing_marks', 'Passing Marks', 'trim|required|numeric');
         $this->form_validation->set_rules('positive_mark', 'Positive Marks', 'trim|required|numeric');
@@ -2130,21 +2133,21 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             
-            $exam_name         = $this->input->post('exam_name');
+            $package_name      = $this->input->post('package_name');
             $time_per_question = $this->input->post('time_per_question');
             $passing_marks     = $this->input->post('passing_marks');
             $positive_mark     = $this->input->post('positive_mark');
             $negative_mark     = $this->input->post('negative_mark');
-            $package_id        = implode(",", $this->input->post('package_id'));
+            $exam_id        = implode(",", $this->input->post('exam_id'));
             $status            = $this->input->post('status');
 
             $data = array(
-                'exam_name' => $exam_name,
+                'package_name' => $package_name,
                 'time_per_question' => $time_per_question,
                 'passing_marks' => $passing_marks,
                 'positive_mark' => $positive_mark,
                 'negative_mark' => $negative_mark,
-                'package_id' => $package_id,
+                'exam_id'        => $exam_id,
                 'is_active' => $status,
                 'created_at' => date('Y-m-d H:i:s')
             );
@@ -2154,18 +2157,18 @@ class Admin extends CI_Controller
                     'id' => $id
                 );
                 unset($data['created_at']);
-                $result = $this->model->updateFields('exam', $data, $where);
+                $result = $this->model->updateFields('package', $data, $where);
             } else {
-                $result = $this->model->insertData('exam', $data);
+                $result = $this->model->insertData('package', $data);
             }
-            $this->examList();
+            $this->packageList();
         }
     }
-    public function examList()
+    public function packageList()
     {
-        $field_val    = 'exam.*,package.package_name';
-        $data['exam'] = $this->model->GetJoinRecord('exam', 'package_id', 'package', 'id', $field_val);
-        $data['body'] = 'exam_list';
+        $field_val    = 'package.*,exam.exam_name';
+        $data['exam'] = $this->model->GetJoinRecord('package', 'exam_id', 'exam', 'id', $field_val);
+        $data['body'] = 'package_list';
 
         $this->controller->load_view($data);
     }
@@ -2178,7 +2181,7 @@ class Admin extends CI_Controller
             $where           = array(
                 'id' => $id
             );
-            $data['package']= $this->model->getAll('exam');
+            $data['package']= $this->model->getAll('package');
             $data['super_package'] = $this->model->getAllwhere('super_package', $where);
 
         }
@@ -2187,7 +2190,7 @@ class Admin extends CI_Controller
         );
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
-            $data['package']= $this->model->getAll('exam');
+            $data['package']= $this->model->getAll('package');
             $data['body'] = 'add_super_package';
 
             $this->controller->load_view($data);
