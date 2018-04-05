@@ -182,6 +182,12 @@
                                 <li>
                                     <a href="<?php echo base_url('admin/examList')?>">Exam List</a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo base_url('admin/super_package')?>">Add Super Sub Package</a>
+                                </li>
+                                <li>
+                                   <!--  <a href="<?php echo base_url('admin/examList')?>">Exam List</a> -->
+                                </li>
                             </ul>
                         </li>
                         <li> <a href="#"><i class="fa fa-copy" aria-hidden="true"></i> Menu Master<span class="fa arrow"></span></a>
