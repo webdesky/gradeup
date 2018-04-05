@@ -209,7 +209,7 @@ function get_results(str) {
                 $('.one').html('');
                 $('#myModal').modal("toggle");
                 for (var i = 0; i < obj.length; i++) {
-                    $('#table').append('<tr class="one"><td><div class=""><input type="radio" id="radio" name="package_id" value="' + obj[i].id + '"><label></label></div></td><td>' + obj[i].package_name + '</td><td><a target="_blank" href="<?php echo base_url()?>admin/view_package/' + obj[i].id + '">View</a></td></tr>');
+                    $('#table').append('<tr class="one"><td><div class=""><input type="checkbox" id="checkbox" name="package_id[]" value="' + obj[i].id + '"><label></label></div></td><td>' + obj[i].package_name + '</td><td><a target="_blank" href="<?php echo base_url()?>admin/view_package/' + obj[i].id + '">View</a></td></tr>');
                 }
             } else {
                 alert('no record found');

@@ -2116,7 +2116,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('time_per_question', 'Time per Question', 'trim|required|numeric');
         $this->form_validation->set_rules('passing_marks', 'Passing Marks', 'trim|required|numeric');
         $this->form_validation->set_rules('positive_mark', 'Positive Marks', 'trim|required|numeric');
-        $this->form_validation->set_rules('package_id', 'Package', 'trim|required|numeric');
+        //$this->form_validation->set_rules('package_id', 'Package', 'trim|required|numeric');
         $this->form_validation->set_rules('status', 'Status', 'trim|required|numeric');
         $payment_status    = $this->input->post('payment_status');
 
@@ -2129,12 +2129,13 @@ class Admin extends CI_Controller
             $data['body'] = 'add_exam';
             $this->controller->load_view($data);
         } else {
+            
             $exam_name         = $this->input->post('exam_name');
             $time_per_question = $this->input->post('time_per_question');
             $passing_marks     = $this->input->post('passing_marks');
             $positive_mark     = $this->input->post('positive_mark');
             $negative_mark     = $this->input->post('negative_mark');
-            $package_id        = $this->input->post('package_id');
+            $package_id        = implode(",", $this->input->post('package_id'));
             $status            = $this->input->post('status');
 
             $data = array(
@@ -2165,6 +2166,67 @@ class Admin extends CI_Controller
         $field_val    = 'exam.*,package.package_name';
         $data['exam'] = $this->model->GetJoinRecord('exam', 'package_id', 'package', 'id', $field_val);
         $data['body'] = 'exam_list';
+
+        $this->controller->load_view($data);
+    }
+
+    public function super_package($id = NULL){
+        $this->form_validation->set_rules('super_package_name', 'Package ', 'trim|required');
+        //$this->form_validation->set_rules('package_id', 'Package', 'trim|required');
+        $this->form_validation->set_rules('status', 'Status', 'trim|required|numeric');
+        if (!empty($id)) {
+            $where           = array(
+                'id' => $id
+            );
+            $data['package']= $this->model->getAll('exam');
+            $data['super_package'] = $this->model->getAllwhere('super_package', $where);
+
+        }
+        $where = array(
+            'is_active' => 1
+        );
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('errors', validation_errors());
+            $data['package']= $this->model->getAll('exam');
+            $data['body'] = 'add_super_package';
+
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                
+                $super_package_name = $this->input->post('super_package_name');
+                $package_id    = implode(",",$this->input->post('package_id'));
+                $valid_till    = $this->input->post('valid_till');
+                $is_active     = $this->input->post('status');
+              
+                
+               
+                
+                $data = array(
+                    'super_package_name' => $super_package_name,
+                    'package_id'         => $package_id,
+                    'valid_till'         => $valid_till,
+                    'is_active'          => $is_active,
+                    'created_at'         => date('Y-m-d H:i:s')
+                );
+               
+                if (!empty($id)) {
+                    $where = array(
+                        'id' => $id
+                    );
+                    unset($data['created_at']);
+                    $result = $this->model->updateFields('super_package', $data, $where);
+                } else {
+                    $result = $this->model->insertData('super_package', $data);
+                }
+                $this->super_packageList();
+            }
+        }
+    }
+    public function super_packageList(){
+        $data['super_package'] = $this->model->getAll('super_package');
+        $data['body']          = 'super_package_list';
+
         $this->controller->load_view($data);
     }
     public function update()
