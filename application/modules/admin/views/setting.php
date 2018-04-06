@@ -64,6 +64,24 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label class="col-md-2">Address * </label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" name="en_address" placeholder="Enter Address" value="<?php if(!empty($setting[0]['en_address'])){ echo  $setting[0]['en_address'];}?>">
+                                                <span class="red"><?php echo form_error('en_address'); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2">Site Tagline * </label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" name="en_tagline" placeholder="Enter tagline" value="<?php if(!empty($setting[0]['en_tagline'])){ echo  $setting[0]['en_tagline'];}?>">
+                                                <span class="red"><?php echo form_error('en_tagline'); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <label class="col-md-2">Favicon Icon * </label>
                                             <div class="col-md-10">
                                                 <input type="file" name="favicon_icon" class="form-control">
@@ -133,7 +151,24 @@
                                         </div>
                                     </div>
 
-
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2">Address * </label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" name="hi_address" placeholder="Enter Address" value="<?php if(!empty($setting[0]['hi_address'])){ echo  $setting[0]['hi_address'];}?>">
+                                                <span class="red"><?php echo form_error('hi_address'); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2">Site Tagline * </label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" name="hi_tagline" placeholder="Enter tagline" value="<?php if(!empty($setting[0]['hi_tagline'])){ echo  $setting[0]['hi_tagline'];}?>">
+                                                <span class="red"><?php echo form_error('hi_tagline'); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-2">Site Email * </label>

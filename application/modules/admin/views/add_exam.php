@@ -1,7 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><?php if(isset($exam) && !empty($exam)){ echo 'Edit Package';}else{ echo 'Add Package';}?></h1>
+            <h1 class="page-header"><?php if(isset($exam) && !empty($exam)){ echo 'Edit Exam';}else{ echo 'Add Exam';}?></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -14,7 +14,7 @@
                 </div>
                 <?php endif ?>
                     <div class="panel panel-default">
-                        <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/packageList')?>"><i class="fa fa-th-list">&nbsp;Package List</i></a> </div>
+                        <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/examList')?>"><i class="fa fa-th-list">&nbsp;Exam List</i></a> </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
@@ -226,6 +226,7 @@
                     } else {
                         $('#question').css('display', 'none');
                     }
+                    
 
                 }
             });

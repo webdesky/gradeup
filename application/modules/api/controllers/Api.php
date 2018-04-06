@@ -376,26 +376,7 @@ class Api extends REST_Controller
         $this->response($resp);
     }
 
-    /*Get All Questions*/
-    public function get_questions_get(){
-      $data = $this->model->getAll('questions');
-      if (!empty($data)) 
-      {
-            $resp = array(
-                'code'      => 'SUCCESS',
-                'message'   => 'SUCCESS',
-                'response'  => array(
-                'questions' => $data
-                )
-            );
-      }else{
-            $resp = array(
-                'code'    => 'ERROR',
-                'message' => 'FAILURE'
-            );
-      }
-        $this->response($resp);
-    }
+    
 
     /*Get All Exams*/
     public function get_exams_get(){
@@ -469,10 +450,11 @@ class Api extends REST_Controller
                'is_active' => 1
                 );
         $data = $this->model->getAllwhere('users', $where,'id,first_name,last_name,email,CONCAT("'.$site_url.'","asset/uploads/",profile_pic)AS image,language');
-        if($data[0]->language==null){
-          $data[0]->language ='en';
+        if(!empty($data)){
+          if($data[0]->language==null){
+            $data[0]->language ='en';
+          }
         }
-       
         if(!empty($data))
         {
           //$this->session->sess_destroy();
@@ -1323,9 +1305,9 @@ class Api extends REST_Controller
     public function get_settings_get(){      
         $lang = $this->input->get('lang');
         if($lang==null){
-          $fields ='en_site_title as site_title,CONCAT(site_url,'.', image_folder,'.',logo)AS logo,CONCAT(site_url, '.', image_folder,'.',favicon)AS favicon,en_meta_tags as meta_tags,en_copyright as copyright,contact_us_phone,contact_us_email,twitter_url,insta_url,linkedin_url,fb_url,gplus_url';
+          $fields ='en_site_title as site_title,CONCAT(site_url,'.', image_folder,'.',logo)AS logo,CONCAT(site_url, '.', image_folder,'.',favicon)AS favicon,en_meta_tags as meta_tags,en_copyright as copyright,contact_us_phone,contact_us_email,twitter_url,insta_url,linkedin_url,fb_url,gplus_url,en_address,en_tagline';
         }else if($lang === 'hi' || $lang==='en'){
-          $fields = $lang.'_site_title as site_title,CONCAT(site_url, '.', image_folder,'.',logo)AS logo,CONCAT(site_url, '.', image_folder,'.',favicon)AS favicon,'.$lang.'_meta_tags as meta_tags,'.$lang.'_copyright as copyright,contact_us_phone,contact_us_email,twitter_url,insta_url,linkedin_url,fb_url,gplus_url';
+          $fields = $lang.'_site_title as site_title,CONCAT(site_url, '.', image_folder,'.',logo)AS logo,CONCAT(site_url, '.', image_folder,'.',favicon)AS favicon,'.$lang.'_meta_tags as meta_tags,'.$lang.'_copyright as copyright,contact_us_phone,contact_us_email,twitter_url,insta_url,linkedin_url,fb_url,gplus_url,'.$lang.'_address as address,'.$lang.'_tagline as tagline';
         }else{
            $resp = array(
                   'code'    => 'ERROR',
@@ -2058,7 +2040,7 @@ class Api extends REST_Controller
             }
 
             if(!empty($sub_comment)){
-                $data1[$key]->comment = $sub_comment;
+                $data1[$key]->comment  = $sub_comment;
             }else{
                  $data1[$key]->comment = null;
             }
@@ -2492,7 +2474,6 @@ class Api extends REST_Controller
     }
 
      /*Get All News*/
-
     public function get_tnews_get(){
       $user_id = $this->input->get('id');
       $lang =$this->input->get('lang');
@@ -2507,124 +2488,105 @@ class Api extends REST_Controller
          $this->response($resp);
          return false;
       }  
-       $where           = array(
+       $where            = array(
             'is_active'  => 1
       );
      // $data = $this->model->getAllwhere('news',$where,$fields);
        //$fields='post.en_post,post.id,users.first_name,users.last_name,post.chapter_id,post.super_submenu_id,post.type,users.id as user_id,.post.added_by';
        $data = $this->model->GetJoinRecord('news', 'added_by', 'users', 'id', $fields);
-      foreach ($data as $key => $value) {
-        $where3   = array(
-            'user_id'  => $user_id,
-            'news_id'  => $value->id
-        );
-
-        $wheres =  array(
-                'save_news.user_id' => $user_id,
-                'save_news.news_id' => $value->id     
-
-            );
-        
-        $notes=$this->model->getAllwhere('save_news',$wheres);
-       
-        if(!empty($notes)){
-          $value->notes = true;
-        }else{
-           $value->notes = false;
-        }
-
-        $check = $this->model->getAllwhere('news_likes', $where3);
-          if(!empty($check)){
-             $value->like =  true;
-          }else{
-              $value->like = false; 
-          }
-
-        $count = $this->model->getAllwhere('news_likes',array('news_id' => $value->id),'COUNT(id)  as Likes_count');
-          if($count[0]->Likes_count!=0){
-             $value->like_count = $count[0]->Likes_count;
-          }else{
-             $value->like_count = 0;         
-          }
-
-          $where4 = array('news_id' => $value->id,'comment_id'=>NULL);
-          $comment_count = $this->model->getAllwhere('news_comment',$where4,'COUNT(id)  as comment_count');
-          if($comment_count[0]->comment_count!=0){
-             $value->comment_count = $comment_count[0]->comment_count;
-          }else{
-             $value->comment_count = 0;         
-          }
-        $comment = $this->model->getAllwhere('news_comment',$where4);
-        if(!empty($comment)){
-        $sub_comment = '';
-        foreach ($comment as $ckey => $cvalue) {
-          $site_url =base_url();
-          $wheres          = array(
-            'comment_id'   => $cvalue->id
+        foreach ($data as $key => $value) {
+          $where3   = array(
+              'user_id'  => $user_id,
+              'news_id'  => $value->id
           );
-          $sub_comment[$ckey]=$cvalue; 
-          
-            
-          $user_id   = $sub_comment[$ckey]->user_id;
 
-          $where2    = array(
+          $wheres =  array(
+                  'save_news.user_id' => $user_id,
+                  'save_news.news_id' => $value->id     
 
-                    'users.is_active'  => 1,
-
-                    'users.id'         => $user_id
-
-                );
-           $user      = $this->model->getAllwhere('users',$where2,'id,first_name,last_name,CONCAT("'.$site_url.'","asset/uploads/",profile_pic)AS image,address');
-
-           @$cvalue->first_name = $user[0]->first_name;
-           @$cvalue->last_name  = $user[0]->last_name;
-           @$cvalue->image      = $user[0]->image;
-           
-           $sub_comment[$ckey]->sub_comment = $this->model->GetJoinRecord('news_comment','user_id','users','id','news_comment.id,news_comment.user_id,news_comment.comment_id,news_comment.comment,users.first_name,users.last_name,CONCAT("'.$site_url.'","asset/uploads/",users.profile_pic)AS image,date(news_comment.created_at) as created_at',$wheres);
-
-           /*echo "<pre>";
-           print_r($sub_comment[$ckey]->sub_comment);*/
-           /*$id = @$sub_comment[$ckey]->sub_comment[$ckey]->user_id;
-           $user_ids  =$id;
-           
-           $where3    = array(
-
-                    'users.is_active'  => 1,
-
-                    'users.id'         => $user_ids
-
-                );
-           $user1      = $this->model->getAllwhere('users',$where3,'id,first_name,last_name,CONCAT("'.$site_url.'","asset/uploads/",profile_pic)AS image,address');
-           
-           @$sub_comment[$ckey]->sub_comment[$ckey]->first_name = $user1[$ckey]->first_name;
-           @$sub_comment[$ckey]->sub_comment[$ckey]->last_name  = $user1[$ckey]->last_name;
-           @$sub_comment[$ckey]->sub_comment[$ckey]->image      = $user1[$ckey]->image;*/
-           
-           
-          }
-         }
-          if(!empty($sub_comment)){
-            $data[$key]->comment = $sub_comment;
+              );
+        
+          $notes=$this->model->getAllwhere('save_news',$wheres);
+       
+          if(!empty($notes)){
+            $value->notes  = true;
           }else{
-             $data[$key]->comment = null;
+             $value->notes = false;
           }
-          
+
+          $check = $this->model->getAllwhere('news_likes', $where3);
+            if(!empty($check)){
+               $value->like  =  true;
+            }else{
+                $value->like = false; 
+            }
+
+          $count = $this->model->getAllwhere('news_likes',array('news_id' => $value->id),'COUNT(id)  as Likes_count');
+            if($count[0]->Likes_count!=0){
+               $value->like_count = $count[0]->Likes_count;
+            }else{
+               $value->like_count = 0;         
+            }
+
+            $where4 = array('news_id' => $value->id,'comment_id'=>NULL);
+            $comment_count = $this->model->getAllwhere('news_comment',$where4,'COUNT(id)  as comment_count');
+            if($comment_count[0]->comment_count!=0){
+               $value->comment_count = $comment_count[0]->comment_count;
+            }else{
+               $value->comment_count = 0;         
+            }
+          $comment = $this->model->getAllwhere('news_comment',$where4);
+          if(!empty($comment)){
+            $sub_comment = '';
+            foreach ($comment as $ckey => $cvalue) {
+              $site_url =base_url();
+              $wheres          = array(
+                'comment_id'   => $cvalue->id
+              );
+              $sub_comment[$ckey]=$cvalue; 
+              
+                
+              $user_id   = $sub_comment[$ckey]->user_id;
+
+              $where2    = array(
+
+                        'users.is_active'  => 1,
+
+                        'users.id'         => $user_id
+
+                    );
+               $user      = $this->model->getAllwhere('users',$where2,'id,first_name,last_name,CONCAT("'.$site_url.'","asset/uploads/",profile_pic)AS image,address');
+
+               @$cvalue->first_name = $user[0]->first_name;
+               @$cvalue->last_name  = $user[0]->last_name;
+               @$cvalue->image      = $user[0]->image;
+               
+               $sub_comment[$ckey]->sub_comment = $this->model->GetJoinRecord('news_comment','user_id','users','id','news_comment.id,news_comment.user_id,news_comment.comment_id,news_comment.comment,users.first_name,users.last_name,CONCAT("'.$site_url.'","asset/uploads/",users.profile_pic)AS image,date(news_comment.created_at) as created_at',$wheres);
+
+            }
+          }
+            if(!empty($sub_comment)){
+                $data[$key]->comment = $sub_comment;
+            }else{
+                 $data[$key]->comment = null;
+            }
+            
       }
       if (!empty($data)) 
       {
-        $resp = array(
-                'code'        => 'SUCCESS',
-                'message'     => 'SUCCESS',
-                'response'    => array(
-                'news'        => $data,
-                'recent_news' => $data
-                )
-            );
+          $resp = array(
+                  'code'        => 'SUCCESS',
+                  'message'     => 'SUCCESS',
+                  'response'    => array(
+                  'news'        => $data,
+                  'recent_news' => $data
+                  )
+              );
       }else{
-        $resp = array(
-                'code'    => 'ERROR',
-                'message' => 'FAILURE'
-            );
+          $resp = array(
+                  'code'    => 'ERROR',
+                  'message' => 'FAILURE'
+              );
       }
         $this->response($resp);
     }
@@ -2642,7 +2604,7 @@ class Api extends REST_Controller
 
                 );
         $data      = $this->model->getAllwhere('users',$where,'id,first_name,last_name,CONCAT("'.$site_url.'","asset/uploads/",profile_pic)AS image,address');
-
+      
         $where1    = array(
 
                       'post.is_active'  => 1,
@@ -2653,8 +2615,7 @@ class Api extends REST_Controller
         $fields='post.en_post,post.id,post.chapter_id,post.super_submenu_id,post.type,post.added_by,CONCAT("'.$site_url.'","asset/uploads/",image)AS image,post.created_at';
         $data1 = $this->model->getAllwhere('post',$where1,$fields);
 
-      
-        
+
         if(!empty($data1)){
         foreach ($data1 as $key => $value) {
             $times = explode(",",$this->dateDiff($value->created_at,date('Y-m-d H:i:s')));
@@ -2733,26 +2694,11 @@ class Api extends REST_Controller
                
                //$sub_comment[$ckey]->sub_comment = $this->model->getAllwhere('post_comment',$where,'id,user_id,post_id,date(created_at) as created_at,comment_id');
                 $sub_comment[$ckey]->sub_comment = $this->model->GetJoinRecord('post_comment','user_id','users','id','post_comment.id,post_comment.user_id,post_comment.comment_id,post_comment.comment,users.first_name,users.last_name,CONCAT("'.$site_url.'","asset/uploads/",users.profile_pic)AS image,date(post_comment.created_at) as created_at,post_comment.post_id',$where);
-               
-              /* $id = @$sub_comment[$ckey]->sub_comment[0]->user_id;
-               $user_ids  =$id;
-
-               $where3    = array(
-
-                        'users.is_active'  => 1,
-
-                        'users.id'         => $user_ids
-
-                    );
-               $user1      = $this->model->getAllwhere('users',$where3,'id,first_name,last_name,CONCAT("'.$site_url.'","asset/uploads/",profile_pic)AS image,address');
-                //echo $this->db->last_query();
-               @$sub_comment[$ckey]->sub_comment[0]->first_name = $user1[0]->first_name;
-               @$sub_comment[$ckey]->sub_comment[0]->last_name  = $user1[0]->last_name;
-               @$sub_comment[$ckey]->sub_comment[0]->image      = $user1[0]->image;*/
+             
             }
 
             if(!empty($sub_comment)){
-                $data1[$key]->comment = $sub_comment;
+                $data1[$key]->comment  = $sub_comment;
             }else{
                  $data1[$key]->comment = null;
             }
@@ -2796,6 +2742,151 @@ class Api extends REST_Controller
                 );
           }
             $this->response($resp);
+    }
+
+    /*Get Featured Links*/
+    public function get_package_get(){
+        $site_url = base_url();
+        $package = $this->model->getAll('super_package','super_package_name as package_name,valid_till,package_price,CONCAT("'.$site_url.'","asset/uploads/",image)AS image,date(created_at) as created_at,id');
+        
+        if (!empty($package)) 
+        {
+          $resp = array(
+              'code'      => 'SUCCESS',
+              'message'   => 'Success',
+              'response'  => array(
+              'package'   => $package,
+                   )
+              );
+        }else{
+          $resp = array(
+                'code'    => 'ERROR',
+                'message' => 'FAILURE'
+                );
+        }
+          $this->response($resp);
+    }
+
+    /*get all subpackage  by package_id*/
+    public function get_sub_package_by_id_get(){
+      $package_id = $this->input->get('id');
+      $where      = array(
+                        'is_active'  => 1,
+                        'id'         => $package_id
+                      );
+      $site_url   = base_url();
+        $super_package = $this->model->getAllwhere('super_package',$where,'super_package_name as super_package_name,valid_till,package_price,CONCAT("'.$site_url.'","asset/uploads/",image)AS image,date(created_at) as created_at,package_id');
+        
+        if(!empty($super_package)){
+          $new_array='';
+          $ids = explode(",",$super_package[0]->package_id);
+          $package=[];
+          for ($i=0; $i <sizeof($ids) ; $i++) { 
+            $where1    = array(
+                        'is_active'  => 1,
+                        'id'         => $ids[$i]
+                    );
+            $package = $this->model->getAllwhere('package',$where1,'id,package_name,exam_id,date(created_at) as created_at');
+            $super_package[0]->package[] = $package[0];
+            $exam_id=explode(",",$package[0]->exam_id);
+            for ($j=0; $j <sizeof($exam_id) ; $j++) { 
+              $where2   = array(
+                        'is_active'  => 1,
+                        'id'         => $exam_id[$j]
+                    );
+               $exam = $this->model->getAllwhere('exam',$where2,'exam_name,id,,date(created_at) as created_at,payment_status');
+               $exam[0]->package_id    = $package[0]->id;
+               $super_package[0]->exam[] = $exam[0];
+            }
+          }
+        }
+        if (!empty($super_package)) 
+        {
+          $resp = array(
+              'code'      => 'SUCCESS',
+              'message'   => 'Success',
+              'response'  => array(
+              'super_package'   => $super_package,
+                   )
+              );
+        }else{
+          $resp = array(
+                'code'    => 'ERROR',
+                'message' => 'FAILURE'
+                );
+        }
+        $this->response($resp);
+    }
+
+    /*Get All Questions*/
+    public function get_questions_get(){
+      $exam_id  = $this->input->get('id');
+      $where    = array(
+                        'exam.is_active'  => 1,
+                        'exam.id'         => $exam_id
+                   );
+
+      $data = $this->model->GetJoinRecord('exam','module_id','modules','id','exam.module_id,exam.chapter_id,exam.id,modules.en_module_name as module_name,modules.id as module_id,exam.exam_name,exam.question_id',$where);
+      
+        $chapter_id = explode(",",$data[0]->chapter_id);
+          
+          for ($i=0; $i <sizeof($chapter_id) ; $i++) { 
+
+                $wheres   = array(
+              'is_active'     => 1,
+                'id'            => $chapter_id[$i],
+            );
+                  $chapter = $this->model->getAllwhere('chapters',$wheres,'id,en_chapter_name');
+                  $data[0]->chapters[] = $chapter[0];
+                  
+          }
+
+      $question_id = explode(",",$data[0]->question_id);
+
+        for ($i=0; $i <sizeof($question_id) ; $i++) { 
+
+                $where2   = array(
+
+                          'questions.is_active'     => 1,
+
+                          'questions.id'              => $question_id[$i]
+
+                         
+                      );
+                  $questions = $this->model->getAllwhere('questions',$where2);
+                
+              $data[0]->questions[] = $questions;
+                  
+          }
+         /* $where2   = array(
+
+                          'questions.is_active'     => 1,
+
+                          'questions.chapter_id'      => $chapter_id[$i],
+
+                          'questions.module_id'   => $data[0]->module_id
+
+                      );
+                  $questions = $this->model->getAllwhere('questions',$where2);
+                
+              $data[0]->questions[] = $questions;
+*/
+        if (!empty($data)) 
+        {
+            $resp = array(
+                'code'      => 'SUCCESS',
+                'message'   => 'SUCCESS',
+                'response'  =>  array(
+                'exam'    =>  $data
+                )
+            );
+        }else{
+            $resp = array(
+                'code'    => 'ERROR',
+                'message' => 'FAILURE'
+            );
+        }
+        $this->response($resp);
     }
 }
 ?>

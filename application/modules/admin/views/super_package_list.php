@@ -15,7 +15,7 @@
             <?php endif ?>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <button class="btn btn-primary"><i class="fa fa-th-list">&nbsp;Review List</i></button>
+                   <div class="panel-heading"><a class="btn btn-primary" href="<?php echo base_url('admin/super_package')?>"><i class="fa fa-th-list">&nbsp;Add Super Package </i></a></div>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -27,7 +27,7 @@
                                     <th>Super Package Name</th>
                                     <th>valid Till</th>
                                     <th>Date</th>
-                                    <th>Status</th>
+                                   <!--  <th>Status</th> -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -48,13 +48,13 @@
                                     <td class="center">
                                         <?php echo $value['created_at'];  ?>
                                     </td>
-                                    <td>
+                                   <!--  <td>
                                         <?php if($value['is_active']==0){?>
                                         <button class="btn btn-danger" onclick="updateStatus('<?php echo $value['id'] ?>','<?php echo $value['is_active'] ?>')">Pending</button>
                                         <?php }else{ ?>
                                         <button class="btn btn-success" onclick="updateStatus('<?php echo $value['id'] ?>','<?php echo $value['is_active'] ?>')">Approved</button>
                                         <?php } ?>
-                                    </td>
+                                    </td> -->
                                     <td>
                                     <a href="<?php echo base_url('admin/super_package/'.$value['id'])?>"><span class="glyphicon glyphicon-edit"></span></a> |
                                         <a href="javascript:void(0)" onclick="delete_record('<?php echo $value['id']?>','<?php echo $count;?>','super_package')"><span class="glyphicon glyphicon-trash"></span></a>

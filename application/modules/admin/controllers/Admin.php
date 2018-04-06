@@ -97,13 +97,21 @@ class Admin extends CI_Controller
                 $linkedin_url     = $this->input->post('linkedin_url');
                 $fb_url           = $this->input->post('fb_url');
                 $gplus_url        = $this->input->post('gplus_url');
+                $en_address       = $this->input->post('en_address');
+                $hi_address       = $this->input->post('hi_address');
+                $en_tagline       = $this->input->post('en_tagline');
+                $hi_tagline       = $this->input->post('hi_tagline');
                 
                 $data = array(
                     'en_site_title' => $en_site_title,
+                    'en_address' => $en_address,
+                    'en_tagline' => $en_tagline,
                     'en_meta_tags' => $en_meta_tags,
                     'en_copyright' => $en_copyright,
                     'contact_us_phone' => $contact_us_phone,
                     'hi_site_title' => $hi_site_title,
+                    'hi_address' => $hi_address,
+                     'hi_tagline' => $hi_tagline,
                     'hi_meta_tags' => $hi_meta_tags,
                     'hi_copyright' => $hi_copyright,
                     'contact_us_email' => $contact_us_email,
@@ -2110,6 +2118,7 @@ class Admin extends CI_Controller
         } else {
             
             $package_name      = $this->input->post('package_name');
+            
             $time_per_question = $this->input->post('time_per_question');
             $passing_marks     = $this->input->post('passing_marks');
             $positive_mark     = $this->input->post('positive_mark');
@@ -2175,6 +2184,7 @@ class Admin extends CI_Controller
                 
                 $super_package_name = $this->input->post('super_package_name');
                 $package_id    = implode(",",$this->input->post('package_id'));
+                $package_price     = $this->input->post('package_price');
                 $valid_till    = $this->input->post('valid_till');
                 $is_active     = $this->input->post('status');
               
@@ -2183,6 +2193,7 @@ class Admin extends CI_Controller
                 
                 $data = array(
                     'super_package_name' => $super_package_name,
+                    'package_price'      => $package_price,
                     'package_id'         => $package_id,
                     'valid_till'         => $valid_till,
                     'is_active'          => $is_active,
