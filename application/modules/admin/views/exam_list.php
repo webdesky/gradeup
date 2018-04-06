@@ -23,7 +23,7 @@
                                         <tr class="bg-primary">
                                             <th>Sr no.</th>
                                             <th>Exam Name</th>
-                                            <th>Question Type</th>
+                                           <!--  <th>Question Type</th> -->
                                             <th>Created at</th>
                                             <th>Action</th>
                                         </tr>
@@ -36,8 +36,8 @@
                                                 <?php echo $i; ?> </td>
                                             <td>
                                                 <?php echo $value['exam_name'];?> </td>
-                                            <td>
-                                                <?php echo $value['question_type'];?> </td>
+                                            <!-- <td>
+                                                <?php echo $value['question_type'];?> </td> -->
                                            
                                             <td>
                                                 <?php echo date('Y-m-d',strtotime($value['created_at']));?> </td>

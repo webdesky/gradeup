@@ -102,7 +102,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                                                        <input type="button" onclick="get_question_id()" class="btn btn-primary" data-dismiss="modal" value="Submit">
                                                     </div>
                                                 </div>
                                             </div>
@@ -155,6 +155,8 @@
                                         <div class="col-md-12" align="center">
                                             <button type="submit" value="Save" class="btn btn-success">Save</button>
                                             <input type="reset" class="btn btn-default" value="Reset"> </div>
+
+                                            <input type="hidden" id="questions_id" name="questions_id">
                                     </form>
                                 </div>
                             </div>
@@ -220,7 +222,7 @@
                         $('.one').html('');
                         $('#myModal').modal("toggle");
                         for (var i = 0; i < obj.length; i++) {
-                            $('#table').append('<tr class="one"><td><div class="checkbox checkbox-success"><input type="checkbox"   id="checkbox1" name="question_id[]" value=" ' + obj[i].id + ' "class="styled"><label></label></div></td><td>' + obj[i].en_question + '</td></tr>');
+                            $('#table').append('<tr class="one"><td><div class="checkbox checkbox-success"><input type="checkbox"   id="checkbox1" name="question_id[]" value=" ' + obj[i].id + ' "class="styled questions"><label></label></div></td><td>' + obj[i].en_question + '</td></tr>');
                             $('#question').show();
                         }
                     } else {
@@ -283,8 +285,6 @@
                             $('#table').append('<tr class="one"><td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox1" name="question_id[]" value=" ' + obj[i].id + ' "class="styled"><label></label></div></td><td>' + obj[i].en_question + '</td></tr>');
                         }
                         $('#question').show();
-                        // $("#chapter_id").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
-
                     }
                 } else {
                     $('#question').css('display', 'none');
@@ -334,4 +334,21 @@
             }
         });
     });
+
+    function get_question_id(){
+        $('#checkAll').prop('checked', false);
+        var questions_id = $('#questions_id').val();
+        var final_ids    = '';
+        var arr = [];
+        $('input.questions:checkbox:checked').each(function () {
+            arr.push($(this).val());
+        });
+
+        if(questions_id.length!=0){
+            final_ids = questions_id+','+arr.join(',');
+        }else{
+            final_ids = arr.join(',');
+        }
+        $('#questions_id').val(final_ids);
+    }
 </script>
