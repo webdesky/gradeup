@@ -595,10 +595,11 @@ class Admin extends CI_Controller
                     }
                 }
                 
-                if (!empty($id)) {
+                if (!empty($id)) 
+                {
                     $where = array(
-                        'id' => $id
-                    );
+                                    'id' => $id
+                                );
                     
                     unset($data['created_at']);
                     
@@ -725,7 +726,7 @@ class Admin extends CI_Controller
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/'.$_FILES['category_image']['name'])) {
                         $data['category_image'] = $_FILES['category_image']['name'];
                     }
                 }
@@ -733,7 +734,7 @@ class Admin extends CI_Controller
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
                     if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
-                        $data['banner_image'] = $_FILES['banner_image']['name'];
+                            $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
                 
@@ -1386,16 +1387,13 @@ class Admin extends CI_Controller
                 $question_type  = $this->input->post('question_type');
                 $description    = $this->input->post('description');
                 $payment_status = $this->input->post('payment_status');
-                
-                $question_id = implode(",", $this->input->post('question_id'));
-                
-                $is_active = $this->input->post('status');
+                $question_id    = $this->input->post('questions_id');
+                $is_active      = $this->input->post('status');
                 
                 $data = array(
                     'module_id' => $module_id,
                     'chapter_id' => $chapter_id,
                     'exam_name' => $exam_name,
-                    'question_type' => $question_type,
                     'description' => $description,
                     'payment_status' => $payment_status,
                     'question_id' => $question_id,
