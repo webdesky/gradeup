@@ -22,8 +22,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Menu Name* </label>
                                         <div class="col-md-9">
-                                            <select class="wide" name="menu_id">
-                                                <option data-display="--Select Menu--">--Select Menu--</option>
+                                            <select class="wide" name="menu_id" required="required">
+                                                <option value="">--Select Menu--</option>
                                                 <?php foreach ($menu as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>" <?php if(isset($sub_menu) && $sub_menu[0]->menu_id==$value->id) { ?> selected
                                                     <?php } ?>>

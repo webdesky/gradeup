@@ -24,7 +24,6 @@
                                             <th>Sr no.</th>
                                             <th>Question</th>
                                             <th>Question Type</th>
-                                            <th>Question Marks</th>
                                             <th>Created at</th>
                                             <th>Action</th>
                                          </tr>
@@ -42,9 +41,7 @@
                                             <td>
                                                 <?php echo $value['question_type'];?> 
                                             </td>
-                                            <td>
-                                                <?php echo $value['question_marks'];?> 
-                                            </td>
+                                           
                                             <td>
                                                 <?php echo date('Y-m-d',strtotime($value['created_at']));?> 
                                             </td>

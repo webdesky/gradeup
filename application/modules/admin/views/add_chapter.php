@@ -48,7 +48,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -58,7 +57,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-3">Chapter Name* </label>
@@ -68,7 +66,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-12" align="center">
                                     <button type="submit" value="Save" class="btn btn-success">Save</button>
                                     <input type="reset" class="btn btn-default" value="Reset"> </div>
@@ -91,7 +88,7 @@ $(document).ready(function() {
     $('select').niceSelect();
     $(".registration_form1").validate({
         rules: {
-            "module_name": "required",
+            "fk_module_id": "required",
         },
         submitHandler: function(form) {
             form.submit();

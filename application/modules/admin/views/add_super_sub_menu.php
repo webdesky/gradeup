@@ -22,8 +22,8 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Menu Name* </label>
                                             <div class="col-md-9">
-                                                <select class="wide" name="menu_id" onchange="get_sub_menu(this.value)">
-                                                    <option data-display="--Select Menu--">--Select Menu--</option>
+                                                <select class="wide" name="menu_id" onchange="get_sub_menu(this.value)" required="required">
+                                                    <option value="">--Select Menu--</option>
                                                     <?php foreach ($menu as $key => $value) { ?>
                                                         <option value="<?php echo $value->id; ?>" <?php if(isset($super_sub_menu) && $super_sub_menu[0]->menu_id==$value->id) { echo 'selected'; } ?>><?php echo ucwords($value->en_menu_name); ?>
                                                         </option>
@@ -37,7 +37,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">SubMenu Name* </label>
                                             <div class="col-md-9">
-                                                <select class="wide" name="sub_menu_id" id="sub_menu_id">
+                                                <select class="wide" name="sub_menu_id" id="sub_menu_id" required="required">
                                                 <?php if(isset($super_sub_menu) && !empty($super_sub_menu[0]->sub_menu_id)){?>
                                                     <option value="<?php echo $super_sub_menu[0]->sub_menu_id?>"><?php echo $super_sub_menu[0]->en_sub_menu_name?></option>
                                                 <?php }?>

@@ -22,12 +22,10 @@
                                     <div class="form-group">
                                         <label class="col-md-3">Notification Title * </label>
                                         <div class="col-md-9">
-                                             <input class="form-control" type="text" name="title" id="title" placeholder="notification Title" autocomplete="off" required="required" value="<?php if(isset($notification)){ echo $notification[0]->title; }else{echo set_value('title');} ?>"> <span class="red"><?php echo form_error('title'); ?></span>
-                                           
+                                            <input class="form-control" type="text" name="title" id="title" placeholder="notification Title" autocomplete="off" required="required" value="<?php if(isset($notification)){ echo $notification[0]->title; }else{echo set_value('title');} ?>"> <span class="red"><?php echo form_error('title'); ?></span>
                                         </div>
                                     </div>
                                 </div>
-                                
                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">notification Url* </label>
@@ -49,8 +47,6 @@
                                         </div>
                                     </div>
                                 </div>
-                             
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">Url* </label>
@@ -59,7 +55,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                  <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">Meta Title* </label>
@@ -68,7 +63,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                  <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label class="col-md-3">Meta Description</label>
@@ -82,7 +76,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label class="col-md-3">Meta Keyword</label>
@@ -96,7 +89,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                  <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label class="col-md-3">Notification  Image</label>
@@ -107,7 +99,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                  <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label class="col-md-3">Category Image</label>
@@ -118,7 +109,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                  <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label class="col-md-3">Banner Image</label>
@@ -129,27 +119,26 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                       
-                                            <div class="form-group">
-                                                <label class="col-md-3">Status* </label>
-                                                <div class="col-md-9">
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="status" value="1" <?php if(isset($notification) && $notification[0]->is_active==1){ echo "checked";} ?>>Active
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="status" value="0" <?php if(isset($notification) && $notification[0]->is_active==0){ echo "checked";} ?>>Inactive
-                                                    </label>
-                                                    <span class="red"><?php echo form_error('status'); ?></span>
-                                                </div>
-                                            </div>
-                                       
-                                    </div> 
-                                    
+                                <div class="col-md-6">   
+                                    <div class="form-group">
+                                        <label class="col-md-3">Status* </label>
+                                        <div class="col-md-9">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="status" value="1" <?php if(isset($notification) && $notification[0]->is_active==1){ echo "checked";} ?>>Active
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="status" value="0" <?php if(isset($notification) && $notification[0]->is_active==0){ echo "checked";} ?>>Inactive
+                                            </label>
+                                            <span class="red"><?php echo form_error('status'); ?></span>
+                                        </div>
+                                    </div>  
+                                </div> 
+                                <div class="clearfix"></div>
+                                <br/>
                                 <div class="col-md-12" align="center">
                                     <button type="submit" value="Save" class="btn btn-success">Save</button>
-                                    <input type="reset" class="btn btn-default" value="Reset"> </div>
+                                    <input type="reset" class="btn btn-default" value="Reset"> 
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -170,7 +159,6 @@ $(document).ready(function() {
     $(".registration_form1").validate({
         rules: {
             "module_name": "required",
-
         },
         submitHandler: function(form) {
             form.submit();

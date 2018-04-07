@@ -13,7 +13,17 @@
                 <?php echo $info_message; ?> </div>
             <?php endif ?>
             <div class="panel panel-default">
-                <div class="panel-heading"> <a class="btn btn-primary" href="<?php echo base_url('admin/questionList')?>"><i class="fa fa-th-list">&nbsp;Question List</i></a> </div>
+                <div class="panel-heading"> 
+                    <a class="btn btn-primary" href="<?php echo base_url('admin/questionList')?>">
+                        <i class="fa fa-th-list">&nbsp;Question List</i>
+                    </a> 
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#questionModel">
+                        <i class="fa fa-th-list">&nbsp;Upload Excel</i>
+                    </a> 
+                    <a class="btn btn-primary" href="<?php //echo base_url('admin/questionList')?>">
+                        <i class="fa fa-th-list">&nbsp;Excel Format</i>
+                    </a> 
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
@@ -22,8 +32,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3 ">Module Name * </label>
                                         <div class="col-md-9">
-                                            <select class="form-control" name="module_id" id="module_id">
-                                                <option data-display="--Select Modules--">--Select Modules--</option>
+                                            <select class="form-control" name="module_id" id="module_id" required="required">
+                                                <option value="">--Select Modules--</option>
                                                 <?php foreach ($modules as $key => $value) { ?>
                                                 <option value="<?php echo $value['id']; ?>" <?php if(isset($questions) && $questions[0]->module_id==$value['id']){ ?> selected
                                                     <?php }?>>
@@ -37,8 +47,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3 ">Chapter Name * </label>
                                         <div class="col-md-9">
-                                            <select class="form-control" name="chapter_id" id="chapter_id">
-                                                <option data-display="--Select Chapter--">--Select Chapter--</option>
+                                            <select class="form-control" name="chapter_id" id="chapter_id" required="required">
+                                                <option value="">--Select Chapter--</option>
                                                 <?php if(!empty($chapters)){ foreach($chapters as $val){?>
                                                 <option value="<?php echo $val->id;?>" <?php if(isset($questions) && $questions[0]->chapter_id==$val->id){ echo 'selected';}?>><?php echo $val->en_chapter_name;?></option>
                                                 <?php }}?>
@@ -46,13 +56,20 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-3">Question Marks </label>
+                                        <label class="col-md-3">Status </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" type="text" name="question_marks" id="question_marks" placeholder="Question Marks" autocomplete="off" value="<?php  if(isset($questions)) { echo  $questions[0]->question_marks; }else{echo set_value('question_marks');} ?>"> <span class="red"><?php echo form_error('question_marks'); ?></span> </div>
+                                            <label class="radio-inline">
+                                            <input type="radio" name="status" value="1" <?php if(isset($questions) && $questions[0]->is_active==1){ ?> checked
+                                            <?php }else{ echo 'checked'; }?>>Active
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="status" value="0" <?php if(isset($questions) && $questions[0]->is_active==0){ ?> checked <?php }?>>Inactive
+                                        </label> </div>
                                     </div>
-                                </div>
+                                </div> 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">Question Type</label>
@@ -189,6 +206,7 @@
                                     </div>
                                 </div>
                                </div>
+                              <!--  <div class="clearfix"></div> -->
                                <div class="col-md-6 border-shadowss" style="display: none">
                                 
                                <div id="option12" style="display: none">
@@ -327,18 +345,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-2">Status</label>
-                                    <div class="col-lg-6">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="status" value="1" <?php if(isset($questions) && $questions[0]->is_active==1){ ?> checked
-                                            <?php }else{ echo 'checked'; }?>>Active
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="status" value="0" <?php if(isset($questions) && $questions[0]->is_active==0){ ?> checked <?php }?>>Inactive
-                                        </label>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-12" align="center">
                                     <button type="submit" value="Save" class="btn btn-success">Save</button>
                                     <input type="reset" class="btn btn-default" value="Reset"> </div>
@@ -354,8 +361,102 @@
         <!-- /.col-lg-12 -->
     </div>
     <!-- row -->
+    <?php if (!empty($validation)){ ?>
+        <script type="text/javascript">
+             $(window).on('load',function(){
+                $('#questionModel').modal('show');
+            });
+        </script>
+    <?php }?>
 </div>
 </div>
+
+
+
+<div id="questionModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Upload Excel</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="post" action="<?php  echo base_url('admin/excelupload');?>" class="registration_form12" enctype="multipart/form-data">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-4">Module Name * </label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="module_id1" id="module_id1" required="required">
+                                    <option value="">--Select Modules--</option>
+                                    <?php foreach ($modules as $key => $value) { ?>
+                                    <option value="<?php echo $value['id']; ?>" <?php if(isset($questions) && $questions[0]->module_id==$value['id']){ ?> selected
+                                        <?php }?>>
+                                        <?php echo ucwords($value['en_module_name']); ?>
+                                    </option>
+                                    <?php } ?>
+                                </select>
+                                <span class="red"><?php echo form_error('module_id1'); ?></span> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-4">Chapter Name * </label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="chapter_id1" id="chapter_id1" required="required">
+                                    <option value="">--Select Chapter--</option>
+                                    <?php if(!empty($chapters)){ foreach($chapters as $val){?>
+                                    <option value="<?php echo $val->id;?>" <?php if(isset($questions) && $questions[0]->chapter_id==$val->id){ echo 'selected';}?>><?php echo $val->en_chapter_name;?></option>
+                                    <?php }}?>
+                                </select> 
+                                <span class="red"><?php echo form_error('chapter_id1'); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-4">Question Type</label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="question_type1" id="question_type">
+                                    <option value="">--Please Select Question Type--</option>
+                                    <option value="Options" <?php if(isset($questions) && $questions[0]->question_type=='Options'){ ?> selected
+                                        <?php }?> >Options </option>
+                                    <option value="Fill In the Blank" <?php if(isset($questions) && $questions[0]->question_type=='Fill In the Blank'){ ?> selected
+                                        <?php }?>>Fill In the Blank</option>
+                                    <!-- <option value="Descriptive">Descriptive</option> -->
+                                    <option value="True False" <?php if(isset($questions) && $questions[0]->question_type=='True False'){ ?> selected
+                                        <?php }?>>True False</option>
+                                </select>
+                                <span class="red"><?php echo form_error('question_type1'); ?></span> </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-4">Upload Excel</label>
+                            <div class="col-md-8">
+                                <input type="file" name="question_excel" class="form-control" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                                <span class="red"><?php echo form_error('question_excel'); ?></span> </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                        <br/>
+                        <div class="col-md-12" align="center">
+                            <button type="submit" value="Save" class="btn btn-success">Save</button>
+                            <input type="reset" class="btn btn-default" value="Reset"> 
+                        </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -412,8 +513,31 @@ $(document).ready(function() {
             }}
 
         });
+    });
+    $('#module_id1').on('change', function() {
+        var url = "<?php echo base_url('admin/getChapter') ?>";
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: {
+                module_id: this.value
+            },
+            success: function(data) {
+                if(data.length!=''){
+                var obj = JSON.parse(data);
+                $('#chapter_id1').html('');
+                if (obj.length != 0) {
+                    for (var i = 0; i < obj.length; i++) {
+                        $("#chapter_id1").append($("<option></option>").val(obj[i].id).html(obj[i].en_chapter_name));
+                    }
+                }
+            }}
+
+        });
     })
 });
+
+
 
 function questionChanges(val) {
     if (val == 'Options') {
@@ -509,3 +633,6 @@ function show_answer_option(id) {
     }
 }
 </script>
+
+
+

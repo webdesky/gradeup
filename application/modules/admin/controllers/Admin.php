@@ -111,7 +111,7 @@ class Admin extends CI_Controller
                     'contact_us_phone' => $contact_us_phone,
                     'hi_site_title' => $hi_site_title,
                     'hi_address' => $hi_address,
-                     'hi_tagline' => $hi_tagline,
+                    'hi_tagline' => $hi_tagline,
                     'hi_meta_tags' => $hi_meta_tags,
                     'hi_copyright' => $hi_copyright,
                     'contact_us_email' => $contact_us_email,
@@ -227,17 +227,18 @@ class Admin extends CI_Controller
                     'hi_terms' => $hi_terms,
                     'created_at' => date('Y-m-d H:i:s')
                 );
-                $where  = array(
+                $where    = array(
                     'id' => $this->input->post('id')
                 );
-                $result = $this->model->updateFields('settings', $data, $where);
+                $result   = $this->model->updateFields('settings', $data, $where);
                 redirect('admin/terms');
             }
         }
     }
     public function module($id = NULL)
     {
-        $this->form_validation->set_rules('en_module_name', 'Module Name', 'trim|required');
+        $this->form_validation->set_rules('en_module_name', 'Module Name in English', 'trim|required');
+        $this->form_validation->set_rules('hi_module_name', 'Module Name in Hindi', 'trim|required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             if (!empty($id)) {
@@ -399,7 +400,10 @@ class Admin extends CI_Controller
     }
     public function chapter($id = NULL)
     {
-        $this->form_validation->set_rules('en_chapter_name', 'Chapter Name', 'trim|required');
+        $this->form_validation->set_rules('en_chapter_name', 'Chapter Name in English', 'trim|required');
+        $this->form_validation->set_rules('fk_module_id', 'Module Name', 'trim|required');
+        $this->form_validation->set_rules('hi_chapter_name', 'Chapter Name in Hindi', 'trim|required');
+        
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('errors', validation_errors());
             
@@ -603,11 +607,10 @@ class Admin extends CI_Controller
                     }
                 }
                 
-                if (!empty($id)) 
-                {
+                if (!empty($id)) {
                     $where = array(
-                                    'id' => $id
-                                );
+                        'id' => $id
+                    );
                     
                     unset($data['created_at']);
                     
@@ -734,7 +737,7 @@ class Admin extends CI_Controller
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/'.$_FILES['category_image']['name'])) {
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
                         $data['category_image'] = $_FILES['category_image']['name'];
                     }
                 }
@@ -742,7 +745,7 @@ class Admin extends CI_Controller
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
                     if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
-                            $data['banner_image'] = $_FILES['banner_image']['name'];
+                        $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
                 
@@ -1277,40 +1280,34 @@ class Admin extends CI_Controller
                 $where             = array(
                     'id ' => $id
                 );
+                
                 $data['questions'] = $this->model->getAllwhere('questions', $where);
                 $data['modules']   = $this->model->getAll('modules');
-                
-                
-                $field_val = 'id,en_chapter_name';
-                
-                $where1 = array(
+                $field_val         = 'id,en_chapter_name';
+                $where1            = array(
                     'fk_module_id' => $data['questions'][0]->module_id
                 );
-                
-                $data['chapters'] = $this->model->getAllwhere('chapters', $where1, $field_val);
-                
+                $data['chapters']  = $this->model->getAllwhere('chapters', $where1, $field_val);
             } else {
-                $data['modules']  = $this->model->getAll('modules');
-                $data['chapters'] = $this->model->getAll('chapters');
+                $data['modules'] = $this->model->getAll('modules');
             }
             $data['body'] = 'add_question';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
-                $module_id      = $this->input->post('module_id');
-                $chapter_id     = $this->input->post('chapter_id');
-                $question_marks = $this->input->post('question_marks');
-                $question_type  = $this->input->post('question_type');
-                $en_question    = $this->input->post('en_question');
-                $hi_question    = $this->input->post('hi_question');
-                $en_option_a    = $this->input->post('en_option_a');
-                $en_option_b    = $this->input->post('en_option_b');
-                $en_option_c    = $this->input->post('en_option_c');
-                $en_option_d    = $this->input->post('en_option_d');
-                $hi_option_a    = $this->input->post('hi_option_a');
-                $hi_option_b    = $this->input->post('hi_option_b');
-                $hi_option_c    = $this->input->post('hi_option_c');
-                $hi_option_d    = $this->input->post('hi_option_d');
+                $module_id     = $this->input->post('module_id');
+                $chapter_id    = $this->input->post('chapter_id');
+                $question_type = $this->input->post('question_type');
+                $en_question   = $this->input->post('en_question');
+                $hi_question   = $this->input->post('hi_question');
+                $en_option_a   = $this->input->post('en_option_a');
+                $en_option_b   = $this->input->post('en_option_b');
+                $en_option_c   = $this->input->post('en_option_c');
+                $en_option_d   = $this->input->post('en_option_d');
+                $hi_option_a   = $this->input->post('hi_option_a');
+                $hi_option_b   = $this->input->post('hi_option_b');
+                $hi_option_c   = $this->input->post('hi_option_c');
+                $hi_option_d   = $this->input->post('hi_option_d');
                 
                 if ($question_type == 'True False') {
                     $en_answer = $this->input->post('en_answers');
@@ -1326,7 +1323,6 @@ class Admin extends CI_Controller
                 $data = array(
                     'module_id' => $module_id,
                     'chapter_id' => $chapter_id,
-                    'question_marks' => $question_marks,
                     'question_type' => $question_type,
                     'en_question' => $en_question,
                     'hi_question' => $hi_question,
@@ -2099,7 +2095,6 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('time_per_question', 'Time per Question', 'trim|required|numeric');
         $this->form_validation->set_rules('passing_marks', 'Passing Marks', 'trim|required|numeric');
         $this->form_validation->set_rules('positive_mark', 'Positive Marks', 'trim|required|numeric');
-        //$this->form_validation->set_rules('package_id', 'Package', 'trim|required|numeric');
         $this->form_validation->set_rules('status', 'Status', 'trim|required|numeric');
         $payment_status = $this->input->post('payment_status');
         
@@ -2113,7 +2108,7 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             
-            $package_name      = $this->input->post('package_name');
+            $package_name = $this->input->post('package_name');
             
             $time_per_question = $this->input->post('time_per_question');
             $passing_marks     = $this->input->post('passing_marks');
@@ -2179,23 +2174,17 @@ class Admin extends CI_Controller
             if ($this->controller->checkSession()) {
                 
                 $super_package_name = $this->input->post('super_package_name');
-
-                $package_id    = implode(",",$this->input->post('package_id'));
-                $package_price     = $this->input->post('package_price');
-                $valid_till    = $this->input->post('valid_till');
-                $is_active     = $this->input->post('status');
-              
-                
-               
-                
-                $data = array(
+                $package_id         = implode(",", $this->input->post('package_id'));
+                $package_price      = $this->input->post('package_price');
+                $valid_till         = $this->input->post('valid_till');
+                $is_active          = $this->input->post('status');
+                $data               = array(
                     'super_package_name' => $super_package_name,
-                    'package_price'      => $package_price,
-                    'package_id'         => $package_id,
-                    'valid_till'         => $valid_till,
-                    'is_active'          => $is_active,
-                    'created_at'         => date('Y-m-d H:i:s')
-
+                    'package_price' => $package_price,
+                    'package_id' => $package_id,
+                    'valid_till' => $valid_till,
+                    'is_active' => $is_active,
+                    'created_at' => date('Y-m-d H:i:s')
                 );
                 
                 if (!empty($id)) {
@@ -2232,6 +2221,67 @@ class Admin extends CI_Controller
             echo 'success';
         } else {
             echo 'error';
+        }
+    }
+    
+    public function excelupload()
+    {
+        $this->form_validation->set_rules('module_id1', 'Module', 'trim|required');
+        $this->form_validation->set_rules('chapter_id1', 'Chapter', 'trim|required');
+        $this->form_validation->set_rules('question_type1', 'Question type', 'trim|required');
+        $this->form_validation->set_rules('question_excel', 'Excel File', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $data['validation'] = '1';    
+            $data['modules'] = $this->model->getAll('modules');
+            $data['body'] = 'add_question';
+            $this->controller->load_view($data);
+        } else {
+            if ($this->controller->checkSession()) {
+                $module_id         = $this->input->post('module_id1');
+                $chapter_id        = $this->input->post('chapter_id1');
+                $question_type     = $this->input->post('question_type1');
+                $post_coloumn_data = array(
+                    'module_id' => $module_id,
+                    'chapter_id' => $chapter_id,
+                    'question_type' => $question_type,
+                    'created_at' => date('Y-m-d H:i:s')
+                );
+                if (!empty($_FILES['question_excel']['tmp_name'])) {
+                    $row  = array();
+                    $file = $_FILES['question_excel']['tmp_name'];
+                    //load the excel library
+                    $this->load->library('excel');
+                    //read file from path
+                    $objPHPExcel     = PHPExcel_IOFactory::load($file);
+                    //get only the Cell Collection
+                    $cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
+                    //extract to a PHP readable array format
+                    foreach ($cell_collection as $cell) {
+                        $column     = $objPHPExcel->getActiveSheet()->getCell($cell)->getColumn();
+                        $row        = $objPHPExcel->getActiveSheet()->getCell($cell)->getRow();
+                        $data_value = $objPHPExcel->getActiveSheet()->getCell($cell)->getValue();
+                        //header will/should be in row 1 only. 
+                        if ($row == 1) {
+                            if (!empty($data_value)) {
+                                $data['key'][] = $data_value;
+                            }
+                        } else {
+                            if (!empty($data_value)) {
+                                $data['value'][] = $data_value;
+                            }
+                        }
+                    }
+                    $array = array_combine($data['key'], $data['value']);
+                    
+                    $final = array_merge($array, $post_coloumn_data);
+                    
+                    $result = $this->model->insertData('questions', $final);
+                    
+                    $this->questionList();
+                    
+                }
+            }
         }
     }
 }
