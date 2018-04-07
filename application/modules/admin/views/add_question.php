@@ -20,7 +20,7 @@
                     <a class="btn btn-primary" data-toggle="modal" data-target="#questionModel">
                         <i class="fa fa-th-list">&nbsp;Upload Excel</i>
                     </a> 
-                    <a class="btn btn-primary" href="<?php //echo base_url('admin/questionList')?>">
+                    <a class="btn btn-primary" href="<?php echo base_url('asset/uploads/question_excel.xlsx')?>">
                         <i class="fa fa-th-list">&nbsp;Excel Format</i>
                     </a> 
                 </div>
@@ -361,13 +361,13 @@
         <!-- /.col-lg-12 -->
     </div>
     <!-- row -->
-    <?php if (!empty($validation)){ ?>
-        <script type="text/javascript">
-             $(window).on('load',function(){
-                $('#questionModel').modal('show');
-            });
-        </script>
-    <?php }?>
+        <?php if (!empty($validation)){ ?>
+            <script type="text/javascript">
+                 $(window).on('load',function(){
+                    $('#questionModel').modal('show');
+                });
+            </script>
+        <?php }?>
 </div>
 </div>
 
