@@ -93,6 +93,7 @@
 </div>
 <script type="text/javascript">
 function update_status(user_id, status) {
+    
     swal({
         title: "Are you sure?", text: "Want to Change Status?", type: "warning", showCancelButton: true, closeOnConfirm: false, confirmButtonText: "Yes,Change it!", confirmButtonColor: "#ec6c62"
     },function(){

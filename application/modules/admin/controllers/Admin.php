@@ -1683,6 +1683,7 @@ class Admin extends CI_Controller
             'is_active' => 1 - $this->input->post('status')
         );
         $result = $this->model->updateFields($table, $data, $where);
+       
     }
     public function profile()
     {

@@ -17,12 +17,14 @@
                     <a class="btn btn-primary" href="<?php echo base_url('admin/questionList')?>">
                         <i class="fa fa-th-list">&nbsp;Question List</i>
                     </a> 
+                    <?php if(!isset($questions)) {?>
                     <a class="btn btn-primary" data-toggle="modal" data-target="#questionModel">
                         <i class="fa fa-th-list">&nbsp;Upload Excel</i>
                     </a> 
                     <a class="btn btn-primary" href="<?php echo base_url('asset/uploads/question_excel.xlsx')?>">
                         <i class="fa fa-th-list">&nbsp;Excel Format</i>
                     </a> 
+                    <?php }?>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -75,7 +77,7 @@
                                         <label class="col-md-3">Question Type</label>
                                         <div class="col-md-9">
                                             <select class="form-control" name="question_type" id="question_type" onchange="questionChanges(this.value)">
-                                                <option data-display="--Select question_type--">--Please Select Question Type--</option>
+                                                <option value="">--Please Select Question Type--</option>
                                                 <option value="Options" <?php if(isset($questions) && $questions[0]->question_type=='Options'){ ?> selected
                                                     <?php }?> >Options </option>
                                                 <option value="Fill In the Blank" <?php if(isset($questions) && $questions[0]->question_type=='Fill In the Blank'){ ?> selected

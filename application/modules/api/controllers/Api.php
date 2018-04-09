@@ -2539,7 +2539,7 @@ class Api extends REST_Controller
           if(!empty($comment)){
             $sub_comment = '';
             foreach ($comment as $ckey => $cvalue) {
-              $site_url =base_url();
+              $site_url = base_url();
               $wheres          = array(
                 'comment_id'   => $cvalue->id
               );
@@ -2566,7 +2566,7 @@ class Api extends REST_Controller
             }
           }
             if(!empty($sub_comment)){
-                $data[$key]->comment = $sub_comment;
+                $data[$key]->comment  = $sub_comment;
             }else{
                  $data[$key]->comment = null;
             }
@@ -2612,8 +2612,8 @@ class Api extends REST_Controller
                       'post.added_by'   => $id
 
                   );
-        $fields='post.en_post,post.id,post.chapter_id,post.super_submenu_id,post.type,post.added_by,CONCAT("'.$site_url.'","asset/uploads/",image)AS image,post.created_at';
-        $data1 = $this->model->getAllwhere('post',$where1,$fields);
+        $fields ='post.en_post,post.id,post.chapter_id,post.super_submenu_id,post.type,post.added_by,CONCAT("'.$site_url.'","asset/uploads/",image)AS image,post.created_at';
+        $data1  = $this->model->getAllwhere('post',$where1,$fields);
 
 
         if(!empty($data1)){
@@ -2623,7 +2623,7 @@ class Api extends REST_Controller
             $data1[$key]->duration=$times[0];
 
             $select2 = 'save_notes.id';
-            $where2 =  array(
+            $where2  =  array(
                     'save_notes.user_id' => $id,
                     'save_notes.post_id' => $value->id     
 
@@ -2674,7 +2674,7 @@ class Api extends REST_Controller
                 'comment_id'   => $cvalue->id,
                 'post_id'      => $cvalue->post_id
               );
-              $sub_comment[$ckey]=$cvalue; 
+              $sub_comment[$ckey] = $cvalue; 
               
                 
               $user_id   = $sub_comment[$ckey]->user_id;
@@ -2803,9 +2803,9 @@ class Api extends REST_Controller
         if (!empty($super_package)) 
         {
           $resp = array(
-              'code'      => 'SUCCESS',
-              'message'   => 'Success',
-              'response'  => array(
+              'code'          => 'SUCCESS',
+              'message'       => 'Success',
+              'response'      => array(
               'super_package'   => $super_package,
                    )
               );
@@ -2820,57 +2820,43 @@ class Api extends REST_Controller
 
     /*Get All Questions*/
     public function get_questions_get(){
-      $exam_id  = $this->input->get('id');
-      $where    = array(
+        $exam_id  = $this->input->get('id');
+        $where    = array(
                         'exam.is_active'  => 1,
                         'exam.id'         => $exam_id
                    );
+        $lang = $this->input->get('lang');
+        $data = $this->model->GetJoinRecord('exam','module_id','modules','id','exam.module_id,exam.chapter_id,exam.id,modules.'.$lang.'_module_name as module_name,modules.id as module_id,exam.exam_name,exam.question_id',$where);
 
-      $data = $this->model->GetJoinRecord('exam','module_id','modules','id','exam.module_id,exam.chapter_id,exam.id,modules.en_module_name as module_name,modules.id as module_id,exam.exam_name,exam.question_id',$where);
+        if(!empty($data[0]->chapter_id)){
+            $chapter_id = explode(",",str_replace(" ", "", trim($data[0]->chapter_id)));
+            
+            $this->db->select('id,'.$lang.'_chapter_name as chapter_name');
+            $this->db->from('chapters');
+            $this->db->where_in('id',$chapter_id);
+            $this->db->order_by('id','ASC');
+            $q = $this->db->get(); 
+            $chapter = $q->result_array();
+        }
+        if(!empty($data[0]->question_id)){
+            $question_id = explode(",",str_replace(" ", "", trim($data[0]->question_id)));
+            $this->db->select('id,chapter_id,question_type,'.$lang.'_question as question,'.$lang.'_option_a as option_a,'.$lang.'_option_b as option_b,'.$lang.'_option_c as option_c,'.$lang.'_option_d as option_d,'.$lang.'_answer as answer,'.$lang.'_explaination as explaination');
+            $this->db->from('questions');
+            $this->db->where_in('id',$question_id);
+            $this->db->order_by('chapter_id','ASC');
+
+            $q = $this->db->get(); 
+            
+            $data[0]->questions = $q->result_array();
+            $count_questions = array_count_values(array_column($data[0]->questions,'chapter_id'));
+
+            for ($i=0; $i <count($chapter) ; $i++) { 
+                $chapter[$i]['questions_count'] = $count_questions[$chapter[$i]['id']]; 
+                @$chapter[$i]['next_id']    = $chapter[$i+1]['id']; 
+            }   
+            $data[0]->chapters    = $chapter;        
+        }
       
-        $chapter_id = explode(",",$data[0]->chapter_id);
-          
-          for ($i=0; $i <sizeof($chapter_id) ; $i++) { 
-
-                $wheres   = array(
-              'is_active'     => 1,
-                'id'            => $chapter_id[$i],
-            );
-                  $chapter = $this->model->getAllwhere('chapters',$wheres,'id,en_chapter_name');
-                  $data[0]->chapters[] = $chapter[0];
-                  
-          }
-
-      $question_id = explode(",",$data[0]->question_id);
-
-        for ($i=0; $i <sizeof($question_id) ; $i++) { 
-
-                $where2   = array(
-
-                          'questions.is_active'     => 1,
-
-                          'questions.id'              => $question_id[$i]
-
-                         
-                      );
-                  $questions = $this->model->getAllwhere('questions',$where2);
-                
-              $data[0]->questions[] = $questions;
-                  
-          }
-         /* $where2   = array(
-
-                          'questions.is_active'     => 1,
-
-                          'questions.chapter_id'      => $chapter_id[$i],
-
-                          'questions.module_id'   => $data[0]->module_id
-
-                      );
-                  $questions = $this->model->getAllwhere('questions',$where2);
-                
-              $data[0]->questions[] = $questions;
-*/
         if (!empty($data)) 
         {
             $resp = array(
@@ -2888,5 +2874,92 @@ class Api extends REST_Controller
         }
         $this->response($resp);
     }
+    
+    public function get_question_duration_get(){
+      $exam_id    = $this->input->get('id');
+      $package_id     = $this->input->get('package_id');
+
+      $where          = array (
+
+        'id' => $package_id,
+        'FIND_IN_SET(exam_id,'.$exam_id.')'
+      );
+      $package = $this->model->getAllwhere('package',"FIND_IN_SET(exam_id,'$exam_id')");
+        echo $this->db->last_query();
+        echo "<pre>";
+        print_r($package);
+                
+    }
+
+    public function get_help_feedback_get(){
+      
+      $data = $this->model->getAll('help_feedback','Distinct(title)');
+      $heading = '';
+      $result = [];
+      foreach ($data as $key => $value) {
+        $result[$key]['title'][] = $data[$key];
+        $where = array(
+          'title like %'.$data[$key]['title'].'%'
+        );
+        /*$data[$key]['heading']*/
+        $heading = $this->model->getAllwhere('help_feedback',$where,'heading,id');
+        
+        foreach ($heading as $ckey => $cvalue) {
+          $cvalue->title = $data[$key]['title'];
+          $where2 = array(
+            'id' => $heading[$key]->id
+          );
+          $description = $this->model->getAllwhere('help_feedback',$where2,'description,id');
+          
+          $cvalue->description = $description[0]->description;
+        }
+         
+            $result[$key]['heading'] = $heading;
+      }
+      
+      if (!empty($result)) 
+        {
+            $resp = array(
+                'code'      => 'SUCCESS',
+                'message'   => 'SUCCESS',
+                'response'  =>  array(
+                'help'    =>  $result
+                )
+            );
+        }else{
+            $resp = array(
+                'code'    => 'ERROR',
+                'message' => 'FAILURE'
+            );
+        }
+            $this->response($resp);
+   }
+
+   public function get_test_result_get(){
+    $user_id = $this->input->get('user_id');
+    $exam_id = $this->input->get('exam_id');
+
+      $where     = array(
+                        'user_id'  => $user_id,
+                        'exam_id'  => $exam_id
+                    );
+        $data = $this->model->getAllwhere('test_result',$where,'id,total_question,attempted_question,correct_question,incorrect_question,positive_marks,negative_marks,total_marks,percentage,created_at as exam_date');
+        if (!empty($data)) 
+        {
+            $resp = array(
+                'code'      => 'SUCCESS',
+                'message'   => 'SUCCESS',
+                'response'  =>  array(
+                'result'    =>  $data
+                )
+            );
+        }else{
+            $resp = array(
+                'code'    => 'ERROR',
+                'message' => 'FAILURE'
+            );
+        }
+            $this->response($resp);
+   }
 }
 ?>

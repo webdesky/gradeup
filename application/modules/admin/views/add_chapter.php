@@ -24,7 +24,7 @@
                                             <label class="col-md-3">Module Name* </label>
                                             <div class="col-md-9">
                                                 <select class="wide" name="fk_module_id">
-                                                    <option data-display="--Select Modules--">--Select Modules--</option>
+                                                    <option value="">--Select Modules--</option>
                                                      <?php foreach ($modules as $key => $value) { ?>
                                                         <option value="<?php echo $value->id; ?>" <?php if(isset($chapter) && $chapter[0]->fk_module_id==$value->id) { ?> selected <?php } ?>><?php echo ucwords($value->en_module_name); ?></option>
                                                     <?php } ?>
