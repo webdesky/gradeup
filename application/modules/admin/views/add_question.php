@@ -29,7 +29,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                            <form role="form" method="post" action="<?php if(isset($questions)) {  echo  base_url('admin/question/'.$questions[0]->id);  }else{ echo  base_url('admin/question'); } ?>" class="registration_form12" enctype="multipart/form-data">
+                            <form role="form" method="post" action="<?php if(isset($questions)) {  echo base_url('admin/question/'.$questions[0]->id); }else{ echo base_url('admin/question'); } ?>" class="registration_form12" enctype="multipart/form-data">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3 ">Module Name * </label>
@@ -82,7 +82,6 @@
                                                     <?php }?> >Options </option>
                                                 <option value="Fill In the Blank" <?php if(isset($questions) && $questions[0]->question_type=='Fill In the Blank'){ ?> selected
                                                     <?php }?>>Fill In the Blank</option>
-                                                <!-- <option value="Descriptive">Descriptive</option> -->
                                                 <option value="True False" <?php if(isset($questions) && $questions[0]->question_type=='True False'){ ?> selected
                                                     <?php }?>>True False</option>
                                             </select>
