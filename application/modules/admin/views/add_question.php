@@ -17,17 +17,19 @@
                     <a class="btn btn-primary" href="<?php echo base_url('admin/questionList')?>">
                         <i class="fa fa-th-list">&nbsp;Question List</i>
                     </a> 
+                    <?php if(!isset($questions)) {?>
                     <a class="btn btn-primary" data-toggle="modal" data-target="#questionModel">
                         <i class="fa fa-th-list">&nbsp;Upload Excel</i>
                     </a> 
                     <a class="btn btn-primary" href="<?php echo base_url('asset/uploads/question_excel.xlsx')?>">
                         <i class="fa fa-th-list">&nbsp;Excel Format</i>
                     </a> 
+                    <?php }?>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                            <form role="form" method="post" action="<?php if(isset($questions)) {  echo  base_url('admin/question/'.$questions[0]->id);  }else{ echo  base_url('admin/question'); } ?>" class="registration_form12" enctype="multipart/form-data">
+                            <form role="form" method="post" action="<?php if(isset($questions)) {  echo base_url('admin/question/'.$questions[0]->id); }else{ echo base_url('admin/question'); } ?>" class="registration_form12" enctype="multipart/form-data">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3 ">Module Name * </label>
@@ -75,12 +77,11 @@
                                         <label class="col-md-3">Question Type</label>
                                         <div class="col-md-9">
                                             <select class="form-control" name="question_type" id="question_type" onchange="questionChanges(this.value)">
-                                                <option data-display="--Select question_type--">--Please Select Question Type--</option>
+                                                <option value="">--Please Select Question Type--</option>
                                                 <option value="Options" <?php if(isset($questions) && $questions[0]->question_type=='Options'){ ?> selected
                                                     <?php }?> >Options </option>
                                                 <option value="Fill In the Blank" <?php if(isset($questions) && $questions[0]->question_type=='Fill In the Blank'){ ?> selected
                                                     <?php }?>>Fill In the Blank</option>
-                                                <!-- <option value="Descriptive">Descriptive</option> -->
                                                 <option value="True False" <?php if(isset($questions) && $questions[0]->question_type=='True False'){ ?> selected
                                                     <?php }?>>True False</option>
                                             </select>

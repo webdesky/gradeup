@@ -28,7 +28,7 @@
                                 </div>
                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-3">notification Url* </label>
+                                        <label class="col-md-3">Notification Url * </label>
                                         <div class="col-md-9">
                                             <input class="form-control" type="text" name="notification_url" id="notification_url" placeholder="notification Url" autocomplete="off"  value="<?php if(isset($notification)){ echo $notification[0]->notification_url; }else{echo set_value('notification_url');} ?>"> <span class="red"><?php echo form_error('notification_url'); ?></span>
                                         </div>
@@ -36,7 +36,7 @@
                                 </div>
                               <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-3">News Description* </label>
+                                        <label class="col-md-3">News Description * </label>
                                         <div class="col-md-9">
                                             <textarea class="form-control" rows="8" id="notification_description" name="notification_description" placeholder="Meta Description">
                                                 <?php if(isset($notification)){ echo $notification[0]->notification_description; }else{echo set_value('notification_description');} ?>
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-3">Url* </label>
+                                        <label class="col-md-3">Url * </label>
                                         <div class="col-md-9">
                                             <input class="form-control" type="text" name="url" id="url" placeholder="url" autocomplete="off"  value="<?php if(isset($notification)){ echo $notification[0]->url; }else{echo set_value('url');} ?>"> <span class="red"><?php echo form_error('url'); ?></span>
                                         </div>
@@ -57,7 +57,7 @@
                                 </div>
                                  <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-3">Meta Title* </label>
+                                        <label class="col-md-3">Meta Title * </label>
                                         <div class="col-md-9">
                                             <input class="form-control" type="text" name="meta_title" id="meta_title" placeholder="Meta Title" autocomplete="off"  value="<?php if(isset($notification)){ echo $notification[0]->meta_title; }else{echo set_value('meta_title');} ?>"> <span class="red"><?php echo form_error('meta_title'); ?></span>
                                         </div>
@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="col-md-6">   
                                     <div class="form-group">
-                                        <label class="col-md-3">Status* </label>
+                                        <label class="col-md-3">Status * </label>
                                         <div class="col-md-9">
                                             <label class="radio-inline">
                                                 <input type="radio" name="status" value="1" <?php if(isset($notification) && $notification[0]->is_active==1){ echo "checked";} ?>>Active
