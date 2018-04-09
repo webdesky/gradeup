@@ -1868,8 +1868,8 @@ class Admin extends CI_Controller
             $f_newfile   = "";
             
             if ($f_name) {
-                $f_newfile = uniqid() . '.' . $f_extension; // It`s use to stop overriding if the image will be same then uniqid() will generate the unique name of both file.
-                $store     = 'asset/uploads/' . $f_newfile;
+                $f_newfile = uniqid().'.'.$f_extension; // It`s use to stop overriding if the image will be same then uniqid() will generate the unique name of both file.
+                $store     = 'asset/uploads/'.$f_newfile;
                 $image1    = move_uploaded_file($f_tmp, $store);
                 return $f_newfile;
             }
@@ -2104,13 +2104,13 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             
-            $package_name = $this->input->post('package_name');
-            $time_per_question = $this->input->post('time_per_question');
-            $passing_marks     = $this->input->post('passing_marks');
-            $positive_mark     = $this->input->post('positive_mark');
-            $negative_mark     = $this->input->post('negative_mark');
-            $exam_id           = implode(",", $this->input->post('exam_id'));
-            $status            = $this->input->post('status');
+            $package_name       = $this->input->post('package_name');
+            $time_per_question  = $this->input->post('time_per_question');
+            $passing_marks      = $this->input->post('passing_marks');
+            $positive_mark      = $this->input->post('positive_mark');
+            $negative_mark      = $this->input->post('negative_mark');
+            $exam_id            = implode(",", $this->input->post('exam_id'));
+            $status             = $this->input->post('status');
             
             $data = array(
                 'package_name' => $package_name,
@@ -2267,12 +2267,9 @@ class Admin extends CI_Controller
                             }
                         }
                     }
-                    $array = array_combine($data['key'], $data['value']);
-                    
-                    $final = array_merge($array, $post_coloumn_data);
-                    
+                    $array  = array_combine($data['key'], $data['value']);
+                    $final  = array_merge($array, $post_coloumn_data);
                     $result = $this->model->insertData('questions', $final);
-                    
                     $this->questionList();
                     
                 }else{

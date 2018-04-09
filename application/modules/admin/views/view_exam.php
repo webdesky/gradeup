@@ -46,7 +46,7 @@
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <div class="col-md-6">
+                                      <!--   <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-md-3">Question Type </label>
                                                 <div class="col-md-9">
@@ -54,7 +54,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="clearfix "></div>
+                                        <div class="clearfix "></div> -->
                                         <div class="col-md-6 ">
                                             <div class="form-group ">
                                                 <label class="col-md-3 ">Created Date </label>
@@ -110,7 +110,7 @@
 
     function update_question() {
         var myArray = [];
-        $(":checkbox:checked").each(function() {
+        $(":checkbox:not(:checked)").each(function() {
             myArray.push(this.value);
         });
         swal({
@@ -126,7 +126,7 @@
                 url: "<?php echo base_url('admin/update')?>",
                 data: {
                     'question_id': myArray,
-                    'table': 'package',
+                    'table': 'exam',
                     'id': '<?php echo $this->uri->segment(3)?>'
                 },
                 type: "POST"
