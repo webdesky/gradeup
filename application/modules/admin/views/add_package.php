@@ -32,7 +32,7 @@
                                         <label class="col-md-3 ">Module Name * </label>
                                         <div class="col-md-9">
                                             <select class="form-control" name="module_id" id="module_id">
-                                                <option data-display="--Select Modules--">--Select modules--</option>
+                                                <option value="">--Select modules--</option>
                                                 <?php foreach ($modules as $key => $value) { ?>
                                                     <option value="<?php echo $value['id']; ?>" <?php if(isset($exam) && $exam[0]->module_id==$value['id']){ echo 'selected'; } ?>>
                                                         <?php echo ucwords($value['en_module_name']); ?>

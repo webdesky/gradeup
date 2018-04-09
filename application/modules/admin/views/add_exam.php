@@ -32,7 +32,7 @@
                                                 <label class="col-md-3 ">Module Name * </label>
                                                 <div class="col-md-9">
                                                     <select class="form-control" name="module_id" id="module_id">
-                                                        <option data-display="--Select Modules--">--Select modules--</option>
+                                                        <option value="">--Select modules--</option>
                                                         <?php foreach ($modules as $key => $value) { ?>
                                                             <option value="<?php echo $value['id']; ?>" <?php if(isset($exam) && $exam[0]->module_id==$value['id']){ echo 'selected'; } ?>>
                                                                 <?php echo ucwords($value['en_module_name']); ?>
@@ -47,7 +47,7 @@
                                                 <label class="col-md-3 ">Chapter Name * </label>
                                                 <div class="col-md-9">
                                                     <select class="form-control" name="chapter_id[]" id="chapter_id" multiple="multiple">
-                                                        <option data-display="--Select Chapter--">--Select Chapter--</option>
+                                                        <option value="">--Select Chapter--</option>
                                                         <?php if(!empty($chapters[0])){ foreach($chapters as $values){?>
                                                             <option value="<?php echo $values->id?>" <?php if(!empty($exam[0]->chapter_id)){ $chapter_array = explode(',', $exam[0]->chapter_id); if(in_array($values->id, $chapter_array)){ echo 'selected';}}?>>
                                                                 <?php echo $values->en_chapter_name;?>
