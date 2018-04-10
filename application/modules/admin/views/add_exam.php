@@ -56,24 +56,6 @@
                                                     </select> <span class="red"><?php echo form_error('chapter_id'); ?></span> </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-md-3">Question Type</label>
-                                                <div class="col-md-9">
-                                                    <select class="form-control" name="question_type" id="question_type">
-                                                        <option value="">--Please Select Question Type--</option>
-                                                        <option value="Options" <?php if(isset($exam) && $exam[0]->question_type=='Options'){ ?> selected
-                                                            <?php }?> >Options </option>
-                                                        <option value="Fill In the Blank" <?php if(isset($exam) && $exam[0]->question_type=='Fill In the Blank'){ ?> selected
-                                                            <?php }?>>Fill In the Blank</option>
-                                                        <!-- <option value="Descriptive">Descriptive</option> -->
-                                                        <option value="True False" <?php if(isset($exam) && $exam[0]->question_type=='True False'){ ?> selected
-                                                            <?php }?>>True False</option>
-                                                    </select>
-                                                    <span class="red"><?php echo form_error('question_type'); ?></span> </div>
-                                            </div>
-                                        </div>
-
                                         <!-- <div class="clearfix"></div> -->
 
                                         <!-- Question modal starts -->
