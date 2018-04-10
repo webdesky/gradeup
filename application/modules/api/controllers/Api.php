@@ -1819,6 +1819,11 @@ class Api extends REST_Controller
       /*Get User Profile By User Id*/
     public function get_profiles_get(){
         $id       = $this->input->get('id');
+          if ($id==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
         $site_url = base_url();
         $where    = array(
 
@@ -2088,6 +2093,11 @@ class Api extends REST_Controller
 
     public function get_modules_id_get(){
       $id       = $this->input->get('id');
+        if ($id==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
       $lang     = $this->input->get('lang');
       $site_url = base_url();
       if($lang==='en' || $lang==null){
@@ -2476,6 +2486,11 @@ class Api extends REST_Controller
      /*Get All News*/
     public function get_tnews_get(){
       $user_id = $this->input->get('id');
+        if ($user_id==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
       $lang =$this->input->get('lang');
       $site_url = base_url();
       if($lang ==='en' || $lang == null || $lang === 'hi'){
@@ -2595,6 +2610,11 @@ class Api extends REST_Controller
     public function user_profiles_get(){
         $id       = $this->input->get('id');
         $user_id  = $this->input->get('user_id');
+        if ($id==NULL || $user_id==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
         $site_url = base_url();
         $where    = array(
 
@@ -2770,6 +2790,11 @@ class Api extends REST_Controller
     /*get all subpackage  by package_id*/
     public function get_sub_package_by_id_get(){
       $package_id = $this->input->get('id');
+      if ($package_id==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
       $where      = array(
                         'is_active'  => 1,
                         'id'         => $package_id
@@ -2826,6 +2851,11 @@ class Api extends REST_Controller
                         'exam.id'         => $exam_id
                    );
         $lang = $this->input->get('lang');
+        if ($exam_id==NULL || $lang==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
         $data = $this->model->GetJoinRecord('exam','module_id','modules','id','exam.module_id,exam.chapter_id,exam.id,modules.'.$lang.'_module_name as module_name,modules.id as module_id,exam.exam_name,exam.question_id',$where);
 
         if(!empty($data[0]->chapter_id)){
@@ -2844,11 +2874,12 @@ class Api extends REST_Controller
             $this->db->from('questions');
             $this->db->where_in('id',$question_id);
             $this->db->order_by('chapter_id','ASC');
-
             $q = $this->db->get(); 
+
+            $questions = $q->result_array();
             
-            $data[0]->questions = $q->result_array();
-            $count_questions = array_count_values(array_column($data[0]->questions,'chapter_id'));
+            $data[0]->questions =$questions;
+            $count_questions    = array_count_values(array_column($data[0]->questions,'chapter_id'));
 
             for ($i=0; $i <count($chapter) ; $i++) { 
                 $chapter[$i]['questions_count'] = $count_questions[$chapter[$i]['id']]; 
@@ -2933,33 +2964,148 @@ class Api extends REST_Controller
             );
         }
             $this->response($resp);
-   }
+    }
 
-   public function get_test_result_get(){
-    $user_id = $this->input->get('user_id');
-    $exam_id = $this->input->get('exam_id');
+    public function get_test_result_get(){
+      $user_id = $this->input->get('user_id');
+      $exam_id = $this->input->get('exam_id');
 
-      $where     = array(
-                        'user_id'  => $user_id,
-                        'exam_id'  => $exam_id
-                    );
-        $data = $this->model->getAllwhere('test_result',$where,'id,total_question,attempted_question,correct_question,incorrect_question,positive_marks,negative_marks,total_marks,percentage,created_at as exam_date');
-        if (!empty($data)) 
+        $where     = array(
+                          'user_id'  => $user_id,
+                          'exam_id'  => $exam_id
+                      );
+          $data = $this->model->getAllwhere('test_result',$where,'id,total_question,attempted_question,correct_question,incorrect_question,positive_marks,negative_marks,total_marks,percentage,created_at as exam_date');
+          if (!empty($data)) 
+          {
+              $resp = array(
+                  'code'      => 'SUCCESS',
+                  'message'   => 'SUCCESS',
+                  'response'  =>  array(
+                  'result'    =>  $data
+                  )
+              );
+          }else{
+              $resp = array(
+                  'code'    => 'ERROR',
+                  'message' => 'FAILURE'
+              );
+          }
+              $this->response($resp);
+    }
+
+    /*register User*/
+    public function test_result_post(){
+        $pdata = file_get_contents("php://input");
+        $data  = json_decode($pdata,true);
+        
+        $required_parameter = array('user_id','exam_id','total_question','attempted_question','correct_question','positive_marks','total_marks','percentage');
+
+        $chk_error = $this->controller->check_required_value($required_parameter, $data);
+
+        if ($chk_error) 
         {
-            $resp = array(
-                'code'      => 'SUCCESS',
-                'message'   => 'SUCCESS',
-                'response'  =>  array(
-                'result'    =>  $data
-                )
-            );
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing ' . strtoupper($chk_error['param']));
+             @$this->response($resp);
+        }
+
+        $user_id            = $data['user_id'];
+        $exam_id            = $data['exam_id'];
+        $total_question           = $data['total_question'];
+        $attempted_question         = $data['attempted_question'];
+        $correct_question       = $data['correct_question'];
+        $incorrect_question       = $data['incorrect_question'];
+        $positive_marks         = $data['positive_marks'];
+        $negative_marks         = $data['negative_marks'];
+        $total_marks          = $data['total_marks'];
+        $percentage           = $data['percentage'];
+        $blank_question         = $data['blank_question'];
+
+        $data             = array(
+                'user_id'         => $user_id,
+                'exam_id'           => $exam_id,
+                'total_question'        => $total_question,
+                'attempted_question'    => $attempted_question,
+                'correct_question'      => $correct_question,
+                'incorrect_question'    => $incorrect_question,
+                'positive_marks'        => $positive_marks,
+                'negative_marks'      => $negative_marks,
+                'total_marks'         => $total_marks,
+                'percentage'          => $percentage,
+                'blank_question'        => $blank_question,
+        'created_at'            => date('Y-m-d H:i:s')
+                );
+
+
+        
+        
+      
+        $id = $this->model->insertData('test_result', $data);
+        $where           = array(
+               'id'        =>$id,
+               
+                );
+        $data = $this->model->getAllwhere('test_result',$where,'id,total_question,attempted_question,correct_question,incorrect_question,positive_marks,negative_marks,total_marks,percentage,created_at as exam_date');
+        if(!empty($data)){
+            $resp = array('code' => 'SUCCESS', 'message' => 'Test Result Successfully','response' => array('test' => $data));   
         }else{
-            $resp = array(
-                'code'    => 'ERROR',
-                'message' => 'FAILURE'
-            );
+            $resp = array('code' => 'ERROR', 'message' => 'FAILURE','response' => array('message' => 'Not Registrered'));
         }
             $this->response($resp);
-   }
+    } 
+
+
+    public function sub_menu_data_get(){
+      $menu  = str_replace("-"," ",$this->input->get('menu'));
+      $lang  = $this->input->get('lang');
+      
+      if ($menu==NULL || $lang==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
+      $fields   = 'id';
+      $where    = $lang."_super_sub_menu LIKE '%$menu%'";
+      $data     = $this->model->getAllwhere('super_sub_menu',$where,$fields);
+      if(!empty($data)){
+      $where1   = array(
+          'super_sub_menu_id'  => $data[0]->id
+      );
+      $fields1  = 'id,'.$lang.'_post as post';
+      $result     = $this->model->getAllwhere('super_sub_menu_post',$where1,$fields1);
+
+       $site_url = base_url();
+       $fields='post.'.$lang.'_post as post,post.id,users.first_name,users.last_name,post.chapter_id,post.super_submenu_id,post.type,users.id as user_id,.post.added_by,CONCAT("'.$site_url.'","asset/uploads/",users.profile_pic)AS image,CONCAT("'.$site_url.'","asset/uploads/",post.image)AS post_image';
+        $fields1='mcq.  question,mcq. option_a,mcq. option_b,mcq. option_c,mcq. option_d,users.first_name,users.last_name,mcq.answer,users.id as user_id,CONCAT("'.$site_url.'","asset/uploads/",users.profile_pic)AS image';
+       $where2 =array(
+        'super_submenu_id' => $data[0]->id
+       );
+      $posts = $this->model->GetJoinRecord('post', 'added_by', 'users', 'id', $fields,$where2);
+      $mcq = $this->model->GetJoinRecord('mcq', 'added_by', 'users', 'id', $fields1,$where2);
+      }
+
+
+      if (!empty($result)) 
+      {
+         $resp = array(
+                'code'      => 'SUCCESS',
+                'message'   => 'SUCCESS',
+                'response'  => array(
+                'exam_details'      => $result,
+                'posts'         =>$posts,
+                'quiz'          =>null,
+                'mcq'          => $mcq
+               
+                
+                )
+            );
+      }else{
+        $resp = array(
+                'code'    => 'ERROR',
+                'message' => 'No Data Found'
+            );
+      }
+      $this->response($resp);
+    }
+
 }
 ?>

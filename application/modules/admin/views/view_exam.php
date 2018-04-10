@@ -46,15 +46,7 @@
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                      <!--   <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-md-3">Question Type </label>
-                                                <div class="col-md-9">
-                                                    <?php echo $package[0]->question_type;?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix "></div> -->
+
                                         <div class="col-md-6 ">
                                             <div class="form-group ">
                                                 <label class="col-md-3 ">Created Date </label>
@@ -67,8 +59,10 @@
                                         <div class="col-md-12 " align="center ">
                                             <input type="button" value="View Questions" class="btn btn-success" onclick="get_questions('<?php echo $package[0]->question_id;?>')">
                                         </div>
+                                         <input type="hidden" name="q_id[]" id="q">
                                     </form>
                                     <div id="questions_list" style="display: none">
+                                       
                                     </div>
                                 </div>
 
@@ -96,6 +90,7 @@
             success: function(data) {
                 var obj = JSON.parse(data);
                 if (obj.length != 0) {
+                    $('#q').val(JSON.stringify(obj)); 
                     var option = '<table class="table table-bordered" id="table"><tr><th>Sr. No.</th><th>Question in English</th><th>Question in Hindi</th><th>Remove</th></tr>';
                     for (var i = 0; i < obj.length; i++) {
                         option += '<tr><td>' + (i + 1) + '</td><td>' + obj[i].en_question + '</td><td>' + obj[i].hi_question + '</td><td><input type="checkbox" name="question_id[]" value="' + obj[i].id + '"/></td></tr>';
@@ -109,6 +104,8 @@
     }
 
     function update_question() {
+        var final=$('#q').val();
+       
         var myArray = [];
         $(":checkbox:not(:checked)").each(function() {
             myArray.push(this.value);

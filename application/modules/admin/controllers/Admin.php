@@ -2213,6 +2213,7 @@ class Admin extends CI_Controller
         $where       = array(
             'id' => $id
         );
+       
         if ($this->model->updateFields($table, $data, $where)) {
             echo 'success';
         } else {
