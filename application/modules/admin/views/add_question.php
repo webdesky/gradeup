@@ -58,7 +58,6 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-3">Status </label>
@@ -97,8 +96,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Question  </label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="en_question" name="en_question" placeholder="English Question">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_question; }else{echo set_value('en_question');} ?>
+                                                <textarea class="form-control" rows="8" id="en_question" name="en_question" placeholder="English Question"><?php  if(isset($questions)) {  echo  $questions[0]->en_question; }else{echo set_value('en_question');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_question'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('en_question');
@@ -114,9 +112,7 @@
                                             <label class="col-md-3">Option A * </label>
                                             <div class="col-md-9">
                                                 <input type="hidden" name="id">
-                                                <textarea class="form-control" rows="8" id="en_option_a" name="en_option_a" placeholder="Option A">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_option_a; }else{echo set_value('en_option_a');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('en_option_a'); ?></span>
+                                                <textarea class="form-control" rows="8" id="en_option_a" name="en_option_a" placeholder="Option A"><?php  if(isset($questions)) {  echo  $questions[0]->en_option_a; }else{echo set_value('en_option_a');} ?></textarea> <span class="red"><?php echo form_error('en_option_a'); ?></span>
                                                <!--  <script type="text/javascript">
                                                 CKEDITOR.replace('en_option_a');
                                                 </script> -->
@@ -131,9 +127,8 @@
                                             <label class="col-md-3">Option B * </label>
                                             <div class="col-md-9">
                                                 <input type="hidden" name="id">
-                                                <textarea class="form-control" rows="8" id="en_option_b" name="en_option_b" placeholder="Option B">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_option_b; }else{echo set_value('en_option_b');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('en_option_b'); ?></span>
+                                                <textarea class="form-control" rows="8" id="en_option_b" name="en_option_b" placeholder="Option B"><?php  if(isset($questions)) {  echo  $questions[0]->en_option_b; }else{echo set_value('en_option_b');} ?></textarea>
+                                                <span class="red"><?php echo form_error('en_option_b'); ?></span>
                                                 <!-- <script type="text/javascript">
                                                 CKEDITOR.replace('en_option_b');
                                                 </script> -->
@@ -148,9 +143,7 @@
                                             <label class="col-md-3">Option C * </label>
                                             <div class="col-md-9">
                                                 <input type="hidden" name="id">
-                                                <textarea class="form-control" rows="8" id="en_option_c" name="en_option_c" placeholder="Option C">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_option_c; }else{echo set_value('en_option_c');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('en_option_c'); ?></span>
+                                                <textarea class="form-control" rows="8" id="en_option_c" name="en_option_c" placeholder="Option C"><?php  if(isset($questions)) {  echo  $questions[0]->en_option_c; }else{echo set_value('en_option_c');} ?></textarea> <span class="red"><?php echo form_error('en_option_c'); ?></span>
                                                 
                                             </div>
                                         </div>
@@ -162,9 +155,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Option D * </label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="en_option_d" name="en_option_d" placeholder="Option D">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_option_d; }else{echo set_value('en_option_d');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('en_option_d'); ?></span>
+                                                <textarea class="form-control" rows="8" id="en_option_d" name="en_option_d" placeholder="Option D"><?php  if(isset($questions)) {  echo  $questions[0]->en_option_d; }else{echo set_value('en_option_d');} ?></textarea> <span class="red"><?php echo form_error('en_option_d'); ?></span>
                                                
                                             </div>
                                         </div>
@@ -176,9 +167,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Answer * </label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="en_answer" name="en_answer" placeholder="Answer">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_answer; }else{echo set_value('en_answer');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('en_answer'); ?></span>
+                                                <textarea class="form-control" rows="8" id="en_answer" name="en_answer" placeholder="Answer"><?php  if(isset($questions)) {  echo  $questions[0]->en_answer; }else{echo set_value('en_answer');} ?></textarea> <span class="red"><?php echo form_error('en_answer'); ?></span>
                                                
                                             </div>
                                         </div>
@@ -190,9 +179,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Explaination</label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="en_explaination" name="en_explaination" placeholder="Explaination">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->en_explaination; }else{echo set_value('en_explaination');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('en_explaination'); ?></span>
+                                                <textarea class="form-control" rows="8" id="en_explaination" name="en_explaination" placeholder="Explaination"><?php  if(isset($questions)) {  echo  $questions[0]->en_explaination; }else{echo set_value('en_explaination');} ?></textarea> <span class="red"><?php echo form_error('en_explaination'); ?></span>
                                                 <script type="text/javascript">
                                                 CKEDITOR.replace('en_explaination');
                                                 </script>
@@ -210,11 +197,10 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Question</label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="hi_question" name="hi_question" placeholder="Hindi Question">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_question; }else{echo set_value('hi_question');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('hi_question'); ?></span>
+                                                <textarea class="form-control" rows="8" id="hi_question" name="hi_question" placeholder="Hindi Question"><?php  if(isset($questions)) {  echo  $questions[0]->hi_question; }else{echo set_value('hi_question');} ?></textarea>
+                                                <span class="red"><?php echo form_error('hi_question'); ?></span>
                                                 <script type="text/javascript">
-                                                CKEDITOR.replace('hi_question');
+                                                    CKEDITOR.replace('hi_question');
                                                 </script>
                                             </div>
                                         </div>
@@ -228,9 +214,8 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Option A </label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="hi_option_a" name="hi_option_a" placeholder="Option A">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_a; }else{echo set_value('hi_option_a');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('hi_option_a'); ?></span>
+                                                <textarea class="form-control" rows="8" id="hi_option_a" name="hi_option_a" placeholder="Option A"><?php  if(isset($questions)) {  echo  $questions[0]->hi_option_a; }else{echo set_value('hi_option_a');} ?></textarea>
+                                                <span class="red"><?php echo form_error('hi_option_a'); ?></span>
                                                
                                             </div>
                                         </div>
@@ -242,9 +227,8 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Option B </label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="hi_option_b" name="hi_option_b" placeholder="Option b">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_b; }else{echo set_value('hi_option_b');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('hi_option_b'); ?></span>
+                                                <textarea class="form-control" rows="8" id="hi_option_b" name="hi_option_b" placeholder="Option B"><?php  if(isset($questions)) {  echo  $questions[0]->hi_option_b; }else{echo set_value('hi_option_b');} ?></textarea>
+                                                <span class="red"><?php echo form_error('hi_option_b'); ?></span>
                                                
                                             </div>
                                         </div>
@@ -256,9 +240,8 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Option C </label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="hi_option_c" name="hi_option_c" placeholder="Option C">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_c; }else{echo set_value('hi_option_c');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('hi_option_c'); ?></span>
+                                                <textarea class="form-control" rows="8" id="hi_option_c" name="hi_option_c" placeholder="Option C"><?php  if(isset($questions)) {  echo  $questions[0]->hi_option_c; }else{echo set_value('hi_option_c');} ?></textarea>
+                                                    <span class="red"><?php echo form_error('hi_option_c'); ?></span>
                                                
                                             </div>
                                         </div>
@@ -270,9 +253,8 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Option D </label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="hi_option_d" name="hi_option_d" placeholder="Option D">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_d; }else{echo set_value('hi_option_d');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('hi_option_d'); ?></span>
+                                                <textarea class="form-control" rows="8" id="hi_option_d" name="hi_option_d" placeholder="Option D"><?php  if(isset($questions)) {  echo  $questions[0]->hi_option_d; }else{echo set_value('hi_option_d');} ?></textarea>
+                                                <span class="red"><?php echo form_error('hi_option_d'); ?></span>
                                                
                                             </div>
                                         </div>
@@ -284,9 +266,8 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Answer </label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="hi_answer" name="hi_answer" placeholder="ANswer">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_answer; }else{echo set_value('hi_answer');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('hi_answer'); ?></span>
+                                                <textarea class="form-control" rows="8" id="hi_answer" name="hi_answer" placeholder="Answer"><?php  if(isset($questions)) {  echo  $questions[0]->hi_answer; }else{echo set_value('hi_answer');} ?></textarea>
+                                                    <span class="red"><?php echo form_error('hi_answer'); ?></span>
                                                 
                                             </div>
                                         </div>
@@ -300,11 +281,10 @@
                                         <div class="form-group">
                                             <label class="col-md-3">Explaination </label>
                                             <div class="col-md-9">
-                                                <textarea class="form-control" rows="8" id="hi_explaination" name="hi_explaination" placeholder="Explaination">
-                                                    <?php  if(isset($questions)) {  echo  $questions[0]->hi_explaination; }else{echo set_value('hi_explaination');} ?>
-                                                </textarea> <span class="red"><?php echo form_error('hi_explaination'); ?></span>
+                                                <textarea class="form-control" rows="8" id="hi_explaination" name="hi_explaination" placeholder="Explaination"><?php  if(isset($questions)) {  echo  $questions[0]->hi_explaination; }else{echo set_value('hi_explaination');} ?></textarea>
+                                                <span class="red"><?php echo form_error('hi_explaination'); ?></span>
                                                 <script type="text/javascript">
-                                                CKEDITOR.replace('hi_explaination');
+                                                    CKEDITOR.replace('hi_explaination');
                                                 </script>
                                             </div>
                                         </div>
@@ -496,9 +476,9 @@ $(document).ready(function() {
                     }
                 }
             }}
-
         });
     });
+    
     $('#module_id1').on('change', function() {
         var url = "<?php echo base_url('admin/getChapter') ?>";
         $.ajax({
@@ -517,7 +497,6 @@ $(document).ready(function() {
                     }
                 }
             }}
-
         });
     })
 });

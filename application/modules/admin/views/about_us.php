@@ -29,7 +29,8 @@
                                         <label class="col-md-2"> About Us * </label>
                                         <div class="col-md-10">
                                             <input type="hidden" name="id" value="<?php echo $about[0]['id']; ?>">
-                                            <textarea class="form-control" rows="8" id="en_about_us" name="en_about_us" placeholder="about us"><?php echo  $about[0]['en_about_us']?>
+                                            <textarea class="form-control" rows="8" id="en_about_us" name="en_about_us" placeholder="about us">
+                                            <?php echo  $about[0]['en_about_us']?>
                                             </textarea> <span class="red"><?php echo form_error('en_about_us'); ?></span>
                                             <script type="text/javascript">
                                                 CKEDITOR.replace('en_about_us');

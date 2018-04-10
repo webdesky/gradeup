@@ -127,7 +127,6 @@
                                                 <span class="red"><?php echo form_error('hi_site_title'); ?></span> </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-2">Meta Tags * </label>
@@ -137,7 +136,6 @@
                                                 <span class="red"><?php echo form_error('hi_meta_tags'); ?></span> </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-2">CopyRight * </label>
@@ -150,7 +148,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-2">Address * </label>
@@ -178,7 +175,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-2">Site Logo * </label>
