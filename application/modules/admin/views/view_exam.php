@@ -46,15 +46,7 @@
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                       <!--  <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-md-3">Question Type </label>
-                                                <div class="col-md-9">
-                                                    <?php echo $package[0]->question_type;?>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        <div class="clearfix "></div>
+
                                         <div class="col-md-6 ">
                                             <div class="form-group ">
                                                 <label class="col-md-3 ">Created Date </label>
@@ -115,7 +107,7 @@
         var final=$('#q').val();
        
         var myArray = [];
-        $(":checkbox:checked").each(function() {
+        $(":checkbox:not(:checked)").each(function() {
             myArray.push(this.value);
         });
         swal({

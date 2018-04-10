@@ -2992,5 +2992,120 @@ class Api extends REST_Controller
           }
               $this->response($resp);
     }
+
+    /*register User*/
+    public function test_result_post(){
+        $pdata = file_get_contents("php://input");
+        $data  = json_decode($pdata,true);
+        
+        $required_parameter = array('user_id','exam_id','total_question','attempted_question','correct_question','positive_marks','total_marks','percentage');
+
+        $chk_error = $this->controller->check_required_value($required_parameter, $data);
+
+        if ($chk_error) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing ' . strtoupper($chk_error['param']));
+             @$this->response($resp);
+        }
+
+        $user_id            = $data['user_id'];
+        $exam_id            = $data['exam_id'];
+        $total_question           = $data['total_question'];
+        $attempted_question         = $data['attempted_question'];
+        $correct_question       = $data['correct_question'];
+        $incorrect_question       = $data['incorrect_question'];
+        $positive_marks         = $data['positive_marks'];
+        $negative_marks         = $data['negative_marks'];
+        $total_marks          = $data['total_marks'];
+        $percentage           = $data['percentage'];
+        $blank_question         = $data['blank_question'];
+
+        $data             = array(
+                'user_id'         => $user_id,
+                'exam_id'           => $exam_id,
+                'total_question'        => $total_question,
+                'attempted_question'    => $attempted_question,
+                'correct_question'      => $correct_question,
+                'incorrect_question'    => $incorrect_question,
+                'positive_marks'        => $positive_marks,
+                'negative_marks'      => $negative_marks,
+                'total_marks'         => $total_marks,
+                'percentage'          => $percentage,
+                'blank_question'        => $blank_question,
+        'created_at'            => date('Y-m-d H:i:s')
+                );
+
+
+        
+        
+      
+        $id = $this->model->insertData('test_result', $data);
+        $where           = array(
+               'id'        =>$id,
+               
+                );
+        $data = $this->model->getAllwhere('test_result',$where,'id,total_question,attempted_question,correct_question,incorrect_question,positive_marks,negative_marks,total_marks,percentage,created_at as exam_date');
+        if(!empty($data)){
+            $resp = array('code' => 'SUCCESS', 'message' => 'Test Result Successfully','response' => array('test' => $data));   
+        }else{
+            $resp = array('code' => 'ERROR', 'message' => 'FAILURE','response' => array('message' => 'Not Registrered'));
+        }
+            $this->response($resp);
+    } 
+
+
+    public function sub_menu_data_get(){
+      $menu  = str_replace("-"," ",$this->input->get('menu'));
+      $lang  = $this->input->get('lang');
+      
+      if ($menu==NULL || $lang==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
+      $fields   = 'id';
+      $where    = $lang."_super_sub_menu LIKE '%$menu%'";
+      $data     = $this->model->getAllwhere('super_sub_menu',$where,$fields);
+      if(!empty($data)){
+      $where1   = array(
+          'super_sub_menu_id'  => $data[0]->id
+      );
+      $fields1  = 'id,'.$lang.'_post as post';
+      $result     = $this->model->getAllwhere('super_sub_menu_post',$where1,$fields1);
+
+       $site_url = base_url();
+       $fields='post.'.$lang.'_post as post,post.id,users.first_name,users.last_name,post.chapter_id,post.super_submenu_id,post.type,users.id as user_id,.post.added_by,CONCAT("'.$site_url.'","asset/uploads/",users.profile_pic)AS image,CONCAT("'.$site_url.'","asset/uploads/",post.image)AS post_image';
+        $fields1='mcq.  question,mcq. option_a,mcq. option_b,mcq. option_c,mcq. option_d,users.first_name,users.last_name,mcq.answer,users.id as user_id,CONCAT("'.$site_url.'","asset/uploads/",users.profile_pic)AS image';
+       $where2 =array(
+        'super_submenu_id' => $data[0]->id
+       );
+      $posts = $this->model->GetJoinRecord('post', 'added_by', 'users', 'id', $fields,$where2);
+      $mcq = $this->model->GetJoinRecord('mcq', 'added_by', 'users', 'id', $fields1,$where2);
+      }
+
+
+      if (!empty($result)) 
+      {
+         $resp = array(
+                'code'      => 'SUCCESS',
+                'message'   => 'SUCCESS',
+                'response'  => array(
+                'exam_details'      => $result,
+                'posts'         =>$posts,
+                'quiz'          =>null,
+                'mcq'          => $mcq
+               
+                
+                )
+            );
+      }else{
+        $resp = array(
+                'code'    => 'ERROR',
+                'message' => 'No Data Found'
+            );
+      }
+      $this->response($resp);
+    }
+
 }
 ?>

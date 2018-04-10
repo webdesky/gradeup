@@ -31,6 +31,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3">Select Module * </label>
                                                 <div class="col-md-9">
+                                                <?php //echo '<pre>'; print_r($post[0]->module_id);?>
                                                     <select class="wide" name="module_id" id="module_id">
                                                         <option data-display="-- Select Module --" value="">-- Select Module --</option>
                                                         <?php foreach($modules as $module):?>
