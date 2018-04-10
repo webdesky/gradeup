@@ -117,9 +117,9 @@
                                                 <textarea class="form-control" rows="8" id="en_option_a" name="en_option_a" placeholder="Option A">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->en_option_a; }else{echo set_value('en_option_a');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_option_a'); ?></span>
-                                                <script type="text/javascript">
+                                               <!--  <script type="text/javascript">
                                                 CKEDITOR.replace('en_option_a');
-                                                </script>
+                                                </script> -->
                                             </div>
                                         </div>
                                     </div>
@@ -134,9 +134,9 @@
                                                 <textarea class="form-control" rows="8" id="en_option_b" name="en_option_b" placeholder="Option B">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->en_option_b; }else{echo set_value('en_option_b');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_option_b'); ?></span>
-                                                <script type="text/javascript">
+                                                <!-- <script type="text/javascript">
                                                 CKEDITOR.replace('en_option_b');
-                                                </script>
+                                                </script> -->
                                             </div>
                                         </div>
                                     </div>
@@ -151,9 +151,7 @@
                                                 <textarea class="form-control" rows="8" id="en_option_c" name="en_option_c" placeholder="Option C">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->en_option_c; }else{echo set_value('en_option_c');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_option_c'); ?></span>
-                                                <script type="text/javascript">
-                                                CKEDITOR.replace('en_option_c');
-                                                </script>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -167,9 +165,7 @@
                                                 <textarea class="form-control" rows="8" id="en_option_d" name="en_option_d" placeholder="Option D">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->en_option_d; }else{echo set_value('en_option_d');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_option_d'); ?></span>
-                                                <script type="text/javascript">
-                                                CKEDITOR.replace('en_option_d');
-                                                </script>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -183,9 +179,7 @@
                                                 <textarea class="form-control" rows="8" id="en_answer" name="en_answer" placeholder="Answer">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->en_answer; }else{echo set_value('en_answer');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('en_answer'); ?></span>
-                                                <script type="text/javascript">
-                                                CKEDITOR.replace('en_answer');
-                                                </script>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -237,9 +231,7 @@
                                                 <textarea class="form-control" rows="8" id="hi_option_a" name="hi_option_a" placeholder="Option A">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_a; }else{echo set_value('hi_option_a');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_option_a'); ?></span>
-                                                <script type="text/javascript">
-                                                CKEDITOR.replace('hi_option_a');
-                                                </script>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -253,9 +245,7 @@
                                                 <textarea class="form-control" rows="8" id="hi_option_b" name="hi_option_b" placeholder="Option b">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_b; }else{echo set_value('hi_option_b');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_option_b'); ?></span>
-                                                <script type="text/javascript">
-                                                CKEDITOR.replace('hi_option_b');
-                                                </script>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -269,9 +259,7 @@
                                                 <textarea class="form-control" rows="8" id="hi_option_c" name="hi_option_c" placeholder="Option C">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_c; }else{echo set_value('hi_option_c');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_option_c'); ?></span>
-                                                <script type="text/javascript">
-                                                CKEDITOR.replace('hi_option_c');
-                                                </script>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -285,9 +273,7 @@
                                                 <textarea class="form-control" rows="8" id="hi_option_d" name="hi_option_d" placeholder="Option D">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->hi_option_d; }else{echo set_value('hi_option_d');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_option_d'); ?></span>
-                                                <script type="text/javascript">
-                                                CKEDITOR.replace('hi_option_d');
-                                                </script>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -301,9 +287,7 @@
                                                 <textarea class="form-control" rows="8" id="hi_answer" name="hi_answer" placeholder="ANswer">
                                                     <?php  if(isset($questions)) {  echo  $questions[0]->hi_answer; }else{echo set_value('hi_answer');} ?>
                                                 </textarea> <span class="red"><?php echo form_error('hi_answer'); ?></span>
-                                                <script type="text/javascript">
-                                                CKEDITOR.replace('hi_answer');
-                                                </script>
+                                                
                                             </div>
                                         </div>
                                     </div>

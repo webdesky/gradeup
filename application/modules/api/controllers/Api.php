@@ -1819,6 +1819,11 @@ class Api extends REST_Controller
       /*Get User Profile By User Id*/
     public function get_profiles_get(){
         $id       = $this->input->get('id');
+          if ($id==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
         $site_url = base_url();
         $where    = array(
 
@@ -2088,6 +2093,11 @@ class Api extends REST_Controller
 
     public function get_modules_id_get(){
       $id       = $this->input->get('id');
+        if ($id==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
       $lang     = $this->input->get('lang');
       $site_url = base_url();
       if($lang==='en' || $lang==null){
@@ -2476,6 +2486,11 @@ class Api extends REST_Controller
      /*Get All News*/
     public function get_tnews_get(){
       $user_id = $this->input->get('id');
+        if ($user_id==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
       $lang =$this->input->get('lang');
       $site_url = base_url();
       if($lang ==='en' || $lang == null || $lang === 'hi'){
@@ -2595,6 +2610,11 @@ class Api extends REST_Controller
     public function user_profiles_get(){
         $id       = $this->input->get('id');
         $user_id  = $this->input->get('user_id');
+        if ($id==NULL || $user_id==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
         $site_url = base_url();
         $where    = array(
 
@@ -2770,6 +2790,11 @@ class Api extends REST_Controller
     /*get all subpackage  by package_id*/
     public function get_sub_package_by_id_get(){
       $package_id = $this->input->get('id');
+      if ($package_id==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
       $where      = array(
                         'is_active'  => 1,
                         'id'         => $package_id
@@ -2826,6 +2851,11 @@ class Api extends REST_Controller
                         'exam.id'         => $exam_id
                    );
         $lang = $this->input->get('lang');
+        if ($exam_id==NULL || $lang==NULL) 
+        {
+             $resp = array('code' => 'MISSING_PARAM', 'message' => 'Missing Parameter');
+             @$this->response($resp);
+        }
         $data = $this->model->GetJoinRecord('exam','module_id','modules','id','exam.module_id,exam.chapter_id,exam.id,modules.'.$lang.'_module_name as module_name,modules.id as module_id,exam.exam_name,exam.question_id',$where);
 
         if(!empty($data[0]->chapter_id)){
@@ -2844,11 +2874,12 @@ class Api extends REST_Controller
             $this->db->from('questions');
             $this->db->where_in('id',$question_id);
             $this->db->order_by('chapter_id','ASC');
-
             $q = $this->db->get(); 
+
+            $questions = $q->result_array();
             
-            $data[0]->questions = $q->result_array();
-            $count_questions = array_count_values(array_column($data[0]->questions,'chapter_id'));
+            $data[0]->questions =$questions;
+            $count_questions    = array_count_values(array_column($data[0]->questions,'chapter_id'));
 
             for ($i=0; $i <count($chapter) ; $i++) { 
                 $chapter[$i]['questions_count'] = $count_questions[$chapter[$i]['id']]; 
@@ -2933,33 +2964,33 @@ class Api extends REST_Controller
             );
         }
             $this->response($resp);
-   }
+    }
 
-   public function get_test_result_get(){
-    $user_id = $this->input->get('user_id');
-    $exam_id = $this->input->get('exam_id');
+    public function get_test_result_get(){
+      $user_id = $this->input->get('user_id');
+      $exam_id = $this->input->get('exam_id');
 
-      $where     = array(
-                        'user_id'  => $user_id,
-                        'exam_id'  => $exam_id
-                    );
-        $data = $this->model->getAllwhere('test_result',$where,'id,total_question,attempted_question,correct_question,incorrect_question,positive_marks,negative_marks,total_marks,percentage,created_at as exam_date');
-        if (!empty($data)) 
-        {
-            $resp = array(
-                'code'      => 'SUCCESS',
-                'message'   => 'SUCCESS',
-                'response'  =>  array(
-                'result'    =>  $data
-                )
-            );
-        }else{
-            $resp = array(
-                'code'    => 'ERROR',
-                'message' => 'FAILURE'
-            );
-        }
-            $this->response($resp);
-   }
+        $where     = array(
+                          'user_id'  => $user_id,
+                          'exam_id'  => $exam_id
+                      );
+          $data = $this->model->getAllwhere('test_result',$where,'id,total_question,attempted_question,correct_question,incorrect_question,positive_marks,negative_marks,total_marks,percentage,created_at as exam_date');
+          if (!empty($data)) 
+          {
+              $resp = array(
+                  'code'      => 'SUCCESS',
+                  'message'   => 'SUCCESS',
+                  'response'  =>  array(
+                  'result'    =>  $data
+                  )
+              );
+          }else{
+              $resp = array(
+                  'code'    => 'ERROR',
+                  'message' => 'FAILURE'
+              );
+          }
+              $this->response($resp);
+    }
 }
 ?>
