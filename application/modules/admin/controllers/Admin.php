@@ -129,19 +129,19 @@ class Admin extends CI_Controller
                         $this->session->set_flashdata('info_message', "favicon icon size too large");
                         redirect('admin/setting');
                     } else {
-                        if (move_uploaded_file($_FILES['favicon_icon']['tmp_name'],'asset/uploads/'.$_FILES['favicon_icon']['name'])) {
+                        if (move_uploaded_file($_FILES['favicon_icon']['tmp_name'], 'asset/uploads/' . $_FILES['favicon_icon']['name'])) {
                             $data['favicon'] = $_FILES['favicon_icon']['name'];
                         }
                     }
                 }
                 
-                if (isset($_FILES['site_logo']['name']) && !empty($_FILES['site_logo']['name'])) { 
+                if (isset($_FILES['site_logo']['name']) && !empty($_FILES['site_logo']['name'])) {
                     
                     if ($_FILES["site_logo"]["size"] > 1000000) {
                         $this->session->set_flashdata('info_message', "Site Logo size too large");
                         redirect('admin/setting');
                     } else {
-                        if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/'.$_FILES['site_logo']['name'])) {
+                        if (move_uploaded_file($_FILES['site_logo']['tmp_name'], 'asset/uploads/' . $_FILES['site_logo']['name'])) {
                             $data['logo'] = $_FILES['site_logo']['name'];
                         }
                     }
@@ -199,9 +199,11 @@ class Admin extends CI_Controller
                 $data              = array(
                     'en_privacy_policy' => $en_privacy_policy,
                     'hi_privacy_policy' => $hi_privacy_policy,
-                    'created_at'        => date('Y-m-d H:i:s')
+                    'created_at' => date('Y-m-d H:i:s')
                 );
-                $where             = array('id' => $this->input->post('id'));
+                $where             = array(
+                    'id' => $this->input->post('id')
+                );
                 $result            = $this->model->updateFields('settings', $data, $where);
                 redirect('admin/privacy');
             }
@@ -266,7 +268,7 @@ class Admin extends CI_Controller
                         $this->session->set_flashdata('info_message', "Module icon size too large");
                         redirect('admin/module');
                     } else {
-                        if (move_uploaded_file($_FILES['image']['tmp_name'], 'asset/uploads/'.$_FILES['image']['name'])) {
+                        if (move_uploaded_file($_FILES['image']['tmp_name'], 'asset/uploads/' . $_FILES['image']['name'])) {
                             $data['image'] = $_FILES['image']['name'];
                         }
                     }
@@ -511,14 +513,14 @@ class Admin extends CI_Controller
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/'.$_FILES['category_image']['name'])){
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
                         $data['category_image'] = $_FILES['category_image']['name'];
                     }
                 }
                 
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/'.$_FILES['banner_image']['name'])){
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
                         $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
@@ -592,14 +594,14 @@ class Admin extends CI_Controller
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/'.$_FILES['category_image']['name'])) {
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
                         $data['category_image'] = $_FILES['category_image']['name'];
                     }
                 }
                 
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/'.$_FILES['banner_image']['name'])) {
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
                         $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
@@ -733,15 +735,14 @@ class Admin extends CI_Controller
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                    if (move_uploaded_file($_FILES['category_image']['tmp_name'],'asset/uploads/'.$_FILES['category_image']['name'])){
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
                         $data['category_image'] = $_FILES['category_image']['name'];
                     }
                 }
                 
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'],'asset/uploads/'.$_FILES['banner_image']['name']))
-                    {
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
                         $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
@@ -936,19 +937,19 @@ class Admin extends CI_Controller
                 );
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/'.$_FILES['category_image']['name'])) {
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
                         $data['category_image'] = $_FILES['category_image']['name'];
                     }
                 }
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/'.$_FILES['banner_image']['name'])) {
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
                         $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
                 if (isset($_FILES['news_image']['name']) && !empty($_FILES['news_image']['name'])) {
                     $count = count($_FILES['news_image']['name']);
-                    if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/'.$_FILES['news_image']['name'])) {
+                    if (move_uploaded_file($_FILES['news_image']['tmp_name'], 'asset/uploads/' . $_FILES['news_image']['name'])) {
                         $data['news_image'] = $_FILES['news_image']['name'];
                     }
                 }
@@ -1014,21 +1015,21 @@ class Admin extends CI_Controller
                 
                 if (isset($_FILES['category_image']['name']) && !empty($_FILES['category_image']['name'])) {
                     $count = count($_FILES['category_image']['name']);
-                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/'.$_FILES['category_image']['name'])) {
+                    if (move_uploaded_file($_FILES['category_image']['tmp_name'], 'asset/uploads/' . $_FILES['category_image']['name'])) {
                         $data['category_image'] = $_FILES['category_image']['name'];
                     }
                 }
                 
                 if (isset($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['name'])) {
                     $count = count($_FILES['banner_image']['name']);
-                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/'.$_FILES['banner_image']['name'])) {
+                    if (move_uploaded_file($_FILES['banner_image']['tmp_name'], 'asset/uploads/' . $_FILES['banner_image']['name'])) {
                         $data['banner_image'] = $_FILES['banner_image']['name'];
                     }
                 }
                 
                 if (isset($_FILES['notification_image']['name']) && !empty($_FILES['notification_image']['name'])) {
                     $count = count($_FILES['notification_image']['name']);
-                    if (move_uploaded_file($_FILES['notification_image']['tmp_name'], 'asset/uploads/'.$_FILES['notification_image']['name'])) {
+                    if (move_uploaded_file($_FILES['notification_image']['tmp_name'], 'asset/uploads/' . $_FILES['notification_image']['name'])) {
                         $data['notification_image'] = $_FILES['notification_image']['name'];
                     }
                 }
@@ -1100,7 +1101,7 @@ class Admin extends CI_Controller
                 
                 if (isset($_FILES['event_image']['name']) && !empty($_FILES['event_image']['name'])) {
                     $count = count($_FILES['event_image']['name']);
-                    if (move_uploaded_file($_FILES['event_image']['tmp_name'], 'asset/uploads/'.$_FILES['event_image']['name'])) {
+                    if (move_uploaded_file($_FILES['event_image']['tmp_name'], 'asset/uploads/' . $_FILES['event_image']['name'])) {
                         $data['image'] = $_FILES['event_image']['name'];
                     }
                 }
@@ -1172,7 +1173,7 @@ class Admin extends CI_Controller
                 
                 if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
                     $count = count($_FILES['image']['name']);
-                    if (move_uploaded_file($_FILES['image']['tmp_name'], 'asset/uploads/'.$_FILES['image']['name'])) {
+                    if (move_uploaded_file($_FILES['image']['tmp_name'], 'asset/uploads/' . $_FILES['image']['name'])) {
                         $data['image'] = $_FILES['image']['name'];
                     }
                 }
@@ -1273,7 +1274,7 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('errors', validation_errors());
             
             if (!empty($id)) {
-                $where             = array(
+                $where = array(
                     'id ' => $id
                 );
                 
@@ -1513,7 +1514,6 @@ class Admin extends CI_Controller
                 $blood_group = $this->input->post('blood_group');
                 $status      = $this->input->post('status');
                 
-                
                 $data = array(
                     'first_name' => $first_name,
                     'last_name' => $last_name,
@@ -1530,13 +1530,11 @@ class Admin extends CI_Controller
                     'user_role' => 3,
                     'created_at' => date('Y-m-d H:i:s')
                 );
-                
-                
                 if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
                     $count = count($_FILES['image']['name']);
                     for ($i = 0; $i < $count; $i++) {
                         if ($_FILES['image']['error'][$i] == 0) {
-                            if (move_uploaded_file($_FILES['image']['tmp_name'][$i], 'asset/uploads/'.$_FILES['image']['name'][$i])) {
+                            if (move_uploaded_file($_FILES['image']['tmp_name'][$i], 'asset/uploads/' . $_FILES['image']['name'][$i])) {
                                 $data['profile_pic'] = $_FILES['image']['name'][$i];
                             }
                         }
@@ -1678,8 +1676,7 @@ class Admin extends CI_Controller
         $data   = array(
             'is_active' => 1 - $this->input->post('status')
         );
-        $result = $this->model->updateFields($table, $data, $where);
-       
+        $result = $this->model->updateFields($table, $data, $where);   
     }
     public function profile()
     {
@@ -1721,7 +1718,7 @@ class Admin extends CI_Controller
                 
                 
                 if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
-                    if (move_uploaded_file($_FILES['image']['tmp_name'], 'asset/uploads/'.$_FILES['image']['name'])) {
+                    if (move_uploaded_file($_FILES['image']['tmp_name'], 'asset/uploads/' . $_FILES['image']['name'])) {
                         $data['profile_pic'] = $_FILES['image']['name'];
                     }
                 }
@@ -1847,6 +1844,10 @@ class Admin extends CI_Controller
     public function check_password()
     {
         $old_password = $this->input->post('data');
+        if(empty($old_password)){
+            echo '2';
+            return false;
+        }
         $where        = array(
             'id' => $this->session->userdata('id'),
             'password' => md5($old_password)
@@ -1869,8 +1870,8 @@ class Admin extends CI_Controller
             $f_newfile   = "";
             
             if ($f_name) {
-                $f_newfile = uniqid().'.'.$f_extension; // It`s use to stop overriding if the image will be same then uniqid() will generate the unique name of both file.
-                $store     = 'asset/uploads/'.$f_newfile;
+                $f_newfile = uniqid() . '.' . $f_extension; // It`s use to stop overriding if the image will be same then uniqid() will generate the unique name of both file.
+                $store     = 'asset/uploads/' . $f_newfile;
                 $image1    = move_uploaded_file($f_tmp, $store);
                 return $f_newfile;
             }
@@ -2105,13 +2106,13 @@ class Admin extends CI_Controller
             $this->controller->load_view($data);
         } else {
             
-            $package_name       = $this->input->post('package_name');
-            $time_per_question  = $this->input->post('time_per_question');
-            $passing_marks      = $this->input->post('passing_marks');
-            $positive_mark      = $this->input->post('positive_mark');
-            $negative_mark      = $this->input->post('negative_mark');
-            $exam_id            = implode(",", $this->input->post('exam_id'));
-            $status             = $this->input->post('status');
+            $package_name      = $this->input->post('package_name');
+            $time_per_question = $this->input->post('time_per_question');
+            $passing_marks     = $this->input->post('passing_marks');
+            $positive_mark     = $this->input->post('positive_mark');
+            $negative_mark     = $this->input->post('negative_mark');
+            $exam_id           = implode(",", $this->input->post('exam_id'));
+            $status            = $this->input->post('status');
             
             $data = array(
                 'package_name' => $package_name,
@@ -2143,8 +2144,7 @@ class Admin extends CI_Controller
         $data['body'] = 'package_list';
         
         $this->controller->load_view($data);
-    }
-    
+    } 
     public function super_package($id = NULL)
     {
         $this->form_validation->set_rules('super_package_name', 'Package ', 'trim|required');
@@ -2213,25 +2213,24 @@ class Admin extends CI_Controller
         $where       = array(
             'id' => $id
         );
-       
+        
         if ($this->model->updateFields($table, $data, $where)) {
             echo 'success';
         } else {
             echo 'error';
         }
     }
-    
     public function excelupload()
     {
         $this->form_validation->set_rules('module_id1', 'Module', 'trim|required');
         $this->form_validation->set_rules('chapter_id1', 'Chapter', 'trim|required');
         $this->form_validation->set_rules('question_type1', 'Question type', 'trim|required');
         $this->form_validation->set_rules('question_excel', 'Excel File', 'trim|required');
-
+        
         if ($this->form_validation->run() == false) {
-            $data['validation'] = '1';    
-            $data['modules'] = $this->model->getAll('modules');
-            $data['body'] = 'add_question';
+            $data['validation'] = '1';
+            $data['modules']    = $this->model->getAll('modules');
+            $data['body']       = 'add_question';
             $this->controller->load_view($data);
         } else {
             if ($this->controller->checkSession()) {
@@ -2274,7 +2273,7 @@ class Admin extends CI_Controller
                     $result = $this->model->insertData('questions', $final);
                     $this->questionList();
                     
-                }else{
+                } else {
                     show_404();
                 }
             }

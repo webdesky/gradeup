@@ -60,9 +60,8 @@
                                 <div class="form-group">
                                     <label class="col-md-2">Address : </label>
                                     <div class="col-lg-6">
-                                        <textarea class="form-control" name="address" placeholder="Enter Address">
-                                            <?php echo $users[0]->address;?>
-                                        </textarea> <span class="red"><?php echo form_error('address'); ?></span> </div>
+                                        <textarea class="form-control" name="address" placeholder="Enter Address"><?php echo $users[0]->address;?></textarea>
+                                        <span class="red"><?php echo form_error('address'); ?></span> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2">Profile Pic : </label>
